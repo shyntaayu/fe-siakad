@@ -22,6 +22,12 @@ import { RekapPresensiComponent } from "app/main/rekap-presensi/rekap-presensi.c
 import { InputNilaiComponent } from "app/main/input-nilai/input-nilai.component";
 import { SalinanNilaiComponent } from "app/main/salinan-nilai/salinan-nilai.component";
 import { KhsComponent } from "app/main/khs/khs.component";
+import { ShareModule } from "app/main/share/share.module";
+import { ButtonModule } from "primeng/button";
+import { TableModule } from "primeng/table";
+import { ToastModule } from "primeng/toast";
+import { HttpClientModule } from "@angular/common/http";
+import { MainService } from "app/main/main.service";
 
 @NgModule({
   imports: [
@@ -35,6 +41,11 @@ import { KhsComponent } from "app/main/khs/khs.component";
     MatInputModule,
     MatSelectModule,
     MatTooltipModule,
+    ShareModule,
+    TableModule,
+    ButtonModule,
+    ToastModule,
+    HttpClientModule,
   ],
   declarations: [
     DashboardComponent,
@@ -51,5 +62,6 @@ import { KhsComponent } from "app/main/khs/khs.component";
     SalinanNilaiComponent,
     KhsComponent,
   ],
+  providers: [MainService],
 })
 export class AdminLayoutModule {}
