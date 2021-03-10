@@ -15,35 +15,18 @@ import {
   FormControl,
   NG_VALUE_ACCESSOR,
 } from "@angular/forms";
+import { MatAutocompleteSelectedEvent } from "@angular/material/autocomplete";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { startWith } from "rxjs/operators";
 const noop = () => {};
 @Component({
   selector: "dosen-ddl",
-  template: ` <mat-form-field class="example-full-width">
-    <mat-label>Number</mat-label>
-    <input
-      type="text"
-      placeholder="Pick one"
-      aria-label="Number"
-      matInput
-      [formControl]="myControl"
-      [matAutocomplete]="auto"
-    />
-    <mat-autocomplete
-      autoActiveFirstOption
-      #auto="matAutocomplete"
-      [(ngModel)]="inputValue"
-    >
-      <mat-option
-        *ngFor="let option of filteredOptions | async"
-        [value]="option"
-      >
-        {{ option }}
-      </mat-option>
-    </mat-autocomplete>
-  </mat-form-field>`,
+  template: ` <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+      {{ option }}
+    </mat-option>
+  </mat-autocomplete>`,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -58,10 +41,12 @@ export class DosenComponent implements OnInit {
   private innerValue: any = "";
   project: any[] = [];
 
-  @Input() isDisabled: boolean = false;
+  @Input() formControl;
   @Input() selectedProject: number = undefined;
   @Output()
   selectedProjectChange: EventEmitter<number> = new EventEmitter<number>();
+  @Output()
+  optionSelected: EventEmitter<MatAutocompleteSelectedEvent> = new EventEmitter<MatAutocompleteSelectedEvent>();
 
   isLoading = false;
   disablekah: boolean = false;

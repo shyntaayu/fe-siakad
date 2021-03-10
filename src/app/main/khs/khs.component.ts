@@ -87,4 +87,8 @@ export class KhsComponent implements OnInit {
     this.products2[index] = this.clonedProducts[product.id];
     delete this.clonedProducts[product.id];
   }
+  onSubmit() {
+    // TODO: Use EventEmitter with form value
+    console.warn(this.profileForm.value);
+  }
 }
