@@ -22,7 +22,6 @@ interface Food {
   selector: "app-presensi",
   templateUrl: "./presensi.component.html",
   styleUrls: ["./presensi.component.css"],
-  providers: [MessageService],
 })
 export class PresensiComponent implements OnInit {
   profileForm: FormGroup;

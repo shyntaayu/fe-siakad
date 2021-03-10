@@ -29,6 +29,9 @@ import { ToastModule } from "primeng/toast";
 import { HttpClientModule } from "@angular/common/http";
 import { MainService } from "app/main/main.service";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
+import { MessageService } from "primeng/api";
+import { DropdownModule } from "primeng/dropdown";
+import { InputTextModule } from "primeng/inputtext";
 
 @NgModule({
   imports: [
@@ -48,6 +51,8 @@ import { MatAutocompleteModule } from "@angular/material/autocomplete";
     ToastModule,
     HttpClientModule,
     MatAutocompleteModule,
+    DropdownModule,
+    InputTextModule,
   ],
   declarations: [
     DashboardComponent,
@@ -64,6 +69,6 @@ import { MatAutocompleteModule } from "@angular/material/autocomplete";
     SalinanNilaiComponent,
     KhsComponent,
   ],
-  providers: [MainService],
+  providers: [MainService, MessageService],
 })
 export class AdminLayoutModule {}
