@@ -28,6 +28,7 @@ import { TableModule } from "primeng/table";
 import { ToastModule } from "primeng/toast";
 import { HttpClientModule } from "@angular/common/http";
 import { MainService } from "app/main/main.service";
+import { MatAutocompleteModule } from "@angular/material/autocomplete";
 
 @NgModule({
   imports: [
@@ -46,6 +47,7 @@ import { MainService } from "app/main/main.service";
     ButtonModule,
     ToastModule,
     HttpClientModule,
+    MatAutocompleteModule,
   ],
   declarations: [
     DashboardComponent,

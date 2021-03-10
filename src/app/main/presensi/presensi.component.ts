@@ -1,12 +1,23 @@
 import { Component, OnInit } from "@angular/core";
-import { FormControl, Validators } from "@angular/forms";
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from "@angular/forms";
 import { MessageService } from "primeng/api";
+import { Observable } from "rxjs";
 import { MainService } from "../main.service";
 import { Product } from "../model/product";
 interface Animal {
   name: string;
   sound: string;
 }
+interface Food {
+  value: string;
+  viewValue: string;
+}
+
 @Component({
   selector: "app-presensi",
   templateUrl: "./presensi.component.html",
@@ -14,10 +25,7 @@ interface Animal {
   providers: [MessageService],
 })
 export class PresensiComponent implements OnInit {
-  constructor(
-    private productService: MainService,
-    private messageService: MessageService
-  ) {}
+  profileForm: FormGroup;
 
   animalControl = new FormControl("", Validators.required);
   selectFormControl = new FormControl("", Validators.required);
@@ -32,18 +40,22 @@ export class PresensiComponent implements OnInit {
   first = 0;
 
   rows = 10;
-
-  selectedProduct1: Product;
-
+  dosen;
+  semester = 8;
   selectedProduct2: Product;
-
-  selectedProduct3: Product;
-
-  selectedProducts1: Product[];
-
-  selectedProducts2: Product[];
-
-  selectedProducts3: Product[];
+  constructor(
+    private productService: MainService,
+    private messageService: MessageService,
+    private fb: FormBuilder
+  ) {
+    this.profileForm = this.fb.group({
+      dosen: ["", Validators.required],
+      semester: ["", Validators.required],
+      jam: ["", Validators.required],
+      tahun: ["", Validators.required],
+      jurusan: ["", Validators.required],
+    });
+  }
 
   ngOnInit() {
     this.productService.getProductsSmall().then((data) => {
@@ -97,4 +109,30 @@ export class PresensiComponent implements OnInit {
   isFirstPage(): boolean {
     return this.products ? this.first === 0 : true;
   }
+  getDosen(event) {
+    console.log(event);
+  }
+  exe_selectedTermCodeChange(a) {
+    console.log(a);
+  }
+
+  onSubmit() {
+    // TODO: Use EventEmitter with form value
+    console.warn(this.profileForm.value);
+  }
+
+  get f() {
+    return this.profileForm.controls;
+  }
+
+  options: string[] = ["One", "Two", "Three"];
+
+  selectedValue: string;
+  selectedCar: string;
+
+  foods: Food[] = [
+    { value: "steak-0", viewValue: "Steak" },
+    { value: "pizza-1", viewValue: "Pizza" },
+    { value: "tacos-2", viewValue: "Tacos" },
+  ];
 }
