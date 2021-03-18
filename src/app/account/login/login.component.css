@@ -1,0 +1,15 @@
+.bg {
+  background: url(/assets/img/cover.jpeg) no-repeat no-repeat center center
+    fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover !important;
+  display: block;
+  margin: 0;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100% !important;
+  min-height: -webkit-fill-available !important;
+}

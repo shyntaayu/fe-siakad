@@ -19,6 +19,9 @@ import { NotificationsComponent } from "./notifications/notifications.component"
 import { UpgradeComponent } from "./upgrade/upgrade.component";
 import { AgmCoreModule } from "@agm/core";
 import { AdminLayoutComponent } from "./layouts/admin-layout/admin-layout.component";
+import { LoginComponent } from "./account/login/login.component";
+import { RegisterComponent } from "./account/register/register.component";
+import { MatCheckboxModule } from "@angular/material/checkbox";
 
 @NgModule({
   imports: [
@@ -32,8 +35,14 @@ import { AdminLayoutComponent } from "./layouts/admin-layout/admin-layout.compon
     AgmCoreModule.forRoot({
       apiKey: "YOUR_GOOGLE_MAPS_API_KEY",
     }),
+    MatCheckboxModule,
   ],
-  declarations: [AppComponent, AdminLayoutComponent],
+  declarations: [
+    AppComponent,
+    AdminLayoutComponent,
+    LoginComponent,
+    RegisterComponent,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
