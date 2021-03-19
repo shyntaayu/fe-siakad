@@ -1,27 +1,4 @@
-<style>
-    body,
-    html {
-        height: 100%;
-        margin: 0;
-        background-image: url(/assets/img/cover.jpeg);
-    }
-
-    .bg {
-        /* The image used */
-        background-image: url(/assets/img/cover.jpeg);
-
-        /* Full height */
-        height: 100%;
-
-        /* Center and scale the image nicely */
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
-</style>
-
-<div>lala</div>
-<!-- <div filter-color="black" class="bg">
+<div filter-color="black" class="bg">
     <div class="container">
         <div class="row">
             <div class="col-md-6 ml-auto mr-auto">
@@ -30,31 +7,13 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12 mr-auto">
-                                <div class="social text-center"><button mat-raised-button=""
-                                        class="btn btn-just-icon btn-round btn-twitter mat-raised-button mat-button-base"><span
-                                            class="mat-button-wrapper"><i class="fa fa-twitter"></i></span>
-                                        <div matripple="" class="mat-ripple mat-button-ripple"></div>
-                                        <div class="mat-button-focus-overlay"></div>
-                                    </button><button mat-raised-button=""
-                                        class="btn btn-just-icon btn-round btn-dribbble mat-raised-button mat-button-base"><span
-                                            class="mat-button-wrapper"><i class="fa fa-dribbble"></i></span>
-                                        <div matripple="" class="mat-ripple mat-button-ripple"></div>
-                                        <div class="mat-button-focus-overlay"></div>
-                                    </button><button mat-raised-button=""
-                                        class="btn btn-just-icon btn-round btn-facebook mat-raised-button mat-button-base"><span
-                                            class="mat-button-wrapper"><i class="fa fa-facebook"></i></span>
-                                        <div matripple="" class="mat-ripple mat-button-ripple"></div>
-                                        <div class="mat-button-focus-overlay"></div>
-                                    </button>
-                                    <h4 class="mt-3"> or be classical </h4>
-                                </div>
-                                <form novalidate="" method="" action="" class="form ng-untouched ng-pristine ng-valid">
+                                <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
                                     <div class="form-group has-default">
                                         <div class="input-group">
                                             <div class="input-group-prepend"><span class="input-group-text"><i
                                                         class="material-icons">mail</i></span></div>
                                             <input type="text" placeholder="Email..." class="form-control"
-                                                autocomplete="off">
+                                                autocomplete="off" formControlName="email">
                                         </div>
                                     </div>
                                     <div class="form-group has-default">
@@ -62,34 +21,12 @@
                                             <div class="input-group-prepend"><span class="input-group-text"><i
                                                         class="material-icons">lock_outline</i></span>
                                             </div><input type="password" placeholder="Password..." autocomplete="off"
-                                                class="form-control">
+                                                class="form-control" formControlName="password">
                                         </div>
                                     </div>
-                                    <mat-checkbox class="mat-checkbox form-check mat-accent" id="mat-checkbox-19">
-                                        <label class="mat-checkbox-layout" for="mat-checkbox-19-input">
-                                            <div class="mat-checkbox-inner-container"><input type="checkbox"
-                                                    class="mat-checkbox-input cdk-visually-hidden"
-                                                    id="mat-checkbox-19-input" tabindex="0" aria-checked="false">
-                                                <div matripple="" class="mat-ripple mat-checkbox-ripple">
-                                                    <div class="mat-ripple-element mat-checkbox-persistent-ripple">
-                                                    </div>
-                                                </div>
-                                                <div class="mat-checkbox-frame"></div>
-                                                <div class="mat-checkbox-background"><svg version="1.1"
-                                                        focusable="false" viewBox="0 0 24 24" xml:space="preserve"
-                                                        class="mat-checkbox-checkmark">
-                                                        <path fill="none" stroke="white" d="M4.1,12.7 9,17.6 20.3,6.3"
-                                                            class="mat-checkbox-checkmark-path"></path>
-                                                    </svg>
-                                                    <div class="mat-checkbox-mixedmark"></div>
-                                                </div>
-                                            </div><span class="mat-checkbox-label"><span
-                                                    style="display: none;">&nbsp;</span> I agree to the
-                                                <a href="#something">terms and conditions</a>. </span>
-                                        </label>
-                                    </mat-checkbox>
-                                    <div class="text-center"><a href="#pablo" class="btn btn-primary btn-round mt-4">Get
-                                            Started</a></div>
+                                    <div class="text-center"><button type="submit" [disabled]="!profileForm.valid"
+                                            class="btn btn-danger btn-round mt-4">Get
+                                            Started</button></div>
                                 </form>
                             </div>
                         </div>
@@ -98,4 +35,4 @@
             </div>
         </div>
     </div>
-</div> -->
+</div>

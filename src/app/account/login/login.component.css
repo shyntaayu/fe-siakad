@@ -10,6 +10,10 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100% !important;
+  height: 100vh !important;
   min-height: -webkit-fill-available !important;
+}
+
+.card {
+  padding: 50px 10px;
 }
