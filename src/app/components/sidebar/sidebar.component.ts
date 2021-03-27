@@ -6,50 +6,113 @@ declare interface RouteInfo {
   title: string;
   icon: string;
   class: string;
+  hidden: boolean;
+  parent: string;
 }
 export const ROUTES: RouteInfo[] = [
-  { path: "/dashboard", title: "Dashboard", icon: "dashboard", class: "" },
-  { path: "/presensi", title: "Presensi", icon: "list_alt", class: "" },
+  {
+    path: "/dashboard",
+    title: "Dashboard",
+    icon: "dashboard",
+    class: "",
+    hidden: false,
+    parent: "dashboard",
+  },
+  {
+    path: "/presensi",
+    title: "Presensi",
+    icon: "list_alt",
+    class: "",
+    hidden: false,
+    parent: "none",
+  },
   {
     path: "/rekap-presensi",
     title: "Rekap Presensi",
     icon: "folder_open",
     class: "",
+    hidden: false,
+    parent: "none",
   },
-  { path: "/input-nilai", title: "Input Nilai", icon: "create", class: "" },
+  {
+    path: "/input-nilai",
+    title: "Input Nilai",
+    icon: "create",
+    class: "",
+    hidden: false,
+    parent: "none",
+  },
   {
     path: "/salinan-nilai",
     title: "Salinan Nilai",
     icon: "content_paste",
     class: "",
+    hidden: false,
+    parent: "none",
   },
-  { path: "/khs", title: "KHS", icon: "file_copy", class: "" },
-  { path: "/user-profile", title: "User Profile", icon: "person", class: "" },
+  {
+    path: "/khs",
+    title: "KHS",
+    icon: "file_copy",
+    class: "",
+    hidden: false,
+    parent: "none",
+  },
+  {
+    path: "/user-profile",
+    title: "User Profile",
+    icon: "person",
+    class: "",
+    hidden: false,
+    parent: "dashboard",
+  },
   {
     path: "/table-list",
     title: "Table List",
     icon: "content_paste",
     class: "",
+    hidden: true,
+    parent: "dashboard",
   },
   {
     path: "/typography",
     title: "Typography",
     icon: "library_books",
     class: "",
+    hidden: true,
+    parent: "dashboard",
   },
-  { path: "/icons", title: "Icons", icon: "bubble_chart", class: "" },
-  { path: "/maps", title: "Maps", icon: "location_on", class: "" },
+  {
+    path: "/icons",
+    title: "Icons",
+    icon: "bubble_chart",
+    class: "",
+    hidden: true,
+    parent: "dashboard",
+  },
+  {
+    path: "/maps",
+    title: "Maps",
+    icon: "location_on",
+    class: "",
+    hidden: true,
+    parent: "dashboard",
+  },
   {
     path: "/notifications",
     title: "Notifications",
     icon: "notifications",
     class: "",
+    hidden: true,
+    parent: "dashboard",
   },
   {
     path: "/upgrade",
     title: "Upgrade to PRO",
     icon: "unarchive",
     class: "active-pro",
+    hidden: true,
+    parent: "dashboard",
   },
 ];
 
@@ -60,11 +123,17 @@ export const ROUTES: RouteInfo[] = [
 })
 export class SidebarComponent implements OnInit {
   menuItems: any[];
+  menuDashboard;
+  menuNone;
 
   constructor() {}
 
   ngOnInit() {
-    this.menuItems = ROUTES.filter((menuItem) => menuItem);
+    this.menuDashboard = ROUTES.filter(
+      (menuItem) => menuItem.icon == "dashboard"
+    );
+    this.menuItems = ROUTES.filter((menuItem) => menuItem.parent == "master");
+    this.menuNone = ROUTES.filter((menuItem) => menuItem.parent == "none");
   }
   isMobileMenu() {
     if ($(window).width() > 991) {

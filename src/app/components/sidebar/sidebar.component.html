@@ -56,8 +56,37 @@
         </ul>
     </div>
     <ul class="nav">
-        <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
+        <!-- <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
             <a class="nav-link" [routerLink]="[menuItem.path]">
+                <i class="material-icons">{{menuItem.icon}}</i>
+                <p>{{menuItem.title}}</p>
+            </a>
+        </li> -->
+        <li routerLinkActive="active" *ngFor="let menuItem of menuDashboard" class="{{menuItem.class}} nav-item">
+            <a class="nav-link" [routerLink]="[menuItem.path]" *ngIf="!menuItem.hidden">
+                <i class="material-icons">{{menuItem.icon}}</i>
+                <p>{{menuItem.title}}</p>
+            </a>
+        </li>
+        <li routerlinkactive="active" class="nav-item active">
+            <a data-toggle="collapse" class="nav-link" href="#components" aria-expanded="true"><i
+                    class="material-icons">apps</i>
+                <p>Master<b class="caret"></b></p>
+            </a>
+            <div class="collapse" id="components" style="">
+                <ul class="nav">
+                    <li routerLinkActive="active" *ngFor="let menuItem of menuItems"
+                        class="{{menuItem.class}} nav-item">
+                        <a class="nav-link" [routerLink]="[menuItem.path]" *ngIf="!menuItem.hidden">
+                            <i class="material-icons">{{menuItem.icon}}</i>
+                            <p>{{menuItem.title}}</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li routerLinkActive="active" *ngFor="let menuItem of menuNone" class="{{menuItem.class}} nav-item">
+            <a class="nav-link" [routerLink]="[menuItem.path]" *ngIf="!menuItem.hidden">
                 <i class="material-icons">{{menuItem.icon}}</i>
                 <p>{{menuItem.title}}</p>
             </a>
