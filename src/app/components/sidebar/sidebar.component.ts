@@ -114,6 +114,30 @@ export const ROUTES: RouteInfo[] = [
     hidden: true,
     parent: "dashboard",
   },
+  {
+    path: "/master/user",
+    title: "User",
+    icon: "badge",
+    class: "",
+    hidden: false,
+    parent: "master",
+  },
+  {
+    path: "/master/karyawan",
+    title: "Karyawan",
+    icon: "groups",
+    class: "",
+    hidden: false,
+    parent: "master",
+  },
+  {
+    path: "/master/dosen",
+    title: "Dosen",
+    icon: "group",
+    class: "",
+    hidden: false,
+    parent: "master",
+  },
 ];
 
 @Component({
