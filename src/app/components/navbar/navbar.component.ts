@@ -6,6 +6,8 @@ import {
   PathLocationStrategy,
 } from "@angular/common";
 import { Router } from "@angular/router";
+import { AuthenticationService } from "app/services/authentication.service";
+import { CookieService } from "ngx-cookie-service";
 
 @Component({
   selector: "app-navbar",
@@ -18,17 +20,23 @@ export class NavbarComponent implements OnInit {
   mobile_menu_visible: any = 0;
   private toggleButton: any;
   private sidebarVisible: boolean;
+  userFromApi;
 
   constructor(
     location: Location,
     private element: ElementRef,
-    private router: Router
+    private router: Router,
+    private authenticationService: AuthenticationService,
+    private cookieService: CookieService
   ) {
     this.location = location;
     this.sidebarVisible = false;
   }
 
   ngOnInit() {
+    let a = JSON.parse(this.cookieService.get("userMe"));
+    console.log(a);
+    this.userFromApi = a ? a.username : null;
     this.listTitles = ROUTES.filter((listTitle) => listTitle);
     const navbar: HTMLElement = this.element.nativeElement;
     this.toggleButton = navbar.getElementsByClassName("navbar-toggler")[0];
@@ -133,6 +141,6 @@ export class NavbarComponent implements OnInit {
   }
 
   logout() {
-    this.router.navigate(["/login"]);
+    this.authenticationService.logout();
   }
 }

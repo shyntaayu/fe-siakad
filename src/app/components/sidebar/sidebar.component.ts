@@ -103,8 +103,8 @@ export const ROUTES: RouteInfo[] = [
     title: "Notifications",
     icon: "notifications",
     class: "",
-    hidden: true,
-    parent: "dashboard",
+    hidden: false,
+    parent: "master",
   },
   {
     path: "/upgrade",
