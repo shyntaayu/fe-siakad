@@ -17,6 +17,7 @@ export class KhsComponent implements OnInit {
   products2: Product[];
   clonedProducts: { [s: string]: Product } = {};
   statuses: SelectItem[];
+  loading = false;
 
   constructor(
     private fb: FormBuilder,
@@ -89,6 +90,7 @@ export class KhsComponent implements OnInit {
   }
   onSubmit() {
     // TODO: Use EventEmitter with form value
+    this.loading = true;
     console.warn(this.profileForm.value);
   }
 }

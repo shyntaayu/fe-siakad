@@ -1,4 +1,4 @@
-<div class="main-content">
+<div class="main-content" [busyIf]="loading">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
@@ -58,7 +58,7 @@
                                 </div>
                             </div>
                             <button mat-raised-button type="submit" class="btn btn-danger pull-right"
-                                [disabled]="!profileForm.valid">Cari</button>
+                                [disabled]="!profileForm.valid" [buttonBusy]="loading">Cari</button>
                             <div class="clearfix"></div>
                         </form>
                     </div>

@@ -32,6 +32,7 @@ import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MessageService } from "primeng/api";
 import { DropdownModule } from "primeng/dropdown";
 import { InputTextModule } from "primeng/inputtext";
+import { UtilsModule } from "shared/utils/utils.module";
 
 @NgModule({
   imports: [
@@ -53,6 +54,7 @@ import { InputTextModule } from "primeng/inputtext";
     MatAutocompleteModule,
     DropdownModule,
     InputTextModule,
+    UtilsModule,
   ],
   declarations: [
     DashboardComponent,
