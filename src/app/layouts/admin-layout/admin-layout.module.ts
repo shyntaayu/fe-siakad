@@ -33,6 +33,8 @@ import { MessageService } from "primeng/api";
 import { DropdownModule } from "primeng/dropdown";
 import { InputTextModule } from "primeng/inputtext";
 import { UtilsModule } from "shared/utils/utils.module";
+import { KrsComponent } from "app/main/krs/krs.component";
+import { KrsService } from "app/services/krs.service";
 
 @NgModule({
   imports: [
@@ -70,7 +72,8 @@ import { UtilsModule } from "shared/utils/utils.module";
     InputNilaiComponent,
     SalinanNilaiComponent,
     KhsComponent,
+    KrsComponent,
   ],
-  providers: [MainService, MessageService],
+  providers: [MainService, MessageService, KrsService],
 })
 export class AdminLayoutModule {}

@@ -59,6 +59,14 @@ export const ROUTES: RouteInfo[] = [
     parent: "none",
   },
   {
+    path: "/krs",
+    title: "KRS",
+    icon: "task_alt",
+    class: "",
+    hidden: false,
+    parent: "none",
+  },
+  {
     path: "/user-profile",
     title: "User Profile",
     icon: "person",

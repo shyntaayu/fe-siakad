@@ -14,6 +14,7 @@ import { InputNilaiComponent } from "app/main/input-nilai/input-nilai.component"
 import { RekapPresensiComponent } from "app/main/rekap-presensi/rekap-presensi.component";
 import { PresensiComponent } from "app/main/presensi/presensi.component";
 import { AuthGuard } from "app/helpers/auth.guard";
+import { KrsComponent } from "app/main/krs/krs.component";
 
 export const AdminLayoutRoutes: Routes = [
   // {
@@ -103,4 +104,5 @@ export const AdminLayoutRoutes: Routes = [
     canActivate: [AuthGuard],
   },
   { path: "khs", component: KhsComponent, canActivate: [AuthGuard] },
+  { path: "krs", component: KrsComponent, canActivate: [AuthGuard] },
 ];

@@ -6,4 +6,5 @@
 export const environment = {
   production: false,
   apiUrlUser: "http://localhost:1000",
+  apiUrlKrs:"http://localhost:1003",
 };
