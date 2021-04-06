@@ -47,3 +47,12 @@ a[data-toggle="collapse"][aria-expanded="true"] .caret {
     transform: rotate(360deg);
   }
 }
+
+@media print {
+  .isPrinting > * {
+    display: none;
+  }
+  .isPrinting app-print-layout {
+    display: block;
+  }
+}

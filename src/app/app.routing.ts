@@ -5,6 +5,7 @@ import { Routes, RouterModule } from "@angular/router";
 
 import { AdminLayoutComponent } from "./layouts/admin-layout/admin-layout.component";
 import { LoginComponent } from "./account/login/login.component";
+import { PrintComponent } from "./print/print.component";
 
 const routes: Routes = [
   {
@@ -29,6 +30,16 @@ const routes: Routes = [
       {
         path: "master",
         loadChildren: "./master/master.module#MasterModule",
+      },
+    ],
+  },
+  {
+    path: "print",
+    component: PrintComponent,
+    children: [
+      {
+        path: "",
+        loadChildren: "./print/print.module#PrintModule",
       },
     ],
   },
