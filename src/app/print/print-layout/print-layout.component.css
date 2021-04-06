@@ -1,20 +1,26 @@
-.header,
 .header-space,
-.footer,
 .footer-space {
+  height: 150px;
+}
+.header,
+.footer {
   height: 100px;
 }
 .header {
   position: fixed;
   top: 0;
+  left: 10%;
 }
 .footer {
   position: fixed;
   bottom: 0;
 }
+* {
+  background-color: white;
+}
 
 @media screen {
   :host {
-    display: none;
+    display: block;
   }
 }

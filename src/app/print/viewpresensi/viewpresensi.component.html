@@ -1,4 +1,186 @@
 <div class="invoice" *ngFor="let invoice of invoiceIds; let i = index">
-    <h1>Invoice Num. {{ invoice }}</h1>
-    Amount: {{ (invoiceDetails[i] | async)?.amount }}
+    <!-- <h1>Invoice Num. {{ invoice }}</h1>
+    Amount: {{ (invoiceDetails[i] | async)?.amount }} -->
+    <center>
+        <font size="6"><b>KARTU RENCANA STUDI</b></font>
+    </center>
+    <table border="0" align="center">
+        <tbody>
+            <tr>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>
+                    <font size="3">Nama</font>
+                </td>
+                <td>:</td>
+                <td>
+                    <font size="3">SHYNTA AYU DWI DARMAWAN</font>
+                </td>
+                <td width="70"> &nbsp; </td>
+                <td>
+                    <font size="3">Jenjang</font>
+                </td>
+                <td>:</td>
+                <td>
+                    <font size="3">S1</font>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <font size="3">NIM</font>
+                </td>
+                <td>:</td>
+                <td>
+                    <font size="3">17.51.0016</font>
+                </td>
+                <td> &nbsp; </td>
+                <td>
+                    <font size="3">Program Studi</font>
+                </td>
+                <td>:</td>
+                <td>
+                    <font size="3">S-1 SISTEM INFORMASI</font>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <font size="3">Semester</font>
+                </td>
+                <td>:</td>
+                <td>
+                    <font size="3">GENAP 2020-2021</font>
+                </td>
+                <td> &nbsp; </td>
+                <td>
+                    <font size="3">Dosen Wali</font>
+                </td>
+                <td>:</td>
+                <td>
+                    <font size="3">Nasrul Firdaus, S.Kom.,MMSI</font>
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+            </tr>
+        </tbody>
+    </table>
+    <table border="1" style="BORDER-COLLAPSE:COLLAPSE;" align="center" cellpadding="3">
+        <tbody>
+            <tr align="center">
+                <td>
+                    <font size="3"><b>No.</b></font>
+                </td>
+                <td>
+                    <font size="3"><b>Kode MTK</b></font>
+                </td>
+                <td>
+                    <font size="3"><b>Mata Kuliah</b></font>
+                </td>
+                <td>
+                    <font size="3"><b>sks</b></font>
+                </td>
+                <td>
+                    <font size="3"><b>Status</b></font>
+                </td>
+                <td>
+                    <font size="3"><b>Wajib/Pilihan</b></font>
+                </td>
+            </tr>
+            <tr class="white">
+                <td align="center">
+                    <font size="2">1.</font>
+                </td>
+                <td>
+                    <font size="3">MBB0-5101</font>
+                </td>
+                <td>
+                    <font size="3">Perilaku Dalam Berorganisasi</font>
+                </td>
+                <td align="center">
+                    <font size="2">2</font>
+                </td>
+                <td align="center">
+                    <font size="2">Baru</font>
+                </td>
+                <td>
+                    <font size="3">Wajib</font>
+                </td>
+            </tr>
+            <tr class="white">
+                <td align="center">
+                    <font size="2">2.</font>
+                </td>
+                <td>
+                    <font size="3">MPB0-5104</font>
+                </td>
+                <td>
+                    <font size="3">Skripsi</font>
+                </td>
+                <td align="center">
+                    <font size="2">4</font>
+                </td>
+                <td align="center">
+                    <font size="2">Baru</font>
+                </td>
+                <td>
+                    <font size="3">Wajib</font>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table border="0" style="BORDER-COLLAPSE:COLLAPSE;" align="center">
+        <tbody>
+            <tr>
+                <td>
+                    <font size="3">Total sks</font>
+                </td>
+                <td>:</td>
+                <td>
+                    <font size="3"><b>6</b></font>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <table border="0" width="700" style="BORDER-COLLAPSE:COLLAPSE;" align="center">
+        <tbody>
+            <tr align="center">
+                <td width="400">&nbsp;</td>
+                <td witdh="200">&nbsp;</td>
+                <td witdh="100">
+                    <font size="3">Malang, 03 April 2021 </font>
+                </td>
+            </tr>
+            <tr>
+                <td width="300">
+                    <font size="3">
+                        <center>Dosen Penasehat Akademik</center>
+                    </font>
+                </td>
+                <td witdh="200">&nbsp;</td>
+                <td witdh="100">
+                    <font size="3">
+                        <center>Mahasiswa,</center>
+                    </font>
+                </td>
+            </tr>
+            <tr>
+                <td><br><br><br><br></td>
+            </tr>
+            <tr>
+                <td width="300">
+                    <font size="3">
+                        <center><b>Nasrul Firdaus, S.Kom.,MMSI</b></center>
+                    </font>
+                </td>
+                <td witdh="200">&nbsp;</td>
+                <td witdh="100">
+                    <font size="3">
+                        <center><b>SHYNTA AYU DWI DARMAWAN</b></center>
+                    </font>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>

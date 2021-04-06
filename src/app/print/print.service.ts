@@ -5,7 +5,7 @@ import { Router } from "@angular/router";
   providedIn: "root",
 })
 export class PrintService {
-  isPrinting = false;
+  isPrinting = true;
 
   constructor(private router: Router) {}
 

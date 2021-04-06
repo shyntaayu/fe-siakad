@@ -7,6 +7,7 @@ import { PrintService } from "../print.service";
   styleUrls: ["./print-layout.component.css"],
 })
 export class PrintLayoutComponent implements OnInit {
+  printby = "admin";
   constructor() {}
 
   ngOnInit(): void {}
