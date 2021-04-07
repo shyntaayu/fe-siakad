@@ -7,12 +7,14 @@ import { FormGroup } from "@angular/forms";
   template: `
     <div [formGroup]="form">
       <input
+        matInput
         *ngIf="!field.multiline"
         [attr.type]="field.type"
         class="form-control"
         [id]="field.name"
         [name]="field.name"
         [formControlName]="field.name"
+        autocomplete="new-password"
       />
       <textarea
         *ngIf="field.multiline"

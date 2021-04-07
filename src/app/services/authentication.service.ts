@@ -37,7 +37,7 @@ export class AuthenticationService extends AppComponentBase {
   }
 
   public get userValue(): LoginResponse {
-    return this.userSubject.value;
+    return this.userSubject.getValue();
   }
 
   login(username: string, password: string) {

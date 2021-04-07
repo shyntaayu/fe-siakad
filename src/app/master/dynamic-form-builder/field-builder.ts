@@ -10,6 +10,11 @@ import { Component, Input, OnInit } from "@angular/core";
       </label>
       <div class="col-md-9" [ngSwitch]="field.type">
         <textbox *ngSwitchCase="'text'" [field]="field" [form]="form"></textbox>
+        <textbox
+          *ngSwitchCase="'password'"
+          [field]="field"
+          [form]="form"
+        ></textbox>
         <dropdown
           *ngSwitchCase="'dropdown'"
           [field]="field"
@@ -22,16 +27,21 @@ import { Component, Input, OnInit } from "@angular/core";
         ></checkbox>
         <radio *ngSwitchCase="'radio'" [field]="field" [form]="form"></radio>
         <file *ngSwitchCase="'file'" [field]="field" [form]="form"></file>
-        <div
-          class="alert alert-danger my-1 p-2 fadeInDown animated"
-          *ngIf="!isValid && isDirty"
-        >
-          {{ field.label }} is required
-        </div>
+
+        <mat-error *ngIf="!isValid && isDirty">
+          {{ field.label }} is <strong>required</strong>
+        </mat-error>
       </div>
     </div>
   `,
 })
+
+// <div
+//           class="alert alert-danger my-1 p-2 fadeInDown animated"
+//           *ngIf="!isValid && isDirty"
+//         >
+//           {{ field.label }} is required
+//         </div>
 export class FieldBuilderComponent implements OnInit {
   @Input() field: any;
   @Input() form: any;

@@ -8,6 +8,8 @@ import { CheckBoxComponent } from "./atoms/checkbox";
 import { FileComponent } from "./atoms/file";
 import { RadioComponent } from "./atoms/radio";
 import { ReactiveFormsModule } from "@angular/forms";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatSelectModule } from "@angular/material/select";
 
 @NgModule({
   declarations: [
@@ -19,7 +21,12 @@ import { ReactiveFormsModule } from "@angular/forms";
     FileComponent,
     RadioComponent,
   ],
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatSelectModule,
+  ],
   exports: [DynamicFormBuilderComponent],
 })
 export class DynamicFormBuilderModule {}

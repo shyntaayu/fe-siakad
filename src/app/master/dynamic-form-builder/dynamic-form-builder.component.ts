@@ -30,4 +30,8 @@ export class DynamicFormBuilderComponent implements OnInit {
     }
     this.form = new FormGroup(fieldsCtrls);
   }
+
+  reset() {
+    this.form.reset();
+  }
 }
