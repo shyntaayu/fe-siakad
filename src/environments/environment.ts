@@ -6,5 +6,6 @@
 export const environment = {
   production: false,
   apiUrlUser: "http://localhost:1000",
-  apiUrlKrs:"http://localhost:1003",
+  apiUrlMahasiswa: "http://localhost:1001",
+  apiUrlKrs: "http://localhost:1003",
 };

@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, Injector } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
 import { Router } from "@angular/router";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
@@ -6,20 +6,23 @@ import { map } from "rxjs/operators";
 import { environment } from "environments/environment";
 import { CookieService } from "ngx-cookie-service";
 import { LoginResponse } from "app/model/login-response";
-declare var $: any;
+import { AppComponentBase } from "shared/app-component-base";
+import Swal from "sweetalert2";
 
 @Injectable({
   providedIn: "root",
 })
-export class AuthenticationService {
+export class AuthenticationService extends AppComponentBase {
   private userSubject: BehaviorSubject<LoginResponse>;
   public user: Observable<LoginResponse>;
 
   constructor(
     private router: Router,
     private http: HttpClient,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private injector: Injector
   ) {
+    super(injector);
     // this.userSubject = new BehaviorSubject<LoginResponse>(JSON.parse(localStorage.getItem('userMe')));
     console.log(this.cookieService.check("userMe"));
     if (this.cookieService.check("userMe")) {
@@ -46,7 +49,13 @@ export class AuthenticationService {
           // localStorage.setItem('userMe', JSON.stringify(user));
 
           if (user.status == 0) {
-            this.showNotification("top", "right", user.msg, "danger");
+            // this.showNotification("top", "right", user.msg, "danger");
+            Swal.fire({
+              title: "Eror!",
+              text: user.msg,
+              icon: "error",
+              allowOutsideClick: false,
+            });
           } else {
             this.userSubject.next(user.result);
             this.cookieService.set(
@@ -67,37 +76,5 @@ export class AuthenticationService {
     this.cookieService.delete("userMe");
     this.userSubject.next(null);
     this.router.navigate(["/login"]);
-  }
-
-  showNotification(from, align, message, type) {
-    // const type = ["", "info", "success", "warning", "danger"];
-
-    const color = Math.floor(Math.random() * 4 + 1);
-
-    $.notify(
-      {
-        icon: "notifications",
-        message: message,
-      },
-      {
-        type: type,
-        timer: 4000,
-        placement: {
-          from: from,
-          align: align,
-        },
-        template:
-          '<div data-notify="container" class="col-xl-4 col-lg-4 col-11 col-sm-4 col-md-4 alert alert-{0} alert-with-icon" role="alert">' +
-          '<button mat-button  type="button" aria-hidden="true" class="close mat-button" data-notify="dismiss">  <i class="material-icons">close</i></button>' +
-          '<i class="material-icons" data-notify="icon">notifications</i> ' +
-          '<span data-notify="title">{1}</span> ' +
-          '<span data-notify="message">{2}</span>' +
-          '<div class="progress" data-notify="progressbar">' +
-          '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
-          "</div>" +
-          '<a href="{3}" target="{4}" data-notify="url"></a>' +
-          "</div>",
-      }
-    );
   }
 }

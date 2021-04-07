@@ -124,4 +124,22 @@ export class KrsComponent implements OnInit {
       this.jenjang = data;
     });
   }
+
+  displayFnJurusan(value?: number) {
+    return value
+      ? this.prodi.find((_) => _.kode_prodi === value).nama
+      : undefined;
+  }
+
+  displayFnJenjang(value?: number) {
+    return value
+      ? this.jenjang.find((_) => _.id_master_jenjang === value).nama
+      : undefined;
+  }
+
+  displayFnSemester(value?: number) {
+    return value
+      ? this.semester.find((_) => _.value === value).nama
+      : undefined;
+  }
 }

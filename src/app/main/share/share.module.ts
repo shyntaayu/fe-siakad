@@ -7,6 +7,7 @@ import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ControlMessageComponent } from "./control-message.component";
 import { FormControlStyleComponent } from "./form-control-style.component";
+import { ProdiDdlComponent } from "./prodi-ddl.component";
 
 @NgModule({
   imports: [
@@ -21,7 +22,13 @@ import { FormControlStyleComponent } from "./form-control-style.component";
     DosenComponent,
     ControlMessageComponent,
     FormControlStyleComponent,
+    ProdiDdlComponent,
   ],
-  exports: [DosenComponent, ControlMessageComponent, FormControlStyleComponent],
+  exports: [
+    DosenComponent,
+    ControlMessageComponent,
+    FormControlStyleComponent,
+    ProdiDdlComponent,
+  ],
 })
 export class ShareModule {}

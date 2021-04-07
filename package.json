@@ -29,6 +29,7 @@
     "@angular/platform-browser-dynamic": "10.1.4",
     "@angular/platform-server": "10.1.4",
     "@angular/router": "10.1.4",
+    "@sweetalert2/ngx-sweetalert2": "^9.0.0",
     "ajv": "6.12.5",
     "arrive": "2.4.1",
     "bootstrap": "4.5.2",
@@ -50,6 +51,7 @@
     "primeng": "^11.2.3",
     "rxjs": "6.6.3",
     "rxjs-compat": "6.6.3",
+    "sweetalert2": "^10.15.7",
     "web-animations-js": "2.3.2",
     "zone.js": "0.11.1"
   },

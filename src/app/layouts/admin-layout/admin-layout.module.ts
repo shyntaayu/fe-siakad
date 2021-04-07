@@ -35,6 +35,7 @@ import { InputTextModule } from "primeng/inputtext";
 import { UtilsModule } from "shared/utils/utils.module";
 import { KrsComponent } from "app/main/krs/krs.component";
 import { KrsService } from "app/services/krs.service";
+import { SweetAlert2Module } from "@sweetalert2/ngx-sweetalert2";
 
 @NgModule({
   imports: [
@@ -57,6 +58,7 @@ import { KrsService } from "app/services/krs.service";
     DropdownModule,
     InputTextModule,
     UtilsModule,
+    SweetAlert2Module,
   ],
   declarations: [
     DashboardComponent,

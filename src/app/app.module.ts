@@ -22,6 +22,7 @@ import { AdminLayoutComponent } from "./layouts/admin-layout/admin-layout.compon
 import { LoginComponent } from "./account/login/login.component";
 import { RegisterComponent } from "./account/register/register.component";
 import { MatCheckboxModule } from "@angular/material/checkbox";
+import { SweetAlert2Module } from "@sweetalert2/ngx-sweetalert2";
 
 @NgModule({
   imports: [
@@ -36,6 +37,7 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
       apiKey: "YOUR_GOOGLE_MAPS_API_KEY",
     }),
     MatCheckboxModule,
+    SweetAlert2Module.forRoot({ dismissOnDestroy: false }),
   ],
   declarations: [
     AppComponent,
