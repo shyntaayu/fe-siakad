@@ -13,10 +13,10 @@
                 </div>
             </div>
         </div> -->
-        <div class="row">
+        <div class="row" *ngIf="isAdd">
             <div class="col-md-12">
                 <div class="card" [busyIf]="loading">
-                    <div class="card-header card-header-rose card-header-icon">
+                    <div class="card-header card-header-info card-header-icon">
                         <div class="card-icon"><i class="material-icons">account_box</i></div>
                         <h4 class="card-title">User Form</h4>
                     </div>
@@ -28,6 +28,59 @@
                 </div>
             </div>
         </div>
-
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12 pull-right">
+                                <button mat-raised-button class="btn btn-primary" (click)="isAdd=true"><i
+                                        class="material-icons">person_add</i>
+                                    Tambah User
+                                </button>
+                            </div>
+                        </div>
+                        <p-table #dt1 [value]="users" selectionMode="single" [(selection)]="selectedProduct2"
+                            dataKey="code" (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)"
+                            [paginator]="true" [rows]="10" [showCurrentPageReport]="true" sortMode="multiple"
+                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                            [globalFilterFields]="['name','code','category','quantity']"
+                            [rowsPerPageOptions]="[10,25,50]">
+                            <ng-template pTemplate="caption">
+                                <div class="p-d-flex">
+                                    <span class="p-input-icon-right p-ml-auto">
+                                        <i class="pi pi-search"></i>
+                                        <input pInputText type="text"
+                                            (input)="dt1.filterGlobal($event.target.value, 'contains')"
+                                            placeholder="Search keyword" />
+                                    </span>
+                                </div>
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th pSortableColumn="code">Username <p-sortIcon field="username"></p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="name">Role <p-sortIcon field="master_hak_akses_id">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="category">Status <p-sortIcon field="status"></p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="quantity">Aksi <p-sortIcon field="quantity"></p-sortIcon>
+                                    </th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-product>
+                                <tr [pSelectableRow]="product">
+                                    <td>{{product.username}}</td>
+                                    <td>{{product.master_hak_akses_id}}</td>
+                                    <td>{{product.status}}</td>
+                                    <td>{{product.quantity}}</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { DynamicFormBuilderModule } from "./dynamic-form-builder/dynamic-form-builder.module";
 import { UserService } from "app/services/user.service";
 import { UtilsModule } from "shared/utils/utils.module";
+import { TableModule } from "primeng/table";
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { UtilsModule } from "shared/utils/utils.module";
     ReactiveFormsModule,
     DynamicFormBuilderModule,
     UtilsModule,
+    TableModule,
   ],
   providers: [UserService],
 })

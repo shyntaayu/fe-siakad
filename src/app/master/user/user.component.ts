@@ -26,6 +26,8 @@ export class UserComponent implements OnInit {
   public form: FormGroup;
   unsubcribe: any;
   @ViewChild("dynamicformbuilder") child: DynamicFormBuilderComponent;
+  isAdd = false;
+  users;
 
   public fields: any[] = [
     {
@@ -113,7 +115,9 @@ export class UserComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getUsers();
+  }
 
   onUpload(e) {
     console.log(e);
@@ -168,5 +172,12 @@ export class UserComponent implements OnInit {
       });
     });
     return this.listRole;
+  }
+
+  getUsers() {
+    this.userService.getUsers().subscribe((data) => {
+      this.users = data.result;
+      console.log(data);
+    });
   }
 }

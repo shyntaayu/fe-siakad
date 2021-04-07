@@ -5,6 +5,7 @@ import {
 } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { RegisterModel } from "app/model/register-model";
+import { RegisterResponse } from "app/model/register-response";
 import { RoleResponse } from "app/model/role-response";
 import { environment } from "environments/environment";
 import { throwError } from "rxjs";
@@ -22,6 +23,12 @@ export class UserService {
 
   getAllRole(): Observable<RoleResponse> {
     return this.http.get<RoleResponse>(`${environment.apiUrlUser}/role`);
+  }
+
+  getUsers(): Observable<RegisterResponse> {
+    return this.http.get<RegisterResponse>(
+      `${environment.apiUrlUser}/register`
+    );
   }
 
   // Add user

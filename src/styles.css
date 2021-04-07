@@ -61,3 +61,8 @@ a[data-toggle="collapse"][aria-expanded="true"] .caret {
     color: #000;
   }
 }
+
+.pull-right {
+  display: flex;
+  justify-content: flex-end;
+}
