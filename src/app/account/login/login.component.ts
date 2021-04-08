@@ -50,9 +50,9 @@ export class LoginComponent implements OnInit {
         (error) => {
           console.log(error);
           this.error = error;
-          this.loading = false;
         }
       );
+    this.loading = false;
     // this.showNotification("top", "right", "halo", "danger");
     // this.router.navigate(["/dashboard"]);
   }

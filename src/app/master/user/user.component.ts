@@ -136,7 +136,7 @@ export class UserComponent implements OnInit {
     let model = new RegisterModel();
     model.jenis_aplikasi = 1;
     model.password = q.password;
-    model.penginput = this.authenticationService.userValue.username;
+    model.penginput = this.authenticationService.userValue["username"];
     model.role = q.role;
     model.status = q.status;
     model.username = q.username;

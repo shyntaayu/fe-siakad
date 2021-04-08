@@ -23,6 +23,7 @@ import { LoginComponent } from "./account/login/login.component";
 import { RegisterComponent } from "./account/register/register.component";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { SweetAlert2Module } from "@sweetalert2/ngx-sweetalert2";
+import { UtilsModule } from "shared/utils/utils.module";
 
 @NgModule({
   imports: [
@@ -38,6 +39,7 @@ import { SweetAlert2Module } from "@sweetalert2/ngx-sweetalert2";
     }),
     MatCheckboxModule,
     SweetAlert2Module.forRoot({ dismissOnDestroy: false }),
+    UtilsModule,
   ],
   declarations: [
     AppComponent,
