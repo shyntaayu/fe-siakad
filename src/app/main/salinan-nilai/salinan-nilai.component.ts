@@ -13,6 +13,7 @@ export class SalinanNilaiComponent implements OnInit {
   profileForm: FormGroup;
   options: string[] = ["One", "Two", "Three"];
   products: Product[];
+  selectedProduct2;
 
   constructor(
     private fb: FormBuilder,

@@ -1,13 +1,11 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";
+import { NgbModal, NgbModalConfig } from "@ng-bootstrap/ng-bootstrap";
 import { RegisterModel } from "app/model/register-model";
 import { AuthenticationService } from "app/services/authentication.service";
 import { UserService } from "app/services/user.service";
-import { Observable } from "rxjs";
 import Swal from "sweetalert2";
 import { DynamicFormBuilderComponent } from "../dynamic-form-builder/dynamic-form-builder.component";
-import { QuestionService } from "../dynamic-form-question/question.service";
-import { QuestionBase } from "../share/question-base";
 
 export class DDR {
   key: string;
@@ -28,6 +26,8 @@ export class UserComponent implements OnInit {
   @ViewChild("dynamicformbuilder") child: DynamicFormBuilderComponent;
   isAdd = false;
   users;
+  selectedProduct2;
+  modalReference: any;
 
   public fields: any[] = [
     {
@@ -103,7 +103,9 @@ export class UserComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    config: NgbModalConfig,
+    private modalService: NgbModal
   ) {
     //option2
     this.form = new FormGroup({
@@ -113,6 +115,9 @@ export class UserComponent implements OnInit {
       console.log(update);
       this.fields = JSON.parse(update.fields);
     });
+
+    config.backdrop = "static";
+    config.keyboard = false;
   }
 
   ngOnInit(): void {
@@ -155,8 +160,10 @@ export class UserComponent implements OnInit {
           text: res.msg + " - Berhasil menambahkan",
           icon: "success",
           allowOutsideClick: false,
+        }).then(() => {
+          this.modalReference.close();
         });
-        this.child.reset();
+        // this.child.reset();
       }
       this.loading = false;
     });
@@ -180,4 +187,14 @@ export class UserComponent implements OnInit {
       console.log(data);
     });
   }
+
+  open(content) {
+    this.modalReference = this.modalService.open(content, { size: "lg" });
+  }
+  close() {
+    this.modalReference.close();
+  }
+
+  onRowUnselect(a) {}
+  onRowSelect(a) {}
 }

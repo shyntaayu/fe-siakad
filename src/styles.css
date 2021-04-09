@@ -66,3 +66,12 @@ a[data-toggle="collapse"][aria-expanded="true"] .caret {
   display: flex;
   justify-content: flex-end;
 }
+
+.cdk-global-overlay-wrapper,
+.cdk-overlay-container {
+  z-index: 1300 !important;
+}
+
+body > [ngb-modal-window]:not([modal-render]) {
+  display: none;
+}

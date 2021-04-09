@@ -13,7 +13,7 @@
                 </div>
             </div>
         </div> -->
-        <div class="row" *ngIf="isAdd">
+        <!-- <div class="row" *ngIf="isAdd">
             <div class="col-md-12">
                 <div class="card" [busyIf]="loading">
                     <div class="card-header card-header-info card-header-icon">
@@ -27,24 +27,25 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12 pull-right">
-                                <button mat-raised-button class="btn btn-primary" (click)="isAdd=true"><i
+                                <button mat-raised-button class="btn btn-primary" (click)="open(content)"><i
                                         class="material-icons">person_add</i>
                                     Tambah User
                                 </button>
                             </div>
                         </div>
                         <p-table #dt1 [value]="users" selectionMode="single" [(selection)]="selectedProduct2"
-                            dataKey="code" (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)"
-                            [paginator]="true" [rows]="10" [showCurrentPageReport]="true" sortMode="multiple"
+                            dataKey="username" (onRowSelect)="onRowSelect($event)"
+                            (onRowUnselect)="onRowUnselect($event)" [paginator]="true" [rows]="10"
+                            [showCurrentPageReport]="true" sortMode="multiple"
                             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                            [globalFilterFields]="['name','code','category','quantity']"
+                            [globalFilterFields]="['username','master_hak_akses_id','status','quantity']"
                             [rowsPerPageOptions]="[10,25,50]">
                             <ng-template pTemplate="caption">
                                 <div class="p-d-flex">
@@ -58,23 +59,24 @@
                             </ng-template>
                             <ng-template pTemplate="header">
                                 <tr>
-                                    <th pSortableColumn="code">Username <p-sortIcon field="username"></p-sortIcon>
+                                    <th pSortableColumn="username">Username <p-sortIcon field="username"></p-sortIcon>
                                     </th>
-                                    <th pSortableColumn="name">Role <p-sortIcon field="master_hak_akses_id">
+                                    <th pSortableColumn="master_hak_akses_id">Role <p-sortIcon
+                                            field="master_hak_akses_id">
                                         </p-sortIcon>
                                     </th>
-                                    <th pSortableColumn="category">Status <p-sortIcon field="status"></p-sortIcon>
+                                    <th pSortableColumn="status">Status <p-sortIcon field="status"></p-sortIcon>
                                     </th>
                                     <th pSortableColumn="quantity">Aksi <p-sortIcon field="quantity"></p-sortIcon>
                                     </th>
                                 </tr>
                             </ng-template>
-                            <ng-template pTemplate="body" let-product>
-                                <tr [pSelectableRow]="product">
-                                    <td>{{product.username}}</td>
-                                    <td>{{product.master_hak_akses_id}}</td>
-                                    <td>{{product.status}}</td>
-                                    <td>{{product.quantity}}</td>
+                            <ng-template pTemplate="body" let-users>
+                                <tr [pSelectableRow]="users">
+                                    <td>{{users.username}}</td>
+                                    <td>{{users.master_hak_akses_id}}</td>
+                                    <td>{{users.status}}</td>
+                                    <td>{{users.quantity}}</td>
                                 </tr>
                             </ng-template>
                         </p-table>
@@ -84,3 +86,23 @@
         </div>
     </div>
 </div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header btn-info">
+        <h4 class="modal-title" id="modal-basic-title">Form User</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row" [busyIf]="loading">
+            <div class="col-md-12">
+                <dynamic-form-builder #dynamicformbuilder [fields]="getFields()" (onSubmit)="getValueForm($event)">
+                </dynamic-form-builder>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
+    </div> -->
+</ng-template>

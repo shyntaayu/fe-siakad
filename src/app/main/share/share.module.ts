@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ControlMessageComponent } from "./control-message.component";
 import { FormControlStyleComponent } from "./form-control-style.component";
 import { ProdiDdlComponent } from "./prodi-ddl.component";
+import { UtilsModule } from "shared/utils/utils.module";
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { ProdiDdlComponent } from "./prodi-ddl.component";
     MatAutocompleteModule,
     FormsModule,
     ReactiveFormsModule,
+    UtilsModule,
   ],
   declarations: [
     DosenComponent,
