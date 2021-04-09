@@ -2,7 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AuthenticationService } from "app/services/authentication.service";
-import { first } from "rxjs/operators";
+import { finalize, first } from "rxjs/operators";
+import Swal from "sweetalert2";
 declare var $: any;
 
 @Component({
@@ -42,17 +43,26 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     this.authenticationService
       .login(this.profileForm.value.email, this.profileForm.value.password)
-      .pipe(first())
+      .pipe(
+        first(),
+        finalize(() => (this.loading = false))
+      )
       .subscribe(
         (data) => {
           this.router.navigate([this.returnUrl]);
         },
         (error) => {
           console.log(error);
+          console.log(error.status);
           this.error = error;
+          Swal.fire({
+            title: "Eror!",
+            text: error.message,
+            icon: "error",
+            allowOutsideClick: false,
+          });
         }
       );
-    this.loading = false;
     // this.showNotification("top", "right", "halo", "danger");
     // this.router.navigate(["/dashboard"]);
   }
