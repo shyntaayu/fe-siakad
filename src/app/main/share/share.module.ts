@@ -9,6 +9,9 @@ import { ControlMessageComponent } from "./control-message.component";
 import { FormControlStyleComponent } from "./form-control-style.component";
 import { ProdiDdlComponent } from "./prodi-ddl.component";
 import { UtilsModule } from "shared/utils/utils.module";
+import { TahunDdlComponent } from "./tahun-ddl.component";
+import { SemesterDdlComponent } from "./semester-ddl.component";
+import { JenjangDdlComponent } from "./jenjang-ddl.component";
 
 @NgModule({
   imports: [
@@ -25,12 +28,18 @@ import { UtilsModule } from "shared/utils/utils.module";
     ControlMessageComponent,
     FormControlStyleComponent,
     ProdiDdlComponent,
+    TahunDdlComponent,
+    SemesterDdlComponent,
+    JenjangDdlComponent,
   ],
   exports: [
     DosenComponent,
     ControlMessageComponent,
     FormControlStyleComponent,
     ProdiDdlComponent,
+    TahunDdlComponent,
+    SemesterDdlComponent,
+    JenjangDdlComponent,
   ],
 })
 export class ShareModule {}

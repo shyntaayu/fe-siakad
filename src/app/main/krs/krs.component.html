@@ -1,70 +1,31 @@
-<div class="main-content" [busyIf]="loading">
+<div class="main-content">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <div class="card">
+                <div class="card" [busyIf]="loading">
                     <div class="card-body">
                         <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
                             <div class="row">
                                 <div class="col-md-4">
-                                    <mat-form-field class="example-full-width" *ngIf="jenjang">
-                                        <mat-label>Jenjang</mat-label>
-                                        <input type="text" placeholder="Pilih Jenis" aria-label="Number" matInput
-                                            formControlName="jenjang" [matAutocomplete]="auto">
-                                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete"
-                                            [displayWith]="displayFnJenjang.bind(this)">
-                                            <mat-option *ngFor="let option of jenjang"
-                                                [value]="option.id_master_jenjang">
-                                                {{option.nama}}
-                                            </mat-option>
-                                        </mat-autocomplete>
-                                        <mat-error *ngIf="profileForm.controls.jenjang.hasError('required')">
-                                            Jenjang is Required
-                                        </mat-error>
-                                    </mat-form-field>
+                                    <jenjang-ddl formControlName="jenjang" [(ngModel)]="jenjang">
+                                    </jenjang-ddl>
                                 </div>
                                 <div class="col-md-4">
-                                    <mat-form-field class="example-full-width" *ngIf="semester">
-                                        <mat-label>Semester</mat-label>
-                                        <input type="text" placeholder="Pilih Semester" aria-label="Number" matInput
-                                            formControlName="semester" [matAutocomplete]="auto">
-                                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete"
-                                            [displayWith]="displayFnSemester.bind(this)">
-                                            <mat-option *ngFor="let option of semester" [value]="option.value">
-                                                {{option.nama}}
-                                            </mat-option>
-                                        </mat-autocomplete>
-                                    </mat-form-field>
+                                    <semester-ddl formControlName="semester" [(ngModel)]="semester">
+                                    </semester-ddl>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4">
-                                    <mat-form-field class="example-full-width" *ngIf="tahun">
-                                        <mat-label>Tahun Ajaran</mat-label>
-                                        <input type="text" placeholder="Pilih Tahun Ajaran" aria-label="Number" matInput
-                                            formControlName="tahun" [matAutocomplete]="auto">
-                                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                                            <mat-option *ngFor="let option of tahun" [value]="option.tahun_akademik">
-                                                {{option.tahun_akademik}}
-                                            </mat-option>
-                                        </mat-autocomplete>
-                                    </mat-form-field>
+                                    <tahun-ddl formControlName="tahun" [(ngModel)]="tahun">
+                                    </tahun-ddl>
                                 </div>
                                 <div class="col-md-4">
-                                    <mat-form-field class="example-full-width" *ngIf="prodi">
-                                        <mat-label>Jurusan</mat-label>
-                                        <input type="text" placeholder="Pilih Jurusan" aria-label="Number" matInput
-                                            formControlName="jurusan" [matAutocomplete]="auto">
-                                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete"
-                                            [displayWith]="displayFnJurusan.bind(this)">
-                                            <mat-option *ngFor="let option of prodi" [value]="option.kode_prodi">
-                                                {{option.nama}}
-                                            </mat-option>
-                                        </mat-autocomplete>
-                                    </mat-form-field>
+                                    <prodi-ddl formControlName="jurusan" [(ngModel)]="prodi" #hasMessage>
+                                    </prodi-ddl>
                                 </div>
                             </div>
-                            <button mat-raised-button type="submit" class="btn btn-danger pull-right"
+                            <button mat-raised-button type="submit" class="btn btn-info pull-right"
                                 [disabled]="!profileForm.valid" [loading]="loading">Cari</button>
                             <div class="clearfix"></div>
 

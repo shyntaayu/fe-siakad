@@ -22,6 +22,7 @@ export class ControlMessageComponent implements OnInit {
     let inputElement = null;
     console.log(this.formComponent);
     if (this.formComponent !== "") {
+      console.log(this.el.nativeElement.querySelector(this.formComponent));
       inputElement = this.el.nativeElement.parentElement.querySelector(
         this.formComponent
       );

@@ -15,13 +15,13 @@ import { KrsService } from "app/services/krs.service";
 import { AppComponentBase } from "shared/app-component-base";
 const noop = () => {};
 @Component({
-  selector: "prodi-ddl",
+  selector: "jenjang-ddl",
   template: `<div [busyIf]="isLoading">
     <mat-form-field class="example-full-width">
-      <mat-label>Jurusan</mat-label>
+      <mat-label>Jenjang</mat-label>
       <input
         type="text"
-        placeholder="Pilih Jurusan"
+        placeholder="Pilih Jenjang"
         aria-label="Number"
         matInput
         [matAutocomplete]="auto"
@@ -33,7 +33,10 @@ const noop = () => {};
         #auto="matAutocomplete"
         [displayWith]="displayFn.bind(this)"
       >
-        <mat-option *ngFor="let option of prodi" [value]="option.kode_prodi">
+        <mat-option
+          *ngFor="let option of jenjang"
+          [value]="option.id_master_jenjang"
+        >
           {{ option.nama }}
         </mat-option>
       </mat-autocomplete>
@@ -42,21 +45,21 @@ const noop = () => {};
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: ProdiDdlComponent,
+      useExisting: JenjangDdlComponent,
       multi: true,
     },
   ],
 })
-export class ProdiDdlComponent
+export class JenjangDdlComponent
   extends AppComponentBase
   implements OnInit, ControlValueAccessor {
   private innerValue: any = "";
-  prodi;
+  jenjang;
 
   onChange: (value: string) => void;
 
   @Input() isDisabled: boolean = false;
-  @Input() selectedProdi: number = undefined;
+  @Input() selectedJenjang: number = undefined;
 
   isLoading = false;
 
@@ -69,9 +72,9 @@ export class ProdiDdlComponent
   ngOnInit(): void {
     let self = this;
     self.isLoading = true;
-    this._krsService.getAllProdi().subscribe(
+    this._krsService.getAllJenjang().subscribe(
       (result) => {
-        this.prodi = result;
+        this.jenjang = result;
         self.isLoading = false;
       },
       (err) => {
@@ -83,7 +86,7 @@ export class ProdiDdlComponent
   }
 
   ngOnChanges(): void {
-    this.selectedProdi = this.selectedProdi;
+    this.selectedJenjang = this.selectedJenjang;
   }
 
   get inputValue(): any {
@@ -113,7 +116,7 @@ export class ProdiDdlComponent
 
   displayFn(value?: number) {
     return value
-      ? this.prodi.find((_) => _.kode_prodi === value).nama
+      ? this.jenjang.find((_) => _.id_master_jenjang === value).nama
       : undefined;
   }
 }

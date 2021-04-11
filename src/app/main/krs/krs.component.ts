@@ -1,7 +1,13 @@
-import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Component, Injector, OnInit } from "@angular/core";
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from "@angular/forms";
 import { KrsService } from "app/services/krs.service";
 import { MessageService, SelectItem } from "primeng/api";
+import { AppComponentBase } from "shared/app-component-base";
 import { MainService } from "../main.service";
 import { Product } from "../model/product";
 
@@ -9,7 +15,7 @@ import { Product } from "../model/product";
   selector: "app-krs",
   templateUrl: "./krs.component.html",
 })
-export class KrsComponent implements OnInit {
+export class KrsComponent extends AppComponentBase implements OnInit {
   profileForm: FormGroup;
   options: string[] = ["One", "Two", "Three"];
   products: Product[];
@@ -22,13 +28,16 @@ export class KrsComponent implements OnInit {
   semester;
   prodi;
   jenjang;
+  prodiMe;
 
   constructor(
     private krsService: KrsService,
     private fb: FormBuilder,
     private productService: MainService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    injector: Injector
   ) {
+    super(injector);
     this.profileForm = this.fb.group({
       jenjang: ["", Validators.required],
       semester: ["", Validators.required],
@@ -38,10 +47,10 @@ export class KrsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getTahun();
-    this.getSemester();
-    this.getProdi();
-    this.getJenjang();
+    // this.getTahun();
+    // this.getSemester();
+    // this.getProdi();
+    // this.getJenjang();
     this.productService.getProductsSmall().then((data) => {
       this.products = data;
       console.log(data);
@@ -101,28 +110,49 @@ export class KrsComponent implements OnInit {
     // TODO: Use EventEmitter with form value
     this.loading = true;
     console.warn(this.profileForm.value);
+    console.log(this.prodiMe);
   }
 
   getTahun() {
-    this.krsService.getAllTahun().subscribe((data) => {
-      this.tahun = data;
-    });
+    this.krsService.getAllTahun().subscribe(
+      (data) => {
+        this.tahun = data;
+      },
+      (error) => {
+        this.showMessage("Eror!", error.message, "error");
+      }
+    );
   }
 
   getSemester() {
-    this.krsService.getAllSemester().subscribe((data) => {
-      this.semester = data;
-    });
+    this.krsService.getAllSemester().subscribe(
+      (data) => {
+        this.semester = data;
+      },
+      (error) => {
+        this.showMessage("Eror!", error.message, "error");
+      }
+    );
   }
   getProdi() {
-    this.krsService.getAllProdi().subscribe((data) => {
-      this.prodi = data;
-    });
+    this.krsService.getAllProdi().subscribe(
+      (data) => {
+        this.prodi = data;
+      },
+      (error) => {
+        this.showMessage("Eror!", error.message, "error");
+      }
+    );
   }
   getJenjang() {
-    this.krsService.getAllJenjang().subscribe((data) => {
-      this.jenjang = data;
-    });
+    this.krsService.getAllJenjang().subscribe(
+      (data) => {
+        this.jenjang = data;
+      },
+      (error) => {
+        this.showMessage("Eror!", error.message, "error");
+      }
+    );
   }
 
   displayFnJurusan(value?: number) {
@@ -141,5 +171,12 @@ export class KrsComponent implements OnInit {
     return value
       ? this.semester.find((_) => _.value === value).nama
       : undefined;
+  }
+
+  onSelectionChanged(a, formcontrol) {
+    console.log(a.option.value);
+    console.log(formcontrol, typeof formcontrol);
+    this.profileForm["controls"][formcontrol].patchValue(a.option.value);
+    console.log(this.profileForm.value);
   }
 }

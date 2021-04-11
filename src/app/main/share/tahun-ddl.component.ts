@@ -15,26 +15,25 @@ import { KrsService } from "app/services/krs.service";
 import { AppComponentBase } from "shared/app-component-base";
 const noop = () => {};
 @Component({
-  selector: "prodi-ddl",
+  selector: "tahun-ddl",
   template: `<div [busyIf]="isLoading">
     <mat-form-field class="example-full-width">
-      <mat-label>Jurusan</mat-label>
+      <mat-label>Tahun</mat-label>
       <input
         type="text"
-        placeholder="Pilih Jurusan"
+        placeholder="Pilih Tahun"
         aria-label="Number"
         matInput
         [matAutocomplete]="auto"
         [(ngModel)]="inputValue"
         (optionSelected)="onChange($event.option.value)"
       />
-      <mat-autocomplete
-        autoActiveFirstOption
-        #auto="matAutocomplete"
-        [displayWith]="displayFn.bind(this)"
-      >
-        <mat-option *ngFor="let option of prodi" [value]="option.kode_prodi">
-          {{ option.nama }}
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option
+          *ngFor="let option of tahun"
+          [value]="option.tahun_akademik"
+        >
+          {{ option.tahun_akademik }}
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>
@@ -42,21 +41,21 @@ const noop = () => {};
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: ProdiDdlComponent,
+      useExisting: TahunDdlComponent,
       multi: true,
     },
   ],
 })
-export class ProdiDdlComponent
+export class TahunDdlComponent
   extends AppComponentBase
   implements OnInit, ControlValueAccessor {
   private innerValue: any = "";
-  prodi;
+  tahun;
 
   onChange: (value: string) => void;
 
   @Input() isDisabled: boolean = false;
-  @Input() selectedProdi: number = undefined;
+  @Input() selectedTahun: number = undefined;
 
   isLoading = false;
 
@@ -69,9 +68,9 @@ export class ProdiDdlComponent
   ngOnInit(): void {
     let self = this;
     self.isLoading = true;
-    this._krsService.getAllProdi().subscribe(
+    this._krsService.getAllTahun().subscribe(
       (result) => {
-        this.prodi = result;
+        this.tahun = result;
         self.isLoading = false;
       },
       (err) => {
@@ -83,7 +82,7 @@ export class ProdiDdlComponent
   }
 
   ngOnChanges(): void {
-    this.selectedProdi = this.selectedProdi;
+    this.selectedTahun = this.selectedTahun;
   }
 
   get inputValue(): any {
@@ -109,11 +108,5 @@ export class ProdiDdlComponent
     if (value !== this.innerValue) {
       this.innerValue = value;
     }
-  }
-
-  displayFn(value?: number) {
-    return value
-      ? this.prodi.find((_) => _.kode_prodi === value).nama
-      : undefined;
   }
 }

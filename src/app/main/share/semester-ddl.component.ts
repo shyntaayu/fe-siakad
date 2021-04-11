@@ -15,13 +15,13 @@ import { KrsService } from "app/services/krs.service";
 import { AppComponentBase } from "shared/app-component-base";
 const noop = () => {};
 @Component({
-  selector: "prodi-ddl",
+  selector: "semester-ddl",
   template: `<div [busyIf]="isLoading">
     <mat-form-field class="example-full-width">
-      <mat-label>Jurusan</mat-label>
+      <mat-label>Semester</mat-label>
       <input
         type="text"
-        placeholder="Pilih Jurusan"
+        placeholder="Pilih Semester"
         aria-label="Number"
         matInput
         [matAutocomplete]="auto"
@@ -33,7 +33,7 @@ const noop = () => {};
         #auto="matAutocomplete"
         [displayWith]="displayFn.bind(this)"
       >
-        <mat-option *ngFor="let option of prodi" [value]="option.kode_prodi">
+        <mat-option *ngFor="let option of semester" [value]="option.value">
           {{ option.nama }}
         </mat-option>
       </mat-autocomplete>
@@ -42,21 +42,21 @@ const noop = () => {};
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: ProdiDdlComponent,
+      useExisting: SemesterDdlComponent,
       multi: true,
     },
   ],
 })
-export class ProdiDdlComponent
+export class SemesterDdlComponent
   extends AppComponentBase
   implements OnInit, ControlValueAccessor {
   private innerValue: any = "";
-  prodi;
+  semester;
 
   onChange: (value: string) => void;
 
   @Input() isDisabled: boolean = false;
-  @Input() selectedProdi: number = undefined;
+  @Input() selectedSemester: number = undefined;
 
   isLoading = false;
 
@@ -69,9 +69,9 @@ export class ProdiDdlComponent
   ngOnInit(): void {
     let self = this;
     self.isLoading = true;
-    this._krsService.getAllProdi().subscribe(
+    this._krsService.getAllSemester().subscribe(
       (result) => {
-        this.prodi = result;
+        this.semester = result;
         self.isLoading = false;
       },
       (err) => {
@@ -83,7 +83,7 @@ export class ProdiDdlComponent
   }
 
   ngOnChanges(): void {
-    this.selectedProdi = this.selectedProdi;
+    this.selectedSemester = this.selectedSemester;
   }
 
   get inputValue(): any {
@@ -113,7 +113,7 @@ export class ProdiDdlComponent
 
   displayFn(value?: number) {
     return value
-      ? this.prodi.find((_) => _.kode_prodi === value).nama
+      ? this.semester.find((_) => _.value === value).nama
       : undefined;
   }
 }
