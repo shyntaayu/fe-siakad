@@ -1,6 +1,7 @@
 import { Component, Injector, OnInit } from "@angular/core";
 import { MainService } from "app/main/main.service";
 import { RoleModel } from "app/model/role-model";
+import { RoleResult } from "app/model/role-result";
 import { RoleService } from "app/services/role.service";
 import { ConfirmationService, MessageService } from "primeng/api";
 import { AppComponentBase } from "shared/app-component-base";
@@ -22,10 +23,10 @@ import Swal from "sweetalert2";
 })
 export class RoleComponent extends AppComponentBase implements OnInit {
   roleDialog: boolean;
-  role;
-  selectedRoles;
+  role: RoleResult;
+  selectedRoles: RoleResult[];
   submitted: boolean;
-  roles;
+  roles: RoleResult[];
 
   constructor(
     // private roleService: MainService,
@@ -124,59 +125,61 @@ export class RoleComponent extends AppComponentBase implements OnInit {
   saveRole() {
     this.submitted = true;
     console.log(this.role);
-    if (this.role.master_hak_akses_id) {
-      const model = new RoleModel();
-      model.nama = this.role.nama;
-      model.jenis_aplikasi = 3;
-      model.master_hak_akses_id = this.role.master_hak_akses_id;
-      this.roleService.updateRole(model).subscribe(
-        (res) => {
-          console.log(res);
-          if (res.status == 0) {
-            this.showMessage("Eror!", res.msg, "error");
-          } else {
-            this.showMessage(
-              "Sukses!",
-              res.msg + " - Berhasil mengedit",
-              "success"
-            );
+    if (this.role.nama.trim()) {
+      if (this.role.master_hak_akses_id) {
+        const model = new RoleModel();
+        model.nama = this.role.nama;
+        model.jenis_aplikasi = 3;
+        model.master_hak_akses_id = this.role.master_hak_akses_id;
+        this.roleService.updateRole(model).subscribe(
+          (res) => {
+            console.log(res);
+            if (res.status == 0) {
+              this.showMessage("Eror!", res.msg, "error");
+            } else {
+              this.showMessage(
+                "Sukses!",
+                res.msg + " - Berhasil mengedit",
+                "success"
+              );
+            }
+          },
+          (error) => {
+            this.showMessage("Eror!", error.message, "error");
           }
-        },
-        (error) => {
-          this.showMessage("Eror!", error.message, "error");
-        }
-      );
-    } else {
-      const model = new RoleModel();
-      model.nama = this.role.nama;
-      model.jenis_aplikasi = 3;
-      this.roleService.addRole(model).subscribe(
-        (res) => {
-          console.log(res);
-          if (res.status == 0) {
-            this.showMessage("Eror!", res.msg, "error");
-          } else {
-            this.showMessage(
-              "Sukses!",
-              res.msg + " - Berhasil menambahkan",
-              "success"
-            );
+        );
+      } else {
+        const model = new RoleModel();
+        model.nama = this.role.nama;
+        model.jenis_aplikasi = 3;
+        this.roleService.addRole(model).subscribe(
+          (res) => {
+            console.log(res);
+            if (res.status == 0) {
+              this.showMessage("Eror!", res.msg, "error");
+            } else {
+              this.showMessage(
+                "Sukses!",
+                res.msg + " - Berhasil menambahkan",
+                "success"
+              );
+            }
+          },
+          (error) => {
+            this.showMessage("Eror!", error.message, "error");
           }
-        },
-        (error) => {
-          this.showMessage("Eror!", error.message, "error");
-        }
-      );
+        );
+      }
+      this.roleDialog = false;
+      this.role = {};
+      this.getRoles();
     }
-    this.roleDialog = false;
-    this.role = {};
-    this.getRoles();
   }
 
   findIndexById(id: string): number {
     let index = -1;
     for (let i = 0; i < this.roles.length; i++) {
-      if (this.roles[i].id === id) {
+      if (this.roles[i].master_hak_akses_id == +id) {
         index = i;
         break;
       }
