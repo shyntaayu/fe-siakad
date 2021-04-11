@@ -31,61 +31,70 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-body">
-                        <div class="row">
+                    <!-- <div class="card-body"> -->
+                    <!-- <div class="row">
                             <div class="col-md-12 pull-right">
                                 <button mat-raised-button class="btn btn-rose" (click)="open(content)"><i
                                         class="material-icons">person_add</i>
                                     Tambah User
                                 </button>
                             </div>
-                        </div>
-                        <p-table #dt1 [value]="users" selectionMode="single" [(selection)]="selectedProduct2"
-                            dataKey="username" (onRowSelect)="onRowSelect($event)"
-                            (onRowUnselect)="onRowUnselect($event)" [paginator]="true" [rows]="10"
-                            [showCurrentPageReport]="true" sortMode="multiple"
-                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                            [globalFilterFields]="['username','nama','status','quantity']"
-                            [rowsPerPageOptions]="[10,25,50]">
-                            <ng-template pTemplate="caption">
-                                <div class="p-d-flex p-ai-center p-jc-between">
-                                    <h5 class="p-m-0">User</h5>
-                                    <span class="p-input-icon-right p-ml-auto">
-                                        <i class="pi pi-search"></i>
-                                        <input pInputText type="text"
-                                            (input)="dt1.filterGlobal($event.target.value, 'contains')"
-                                            placeholder="Search keyword" />
-                                    </span>
-                                </div>
-                            </ng-template>
-                            <ng-template pTemplate="header">
-                                <tr>
-                                    <th pSortableColumn="username">Username <p-sortIcon field="username"></p-sortIcon>
-                                    </th>
-                                    <th pSortableColumn="nama">Role <p-sortIcon field="nama">
-                                        </p-sortIcon>
-                                    </th>
-                                    <th pSortableColumn="status">Status <p-sortIcon field="status"></p-sortIcon>
-                                    </th>
-                                    <th></th>
-                                </tr>
-                            </ng-template>
-                            <ng-template pTemplate="body" let-users>
-                                <tr [pSelectableRow]="users">
-                                    <td>{{users.username}}</td>
-                                    <td>{{users.nama}}</td>
-                                    <td>{{setStatus(users.status)}}</td>
-                                    <td>
-                                    </td>
-                                </tr>
-                            </ng-template>
-                            <ng-template pTemplate="summary">
-                                <div class="p-d-flex p-ai-center p-jc-between">
-                                    In total there are {{users ? users.length : 0 }} users.
-                                </div>
-                            </ng-template>
-                        </p-table>
-                    </div>
+                        </div> -->
+                    <p-toolbar styleClass="p-mb-4">
+                        <ng-template pTemplate="left">
+                            <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2"
+                                (click)="open(content,1)"></button>
+                        </ng-template>
+                    </p-toolbar>
+                    <p-table #dt1 [value]="users" selectionMode="single" [(selection)]="selectedProduct2"
+                        dataKey="username" (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)"
+                        [paginator]="true" [rows]="10" [showCurrentPageReport]="true" sortMode="multiple"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                        [globalFilterFields]="['username','nama','status','quantity']"
+                        [rowsPerPageOptions]="[10,25,50]">
+                        <ng-template pTemplate="caption">
+                            <div class="p-d-flex p-ai-center p-jc-between">
+                                <!-- <h5 class="p-m-0">User</h5> -->
+                                <span class="p-input-icon-right p-ml-auto">
+                                    <i class="pi pi-search"></i>
+                                    <input pInputText type="text"
+                                        (input)="dt1.filterGlobal($event.target.value, 'contains')"
+                                        placeholder="Search keyword" />
+                                </span>
+                            </div>
+                        </ng-template>
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th pSortableColumn="username">Username <p-sortIcon field="username"></p-sortIcon>
+                                </th>
+                                <th pSortableColumn="nama">Role <p-sortIcon field="nama">
+                                    </p-sortIcon>
+                                </th>
+                                <th pSortableColumn="status">Status <p-sortIcon field="status"></p-sortIcon>
+                                </th>
+                                <th></th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-user>
+                            <tr [pSelectableRow]="user">
+                                <td>{{user.username}}</td>
+                                <td>{{user.nama}}</td>
+                                <td>{{setStatus(user.status)}}</td>
+                                <td> <button pButton pRipple icon="pi pi-pencil"
+                                        class="p-button-rounded p-button-warning p-mr-2"
+                                        (click)="open(content,2,user)"></button>
+                                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger"
+                                        (click)="deleteUser(user)"></button>
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="summary">
+                            <div class="p-d-flex p-ai-center p-jc-between">
+                                In total there are {{users ? users.length : 0 }} users.
+                            </div>
+                        </ng-template>
+                    </p-table>
+                    <!-- </div> -->
                 </div>
             </div>
         </div>
@@ -111,3 +120,4 @@
         <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
     </div> -->
 </ng-template>
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>

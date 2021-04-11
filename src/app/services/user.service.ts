@@ -36,6 +36,23 @@ export class UserService {
     return this.http.post(API_URL, data).pipe(catchError(this.errorMgmt));
   }
 
+  // Update user
+  updateUser(data: RegisterModel): Observable<any> {
+    let API_URL = `${environment.apiUrlUser}/register`;
+    return this.http.put(API_URL, data).pipe(catchError(this.errorMgmt));
+  }
+
+  // Delete user
+  deleteUser(id): Observable<any> {
+    let API_URL = `${environment.apiUrlUser}/register`;
+    const options = {
+      body: { login_id: id },
+    };
+    return this.http
+      .request("DELETE", API_URL, options)
+      .pipe(catchError(this.errorMgmt));
+  }
+
   // Error handling
   errorMgmt(error: HttpErrorResponse) {
     let errorMessage = "";

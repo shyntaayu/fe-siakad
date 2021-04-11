@@ -1,9 +1,11 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, Injector, OnInit, ViewChild } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";
 import { NgbModal, NgbModalConfig } from "@ng-bootstrap/ng-bootstrap";
 import { RegisterModel } from "app/model/register-model";
 import { AuthenticationService } from "app/services/authentication.service";
 import { UserService } from "app/services/user.service";
+import { ConfirmationService } from "primeng/api";
+import { AppComponentBase } from "shared/app-component-base";
 import Swal from "sweetalert2";
 import { DynamicFormBuilderComponent } from "../dynamic-form-builder/dynamic-form-builder.component";
 
@@ -17,7 +19,7 @@ export class DDR {
   templateUrl: "./user.component.html",
   styleUrls: ["./user.component.css"],
 })
-export class UserComponent implements OnInit {
+export class UserComponent extends AppComponentBase implements OnInit {
   listRole = [];
   loading = false;
   //option 2
@@ -28,6 +30,8 @@ export class UserComponent implements OnInit {
   users;
   selectedProduct2;
   modalReference: any;
+  type;
+  user;
 
   public fields: any[] = [
     {
@@ -44,21 +48,6 @@ export class UserComponent implements OnInit {
       value: "",
       required: true,
     },
-    // {
-    //   type: "text",
-    //   name: "email",
-    //   label: "Email",
-    //   value: "",
-    //   required: true,
-    // },
-
-    // {
-    //   type: "file",
-    //   name: "picture",
-    //   label: "Picture",
-    //   required: true,
-    //   onUpload: this.onUpload.bind(this),
-    // },
     {
       type: "dropdown",
       name: "role",
@@ -77,27 +66,6 @@ export class UserComponent implements OnInit {
         { key: "2", label: "Cekal" },
       ],
     },
-    // {
-    //   type: "radio",
-    //   name: "country",
-    //   label: "Country",
-    //   value: "in",
-    //   required: true,
-    //   options: [
-    //     { key: "m", label: "Male" },
-    //     { key: "f", label: "Female" },
-    //   ],
-    // },
-    // {
-    //   type: "checkbox",
-    //   name: "hobby",
-    //   label: "Hobby",
-    //   required: true,
-    //   options: [
-    //     { key: "f", label: "Fishing" },
-    //     { key: "c", label: "Cooking" },
-    //   ],
-    // },
   ];
   //end option 2
 
@@ -105,8 +73,11 @@ export class UserComponent implements OnInit {
     private userService: UserService,
     private authenticationService: AuthenticationService,
     config: NgbModalConfig,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    injector: Injector,
+    private confirmationService: ConfirmationService
   ) {
+    super(injector);
     //option2
     this.form = new FormGroup({
       fields: new FormControl(JSON.stringify(this.fields)),
@@ -145,38 +116,53 @@ export class UserComponent implements OnInit {
     model.role = q.role;
     model.status = q.status;
     model.username = q.username;
-    this.userService.register(model).subscribe(
-      (res) => {
-        console.log(res);
-        if (res.status == 0) {
-          Swal.fire({
-            title: "Eror!",
-            text: res.msg,
-            icon: "error",
-            allowOutsideClick: false,
-          });
-        } else {
-          Swal.fire({
-            title: "Sukses!",
-            text: res.msg + " - Berhasil menambahkan",
-            icon: "success",
-            allowOutsideClick: false,
-          }).then(() => {
-            this.modalReference.close();
-          });
-          // this.child.reset();
+    model.login_id = this.user.login_id;
+    if (this.type == 1) {
+      this.userService.register(model).subscribe(
+        (res) => {
+          console.log(res);
+          if (res.status == 0) {
+            this.showMessage("Eror!", res.msg, "error");
+          } else {
+            Swal.fire({
+              title: "Sukses!",
+              text: res.msg + " - Berhasil menambahkan",
+              icon: "success",
+              allowOutsideClick: false,
+            }).then(() => {
+              this.modalReference.close();
+            });
+          }
+          this.loading = false;
+        },
+        (error) => {
+          this.showMessage("Eror!", error.message, "error");
         }
-        this.loading = false;
-      },
-      (error) => {
-        Swal.fire({
-          title: "Eror!",
-          text: error.message,
-          icon: "error",
-          allowOutsideClick: false,
-        });
-      }
-    );
+      );
+    } else {
+      this.userService.updateUser(model).subscribe(
+        (res) => {
+          console.log(res);
+          if (res.status == 0) {
+            this.showMessage("Eror!", res.msg, "error");
+          } else {
+            Swal.fire({
+              title: "Sukses!",
+              text: res.msg + " - Berhasil mengedit",
+              icon: "success",
+              allowOutsideClick: false,
+            }).then(() => {
+              this.modalReference.close();
+            });
+          }
+          this.loading = false;
+        },
+        (error) => {
+          this.showMessage("Eror!", error.message, "error");
+        }
+      );
+    }
+    this.getUsers();
   }
 
   getRole() {
@@ -190,12 +176,7 @@ export class UserComponent implements OnInit {
         });
       },
       (error) => {
-        Swal.fire({
-          title: "Eror!",
-          text: error.message,
-          icon: "error",
-          allowOutsideClick: false,
-        });
+        this.showMessage("Eror!", error.message, "error");
       }
     );
     return this.listRole;
@@ -208,17 +189,15 @@ export class UserComponent implements OnInit {
         console.log(data);
       },
       (error) => {
-        Swal.fire({
-          title: "Eror!",
-          text: error.message,
-          icon: "error",
-          allowOutsideClick: false,
-        });
+        this.showMessage("Eror!", error.message, "error");
       }
     );
   }
 
-  open(content) {
+  open(content, type?, user?) {
+    console.log(type, user);
+    this.setFieldsEdit(user);
+    this.type = type;
     this.modalReference = this.modalService.open(content, { size: "lg" });
   }
   close() {
@@ -234,5 +213,49 @@ export class UserComponent implements OnInit {
       { id: 2, label: "Cekal" },
     ];
     return status.find((x) => x.id == a).label;
+  }
+
+  deleteUser(user) {
+    this.confirmationService.confirm({
+      message: "Are you sure you want to delete " + user.username + "?",
+      header: "Confirm",
+      icon: "pi pi-exclamation-triangle",
+      accept: () => {
+        this.userService.deleteUser(user.login_id).subscribe(
+          (res) => {
+            console.log(res);
+            if (res.status == 0) {
+              this.showMessage("Eror!", res.msg, "error");
+            } else {
+              this.showMessage(
+                "Sukses!",
+                res.msg + " - Berhasil menghapus",
+                "success"
+              );
+            }
+          },
+          (error) => {
+            this.showMessage("Eror!", error.message, "error");
+          }
+        );
+        this.getUsers();
+      },
+    });
+  }
+
+  setFieldsEdit(user) {
+    if (user) {
+      this.user = user;
+      this.fields[0].value = user.username;
+      this.fields[1].value = user.password;
+      this.fields[2].value = user.master_hak_akses_id.toString();
+      this.fields[3].value = user.status.toString();
+    } else {
+      this.user = {};
+      this.fields[0].value = undefined;
+      this.fields[1].value = undefined;
+      this.fields[2].value = undefined;
+      this.fields[3].value = undefined;
+    }
   }
 }
