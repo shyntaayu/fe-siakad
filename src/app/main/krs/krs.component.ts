@@ -28,8 +28,6 @@ export class KrsComponent extends AppComponentBase implements OnInit {
   semester;
   prodi;
   jenjang;
-  prodiMe;
-
   constructor(
     private krsService: KrsService,
     private fb: FormBuilder,
@@ -110,73 +108,5 @@ export class KrsComponent extends AppComponentBase implements OnInit {
     // TODO: Use EventEmitter with form value
     this.loading = true;
     console.warn(this.profileForm.value);
-    console.log(this.prodiMe);
-  }
-
-  getTahun() {
-    this.krsService.getAllTahun().subscribe(
-      (data) => {
-        this.tahun = data;
-      },
-      (error) => {
-        this.showMessage("Eror!", error.message, "error");
-      }
-    );
-  }
-
-  getSemester() {
-    this.krsService.getAllSemester().subscribe(
-      (data) => {
-        this.semester = data;
-      },
-      (error) => {
-        this.showMessage("Eror!", error.message, "error");
-      }
-    );
-  }
-  getProdi() {
-    this.krsService.getAllProdi().subscribe(
-      (data) => {
-        this.prodi = data;
-      },
-      (error) => {
-        this.showMessage("Eror!", error.message, "error");
-      }
-    );
-  }
-  getJenjang() {
-    this.krsService.getAllJenjang().subscribe(
-      (data) => {
-        this.jenjang = data;
-      },
-      (error) => {
-        this.showMessage("Eror!", error.message, "error");
-      }
-    );
-  }
-
-  displayFnJurusan(value?: number) {
-    return value
-      ? this.prodi.find((_) => _.kode_prodi === value).nama
-      : undefined;
-  }
-
-  displayFnJenjang(value?: number) {
-    return value
-      ? this.jenjang.find((_) => _.id_master_jenjang === value).nama
-      : undefined;
-  }
-
-  displayFnSemester(value?: number) {
-    return value
-      ? this.semester.find((_) => _.value === value).nama
-      : undefined;
-  }
-
-  onSelectionChanged(a, formcontrol) {
-    console.log(a.option.value);
-    console.log(formcontrol, typeof formcontrol);
-    this.profileForm["controls"][formcontrol].patchValue(a.option.value);
-    console.log(this.profileForm.value);
   }
 }
