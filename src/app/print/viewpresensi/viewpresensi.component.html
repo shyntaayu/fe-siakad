@@ -1,9 +1,9 @@
 <div class="invoice" *ngFor="let invoice of invoiceIds; let i = index">
     <!-- <h1>Invoice Num. {{ invoice }}</h1>
     Amount: {{ (invoiceDetails[i] | async)?.amount }} -->
-    <center>
-        <font size="6"><b>KARTU RENCANA STUDI</b></font>
-    </center>
+    <div style="text-align:center;">
+        <font size="6"><span style="font-weight: bold;">KARTU RENCANA STUDI</span></font>
+    </div>
     <table border="0" align="center">
         <tbody>
             <tr>
@@ -69,22 +69,22 @@
         <tbody>
             <tr align="center">
                 <td>
-                    <font size="3"><b>No.</b></font>
+                    <font size="3"><span style="font-weight: bold;">No.</span></font>
                 </td>
                 <td>
-                    <font size="3"><b>Kode MTK</b></font>
+                    <font size="3"><span style="font-weight: bold;">Kode MTK</span></font>
                 </td>
                 <td>
-                    <font size="3"><b>Mata Kuliah</b></font>
+                    <font size="3"><span style="font-weight: bold;">Mata Kuliah</span></font>
                 </td>
                 <td>
-                    <font size="3"><b>sks</b></font>
+                    <font size="3"><span style="font-weight: bold;">sks</span></font>
                 </td>
                 <td>
-                    <font size="3"><b>Status</b></font>
+                    <font size="3"><span style="font-weight: bold;">Status</span></font>
                 </td>
                 <td>
-                    <font size="3"><b>Wajib/Pilihan</b></font>
+                    <font size="3"><span style="font-weight: bold;">Wajib/Pilihan</span></font>
                 </td>
             </tr>
             <tr class="white">
@@ -137,7 +137,7 @@
                 </td>
                 <td>:</td>
                 <td>
-                    <font size="3"><b>6</b></font>
+                    <font size="3"><span style="font-weight: bold;">6</span></font>
                 </td>
             </tr>
         </tbody>
@@ -155,13 +155,13 @@
             <tr>
                 <td width="300">
                     <font size="3">
-                        <center>Dosen Penasehat Akademik</center>
+                        <div style="text-align:center;">Dosen Penasehat Akademik</div>
                     </font>
                 </td>
                 <td witdh="200">&nbsp;</td>
                 <td witdh="100">
                     <font size="3">
-                        <center>Mahasiswa,</center>
+                        <div style="text-align:center;">Mahasiswa,</div>
                     </font>
                 </td>
             </tr>
@@ -171,13 +171,16 @@
             <tr>
                 <td width="300">
                     <font size="3">
-                        <center><b>Nasrul Firdaus, S.Kom.,MMSI</b></center>
+                        <div style="text-align:center;"><span style="font-weight: bold;">Nasrul Firdaus,
+                                S.Kom.,MMSI</span>
+                        </div>
                     </font>
                 </td>
                 <td witdh="200">&nbsp;</td>
                 <td witdh="100">
                     <font size="3">
-                        <center><b>SHYNTA AYU DWI DARMAWAN</b></center>
+                        <div style="text-align:center;"><span style="font-weight: bold;">SHYNTA AYU DWI DARMAWAN</span>
+                        </div>
                     </font>
                 </td>
             </tr>
