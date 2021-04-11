@@ -6,4 +6,5 @@ export interface RegisterResult {
   master_hak_akses_id: number;
   last_login: string;
   status: number;
+  nama: string;
 }

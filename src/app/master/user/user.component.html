@@ -34,7 +34,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12 pull-right">
-                                <button mat-raised-button class="btn btn-primary" (click)="open(content)"><i
+                                <button mat-raised-button class="btn btn-rose" (click)="open(content)"><i
                                         class="material-icons">person_add</i>
                                     Tambah User
                                 </button>
@@ -45,10 +45,11 @@
                             (onRowUnselect)="onRowUnselect($event)" [paginator]="true" [rows]="10"
                             [showCurrentPageReport]="true" sortMode="multiple"
                             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                            [globalFilterFields]="['username','master_hak_akses_id','status','quantity']"
+                            [globalFilterFields]="['username','nama','status','quantity']"
                             [rowsPerPageOptions]="[10,25,50]">
                             <ng-template pTemplate="caption">
-                                <div class="p-d-flex">
+                                <div class="p-d-flex p-ai-center p-jc-between">
+                                    <h5 class="p-m-0">User</h5>
                                     <span class="p-input-icon-right p-ml-auto">
                                         <i class="pi pi-search"></i>
                                         <input pInputText type="text"
@@ -61,23 +62,27 @@
                                 <tr>
                                     <th pSortableColumn="username">Username <p-sortIcon field="username"></p-sortIcon>
                                     </th>
-                                    <th pSortableColumn="master_hak_akses_id">Role <p-sortIcon
-                                            field="master_hak_akses_id">
+                                    <th pSortableColumn="nama">Role <p-sortIcon field="nama">
                                         </p-sortIcon>
                                     </th>
                                     <th pSortableColumn="status">Status <p-sortIcon field="status"></p-sortIcon>
                                     </th>
-                                    <th pSortableColumn="quantity">Aksi <p-sortIcon field="quantity"></p-sortIcon>
-                                    </th>
+                                    <th></th>
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" let-users>
                                 <tr [pSelectableRow]="users">
                                     <td>{{users.username}}</td>
-                                    <td>{{users.master_hak_akses_id}}</td>
-                                    <td>{{users.status}}</td>
-                                    <td>{{users.quantity}}</td>
+                                    <td>{{users.nama}}</td>
+                                    <td>{{setStatus(users.status)}}</td>
+                                    <td>
+                                    </td>
                                 </tr>
+                            </ng-template>
+                            <ng-template pTemplate="summary">
+                                <div class="p-d-flex p-ai-center p-jc-between">
+                                    In total there are {{users ? users.length : 0 }} users.
+                                </div>
                             </ng-template>
                         </p-table>
                     </div>

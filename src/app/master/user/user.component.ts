@@ -145,47 +145,77 @@ export class UserComponent implements OnInit {
     model.role = q.role;
     model.status = q.status;
     model.username = q.username;
-    this.userService.register(model).subscribe((res) => {
-      console.log(res);
-      if (res.status == 0) {
+    this.userService.register(model).subscribe(
+      (res) => {
+        console.log(res);
+        if (res.status == 0) {
+          Swal.fire({
+            title: "Eror!",
+            text: res.msg,
+            icon: "error",
+            allowOutsideClick: false,
+          });
+        } else {
+          Swal.fire({
+            title: "Sukses!",
+            text: res.msg + " - Berhasil menambahkan",
+            icon: "success",
+            allowOutsideClick: false,
+          }).then(() => {
+            this.modalReference.close();
+          });
+          // this.child.reset();
+        }
+        this.loading = false;
+      },
+      (error) => {
         Swal.fire({
           title: "Eror!",
-          text: res.msg,
+          text: error.message,
           icon: "error",
           allowOutsideClick: false,
         });
-      } else {
-        Swal.fire({
-          title: "Sukses!",
-          text: res.msg + " - Berhasil menambahkan",
-          icon: "success",
-          allowOutsideClick: false,
-        }).then(() => {
-          this.modalReference.close();
-        });
-        // this.child.reset();
       }
-      this.loading = false;
-    });
+    );
   }
 
   getRole() {
-    this.userService.getAllRole().subscribe((data) => {
-      data.result.map((x) => {
-        let a = new DDR();
-        a.key = x.master_hak_akses_id.toString();
-        a.label = x.nama;
-        this.listRole.push(a);
-      });
-    });
+    this.userService.getAllRole().subscribe(
+      (data) => {
+        data.result.map((x) => {
+          let a = new DDR();
+          a.key = x.master_hak_akses_id.toString();
+          a.label = x.nama;
+          this.listRole.push(a);
+        });
+      },
+      (error) => {
+        Swal.fire({
+          title: "Eror!",
+          text: error.message,
+          icon: "error",
+          allowOutsideClick: false,
+        });
+      }
+    );
     return this.listRole;
   }
 
   getUsers() {
-    this.userService.getUsers().subscribe((data) => {
-      this.users = data.result;
-      console.log(data);
-    });
+    this.userService.getUsers().subscribe(
+      (data) => {
+        this.users = data.result;
+        console.log(data);
+      },
+      (error) => {
+        Swal.fire({
+          title: "Eror!",
+          text: error.message,
+          icon: "error",
+          allowOutsideClick: false,
+        });
+      }
+    );
   }
 
   open(content) {
@@ -197,4 +227,12 @@ export class UserComponent implements OnInit {
 
   onRowUnselect(a) {}
   onRowSelect(a) {}
+
+  setStatus(a) {
+    let status = [
+      { id: 1, label: "Aktif" },
+      { id: 2, label: "Cekal" },
+    ];
+    return status.find((x) => x.id == a).label;
+  }
 }

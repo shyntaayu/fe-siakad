@@ -111,7 +111,7 @@ export const ROUTES: RouteInfo[] = [
     title: "Notifications",
     icon: "notifications",
     class: "",
-    hidden: false,
+    hidden: true,
     parent: "master",
   },
   {
