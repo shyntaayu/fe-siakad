@@ -112,7 +112,7 @@ export const ROUTES: RouteInfo[] = [
     icon: "notifications",
     class: "",
     hidden: true,
-    parent: "master",
+    parent: "none",
   },
   {
     path: "/upgrade",
@@ -131,21 +131,21 @@ export const ROUTES: RouteInfo[] = [
     parent: "master",
   },
   {
-    path: "/master/karyawan",
-    title: "Karyawan",
-    icon: "groups",
+    path: "/master/role",
+    title: "Role",
+    icon: "lock",
     class: "",
     hidden: false,
     parent: "master",
   },
-  {
-    path: "/master/dosen",
-    title: "Dosen",
-    icon: "group",
-    class: "",
-    hidden: false,
-    parent: "master",
-  },
+  // {
+  //   path: "/master/dosen",
+  //   title: "Dosen",
+  //   icon: "group",
+  //   class: "",
+  //   hidden: false,
+  //   parent: "master",
+  // },
 ];
 
 @Component({

@@ -6,6 +6,7 @@ import {
 import { Injectable } from "@angular/core";
 import { RegisterModel } from "app/model/register-model";
 import { RegisterResponse } from "app/model/register-response";
+import { RoleModel } from "app/model/role-model";
 import { RoleResponse } from "app/model/role-response";
 import { environment } from "environments/environment";
 import { throwError } from "rxjs";
@@ -15,25 +16,36 @@ import { catchError } from "rxjs/operators";
 @Injectable({
   providedIn: "root",
 })
-export class UserService {
+export class RoleService {
   headers = new HttpHeaders().set("Content-Type", "application/json");
 
   constructor(private http: HttpClient) {}
 
-  getAllRole(): Observable<RoleResponse> {
+  getRoles(): Observable<RoleResponse> {
     return this.http.get<RoleResponse>(`${environment.apiUrlUser}/role`);
   }
 
-  getUsers(): Observable<RegisterResponse> {
-    return this.http.get<RegisterResponse>(
-      `${environment.apiUrlUser}/register`
-    );
+  // Add role
+  addRole(data: RoleModel): Observable<any> {
+    let API_URL = `${environment.apiUrlUser}/role`;
+    return this.http.post(API_URL, data).pipe(catchError(this.errorMgmt));
   }
 
-  // Add user
-  register(data: RegisterModel): Observable<any> {
-    let API_URL = `${environment.apiUrlUser}/register`;
-    return this.http.post(API_URL, data).pipe(catchError(this.errorMgmt));
+  // Update role
+  updateRole(data: RoleModel): Observable<any> {
+    let API_URL = `${environment.apiUrlUser}/role`;
+    return this.http.put(API_URL, data).pipe(catchError(this.errorMgmt));
+  }
+
+  // Delete role
+  deleteRole(id): Observable<any> {
+    let API_URL = `${environment.apiUrlUser}/role`;
+    const options = {
+      body: { master_hak_akses_id: id },
+    };
+    return this.http
+      .request("DELETE", API_URL, options)
+      .pipe(catchError(this.errorMgmt));
   }
 
   // Error handling

@@ -1,5 +1,6 @@
 import { Injector } from "@angular/core";
 import * as moment from "moment";
+import Swal from "sweetalert2";
 declare var $: any;
 
 export class ModalProperty {
@@ -338,5 +339,14 @@ export abstract class AppComponentBase {
           "</div>",
       }
     );
+  }
+
+  showMessage(title, text, icon) {
+    Swal.fire({
+      title: title,
+      text: text,
+      icon: icon,
+      allowOutsideClick: false,
+    });
   }
 }
