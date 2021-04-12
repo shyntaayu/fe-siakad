@@ -144,6 +144,7 @@ export class KrsComponent extends AppComponentBase implements OnInit {
   onSubmit() {
     this.loading = true;
     this.loading1 = true;
+    this.listMatkul = [];
     console.warn(this.profileForm.value);
     this.model = this.profileForm.value;
     this.mahasiswaService
