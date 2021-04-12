@@ -4,6 +4,7 @@ import {
   HttpHeaders,
 } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { AppConfig } from "app/model/app-config";
 import { RegisterModel } from "app/model/register-model";
 import { RegisterResponse } from "app/model/register-response";
 import { RoleResponse } from "app/model/role-response";
@@ -18,33 +19,33 @@ import { catchError } from "rxjs/operators";
 export class UserService {
   headers = new HttpHeaders().set("Content-Type", "application/json");
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private appConfig: AppConfig) {}
 
   getAllRole(): Observable<RoleResponse> {
-    return this.http.get<RoleResponse>(`${environment.apiUrlUser}/role`);
+    return this.http.get<RoleResponse>(`${this.appConfig.apiUrlUser}/role`);
   }
 
   getUsers(): Observable<RegisterResponse> {
     return this.http.get<RegisterResponse>(
-      `${environment.apiUrlUser}/register`
+      `${this.appConfig.apiUrlUser}/register`
     );
   }
 
   // Add user
   register(data: RegisterModel): Observable<any> {
-    let API_URL = `${environment.apiUrlUser}/register`;
+    let API_URL = `${this.appConfig.apiUrlUser}/register`;
     return this.http.post(API_URL, data).pipe(catchError(this.errorMgmt));
   }
 
   // Update user
   updateUser(data: RegisterModel): Observable<any> {
-    let API_URL = `${environment.apiUrlUser}/register`;
+    let API_URL = `${this.appConfig.apiUrlUser}/register`;
     return this.http.put(API_URL, data).pipe(catchError(this.errorMgmt));
   }
 
   // Delete user
   deleteUser(id): Observable<any> {
-    let API_URL = `${environment.apiUrlUser}/register`;
+    let API_URL = `${this.appConfig.apiUrlUser}/register`;
     const options = {
       body: { login_id: id },
     };

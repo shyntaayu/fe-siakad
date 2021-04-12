@@ -4,6 +4,7 @@ import {
   HttpHeaders,
 } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { AppConfig } from "app/model/app-config";
 import { RegisterModel } from "app/model/register-model";
 import { RegisterResponse } from "app/model/register-response";
 import { RoleModel } from "app/model/role-model";
@@ -19,27 +20,27 @@ import { catchError } from "rxjs/operators";
 export class RoleService {
   headers = new HttpHeaders().set("Content-Type", "application/json");
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private appConfig: AppConfig) {}
 
   getRoles(): Observable<RoleResponse> {
-    return this.http.get<RoleResponse>(`${environment.apiUrlUser}/role`);
+    return this.http.get<RoleResponse>(`${this.appConfig.apiUrlUser}/role`);
   }
 
   // Add role
   addRole(data: RoleModel): Observable<any> {
-    let API_URL = `${environment.apiUrlUser}/role`;
+    let API_URL = `${this.appConfig.apiUrlUser}/role`;
     return this.http.post(API_URL, data).pipe(catchError(this.errorMgmt));
   }
 
   // Update role
   updateRole(data: RoleModel): Observable<any> {
-    let API_URL = `${environment.apiUrlUser}/role`;
+    let API_URL = `${this.appConfig.apiUrlUser}/role`;
     return this.http.put(API_URL, data).pipe(catchError(this.errorMgmt));
   }
 
   // Delete role
   deleteRole(id): Observable<any> {
-    let API_URL = `${environment.apiUrlUser}/role`;
+    let API_URL = `${this.appConfig.apiUrlUser}/role`;
     const options = {
       body: { master_hak_akses_id: id },
     };

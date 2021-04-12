@@ -8,6 +8,7 @@ import { CookieService } from "ngx-cookie-service";
 import { LoginResponse } from "app/model/login-response";
 import { AppComponentBase } from "shared/app-component-base";
 import Swal from "sweetalert2";
+import { AppConfig } from "app/model/app-config";
 
 @Injectable({
   providedIn: "root",
@@ -20,7 +21,8 @@ export class AuthenticationService extends AppComponentBase {
     private router: Router,
     private http: HttpClient,
     private cookieService: CookieService,
-    private injector: Injector
+    private injector: Injector,
+    private appConfig: AppConfig
   ) {
     super(injector);
     // this.userSubject = new BehaviorSubject<LoginResponse>(JSON.parse(localStorage.getItem('userMe')));
@@ -42,7 +44,7 @@ export class AuthenticationService extends AppComponentBase {
 
   login(username: string, password: string) {
     return this.http
-      .post<any>(`${environment.apiUrlUser}/login`, { username, password })
+      .post<any>(`${this.appConfig.apiUrlUser}/login`, { username, password })
       .pipe(
         map((user) => {
           // store user details and jwt token in local storage to keep user logged in between page refreshes

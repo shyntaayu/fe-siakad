@@ -1,7 +1,7 @@
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { NgModule } from "@angular/core";
+import { APP_INITIALIZER, Injector, NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClient, HttpClientModule } from "@angular/common/http";
 import { RouterModule } from "@angular/router";
 
 import { AppRoutingModule } from "./app.routing";
@@ -25,6 +25,14 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
 import { SweetAlert2Module } from "@sweetalert2/ngx-sweetalert2";
 import { UtilsModule } from "shared/utils/utils.module";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { AppConfigService } from "shared/appconfig.service";
+import { AppConfig } from "./model/app-config";
+
+export function initializerFn(jsonAppConfigService: AppConfigService) {
+  return () => {
+    return jsonAppConfigService.loadConfig();
+  };
+}
 
 @NgModule({
   imports: [
@@ -49,7 +57,19 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
     LoginComponent,
     RegisterComponent,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: AppConfig,
+      deps: [HttpClient],
+      useExisting: AppConfigService,
+    },
+    {
+      provide: APP_INITIALIZER,
+      multi: true,
+      deps: [AppConfigService],
+      useFactory: initializerFn,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

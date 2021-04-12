@@ -1,5 +1,6 @@
 import { Component, Injector, OnInit } from "@angular/core";
 import { MainService } from "app/main/main.service";
+import { AppConfig } from "app/model/app-config";
 import { RoleModel } from "app/model/role-model";
 import { RoleResult } from "app/model/role-result";
 import { RoleService } from "app/services/role.service";
@@ -33,7 +34,8 @@ export class RoleComponent extends AppComponentBase implements OnInit {
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
     private roleService: RoleService,
-    injector: Injector
+    injector: Injector,
+    private appConfig: AppConfig
   ) {
     super(injector);
   }
@@ -129,7 +131,7 @@ export class RoleComponent extends AppComponentBase implements OnInit {
       if (this.role.master_hak_akses_id) {
         const model = new RoleModel();
         model.nama = this.role.nama;
-        model.jenis_aplikasi = 3;
+        model.jenis_aplikasi = this.appConfig.jenisAplikasi;
         model.master_hak_akses_id = this.role.master_hak_akses_id;
         this.roleService.updateRole(model).subscribe(
           (res) => {
@@ -151,7 +153,7 @@ export class RoleComponent extends AppComponentBase implements OnInit {
       } else {
         const model = new RoleModel();
         model.nama = this.role.nama;
-        model.jenis_aplikasi = 3;
+        model.jenis_aplikasi = this.appConfig.jenisAplikasi;
         this.roleService.addRole(model).subscribe(
           (res) => {
             console.log(res);

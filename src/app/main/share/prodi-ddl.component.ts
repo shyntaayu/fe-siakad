@@ -18,15 +18,16 @@ const noop = () => {};
   selector: "prodi-ddl",
   template: `<div [busyIf]="isLoading">
     <mat-form-field class="example-full-width">
-      <mat-label>Jurusan</mat-label>
+      <mat-label>Prodi</mat-label>
       <input
         type="text"
-        placeholder="Pilih Jurusan"
+        placeholder="Pilih Prodi"
         aria-label="Number"
         matInput
         [matAutocomplete]="auto"
         [(ngModel)]="inputValue"
         (optionSelected)="onChange($event.option.value)"
+        required
       />
       <mat-autocomplete
         autoActiveFirstOption

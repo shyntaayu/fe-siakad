@@ -1,6 +1,7 @@
 import { Component, Injector, OnInit, ViewChild } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";
 import { NgbModal, NgbModalConfig } from "@ng-bootstrap/ng-bootstrap";
+import { AppConfig } from "app/model/app-config";
 import { RegisterModel } from "app/model/register-model";
 import { AuthenticationService } from "app/services/authentication.service";
 import { UserService } from "app/services/user.service";
@@ -75,7 +76,8 @@ export class UserComponent extends AppComponentBase implements OnInit {
     config: NgbModalConfig,
     private modalService: NgbModal,
     injector: Injector,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private appConfig: AppConfig
   ) {
     super(injector);
     //option2
@@ -110,7 +112,7 @@ export class UserComponent extends AppComponentBase implements OnInit {
   getValueForm(q) {
     this.loading = true;
     let model = new RegisterModel();
-    model.jenis_aplikasi = 1;
+    model.jenis_aplikasi = this.appConfig.jenisAplikasi;
     model.password = q.password;
     model.penginput = this.authenticationService.userValue["username"];
     model.role = q.role;

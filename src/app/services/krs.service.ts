@@ -11,17 +11,18 @@ import { TahunAkademik } from "app/model/tahun_akademik";
 import { Semester } from "app/model/semester";
 import { Prodi } from "app/model/prodi";
 import { Jenjang } from "app/model/jenjang";
+import { AppConfig } from "app/model/app-config";
 @Injectable({
   providedIn: "root",
 })
 export class KrsService {
   headers = new HttpHeaders().set("Content-Type", "application/json");
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private appConfig: AppConfig) {}
 
   // Add sanitasi
   //   addSanitasi(data: Sanitasi): Observable<any> {
-  //     let API_URL = `${environment.apiUrlKrs}/master/sanitasi`;
+  //     let API_URL = `${AppConsts.apiUrlKrs}/master/sanitasi`;
   //     return this.http.post(API_URL, data)
   //       .pipe(
   //         catchError(this.errorMgmt)
@@ -30,12 +31,12 @@ export class KrsService {
 
   //   // Get all sanitasi
   //   getAllSanitasi(): Observable<Sanitasiresponse> {
-  //     return this.http.get<Sanitasiresponse>(`${environment.apiUrlKrs}/master/sanitasi`);
+  //     return this.http.get<Sanitasiresponse>(`${AppConsts.apiUrlKrs}/master/sanitasi`);
   //   }
 
   // Get sanitasi
   getSanitasi(id): Observable<any> {
-    let API_URL = `${environment.apiUrlKrs}/master/sanitasi/${id}`;
+    let API_URL = `${this.appConfig.apiUrlKrs}/master/sanitasi/${id}`;
     return this.http.get(API_URL, { headers: this.headers }).pipe(
       map((res: Response) => {
         return res || {};
@@ -46,7 +47,7 @@ export class KrsService {
 
   // Update sanitasi
   updateSanitasi(id, data): Observable<any> {
-    let API_URL = `${environment.apiUrlKrs}/master/sanitasi/${id}`;
+    let API_URL = `${this.appConfig.apiUrlKrs}/master/sanitasi/${id}`;
     return this.http
       .put(API_URL, data, { headers: this.headers })
       .pipe(catchError(this.errorMgmt));
@@ -54,26 +55,29 @@ export class KrsService {
 
   // Delete sanitasi
   deleteSanitasi(id): Observable<any> {
-    var API_URL = `${environment.apiUrlKrs}/master/sanitasi/${id}`;
+    var API_URL = `${this.appConfig.apiUrlKrs}/master/sanitasi/${id}`;
     return this.http.delete(API_URL).pipe(catchError(this.errorMgmt));
   }
 
   getAllTahun(): Observable<TahunAkademik> {
+    console.log(this.appConfig.apiUrlKrs);
     return this.http.get<TahunAkademik>(
-      `${environment.apiUrlKrs}/dropdown/tahun`
+      `${this.appConfig.apiUrlKrs}/dropdown/tahun`
     );
   }
 
   getAllSemester(): Observable<Semester> {
     return this.http.get<Semester>(
-      `${environment.apiUrlKrs}/dropdown/semester`
+      `${this.appConfig.apiUrlKrs}/dropdown/semester`
     );
   }
   getAllProdi(): Observable<Prodi> {
-    return this.http.get<Prodi>(`${environment.apiUrlKrs}/dropdown/prodi`);
+    return this.http.get<Prodi>(`${this.appConfig.apiUrlKrs}/dropdown/prodi`);
   }
   getAllJenjang(): Observable<Jenjang> {
-    return this.http.get<Jenjang>(`${environment.apiUrlKrs}/dropdown/jenjang`);
+    return this.http.get<Jenjang>(
+      `${this.appConfig.apiUrlKrs}/dropdown/jenjang`
+    );
   }
 
   // Error handling

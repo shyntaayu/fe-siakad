@@ -7,11 +7,14 @@ import {
 } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { AuthenticationService } from "../services/authentication.service";
-import { environment } from "environments/environment";
+import { AppConfig } from "app/model/app-config";
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
-  constructor(private authenticationService: AuthenticationService) {}
+  constructor(
+    private authenticationService: AuthenticationService,
+    private appConfig: AppConfig
+  ) {}
 
   intercept(
     request: HttpRequest<any>,
@@ -20,7 +23,7 @@ export class JwtInterceptor implements HttpInterceptor {
     // add auth header with jwt if user is logged in and request is to api url
     const user = this.authenticationService.userValue;
     const isLoggedIn = user && user.result.login_id;
-    const isApiUrl = request.url.startsWith(environment.apiUrlUser);
+    const isApiUrl = request.url.startsWith(this.appConfig.apiUrlUser);
     if (isLoggedIn && isApiUrl) {
       request = request.clone({
         setHeaders: {
