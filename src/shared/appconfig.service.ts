@@ -21,6 +21,7 @@ export class AppConfigService extends AppConfig {
         this.apiUrlMahasiswa = result.apiUrlMahasiswa;
         this.apiUrlUser = result.apiUrlUser;
         this.jenisAplikasi = result.jenisAplikasi;
+        this.jenisAplikasiString = result.jenisAplikasiString;
         return Promise.resolve(result);
       });
   }

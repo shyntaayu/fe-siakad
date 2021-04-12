@@ -36,6 +36,7 @@ import { UtilsModule } from "shared/utils/utils.module";
 import { KrsComponent } from "app/main/krs/krs.component";
 import { KrsService } from "app/services/krs.service";
 import { SweetAlert2Module } from "@sweetalert2/ngx-sweetalert2";
+import { MahasiswaService } from "app/services/mahasiswa.service";
 
 @NgModule({
   imports: [
@@ -76,6 +77,6 @@ import { SweetAlert2Module } from "@sweetalert2/ngx-sweetalert2";
     KhsComponent,
     KrsComponent,
   ],
-  providers: [MainService, MessageService, KrsService],
+  providers: [MainService, MessageService, KrsService, MahasiswaService],
 })
 export class AdminLayoutModule {}

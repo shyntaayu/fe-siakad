@@ -52,12 +52,7 @@ export class AuthenticationService extends AppComponentBase {
 
           if (user.status == 0) {
             // this.showNotification("top", "right", user.msg, "danger");
-            Swal.fire({
-              title: "Eror!",
-              text: user.msg,
-              icon: "error",
-              allowOutsideClick: false,
-            });
+            this.showMessage("Eror!", user.msg, "error");
           } else {
             this.userSubject.next(user.result);
             this.cookieService.set(

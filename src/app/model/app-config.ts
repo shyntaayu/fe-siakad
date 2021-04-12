@@ -4,4 +4,5 @@ export abstract class AppConfig {
   apiUrlMahasiswa: string;
   apiUrlKrs: string;
   jenisAplikasi: number;
+  jenisAplikasiString: string;
 }

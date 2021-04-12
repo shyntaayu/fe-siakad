@@ -1,8 +1,9 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Injector, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AuthenticationService } from "app/services/authentication.service";
 import { finalize, first } from "rxjs/operators";
+import { AppComponentBase } from "shared/app-component-base";
 import Swal from "sweetalert2";
 declare var $: any;
 
@@ -11,7 +12,7 @@ declare var $: any;
   templateUrl: "./login.component.html",
   styleUrls: ["./login.component.css"],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent extends AppComponentBase implements OnInit {
   profileForm: FormGroup;
   returnUrl: string;
   loading = false;
@@ -21,8 +22,10 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private authenticationService: AuthenticationService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    injector: Injector
   ) {
+    super(injector);
     this.profileForm = this.fb.group({
       email: ["", Validators.required],
       password: ["", Validators.required],
@@ -55,12 +58,7 @@ export class LoginComponent implements OnInit {
           console.log(error);
           console.log(error.status);
           this.error = error;
-          Swal.fire({
-            title: "Eror!",
-            text: error.message,
-            icon: "error",
-            allowOutsideClick: false,
-          });
+          this.showMessage("Eror!", error.message, "error");
         }
       );
     // this.showNotification("top", "right", "halo", "danger");

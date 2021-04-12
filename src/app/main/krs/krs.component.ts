@@ -5,8 +5,10 @@ import {
   FormGroup,
   Validators,
 } from "@angular/forms";
-import { KrsService } from "app/services/krs.service";
+import { AppConfig } from "app/model/app-config";
+import { MahasiswaService } from "app/services/mahasiswa.service";
 import { MessageService, SelectItem } from "primeng/api";
+import { finalize } from "rxjs/operators";
 import { AppComponentBase } from "shared/app-component-base";
 import { MainService } from "../main.service";
 import { Product } from "../model/product";
@@ -28,12 +30,14 @@ export class KrsComponent extends AppComponentBase implements OnInit {
   semester;
   prodi;
   jenjang;
+  listMahasiswa;
   constructor(
-    private krsService: KrsService,
+    private mahasiswaService: MahasiswaService,
     private fb: FormBuilder,
     private productService: MainService,
     private messageService: MessageService,
-    injector: Injector
+    injector: Injector,
+    private appConfig: AppConfig
   ) {
     super(injector);
     this.profileForm = this.fb.group({
@@ -45,10 +49,6 @@ export class KrsComponent extends AppComponentBase implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.getTahun();
-    // this.getSemester();
-    // this.getProdi();
-    // this.getJenjang();
     this.productService.getProductsSmall().then((data) => {
       this.products = data;
       console.log(data);
@@ -64,10 +64,11 @@ export class KrsComponent extends AppComponentBase implements OnInit {
   }
 
   onRowSelect(event) {
+    console.log(event);
     this.messageService.add({
       severity: "info",
-      summary: "Product Selected",
-      detail: event.data.name,
+      summary: "Mahasiswa Selected",
+      detail: event.data.nama,
     });
   }
 
@@ -75,7 +76,7 @@ export class KrsComponent extends AppComponentBase implements OnInit {
     this.messageService.add({
       severity: "info",
       summary: "Product Unselected",
-      detail: event.data.name,
+      detail: event.data.nama,
     });
   }
 
@@ -105,8 +106,26 @@ export class KrsComponent extends AppComponentBase implements OnInit {
     delete this.clonedProducts[product.id];
   }
   onSubmit() {
-    // TODO: Use EventEmitter with form value
     this.loading = true;
     console.warn(this.profileForm.value);
+    let model = this.profileForm.value;
+    this.mahasiswaService
+      .getMahasiswas(
+        this.appConfig.jenisAplikasiString,
+        model.jenjang,
+        model.jurusan
+      )
+      .pipe(finalize(() => (this.loading = false)))
+      .subscribe(
+        (data) => {
+          this.listMahasiswa = data.result;
+          console.log(data);
+        },
+        (error) => {
+          console.log(error);
+          console.log(error.status);
+          this.showMessage("Eror!", error.message, "error");
+        }
+      );
   }
 }

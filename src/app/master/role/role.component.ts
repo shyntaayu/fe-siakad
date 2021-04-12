@@ -207,12 +207,9 @@ export class RoleComponent extends AppComponentBase implements OnInit {
         console.log(data);
       },
       (error) => {
-        Swal.fire({
-          title: "Eror!",
-          text: error.message,
-          icon: "error",
-          allowOutsideClick: false,
-        });
+        console.log(error);
+        console.log(error.status);
+        this.showMessage("Eror!", error.message, "error");
       }
     );
   }
