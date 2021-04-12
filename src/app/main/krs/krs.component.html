@@ -37,7 +37,7 @@
         <p-toast></p-toast>
         <div class="row">
             <div class="col-md-6">
-                <div class="card">
+                <div class="card" [busyIf]="loading1">
                     <div class="card-header card-header-rose">
                         <h5 class="card-title ">Mahasiswa</h5>
                     </div>
@@ -82,14 +82,14 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="card">
+                <div class="card" [busyIf]="loading2">
                     <div class="card-header card-header-rose">
                         <h5 class="card-title ">Mata Kuliah</h5>
                     </div>
                     <div class="card-body">
-                        <p-table #dt2 [value]="products2" dataKey="id" editMode="row" [paginator]="true" [rows]="10"
+                        <p-table #dt2 [value]="listMatkul" dataKey="id" editMode="row" [paginator]="true" [rows]="10"
                             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                            [showCurrentPageReport]="true" [globalFilterFields]="['name','code','category','quantity']"
+                            [showCurrentPageReport]="true" [globalFilterFields]="['nama','kode_matkul']"
                             [rowsPerPageOptions]="[10,25,50]">
                             <ng-template pTemplate="caption">
                                 <div class="p-d-flex">
@@ -105,65 +105,17 @@
                                 <tr>
                                     <th>Kode</th>
                                     <th>Nama Matakuliah</th>
-                                    <th>Category</th>
-                                    <th>Quantity</th>
+                                    <!-- <th>Category</th>
+                                    <th>Quantity</th> -->
                                     <th style="width:8rem"></th>
                                 </tr>
                             </ng-template>
-                            <ng-template pTemplate="body" let-product let-editing="editing" let-ri="rowIndex">
-                                <tr [pEditableRow]="product">
-                                    <td>
-                                        <p-cellEditor>
-                                            <ng-template pTemplate="input">
-                                                <input pInputText type="text" [(ngModel)]="product.code">
-                                            </ng-template>
-                                            <ng-template pTemplate="output">
-                                                {{product.code}}
-                                            </ng-template>
-                                        </p-cellEditor>
-                                    </td>
-                                    <td>
-                                        <p-cellEditor>
-                                            <ng-template pTemplate="input">
-                                                <input pInputText type="text" [(ngModel)]="product.name" required>
-                                            </ng-template>
-                                            <ng-template pTemplate="output">
-                                                {{product.name}}
-                                            </ng-template>
-                                        </p-cellEditor>
-                                    </td>
-                                    <td>
-                                        <p-cellEditor>
-                                            <ng-template pTemplate="input">
-                                                <p-dropdown [options]="statuses" [(ngModel)]="product.inventoryStatus"
-                                                    [style]="{'width':'100%'}"></p-dropdown>
-                                            </ng-template>
-                                            <ng-template pTemplate="output">
-                                                {{product.inventoryStatus}}
-                                            </ng-template>
-                                        </p-cellEditor>
-                                    </td>
-                                    <td>
-                                        <p-cellEditor>
-                                            <ng-template pTemplate="input">
-                                                <input pInputText type="text" [(ngModel)]="product.price">
-                                            </ng-template>
-                                            <ng-template pTemplate="output">
-                                                {{product.price | currency: 'USD'}}
-                                            </ng-template>
-                                        </p-cellEditor>
-                                    </td>
-                                    <td style="text-align:center">
-                                        <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow
-                                            icon="pi pi-pencil" (click)="onRowEditInit(product)"
-                                            class="p-button-rounded p-button-text"></button>
-                                        <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow
-                                            icon="pi pi-check" (click)="onRowEditSave(product)"
-                                            class="p-button-rounded p-button-text p-button-success p-mr-2"></button>
-                                        <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow
-                                            icon="pi pi-times" (click)="onRowEditCancel(product, ri)"
-                                            class="p-button-rounded p-button-text p-button-danger"></button>
-                                    </td>
+                            <ng-template pTemplate="body" let-matkul>
+                                <tr [pSelectableRow]="matkul">
+                                    <td>{{matkul.kode_matkul}}</td>
+                                    <td>{{matkul.nama}}</td>
+                                    <!-- <td>{{matkul.category}}</td>
+                                    <td>{{matkul.quantity}}</td> -->
                                 </tr>
                             </ng-template>
                         </p-table>

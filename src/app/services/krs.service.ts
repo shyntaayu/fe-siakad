@@ -3,6 +3,7 @@ import {
   HttpClient,
   HttpHeaders,
   HttpErrorResponse,
+  HttpParams,
 } from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
 import { catchError, map } from "rxjs/operators";
@@ -12,6 +13,7 @@ import { Semester } from "app/model/semester";
 import { Prodi } from "app/model/prodi";
 import { Jenjang } from "app/model/jenjang";
 import { AppConfig } from "app/model/app-config";
+import { KrsResponse } from "app/model/krs-response";
 @Injectable({
   providedIn: "root",
 })
@@ -77,6 +79,31 @@ export class KrsService {
   getAllJenjang(): Observable<Jenjang> {
     return this.http.get<Jenjang>(
       `${this.appConfig.apiUrlKrs}/dropdown/jenjang`
+    );
+  }
+
+  getKrs(
+    jenis_aplikasi,
+    nim,
+    tahun_akademik,
+    status_semester,
+    id_master_jenjang,
+    kode_prodi,
+    id_master_kelas?
+  ): Observable<KrsResponse> {
+    let params = new HttpParams();
+    params = params.append("jenis_aplikasi", jenis_aplikasi);
+    params = params.append("nim", nim);
+    params = params.append("tahun_akademik", tahun_akademik);
+    params = params.append("status_semester", status_semester);
+    params = params.append("id_master_jenjang", id_master_jenjang);
+    params = params.append("kode_prodi", kode_prodi);
+    // params = params.append("id_master_kelas", id_master_kelas);
+    return this.http.get<KrsResponse>(
+      `${this.appConfig.apiUrlKrs}/krs/mahasiswa`,
+      {
+        params: params,
+      }
     );
   }
 

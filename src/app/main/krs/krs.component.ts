@@ -6,6 +6,7 @@ import {
   Validators,
 } from "@angular/forms";
 import { AppConfig } from "app/model/app-config";
+import { KrsService } from "app/services/krs.service";
 import { MahasiswaService } from "app/services/mahasiswa.service";
 import { MessageService, SelectItem } from "primeng/api";
 import { finalize } from "rxjs/operators";
@@ -31,13 +32,19 @@ export class KrsComponent extends AppComponentBase implements OnInit {
   prodi;
   jenjang;
   listMahasiswa;
+  loading1 = false;
+  loading2 = false;
+  model;
+  listMatkul;
+
   constructor(
     private mahasiswaService: MahasiswaService,
     private fb: FormBuilder,
     private productService: MainService,
     private messageService: MessageService,
     injector: Injector,
-    private appConfig: AppConfig
+    private appConfig: AppConfig,
+    private krsService: KrsService
   ) {
     super(injector);
     this.profileForm = this.fb.group({
@@ -70,6 +77,35 @@ export class KrsComponent extends AppComponentBase implements OnInit {
       summary: "Mahasiswa Selected",
       detail: event.data.nama,
     });
+    this.loading2 = true;
+    console.warn(this.profileForm.value);
+    this.model = this.profileForm.value;
+    this.krsService
+      .getKrs(
+        this.appConfig.jenisAplikasiString,
+        event.data.nim,
+        this.model.tahun,
+        this.model.semester,
+        this.model.jenjang,
+        this.model.jurusan
+      )
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+          this.loading2 = false;
+        })
+      )
+      .subscribe(
+        (data) => {
+          this.listMatkul = data.result;
+          console.log(data);
+        },
+        (error) => {
+          console.log(error);
+          console.log(error.status);
+          this.showMessage("Eror!", error.message, "error");
+        }
+      );
   }
 
   onRowUnselect(event) {
@@ -107,15 +143,21 @@ export class KrsComponent extends AppComponentBase implements OnInit {
   }
   onSubmit() {
     this.loading = true;
+    this.loading1 = true;
     console.warn(this.profileForm.value);
-    let model = this.profileForm.value;
+    this.model = this.profileForm.value;
     this.mahasiswaService
       .getMahasiswas(
         this.appConfig.jenisAplikasiString,
-        model.jenjang,
-        model.jurusan
+        this.model.jenjang,
+        this.model.jurusan
       )
-      .pipe(finalize(() => (this.loading = false)))
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+          this.loading1 = false;
+        })
+      )
       .subscribe(
         (data) => {
           this.listMahasiswa = data.result;
