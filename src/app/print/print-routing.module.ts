@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { AuthGuard } from "app/helpers/auth.guard";
 import { PrintLayoutComponent } from "./print-layout/print-layout.component";
+import { ViewKrsComponent } from "./viewkrs/viewkrs.component";
 import { ViewpresensiComponent } from "./viewpresensi/viewpresensi.component";
 
 const routes: Routes = [
@@ -14,6 +15,10 @@ const routes: Routes = [
       {
         path: "presensi/:invoiceIds",
         component: ViewpresensiComponent,
+      },
+      {
+        path: "krs",
+        component: ViewKrsComponent,
       },
     ],
   },

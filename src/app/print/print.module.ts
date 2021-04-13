@@ -6,10 +6,23 @@ import { ViewpresensiComponent } from "./viewpresensi/viewpresensi.component";
 import { PrintLayoutComponent } from "./print-layout/print-layout.component";
 import { PrintComponent } from "./print.component";
 import { PrintService } from "./print.service";
+import { RouterModule } from "@angular/router";
+import { ViewKrsComponent } from "./viewkrs/viewkrs.component";
 
 @NgModule({
-  declarations: [ViewpresensiComponent, PrintLayoutComponent, PrintComponent],
-  imports: [CommonModule, PrintRoutingModule],
+  imports: [CommonModule, PrintRoutingModule, RouterModule],
+  declarations: [
+    ViewpresensiComponent,
+    PrintLayoutComponent,
+    PrintComponent,
+    ViewKrsComponent,
+  ],
+  exports: [
+    ViewpresensiComponent,
+    PrintLayoutComponent,
+    PrintComponent,
+    ViewKrsComponent,
+  ],
   providers: [PrintService],
   bootstrap: [PrintComponent],
 })

@@ -184,6 +184,7 @@ export class KrsComponent extends AppComponentBase implements OnInit {
   print(type) {
     console.log("type----", type);
     localStorage.setItem("sinim", this.nim);
+    localStorage.setItem("sismt", this.model.semester);
     if (type == 1) {
       this.router.navigate(["/print/krs"]);
     }
