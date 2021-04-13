@@ -111,11 +111,13 @@
                             </ng-template>
                             <ng-template pTemplate="header">
                                 <tr>
-                                    <th>Kode</th>
-                                    <th>Nama Matakuliah</th>
+                                    <th pSortableColumn="kode_matkul">Kode <p-sortIcon field="kode_matkul"></p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="nama">Nama Matakuliah <p-sortIcon field="nama"></p-sortIcon>
+                                    </th>
                                     <!-- <th>Category</th>
                                     <th>Quantity</th> -->
-                                    <th style="width:8rem"></th>
+                                    <!-- <th style="width:8rem"></th> -->
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" let-matkul>

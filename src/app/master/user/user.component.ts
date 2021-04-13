@@ -6,6 +6,7 @@ import { RegisterModel } from "app/model/register-model";
 import { AuthenticationService } from "app/services/authentication.service";
 import { UserService } from "app/services/user.service";
 import { ConfirmationService } from "primeng/api";
+import { finalize } from "rxjs/operators";
 import { AppComponentBase } from "shared/app-component-base";
 import Swal from "sweetalert2";
 import { DynamicFormBuilderComponent } from "../dynamic-form-builder/dynamic-form-builder.component";
@@ -33,6 +34,7 @@ export class UserComponent extends AppComponentBase implements OnInit {
   modalReference: any;
   type;
   user;
+  loading2 = false;
 
   public fields: any[] = [
     {
@@ -185,15 +187,23 @@ export class UserComponent extends AppComponentBase implements OnInit {
   }
 
   getUsers() {
-    this.userService.getUsers().subscribe(
-      (data) => {
-        this.users = data.result;
-        console.log(data);
-      },
-      (error) => {
-        this.showMessage("Eror!", error.message, "error");
-      }
-    );
+    this.loading2 = true;
+    this.userService
+      .getUsers()
+      .pipe(
+        finalize(() => {
+          this.loading2 = false;
+        })
+      )
+      .subscribe(
+        (data) => {
+          this.users = data.result;
+          console.log(data);
+        },
+        (error) => {
+          this.showMessage("Eror!", error.message, "error");
+        }
+      );
   }
 
   open(content, type?, user?) {

@@ -5,6 +5,7 @@ import { RoleModel } from "app/model/role-model";
 import { RoleResult } from "app/model/role-result";
 import { RoleService } from "app/services/role.service";
 import { ConfirmationService, MessageService } from "primeng/api";
+import { finalize } from "rxjs/operators";
 import { AppComponentBase } from "shared/app-component-base";
 import Swal from "sweetalert2";
 
@@ -28,6 +29,7 @@ export class RoleComponent extends AppComponentBase implements OnInit {
   selectedRoles: RoleResult[];
   submitted: boolean;
   roles: RoleResult[];
+  loading2 = false;
 
   constructor(
     // private roleService: MainService,
@@ -201,16 +203,24 @@ export class RoleComponent extends AppComponentBase implements OnInit {
   }
 
   getRoles() {
-    this.roleService.getRoles().subscribe(
-      (data) => {
-        this.roles = data.result;
-        console.log(data);
-      },
-      (error) => {
-        console.log(error);
-        console.log(error.status);
-        this.showMessage("Eror!", error.message, "error");
-      }
-    );
+    this.loading2 = true;
+    this.roleService
+      .getRoles()
+      .pipe(
+        finalize(() => {
+          this.loading2 = false;
+        })
+      )
+      .subscribe(
+        (data) => {
+          this.roles = data.result;
+          console.log(data);
+        },
+        (error) => {
+          console.log(error);
+          console.log(error.status);
+          this.showMessage("Eror!", error.message, "error");
+        }
+      );
   }
 }

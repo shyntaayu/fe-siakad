@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <p-toast></p-toast>
 
-        <div class="card">
+        <div class="card" [busyIf]="loading2">
             <p-toolbar styleClass="p-mb-4">
                 <ng-template pTemplate="left">
                     <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2"
@@ -58,7 +58,7 @@
         </div>
 
         <p-dialog [(visible)]="roleDialog" [style]="{width: '450px'}" header="Role Details" [modal]="true"
-            styleClass="p-fluid" [busyIf]="loading">
+            styleClass="p-fluid">
             <ng-template pTemplate="content">
                 <div class="p-field">
                     <label for="nama">Nama</label>
