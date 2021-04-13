@@ -14,6 +14,8 @@ import { Prodi } from "app/model/prodi";
 import { Jenjang } from "app/model/jenjang";
 import { AppConfig } from "app/model/app-config";
 import { KrsResponse } from "app/model/krs-response";
+import { KrsPrintResponse } from "app/model/krs-print-response";
+import { KrsHeaderResponse } from "app/model/krs-header-response";
 @Injectable({
   providedIn: "root",
 })
@@ -114,6 +116,30 @@ export class KrsService {
     params = params.append("semester", semester);
     return this.http.get<KrsResponse>(
       `${this.appConfig.apiUrlKrs}/krs/mahasiswa`,
+      {
+        params: params,
+      }
+    );
+  }
+
+  getKrsBody(jenis_aplikasi, nim, semester): Observable<KrsPrintResponse> {
+    let params = new HttpParams();
+    params = params.append("jenis_aplikasi", jenis_aplikasi);
+    params = params.append("nim", nim);
+    params = params.append("semester", semester);
+    return this.http.get<KrsPrintResponse>(
+      `${this.appConfig.apiUrlKrs}/krs/mahasiswa/body`,
+      {
+        params: params,
+      }
+    );
+  }
+
+  getKrsHeader(nim): Observable<KrsHeaderResponse> {
+    let params = new HttpParams();
+    params = params.append("nim", nim);
+    return this.http.get<KrsHeaderResponse>(
+      `${this.appConfig.apiUrlKrs}/krs/mahasiswa/header`,
       {
         params: params,
       }

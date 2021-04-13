@@ -15,6 +15,8 @@ export class ViewKrsComponent extends AppComponentBase implements OnInit {
   nim;
   semester;
   current_date = Date.now();
+  header;
+  totalSks;
 
   constructor(
     private printService: PrintService,
@@ -29,22 +31,49 @@ export class ViewKrsComponent extends AppComponentBase implements OnInit {
 
   ngOnInit() {
     this.krsService
-      .getKrs2(this.appConfig.jenisAplikasiString, this.nim, this.semester)
+      .getKrsBody(this.appConfig.jenisAplikasiString, this.nim, this.semester)
       .pipe(
         finalize(() => {
-          // this.printService.onDataReady();
+          this.krsService
+            .getKrsHeader(this.nim)
+            .pipe(
+              finalize(() => {
+                this.printService.onDataReady();
+              })
+            )
+            .subscribe(
+              (data) => {
+                this.header = data.result[0];
+                console.log(data);
+              },
+              (error) => {
+                console.log(error);
+                this.showMessage("Eror!", error.message, "error");
+              }
+            );
         })
       )
       .subscribe(
         (data) => {
           this.data = data.result;
+          this.totalSks = this.data.reduce((total, num) => {
+            return total + num.sks;
+          }, 0);
           console.log(data);
         },
         (error) => {
           console.log(error);
-          console.log(error.status);
           this.showMessage("Eror!", error.message, "error");
         }
       );
+  }
+
+  setStatusMatkul(a) {
+    let status = [
+      { value: 1, name: "Baru" },
+      { value: 2, name: "Ulang" },
+      { value: 3, name: "Ganti Nilai" },
+    ];
+    return status.find((x) => x.value == a).name;
   }
 }

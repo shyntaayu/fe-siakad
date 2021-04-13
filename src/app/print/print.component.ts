@@ -27,8 +27,17 @@ export class PrintComponent implements OnInit {
   getRouter() {
     console.log(this._router.url);
     let urlArray = this._router.url.split("/");
-    let a = urlArray[urlArray.length - 2];
+    let a;
+    if (this.isNumber(urlArray[urlArray.length - 1])) {
+      a = urlArray[urlArray.length - 2];
+    } else {
+      a = urlArray[urlArray.length - 1];
+    }
     this.title = a.replace("-", " ");
     console.log(this.title);
+  }
+
+  isNumber(myString) {
+    return /\d/.test(myString);
   }
 }

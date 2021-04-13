@@ -4,7 +4,7 @@
     <div style="text-align:center;">
         <font size="6"><span style="font-weight: bold;">KARTU RENCANA STUDI</span></font>
     </div>
-    <table border="0" align="center">
+    <table border="0" align="center" *ngIf="header">
         <tbody>
             <tr>
                 <td>&nbsp;</td>
@@ -15,7 +15,7 @@
                 </td>
                 <td>:</td>
                 <td>
-                    <font size="3">{{data[0].tahun_akademik}}</font>
+                    <font size="3">{{header.nama}}</font>
                 </td>
                 <td width="70"> &nbsp; </td>
                 <td>
@@ -23,7 +23,7 @@
                 </td>
                 <td>:</td>
                 <td>
-                    <font size="3">{{data[0].namajenjang}}</font>
+                    <font size="3">{{header.jenjang}}</font>
                 </td>
             </tr>
             <tr>
@@ -32,7 +32,7 @@
                 </td>
                 <td>:</td>
                 <td>
-                    <font size="3">{{data[0].nim}}</font>
+                    <font size="3">{{header.nim}}</font>
                 </td>
                 <td> &nbsp; </td>
                 <td>
@@ -40,7 +40,7 @@
                 </td>
                 <td>:</td>
                 <td>
-                    <font size="3">{{data[0].namaprodi}}</font>
+                    <font size="3">{{header.prodi}}</font>
                 </td>
             </tr>
             <tr>
@@ -49,7 +49,7 @@
                 </td>
                 <td>:</td>
                 <td>
-                    <font size="3">GENAP 2020-2021</font>
+                    <font size="3">{{header.semester}}</font>
                 </td>
                 <td> &nbsp; </td>
                 <td>
@@ -57,7 +57,7 @@
                 </td>
                 <td>:</td>
                 <td>
-                    <font size="3">Nasrul Firdaus, S.Kom.,MMSI</font>
+                    <font size="3">{{header.dosen}}</font>
                 </td>
             </tr>
             <tr>
@@ -98,13 +98,13 @@
                     <font size="3">{{a.nama}}</font>
                 </td>
                 <td align="center">
-                    <font size="2">2</font>
+                    <font size="2">{{a.sks}}</font>
                 </td>
                 <td align="center">
-                    <font size="2">Baru</font>
+                    <font size="2">{{setStatusMatkul(a.status_matkul)}}</font>
                 </td>
                 <td>
-                    <font size="3">Wajib</font>
+                    <font size="3">{{a.status}}</font>
                 </td>
             </tr>
         </tbody>
@@ -117,13 +117,13 @@
                 </td>
                 <td>:</td>
                 <td>
-                    <font size="3"><span style="font-weight: bold;">6</span></font>
+                    <font size="3"><span style="font-weight: bold;">{{totalSks}}</span></font>
                 </td>
             </tr>
         </tbody>
     </table>
     <br>
-    <table border="0" width="700" style="BORDER-COLLAPSE:COLLAPSE;" align="center">
+    <table border="0" width="700" style="BORDER-COLLAPSE:COLLAPSE;" align="center" *ngIf="header">
         <tbody>
             <tr align="center">
                 <td width="400">&nbsp;</td>
@@ -151,15 +151,14 @@
             <tr>
                 <td width="300">
                     <font size="3">
-                        <div style="text-align:center;"><span style="font-weight: bold;">Nasrul Firdaus,
-                                S.Kom.,MMSI</span>
+                        <div style="text-align:center;"><span style="font-weight: bold;">{{header.dosen}}</span>
                         </div>
                     </font>
                 </td>
                 <td witdh="200">&nbsp;</td>
                 <td witdh="100">
                     <font size="3">
-                        <div style="text-align:center;"><span style="font-weight: bold;">SHYNTA AYU DWI DARMAWAN</span>
+                        <div style="text-align:center;"><span style="font-weight: bold;">{{header.nama}}</span>
                         </div>
                     </font>
                 </td>
