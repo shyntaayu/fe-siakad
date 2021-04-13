@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators,
 } from "@angular/forms";
+import { Router } from "@angular/router";
 import { AppConfig } from "app/model/app-config";
 import { KrsService } from "app/services/krs.service";
 import { MahasiswaService } from "app/services/mahasiswa.service";
@@ -35,7 +36,8 @@ export class KrsComponent extends AppComponentBase implements OnInit {
   loading1 = false;
   loading2 = false;
   model;
-  listMatkul;
+  nim;
+  listMatkul = [];
 
   constructor(
     private mahasiswaService: MahasiswaService,
@@ -44,13 +46,14 @@ export class KrsComponent extends AppComponentBase implements OnInit {
     private messageService: MessageService,
     injector: Injector,
     private appConfig: AppConfig,
-    private krsService: KrsService
+    private krsService: KrsService,
+    private router: Router
   ) {
     super(injector);
     this.profileForm = this.fb.group({
       jenjang: ["", Validators.required],
       semester: ["", Validators.required],
-      tahun: ["", Validators.required],
+      // tahun: ["", Validators.required],
       jurusan: ["", Validators.required],
     });
   }
@@ -77,18 +80,14 @@ export class KrsComponent extends AppComponentBase implements OnInit {
       summary: "Mahasiswa Selected",
       detail: event.data.nama,
     });
+    this.nim = event.data.nim;
+    this.getMatkulByMhs(this.nim);
+  }
+
+  getMatkulByMhs(nim) {
     this.loading2 = true;
-    console.warn(this.profileForm.value);
-    this.model = this.profileForm.value;
     this.krsService
-      .getKrs(
-        this.appConfig.jenisAplikasiString,
-        event.data.nim,
-        this.model.tahun,
-        this.model.semester,
-        this.model.jenjang,
-        this.model.jurusan
-      )
+      .getKrs2(this.appConfig.jenisAplikasiString, nim, this.model.semester)
       .pipe(
         finalize(() => {
           this.loading = false;
@@ -142,11 +141,15 @@ export class KrsComponent extends AppComponentBase implements OnInit {
     delete this.clonedProducts[product.id];
   }
   onSubmit() {
+    console.warn(this.profileForm.value);
+    this.model = this.profileForm.value;
+    this.getMahasiswa2();
+  }
+
+  getMahasiswa2() {
     this.loading = true;
     this.loading1 = true;
     this.listMatkul = [];
-    console.warn(this.profileForm.value);
-    this.model = this.profileForm.value;
     this.mahasiswaService
       .getMahasiswas(
         this.appConfig.jenisAplikasiString,
@@ -170,5 +173,19 @@ export class KrsComponent extends AppComponentBase implements OnInit {
           this.showMessage("Eror!", error.message, "error");
         }
       );
+  }
+
+  getNew(param) {
+    console.log(param);
+    if (this.model) this.model.semester = param;
+    if (this.nim) this.getMatkulByMhs(this.nim);
+  }
+
+  print(type) {
+    console.log("type----", type);
+    localStorage.setItem("sinim", this.nim);
+    if (type == 1) {
+      this.router.navigate(["/print/krs"]);
+    }
   }
 }

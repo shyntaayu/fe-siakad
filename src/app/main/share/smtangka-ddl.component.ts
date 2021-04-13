@@ -15,29 +15,26 @@ import { KrsService } from "app/services/krs.service";
 import { AppComponentBase } from "shared/app-component-base";
 const noop = () => {};
 @Component({
-  selector: "jenjang-ddl",
+  selector: "smtangka-ddl",
   template: `<div [busyIf]="isLoading">
     <mat-form-field class="example-full-width">
-      <mat-label>Jenjang</mat-label>
+      <mat-label>Semester</mat-label>
       <input
         type="text"
-        placeholder="Pilih Jenjang"
+        placeholder="Pilih Semester"
         aria-label="Number"
         matInput
         [matAutocomplete]="auto"
         [(ngModel)]="inputValue"
-        (optionSelected)="onChange($event.option.value)"
       />
       <mat-autocomplete
+        (optionSelected)="selectedSmt.emit(inputValue)"
         autoActiveFirstOption
         #auto="matAutocomplete"
         [displayWith]="displayFn.bind(this)"
       >
-        <mat-option
-          *ngFor="let option of jenjang"
-          [value]="option.id_master_jenjang"
-        >
-          {{ option.nama }}
+        <mat-option *ngFor="let option of semester" [value]="option.value">
+          {{ option.value }}
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>
@@ -45,21 +42,22 @@ const noop = () => {};
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: JenjangDdlComponent,
+      useExisting: SmtAngkaDdlComponent,
       multi: true,
     },
   ],
 })
-export class JenjangDdlComponent
+export class SmtAngkaDdlComponent
   extends AppComponentBase
   implements OnInit, ControlValueAccessor {
   private innerValue: any = "";
-  jenjang;
+  semester;
 
   onChange: (value: string) => void;
 
   @Input() isDisabled: boolean = false;
-  @Input() selectedJenjang: number = undefined;
+  @Input() selectedSmtAngka: number = undefined;
+  @Output() selectedSmt: EventEmitter<any> = new EventEmitter<any>();
 
   isLoading = false;
 
@@ -72,21 +70,43 @@ export class JenjangDdlComponent
   ngOnInit(): void {
     let self = this;
     self.isLoading = true;
-    this._krsService.getAllJenjang().subscribe(
-      (result) => {
-        this.jenjang = result;
-        self.isLoading = false;
+    this.semester = [
+      {
+        value: 1,
       },
-      (err) => {
-        self.isLoading = false;
-        console.error(err);
-        this.showMessage("Eror!", err.message, "error");
-      }
-    );
+      {
+        value: 2,
+      },
+      {
+        value: 3,
+      },
+      {
+        value: 4,
+      },
+      {
+        value: 5,
+      },
+      {
+        value: 6,
+      },
+      {
+        value: 7,
+      },
+      {
+        value: 8,
+      },
+      {
+        value: 9,
+      },
+      {
+        value: 10,
+      },
+    ];
+    self.isLoading = false;
   }
 
   ngOnChanges(): void {
-    this.selectedJenjang = this.selectedJenjang;
+    this.selectedSmtAngka = this.selectedSmtAngka;
   }
 
   get inputValue(): any {
@@ -116,7 +136,7 @@ export class JenjangDdlComponent
 
   displayFn(value?: number) {
     return value
-      ? this.jenjang.find((_) => _.id_master_jenjang === value).nama
+      ? this.semester.find((_) => _.value === value).value
       : undefined;
   }
 }

@@ -10,8 +10,9 @@ import { FormControlStyleComponent } from "./form-control-style.component";
 import { ProdiDdlComponent } from "./prodi-ddl.component";
 import { UtilsModule } from "shared/utils/utils.module";
 import { TahunDdlComponent } from "./tahun-ddl.component";
-import { SemesterDdlComponent } from "./semester-ddl.component";
+import { SmtAngkaDdlComponent } from "./smtangka-ddl.component";
 import { JenjangDdlComponent } from "./jenjang-ddl.component";
+import { SemesterDdlComponent } from "./semester-ddl.component";
 
 @NgModule({
   imports: [
@@ -31,6 +32,7 @@ import { JenjangDdlComponent } from "./jenjang-ddl.component";
     TahunDdlComponent,
     SemesterDdlComponent,
     JenjangDdlComponent,
+    SmtAngkaDdlComponent,
   ],
   exports: [
     DosenComponent,
@@ -40,6 +42,7 @@ import { JenjangDdlComponent } from "./jenjang-ddl.component";
     TahunDdlComponent,
     SemesterDdlComponent,
     JenjangDdlComponent,
+    SmtAngkaDdlComponent,
   ],
 })
 export class ShareModule {}

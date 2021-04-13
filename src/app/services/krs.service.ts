@@ -107,6 +107,19 @@ export class KrsService {
     );
   }
 
+  getKrs2(jenis_aplikasi, nim, semester): Observable<KrsResponse> {
+    let params = new HttpParams();
+    params = params.append("jenis_aplikasi", jenis_aplikasi);
+    params = params.append("nim", nim);
+    params = params.append("semester", semester);
+    return this.http.get<KrsResponse>(
+      `${this.appConfig.apiUrlKrs}/krs/mahasiswa`,
+      {
+        params: params,
+      }
+    );
+  }
+
   // Error handling
   errorMgmt(error: HttpErrorResponse) {
     let errorMessage = "";

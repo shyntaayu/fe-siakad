@@ -27,7 +27,6 @@ const noop = () => {};
         [matAutocomplete]="auto"
         [(ngModel)]="inputValue"
         (optionSelected)="onChange($event.option.value)"
-        required
       />
       <mat-autocomplete
         autoActiveFirstOption

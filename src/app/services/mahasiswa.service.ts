@@ -26,4 +26,21 @@ export class MahasiswaService {
       { params: params }
     );
   }
+
+  getMahasiswas2(
+    jenis_aplikasi,
+    id_master_jenjang,
+    kode_prodi,
+    semester
+  ): Observable<MahasiswaResponse> {
+    let params = new HttpParams();
+    params = params.append("jenis_aplikasi", jenis_aplikasi);
+    params = params.append("id_master_jenjang", id_master_jenjang);
+    params = params.append("kode_prodi", kode_prodi);
+    params = params.append("semester", semester);
+    return this.http.get<MahasiswaResponse>(
+      `${this.appConfig.apiUrlMahasiswa}/mahasiswa2`,
+      { params: params }
+    );
+  }
 }
