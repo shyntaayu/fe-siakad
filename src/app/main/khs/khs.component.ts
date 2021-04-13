@@ -18,6 +18,8 @@ export class KhsComponent implements OnInit {
   clonedProducts: { [s: string]: Product } = {};
   statuses: SelectItem[];
   loading = false;
+  jenjang;
+  prodi;
 
   constructor(
     private fb: FormBuilder,
@@ -29,6 +31,7 @@ export class KhsComponent implements OnInit {
       semester: ["", Validators.required],
       tahun: ["", Validators.required],
       jurusan: ["", Validators.required],
+      jenjang: ["", Validators.required],
     });
   }
 

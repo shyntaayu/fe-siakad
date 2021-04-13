@@ -63,6 +63,7 @@ export const AdminLayoutRoutes: Routes = [
     path: "dashboard",
     component: DashboardComponent,
     canActivate: [AuthGuard],
+    data: { permission: "1" },
   },
   {
     path: "user-profile",
@@ -92,17 +93,30 @@ export const AdminLayoutRoutes: Routes = [
     path: "rekap-presensi",
     component: RekapPresensiComponent,
     canActivate: [AuthGuard],
+    data: { permission: "1" },
   },
   {
     path: "input-nilai",
     component: InputNilaiComponent,
     canActivate: [AuthGuard],
+    data: { permission: "1" },
   },
   {
     path: "salinan-nilai",
     component: SalinanNilaiComponent,
     canActivate: [AuthGuard],
+    data: { permission: "1" },
   },
-  { path: "khs", component: KhsComponent, canActivate: [AuthGuard] },
-  { path: "krs", component: KrsComponent, canActivate: [AuthGuard] },
+  {
+    path: "khs",
+    component: KhsComponent,
+    canActivate: [AuthGuard],
+    data: { permission: "1" },
+  },
+  {
+    path: "krs",
+    component: KrsComponent,
+    canActivate: [AuthGuard],
+    data: { permission: "1" },
+  },
 ];

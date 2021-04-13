@@ -5,8 +5,18 @@ import { RoleComponent } from "./role/role.component";
 import { UserComponent } from "./user/user.component";
 
 const routes: Routes = [
-  { path: "user", component: UserComponent, canActivate: [AuthGuard] },
-  { path: "role", component: RoleComponent, canActivate: [AuthGuard] },
+  {
+    path: "user",
+    component: UserComponent,
+    canActivate: [AuthGuard],
+    data: { permission: "1" },
+  },
+  {
+    path: "role",
+    component: RoleComponent,
+    canActivate: [AuthGuard],
+    data: { permission: "1" },
+  },
 ];
 
 @NgModule({

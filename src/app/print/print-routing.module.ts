@@ -11,6 +11,7 @@ const routes: Routes = [
     // outlet: "print",
     component: PrintLayoutComponent,
     canActivate: [AuthGuard],
+    data: { permission: "1" },
     children: [
       {
         path: "presensi/:invoiceIds",

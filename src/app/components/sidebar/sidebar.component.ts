@@ -1,4 +1,6 @@
 import { Component, OnInit } from "@angular/core";
+import { AuthenticationService } from "app/services/authentication.service";
+import { AppMenuItem } from "./app-menu-item";
 
 declare const $: any;
 declare interface RouteInfo {
@@ -148,6 +150,20 @@ export const ROUTES: RouteInfo[] = [
   // },
 ];
 
+export const menu: AppMenuItem[] = [
+  new AppMenuItem("Dashboard", "1", "dashboard", "/dashboard"),
+  new AppMenuItem("Presensi", "1", "list_alt", "/presensi"),
+  new AppMenuItem("Rekap Presensi", "1", "folder_open", "/rekap-presensi"),
+  new AppMenuItem("Input Nilai", "1", "create", "/input-nilai"),
+  new AppMenuItem("Salinan Nilai", "1", "content_paste", "/salinan-nilai"),
+  new AppMenuItem("KHS", "1", "file_copy", "/khs"),
+  new AppMenuItem("KRS", "1", "task_alt", "/krs"),
+  new AppMenuItem("Master", "1", "apps", "", [
+    new AppMenuItem("User", "1", "badge", "/master/user"),
+    new AppMenuItem("Role", "1", "lock", "/master/role"),
+  ]),
+];
+
 @Component({
   selector: "app-sidebar",
   templateUrl: "./sidebar.component.html",
@@ -157,19 +173,32 @@ export class SidebarComponent implements OnInit {
   menuItems: any[];
   menuDashboard;
   menuNone;
+  menuNew: any[];
 
-  constructor() {}
+  constructor(private authenticationService: AuthenticationService) {}
 
   ngOnInit() {
-    this.menuDashboard = ROUTES.filter(
-      (menuItem) => menuItem.icon == "dashboard"
-    );
-    this.menuItems = ROUTES.filter((menuItem) => menuItem.parent == "master");
-    this.menuNone = ROUTES.filter((menuItem) => menuItem.parent == "none");
+    // this.menuDashboard = ROUTES.filter(
+    //   (menuItem) => menuItem.icon == "dashboard"
+    // );
+    // this.menuItems = ROUTES.filter((menuItem) => menuItem.parent == "master");
+    // this.menuNone = ROUTES.filter((menuItem) => menuItem.parent == "none");
+    console.log(menu);
+    this.menuNew = menu;
   }
   isMobileMenu() {
     if ($(window).width() > 991) {
       return false;
+    }
+    return true;
+  }
+
+  showMenuItem(menuItem): boolean {
+    if (menuItem.permissionName) {
+      return (
+        this.authenticationService.userValue["master_hak_akses_id"] ==
+        menuItem.permissionName
+      );
     }
     return true;
   }

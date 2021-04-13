@@ -122,49 +122,61 @@ export class UserComponent extends AppComponentBase implements OnInit {
     model.username = q.username;
     model.login_id = this.user.login_id;
     if (this.type == 1) {
-      this.userService.register(model).subscribe(
-        (res) => {
-          console.log(res);
-          if (res.status == 0) {
-            this.showMessage("Eror!", res.msg, "error");
-          } else {
-            Swal.fire({
-              title: "Sukses!",
-              text: res.msg + " - Berhasil menambahkan",
-              icon: "success",
-              allowOutsideClick: false,
-            }).then(() => {
-              this.modalReference.close();
-            });
+      this.userService
+        .register(model)
+        .pipe(
+          finalize(() => {
+            this.loading = false;
+          })
+        )
+        .subscribe(
+          (res) => {
+            console.log(res);
+            if (res.status == 0) {
+              this.showMessage("Eror!", res.msg, "error");
+            } else {
+              Swal.fire({
+                title: "Sukses!",
+                text: res.msg + " - Berhasil menambahkan",
+                icon: "success",
+                allowOutsideClick: false,
+              }).then(() => {
+                this.modalReference.close();
+              });
+            }
+          },
+          (error) => {
+            this.showMessage("Eror!", error.message, "error");
           }
-          this.loading = false;
-        },
-        (error) => {
-          this.showMessage("Eror!", error.message, "error");
-        }
-      );
+        );
     } else {
-      this.userService.updateUser(model).subscribe(
-        (res) => {
-          console.log(res);
-          if (res.status == 0) {
-            this.showMessage("Eror!", res.msg, "error");
-          } else {
-            Swal.fire({
-              title: "Sukses!",
-              text: res.msg + " - Berhasil mengedit",
-              icon: "success",
-              allowOutsideClick: false,
-            }).then(() => {
-              this.modalReference.close();
-            });
+      this.userService
+        .updateUser(model)
+        .pipe(
+          finalize(() => {
+            this.loading = false;
+          })
+        )
+        .subscribe(
+          (res) => {
+            console.log(res);
+            if (res.status == 0) {
+              this.showMessage("Eror!", res.msg, "error");
+            } else {
+              Swal.fire({
+                title: "Sukses!",
+                text: res.msg + " - Berhasil mengedit",
+                icon: "success",
+                allowOutsideClick: false,
+              }).then(() => {
+                this.modalReference.close();
+              });
+            }
+          },
+          (error) => {
+            this.showMessage("Eror!", error.message, "error");
           }
-          this.loading = false;
-        },
-        (error) => {
-          this.showMessage("Eror!", error.message, "error");
-        }
-      );
+        );
     }
     this.getUsers();
   }
