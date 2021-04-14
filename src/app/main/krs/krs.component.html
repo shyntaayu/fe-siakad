@@ -115,8 +115,10 @@
                                     </th>
                                     <th pSortableColumn="nama">Nama Matakuliah <p-sortIcon field="nama"></p-sortIcon>
                                     </th>
-                                    <!-- <th>Category</th>
-                                    <th>Quantity</th> -->
+                                    <th pSortableColumn="status_matkul">Status <p-sortIcon field="status_matkul">
+                                        </p-sortIcon>
+                                    </th>
+                                    <!-- <th>Quantity</th> -->
                                     <!-- <th style="width:8rem"></th> -->
                                 </tr>
                             </ng-template>
@@ -124,8 +126,8 @@
                                 <tr [pSelectableRow]="matkul">
                                     <td>{{matkul.kode_matkul}}</td>
                                     <td>{{matkul.nama}}</td>
-                                    <!-- <td>{{matkul.category}}</td>
-                                    <td>{{matkul.quantity}}</td> -->
+                                    <td>{{setStatusMatkul(matkul.status_matkul)}}</td>
+                                    <!-- <td>{{matkul.quantity}}</td> -->
                                 </tr>
                             </ng-template>
                         </p-table>

@@ -1,0 +1,234 @@
+<div class="invoice" *ngIf="data">
+    <!-- <h1>Invoice Num. {{ invoice }}</h1>
+    Amount: {{ (invoiceDetails[i] | async)?.amount }} -->
+    <div style="text-align:center;">
+        <font size="6"><span style="font-weight: bold;">KARTU HASIL STUDI</span></font>
+    </div>
+    <table border="0" align="center" *ngIf="header">
+        <tbody>
+            <tr>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>
+                    <font size="3">Nama</font>
+                </td>
+                <td>:</td>
+                <td>
+                    <font size="3">{{header.nama}}</font>
+                </td>
+                <td width="70"> &nbsp; </td>
+                <td>
+                    <font size="3">Jenjang</font>
+                </td>
+                <td>:</td>
+                <td>
+                    <font size="3">{{header.jenjang}}</font>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <font size="3">NIM</font>
+                </td>
+                <td>:</td>
+                <td>
+                    <font size="3">{{header.nim}}</font>
+                </td>
+                <td> &nbsp; </td>
+                <td>
+                    <font size="3">Program Studi</font>
+                </td>
+                <td>:</td>
+                <td>
+                    <font size="3">{{header.prodi}}</font>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <font size="3">Dosen Wali</font>
+                </td>
+                <td>:</td>
+                <td>
+                    <font size="3">{{header.dosen}}</font>
+                </td>
+                <td> &nbsp; </td>
+                <td>
+                    <font size="3">Semester</font>
+                </td>
+                <td>:</td>
+                <td>
+                    <font size="3">{{header.semester}}</font>
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+            </tr>
+        </tbody>
+    </table>
+    <table border="1" style="BORDER-COLLAPSE:COLLAPSE;" align="center" cellpadding="3">
+        <tbody>
+            <tr align="center">
+                <td>
+                    <font size="3"><span style="font-weight: bold;">No.</span></font>
+                </td>
+                <td>
+                    <font size="3"><span style="font-weight: bold;">Kode MTK</span></font>
+                </td>
+                <td>
+                    <font size="3"><span style="font-weight: bold;">Mata Kuliah</span></font>
+                </td>
+                <td>
+                    <font size="3"><span style="font-weight: bold;">sks</span></font>
+                </td>
+                <td>
+                    <font size="3"><span style="font-weight: bold;">Nilai</span></font>
+                </td>
+                <td>
+                    <font size="3"><span style="font-weight: bold;">Indeks</span></font>
+                </td>
+                <td>
+                    <font size="3"><span style="font-weight: bold;">Bobot</span></font>
+                </td>
+                <td>
+                    <font size="3"><span style="font-weight: bold;">Predikat</span></font>
+                </td>
+                <td>
+                    <font size="3"><span style="font-weight: bold;">Ket.</span></font>
+                </td>
+            </tr>
+            <tr class="white" *ngFor="let a of data; let i = index">
+                <td align="center">
+                    <font size="2">{{i+1}}.</font>
+                </td>
+                <td>
+                    <font size="3">{{a.kode_matkul}}</font>
+                </td>
+                <td>
+                    <font size="3">{{a.nama}}</font>
+                </td>
+                <td align="center">
+                    <font size="2">{{a.sks}}</font>
+                </td>
+                <td align="center">
+                    <font size="2">{{a.sks}}</font>
+                </td>
+                <td align="center">
+                    <font size="2">{{a.sks}}</font>
+                </td>
+                <td align="center">
+                    <font size="2">{{a.sks}}</font>
+                </td>
+                <td align="center">
+                    <font size="2">{{a.sks}}</font>
+                </td>
+                <td align="center">
+                    <font size="2">{{setStatusMatkul(a.status_matkul)}}</font>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table border="0" align="center" *ngIf="header">
+        <tbody>
+            <tr>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>
+                    <font size="3">Total Bobot</font>
+                </td>
+                <td>:</td>
+                <td>
+                    <font size="3">{{header.nama}}</font>
+                </td>
+                <td width="70"> &nbsp; </td>
+                <td>
+                    <font size="3">Indeks Prestasi (IP)</font>
+                </td>
+                <td>:</td>
+                <td>
+                    <font size="3">{{header.jenjang}}</font>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <font size="3">Total SKS</font>
+                </td>
+                <td>:</td>
+                <td>
+                    <font size="3">{{header.nim}}</font>
+                </td>
+                <td> &nbsp; </td>
+                <td>
+                    <font size="3">Indeks Prestasii Kumulatif (IPK)</font>
+                </td>
+                <td>:</td>
+                <td>
+                    <font size="3">{{header.prodi}}</font>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <font size="3">Total SKS Lulus</font>
+                </td>
+                <td>:</td>
+                <td>
+                    <font size="3">{{header.dosen}}</font>
+                </td>
+                <td> &nbsp; </td>
+                <td>
+                    <font size="3">Beban Studi Maksimum y.a.d</font>
+                </td>
+                <td>:</td>
+                <td>
+                    <font size="3">{{header.semester}}</font>
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <table border="0" width="700" style="BORDER-COLLAPSE:COLLAPSE;" align="center" *ngIf="header">
+        <tbody>
+            <tr align="left">
+                <td width="400">&nbsp;</td>
+                <td witdh="200">&nbsp;</td>
+                <td witdh="100">
+                    <font size="3">Malang, {{current_date | date:('dd MMMM yyyy')}} </font>
+                </td>
+            </tr>
+            <tr>
+                <td width="300">
+                    <font size="3">
+                        <div style="text-align:center;"></div>
+                    </font>
+                </td>
+                <td witdh="100">&nbsp;</td>
+                <td witdh="200">
+                    <font size="3">
+                        <div style="text-align:left;">Ka. Prodi. {{header.jenjang}}-{{header.prodi}}</div>
+                    </font>
+                </td>
+            </tr>
+            <tr>
+                <td><br><br><br><br></td>
+            </tr>
+            <tr>
+                <td width="300">
+                    <font size="3">
+                        <div style="text-align:center;"><span style="font-weight: bold;"></span>
+                        </div>
+                    </font>
+                </td>
+                <td witdh="100">&nbsp;</td>
+                <td witdh="200">
+                    <font size="3">
+                        <div style="text-align:left;"><span style="font-weight: bold;">{{footer.nama_kaprodi}}</span>
+                        </div>
+                    </font>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

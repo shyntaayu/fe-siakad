@@ -55,6 +55,9 @@ a[data-toggle="collapse"][aria-expanded="true"] .caret {
   .isPrinting app-print-layout {
     display: block;
   }
+  button {
+    display: none;
+  }
 
   * {
     font-family: "Times New Roman", Times, serif;

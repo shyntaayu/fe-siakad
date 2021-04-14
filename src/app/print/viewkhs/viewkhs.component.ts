@@ -7,21 +7,22 @@ import { AppComponentBase } from "shared/app-component-base";
 import { PrintService } from "../print.service";
 
 @Component({
-  selector: "app-viewkrs",
-  templateUrl: "./viewkrs.component.html",
-  styleUrls: ["./viewkrs.component.css"],
+  selector: "app-viewkhs",
+  templateUrl: "./viewkhs.component.html",
+  styleUrls: ["./viewkhs.component.css"],
 })
-export class ViewKrsComponent extends AppComponentBase implements OnInit {
+export class ViewKhsComponent extends AppComponentBase implements OnInit {
   data;
   nim;
   semester;
   current_date = Date.now();
   header;
   totalSks;
+  footer;
 
   constructor(
     private printService: PrintService,
-    private krsService: KrsService,
+    private khsService: KrsService,
     private appConfig: AppConfig,
     injector: Injector,
     route: ActivatedRoute
@@ -34,15 +35,15 @@ export class ViewKrsComponent extends AppComponentBase implements OnInit {
   }
 
   ngOnInit() {
-    this.krsService
+    this.khsService
       .getKrsBody(this.appConfig.jenisAplikasiString, this.nim, this.semester)
       .pipe(
         finalize(() => {
-          this.krsService
+          this.khsService
             .getKrsHeader(this.nim)
             .pipe(
               finalize(() => {
-                this.printService.onDataReady();
+                // this.printService.onDataReady();
               })
             )
             .subscribe(
@@ -60,6 +61,7 @@ export class ViewKrsComponent extends AppComponentBase implements OnInit {
       .subscribe(
         (data) => {
           this.data = data.result;
+          this.footer = data.result[0];
           this.totalSks = this.data.reduce((total, num) => {
             return total + num.sks;
           }, 0);

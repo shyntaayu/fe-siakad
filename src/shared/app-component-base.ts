@@ -349,4 +349,13 @@ export abstract class AppComponentBase {
       allowOutsideClick: false,
     });
   }
+
+  setStatusMatkul(a) {
+    let status = [
+      { value: 1, name: "Baru" },
+      { value: 2, name: "Ulang" },
+      { value: 3, name: "Ganti Nilai" },
+    ];
+    return status.find((x) => x.value == a).name;
+  }
 }

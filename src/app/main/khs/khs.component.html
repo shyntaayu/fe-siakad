@@ -1,23 +1,11 @@
 <div class="main-content">
     <div class="container-fluid">
-        <div class="row">
+        <div class="row" style="margin-top: -30px;">
             <div class="col-md-12">
                 <div class="card" [busyIf]="loading">
                     <div class="card-body">
                         <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
                             <div class="row">
-                                <div class="col-md-4">
-                                    <mat-form-field class="example-full-width">
-                                        <mat-label>Jenis</mat-label>
-                                        <input type="text" placeholder="Pilih Jenis" aria-label="Number" matInput
-                                            formControlName="jenis" [matAutocomplete]="auto">
-                                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                                            <mat-option *ngFor="let option of options" [value]="option">
-                                                {{option}}
-                                            </mat-option>
-                                        </mat-autocomplete>
-                                    </mat-form-field>
-                                </div>
                                 <div class="col-md-4">
                                     <jenjang-ddl formControlName="jenjang" [(ngModel)]="jenjang">
                                     </jenjang-ddl>
@@ -26,53 +14,38 @@
                                     <prodi-ddl formControlName="jurusan" [(ngModel)]="prodi" #hasMessage>
                                     </prodi-ddl>
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md-4">
-                                    <mat-form-field class="example-full-width">
-                                        <mat-label>Tahun Ajaran</mat-label>
-                                        <input type="text" placeholder="Pilih Tahun Ajaran" aria-label="Number" matInput
-                                            formControlName="tahun" [matAutocomplete]="auto">
-                                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                                            <mat-option *ngFor="let option of options" [value]="option">
-                                                {{option}}
-                                            </mat-option>
-                                        </mat-autocomplete>
-                                    </mat-form-field>
-                                </div>
-                                <div class="col-md-4">
-                                    <mat-form-field class="example-full-width">
-                                        <mat-label>Jurusan</mat-label>
-                                        <input type="text" placeholder="Pilih Jurusan" aria-label="Number" matInput
-                                            formControlName="jurusan" [matAutocomplete]="auto">
-                                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                                            <mat-option *ngFor="let option of options" [value]="option">
-                                                {{option}}
-                                            </mat-option>
-                                        </mat-autocomplete>
-                                    </mat-form-field>
+                                    <smtangka-ddl formControlName="semester" [(ngModel)]="semester"
+                                        (selectedSmt)="getNew($event)">
+                                    </smtangka-ddl>
                                 </div>
                             </div>
-                            <button mat-raised-button type="submit" class="btn btn-danger pull-right"
+                            <!-- <div class="row">
+                                <div class="col-md-4">
+                                    <tahun-ddl formControlName="tahun" [(ngModel)]="tahun">
+                                    </tahun-ddl>
+                                </div>
+                            </div> -->
+                            <button mat-raised-button type="submit" class="btn btn-warning pull-right"
                                 [disabled]="!profileForm.valid" [loading]="loading">Cari</button>
                             <div class="clearfix"></div>
+
                         </form>
                     </div>
                 </div>
             </div>
         </div>
         <p-toast></p-toast>
-        <div class="row">
+        <div class="row" style="margin-top: -30px;">
             <div class="col-md-6">
-                <div class="card">
+                <div class="card" [busyIf]="loading1">
                     <div class="card-body">
-                        <p-table #dt1 [value]="products" selectionMode="single" [(selection)]="selectedProduct2"
-                            dataKey="code" (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)"
+                        <p-table #dt1 [value]="listMahasiswa" selectionMode="single" [(selection)]="selectedProduct2"
+                            dataKey="nim" (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)"
                             [paginator]="true" [rows]="10" [showCurrentPageReport]="true" sortMode="multiple"
                             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                            [globalFilterFields]="['name','code','category','quantity']"
-                            [rowsPerPageOptions]="[10,25,50]">
-                            <ng-template pTemplate="caption">
+                            [globalFilterFields]="['nama','nim']" [rowsPerPageOptions]="[10,25,50]">
+                            <!-- <ng-template pTemplate="caption">
                                 <div class="p-d-flex">
                                     <span class="p-input-icon-right p-ml-auto">
                                         <i class="pi pi-search"></i>
@@ -81,25 +54,37 @@
                                             placeholder="Search keyword" />
                                     </span>
                                 </div>
+                            </ng-template> -->
+                            <ng-template pTemplate="caption">
+                                <div class="table-header">
+                                    List Mahasiswa
+                                    <br><br>
+                                    <span class="p-input-icon-left">
+                                        <i class="pi pi-search"></i>
+                                        <input pInputText type="text"
+                                            (input)="dt1.filterGlobal($event.target.value, 'contains')"
+                                            placeholder="Search..." />
+                                    </span>
+                                </div>
                             </ng-template>
                             <ng-template pTemplate="header">
                                 <tr>
-                                    <th pSortableColumn="code">Code <p-sortIcon field="code"></p-sortIcon>
+                                    <th pSortableColumn="nim">NIM <p-sortIcon field="nim"></p-sortIcon>
                                     </th>
-                                    <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon>
+                                    <th pSortableColumn="nama">Nama <p-sortIcon field="nama"></p-sortIcon>
                                     </th>
-                                    <th pSortableColumn="category">Category <p-sortIcon field="category"></p-sortIcon>
+                                    <!-- <th pSortableColumn="category">Category <p-sortIcon field="category"></p-sortIcon>
                                     </th>
                                     <th pSortableColumn="quantity">Quantity <p-sortIcon field="quantity"></p-sortIcon>
-                                    </th>
+                                    </th> -->
                                 </tr>
                             </ng-template>
-                            <ng-template pTemplate="body" let-product>
-                                <tr [pSelectableRow]="product">
-                                    <td>{{product.code}}</td>
-                                    <td>{{product.name}}</td>
-                                    <td>{{product.category}}</td>
-                                    <td>{{product.quantity}}</td>
+                            <ng-template pTemplate="body" let-mahasiswa>
+                                <tr [pSelectableRow]="mahasiswa">
+                                    <td>{{mahasiswa.nim}}</td>
+                                    <td>{{mahasiswa.nama}}</td>
+                                    <!-- <td>{{mahasiswa.category}}</td>
+                                    <td>{{mahasiswa.quantity}}</td> -->
                                 </tr>
                             </ng-template>
                         </p-table>
@@ -107,14 +92,15 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="card">
+                <div class="card" [busyIf]="loading2">
                     <div class="card-body">
-                        <p-table #dt2 [value]="products2" dataKey="id" editMode="row" [paginator]="true" [rows]="10"
+                        <p-table #dt2 [value]="listMatkul" dataKey="id" editMode="row" [paginator]="true" [rows]="10"
                             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                            [showCurrentPageReport]="true" [globalFilterFields]="['name','code','category','quantity']"
+                            [showCurrentPageReport]="true" [globalFilterFields]="['nama','kode_matkul']"
                             [rowsPerPageOptions]="[10,25,50]">
                             <ng-template pTemplate="caption">
-                                <div class="p-d-flex">
+                                <div class="table-header">
+                                    List Mata Kuliah<br><br>
                                     <span class="p-input-icon-right p-ml-auto">
                                         <i class="pi pi-search"></i>
                                         <input pInputText type="text"
@@ -125,77 +111,34 @@
                             </ng-template>
                             <ng-template pTemplate="header">
                                 <tr>
-                                    <th>Code</th>
-                                    <th>Name</th>
-                                    <th>Category</th>
-                                    <th>Quantity</th>
-                                    <th style="width:8rem"></th>
+                                    <th pSortableColumn="kode_matkul">Kode <p-sortIcon field="kode_matkul"></p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="nama">Nama Matakuliah <p-sortIcon field="nama"></p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="status_matkul">Status <p-sortIcon field="status_matkul">
+                                        </p-sortIcon>
+                                    </th>
+                                    <!-- <th>Quantity</th> -->
+                                    <!-- <th style="width:8rem"></th> -->
                                 </tr>
                             </ng-template>
-                            <ng-template pTemplate="body" let-product let-editing="editing" let-ri="rowIndex">
-                                <tr [pEditableRow]="product">
-                                    <td>
-                                        <p-cellEditor>
-                                            <ng-template pTemplate="input">
-                                                <input pInputText type="text" [(ngModel)]="product.code">
-                                            </ng-template>
-                                            <ng-template pTemplate="output">
-                                                {{product.code}}
-                                            </ng-template>
-                                        </p-cellEditor>
-                                    </td>
-                                    <td>
-                                        <p-cellEditor>
-                                            <ng-template pTemplate="input">
-                                                <input pInputText type="text" [(ngModel)]="product.name" required>
-                                            </ng-template>
-                                            <ng-template pTemplate="output">
-                                                {{product.name}}
-                                            </ng-template>
-                                        </p-cellEditor>
-                                    </td>
-                                    <td>
-                                        <p-cellEditor>
-                                            <ng-template pTemplate="input">
-                                                <p-dropdown [options]="statuses" [(ngModel)]="product.inventoryStatus"
-                                                    [style]="{'width':'100%'}"></p-dropdown>
-                                            </ng-template>
-                                            <ng-template pTemplate="output">
-                                                {{product.inventoryStatus}}
-                                            </ng-template>
-                                        </p-cellEditor>
-                                    </td>
-                                    <td>
-                                        <p-cellEditor>
-                                            <ng-template pTemplate="input">
-                                                <input pInputText type="text" [(ngModel)]="product.price">
-                                            </ng-template>
-                                            <ng-template pTemplate="output">
-                                                {{product.price | currency: 'USD'}}
-                                            </ng-template>
-                                        </p-cellEditor>
-                                    </td>
-                                    <td style="text-align:center">
-                                        <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow
-                                            icon="pi pi-pencil" (click)="onRowEditInit(product)"
-                                            class="p-button-rounded p-button-text"></button>
-                                        <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow
-                                            icon="pi pi-check" (click)="onRowEditSave(product)"
-                                            class="p-button-rounded p-button-text p-button-success p-mr-2"></button>
-                                        <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow
-                                            icon="pi pi-times" (click)="onRowEditCancel(product, ri)"
-                                            class="p-button-rounded p-button-text p-button-danger"></button>
-                                    </td>
+                            <ng-template pTemplate="body" let-matkul>
+                                <tr [pSelectableRow]="matkul">
+                                    <td>{{matkul.kode_matkul}}</td>
+                                    <td>{{matkul.nama}}</td>
+                                    <td>{{setStatusMatkul(matkul.status_matkul)}}</td>
+                                    <!-- <td>{{matkul.quantity}}</td> -->
                                 </tr>
                             </ng-template>
                         </p-table>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-12"> <button mat-raised-button type="button" class="btn btn-danger pull-right"
+                            [disabled]="this.listMatkul.length==0" (click)="print(1)">Print</button></div>
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12"><button mat-raised-button type="button" class="btn btn-success pull-right"
-                    [disabled]="!profileForm.valid">Print Semua</button></div>
-        </div>
+
     </div>
 </div>

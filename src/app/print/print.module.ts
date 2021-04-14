@@ -8,6 +8,7 @@ import { PrintComponent } from "./print.component";
 import { PrintService } from "./print.service";
 import { RouterModule } from "@angular/router";
 import { ViewKrsComponent } from "./viewkrs/viewkrs.component";
+import { ViewKhsComponent } from "./viewkhs/viewkhs.component";
 
 @NgModule({
   imports: [CommonModule, PrintRoutingModule, RouterModule],
@@ -16,12 +17,14 @@ import { ViewKrsComponent } from "./viewkrs/viewkrs.component";
     PrintLayoutComponent,
     PrintComponent,
     ViewKrsComponent,
+    ViewKhsComponent,
   ],
   exports: [
     ViewpresensiComponent,
     PrintLayoutComponent,
     PrintComponent,
     ViewKrsComponent,
+    ViewKhsComponent,
   ],
   providers: [PrintService],
   bootstrap: [PrintComponent],
