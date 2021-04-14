@@ -88,7 +88,12 @@ export const AdminLayoutRoutes: Routes = [
     canActivate: [AuthGuard],
   },
   { path: "upgrade", component: UpgradeComponent, canActivate: [AuthGuard] },
-  { path: "presensi", component: PresensiComponent, canActivate: [AuthGuard] },
+  {
+    path: "presensi",
+    component: PresensiComponent,
+    canActivate: [AuthGuard],
+    data: { permission: "1" },
+  },
   {
     path: "rekap-presensi",
     component: RekapPresensiComponent,

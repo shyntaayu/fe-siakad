@@ -27,6 +27,7 @@ import { UtilsModule } from "shared/utils/utils.module";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { AppConfigService } from "shared/appconfig.service";
 import { AppConfig } from "./model/app-config";
+import { NotfoundComponent } from './main/notfound/notfound.component';
 
 export function initializerFn(jsonAppConfigService: AppConfigService) {
   return () => {
@@ -56,6 +57,7 @@ export function initializerFn(jsonAppConfigService: AppConfigService) {
     AdminLayoutComponent,
     LoginComponent,
     RegisterComponent,
+    NotfoundComponent,
   ],
   providers: [
     {

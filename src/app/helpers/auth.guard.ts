@@ -18,12 +18,9 @@ export class AuthGuard implements CanActivate {
     const user = this.authenticationService.userValue;
     if (user) {
       // check if route is restricted by role
-      if (
-        route.data.roles &&
-        route.data.roles.indexOf(user.result.master_hak_akses_id) === -1
-      ) {
+      if (route.data && user["master_hak_akses_id"] != route.data.permission) {
         // role not authorised so redirect to home page
-        this.router.navigate(["/"]);
+        this.router.navigate(["/notfound"]);
         return false;
       }
 
@@ -35,4 +32,10 @@ export class AuthGuard implements CanActivate {
     this.router.navigate(["/login"], { queryParams: { returnUrl: state.url } });
     return false;
   }
+
+  // canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+  //   if(!route.data || (route.data && user["master_hak_akses_id"] ==route.data.permission)) {
+  //     return true;
+  //   }
+  // }
 }

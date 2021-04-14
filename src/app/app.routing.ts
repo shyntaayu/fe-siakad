@@ -6,6 +6,7 @@ import { Routes, RouterModule } from "@angular/router";
 import { AdminLayoutComponent } from "./layouts/admin-layout/admin-layout.component";
 import { LoginComponent } from "./account/login/login.component";
 import { PrintComponent } from "./print/print.component";
+import { NotfoundComponent } from "./main/notfound/notfound.component";
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
     path: "login",
     component: LoginComponent,
     // data: { preload: true }
+  },
+  {
+    path: "notfound",
+    component: NotfoundComponent,
   },
   {
     path: "",
@@ -42,6 +47,10 @@ const routes: Routes = [
         loadChildren: "./print/print.module#PrintModule",
       },
     ],
+  },
+  {
+    path: "**",
+    redirectTo: "notfound",
   },
 ];
 
