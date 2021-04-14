@@ -151,10 +151,11 @@ export class KrsComponent extends AppComponentBase implements OnInit {
     this.loading1 = true;
     this.listMatkul = [];
     this.mahasiswaService
-      .getMahasiswas(
+      .getMahasiswas2(
         this.appConfig.jenisAplikasiString,
         this.model.jenjang,
-        this.model.jurusan
+        this.model.jurusan,
+        this.model.semester
       )
       .pipe(
         finalize(() => {
@@ -183,10 +184,10 @@ export class KrsComponent extends AppComponentBase implements OnInit {
 
   print(type) {
     console.log("type----", type);
-    localStorage.setItem("sinim", this.nim);
-    localStorage.setItem("sismt", this.model.semester);
+    // localStorage.setItem("sinim", this.nim);
+    // localStorage.setItem("sismt", this.model.semester);
     if (type == 1) {
-      let link = "/print/krs";
+      let link = "/print/krs/" + this.nim + "/" + this.semester;
       this.router.navigate([]).then((result) => {
         window.open(link, "_blank");
       });

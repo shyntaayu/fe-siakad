@@ -28,10 +28,10 @@ export class PrintComponent implements OnInit {
     console.log(this._router.url);
     let urlArray = this._router.url.split("/");
     let a;
-    if (this.isNumber(urlArray[urlArray.length - 1])) {
-      a = urlArray[urlArray.length - 2];
+    if (this.isNumber(urlArray[urlArray.length - 2])) {
+      a = urlArray[urlArray.length - 3];
     } else {
-      a = urlArray[urlArray.length - 1];
+      a = urlArray[urlArray.length - 2];
     }
     this.title = a.replace("-", " ");
     console.log(this.title);

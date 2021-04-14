@@ -10,15 +10,15 @@ const routes: Routes = [
     path: "",
     // outlet: "print",
     component: PrintLayoutComponent,
-    canActivate: [AuthGuard],
-    data: { permission: "1" },
+    // canActivate: [AuthGuard],
+    // data: { permission: "1" },
     children: [
       {
         path: "presensi/:invoiceIds",
         component: ViewpresensiComponent,
       },
       {
-        path: "krs",
+        path: "krs/:nim/:semester",
         component: ViewKrsComponent,
       },
     ],

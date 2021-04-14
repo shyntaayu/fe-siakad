@@ -20,10 +20,6 @@ const routes: Routes = [
     // data: { preload: true }
   },
   {
-    path: "notfound",
-    component: NotfoundComponent,
-  },
-  {
     path: "",
     component: AdminLayoutComponent,
     children: [
@@ -35,6 +31,10 @@ const routes: Routes = [
       {
         path: "master",
         loadChildren: "./master/master.module#MasterModule",
+      },
+      {
+        path: "notfound",
+        component: NotfoundComponent,
       },
     ],
   },

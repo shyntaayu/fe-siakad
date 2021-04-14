@@ -1,4 +1,5 @@
 import { Component, Injector, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 import { AppConfig } from "app/model/app-config";
 import { KrsService } from "app/services/krs.service";
 import { finalize } from "rxjs/operators";
@@ -22,11 +23,14 @@ export class ViewKrsComponent extends AppComponentBase implements OnInit {
     private printService: PrintService,
     private krsService: KrsService,
     private appConfig: AppConfig,
-    injector: Injector
+    injector: Injector,
+    route: ActivatedRoute
   ) {
     super(injector);
-    this.nim = localStorage.getItem("sinim");
-    this.semester = localStorage.getItem("sismt");
+    // this.nim = localStorage.getItem("sinim");
+    // this.semester = localStorage.getItem("sismt");
+    this.nim = route.snapshot.params["nim"];
+    this.semester = route.snapshot.params["semester"];
   }
 
   ngOnInit() {
