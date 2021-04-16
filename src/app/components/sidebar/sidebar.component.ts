@@ -21,8 +21,8 @@ export const ROUTES: RouteInfo[] = [
     parent: "dashboard",
   },
   {
-    path: "/presensi",
-    title: "Presensi",
+    path: "/kartu-ujian",
+    title: "Kartu Ujian",
     icon: "list_alt",
     class: "",
     hidden: false,
@@ -152,7 +152,7 @@ export const ROUTES: RouteInfo[] = [
 
 export const menu: AppMenuItem[] = [
   new AppMenuItem("Dashboard", "1", "dashboard", "/dashboard"),
-  new AppMenuItem("Presensi", "1", "list_alt", "/presensi"),
+  new AppMenuItem("Kartu Ujian", "1", "list_alt", "/kartu-ujian"),
   new AppMenuItem("Rekap Presensi", "1", "folder_open", "/rekap-presensi"),
   new AppMenuItem("Input Nilai", "1", "create", "/input-nilai"),
   new AppMenuItem("Salinan Nilai", "1", "content_paste", "/salinan-nilai"),

@@ -1,12 +1,19 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Injector, OnInit } from "@angular/core";
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
 } from "@angular/forms";
-import { MessageService } from "primeng/api";
+import { Router } from "@angular/router";
+import { AppConfig } from "app/model/app-config";
+import { KrsService } from "app/services/krs.service";
+import { MahasiswaService } from "app/services/mahasiswa.service";
+import { PresensiService } from "app/services/presensi.service";
+import { MessageService, SelectItem } from "primeng/api";
 import { Observable } from "rxjs";
+import { finalize } from "rxjs/operators";
+import { AppComponentBase } from "shared/app-component-base";
 import { MainService } from "../main.service";
 import { Product } from "../model/product";
 interface Animal {
@@ -23,115 +30,169 @@ interface Food {
   templateUrl: "./presensi.component.html",
   styleUrls: ["./presensi.component.css"],
 })
-export class PresensiComponent implements OnInit {
+export class PresensiComponent extends AppComponentBase implements OnInit {
   profileForm: FormGroup;
-
-  animalControl = new FormControl("", Validators.required);
-  selectFormControl = new FormControl("", Validators.required);
-  animals: Animal[] = [
-    { name: "Dog", sound: "Woof!" },
-    { name: "Cat", sound: "Meow!" },
-    { name: "Cow", sound: "Moo!" },
-    { name: "Fox", sound: "Wa-pa-pa-pa-pa-pa-pow!" },
-  ];
-
+  options: string[] = ["One", "Two", "Three"];
   products: Product[];
-  first = 0;
-
-  rows = 10;
-  dosen;
-  semester = 8;
   selectedProduct2: Product;
+  products2: Product[];
+  clonedProducts: { [s: string]: Product } = {};
+  statuses: SelectItem[];
+  loading = false;
+  tahun;
+  semester;
+  prodi;
+  jenjang;
+  listMahasiswa;
+  loading1 = false;
+  loading2 = false;
+  model;
+  nim;
+  listPresensi = [];
+
   constructor(
+    private mahasiswaService: MahasiswaService,
+    private fb: FormBuilder,
     private productService: MainService,
     private messageService: MessageService,
-    private fb: FormBuilder
+    injector: Injector,
+    private appConfig: AppConfig,
+    private presensiService: PresensiService,
+    private router: Router
   ) {
+    super(injector);
     this.profileForm = this.fb.group({
-      dosen: ["", Validators.required],
+      jenjang: ["", Validators.required],
       semester: ["", Validators.required],
-      jam: ["", Validators.required],
-      tahun: ["", Validators.required],
+      // tahun: ["", Validators.required],
       jurusan: ["", Validators.required],
     });
   }
 
-  ngOnInit() {
-    this.productService.getProductsSmall().then((data) => {
-      this.products = data;
-      console.log(data);
-    });
-  }
-
-  selectProduct(product: Product) {
-    this.messageService.add({
-      severity: "info",
-      summary: "Product Selected",
-      detail: product.name,
-    });
-  }
+  ngOnInit(): void {}
 
   onRowSelect(event) {
+    console.log(event);
     this.messageService.add({
       severity: "info",
-      summary: "Product Selected",
-      detail: event.data.name,
+      summary: "Mahasiswa Selected",
+      detail: event.data.nama,
     });
+    this.nim = event.data.nim;
+    this.getMatkulByMhs(this.nim);
+  }
+
+  getMatkulByMhs(nim) {
+    this.loading2 = true;
+    this.presensiService
+      .getLaporanPresensi(
+        this.appConfig.jenisAplikasiString,
+        nim,
+        this.model.semester
+      )
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+          this.loading2 = false;
+        })
+      )
+      .subscribe(
+        (data) => {
+          this.listPresensi = data.result;
+          console.log(data);
+        },
+        (error) => {
+          console.log(error);
+          console.log(error.status);
+          this.showMessage("Eror!", error.message, "error");
+        }
+      );
   }
 
   onRowUnselect(event) {
     this.messageService.add({
       severity: "info",
       summary: "Product Unselected",
-      detail: event.data.name,
+      detail: event.data.nama,
     });
   }
 
-  next() {
-    this.first = this.first + this.rows;
+  onRowEditInit(product: Product) {
+    this.clonedProducts[product.id] = { ...product };
   }
 
-  prev() {
-    this.first = this.first - this.rows;
+  onRowEditSave(product: Product) {
+    if (product.price > 0) {
+      delete this.clonedProducts[product.id];
+      this.messageService.add({
+        severity: "success",
+        summary: "Success",
+        detail: "Product is updated",
+      });
+    } else {
+      this.messageService.add({
+        severity: "error",
+        summary: "Error",
+        detail: "Invalid Price",
+      });
+    }
   }
 
-  reset() {
-    this.first = 0;
+  onRowEditCancel(product: Product, index: number) {
+    this.products2[index] = this.clonedProducts[product.id];
+    delete this.clonedProducts[product.id];
   }
-
-  isLastPage(): boolean {
-    return this.products
-      ? this.first === this.products.length - this.rows
-      : true;
-  }
-
-  isFirstPage(): boolean {
-    return this.products ? this.first === 0 : true;
-  }
-  getDosen(event) {
-    console.log(event);
-  }
-  exe_selectedTermCodeChange(a) {
-    console.log(a);
-  }
-
   onSubmit() {
-    // TODO: Use EventEmitter with form value
     console.warn(this.profileForm.value);
+    this.model = this.profileForm.value;
+    this.getMahasiswa2();
   }
 
-  get f() {
-    return this.profileForm.controls;
+  getMahasiswa2() {
+    this.loading = true;
+    this.loading1 = true;
+    this.listPresensi = [];
+    this.mahasiswaService
+      .getMahasiswas2(
+        this.appConfig.jenisAplikasiString,
+        this.model.jenjang,
+        this.model.jurusan,
+        this.model.semester
+      )
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+          this.loading1 = false;
+        })
+      )
+      .subscribe(
+        (data) => {
+          this.listMahasiswa = data.result;
+          console.log(data);
+        },
+        (error) => {
+          console.log(error);
+          console.log(error.status);
+          this.showMessage("Eror!", error.message, "error");
+        }
+      );
   }
 
-  options: string[] = ["One", "Two", "Three"];
+  getNew(param) {
+    console.log(param);
+    if (this.model) this.model.semester = param;
+    if (this.nim) this.getMatkulByMhs(this.nim);
+  }
 
-  selectedValue: string;
-  selectedCar: string;
-
-  foods: Food[] = [
-    { value: "steak-0", viewValue: "Steak" },
-    { value: "pizza-1", viewValue: "Pizza" },
-    { value: "tacos-2", viewValue: "Tacos" },
-  ];
+  print(type) {
+    console.log("type----", type);
+    // localStorage.setItem("sinim", this.nim);
+    // localStorage.setItem("sismt", this.model.semester);
+    if (type == 1) {
+      let link = "/print/krs/" + this.nim + "/" + this.semester;
+      this.router.navigate([]).then((result) => {
+        window.open(link, "_blank");
+      });
+    }
+  }
 }

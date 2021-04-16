@@ -89,7 +89,7 @@ export const AdminLayoutRoutes: Routes = [
   },
   { path: "upgrade", component: UpgradeComponent, canActivate: [AuthGuard] },
   {
-    path: "presensi",
+    path: "kartu-ujian",
     component: PresensiComponent,
     canActivate: [AuthGuard],
     data: { permission: "1" },

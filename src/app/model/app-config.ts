@@ -3,6 +3,7 @@ export abstract class AppConfig {
   apiUrlUser: string;
   apiUrlMahasiswa: string;
   apiUrlKrs: string;
+  apiUrlPresensi: string;
   jenisAplikasi: number;
   jenisAplikasiString: string;
 }
