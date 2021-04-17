@@ -15,13 +15,13 @@ import { KrsService } from "app/services/krs.service";
 import { AppComponentBase } from "shared/app-component-base";
 const noop = () => {};
 @Component({
-  selector: "dosen-ddl",
+  selector: "kelas-ddl",
   template: `<div [busyIf]="isLoading">
     <mat-form-field class="example-full-width">
-      <mat-label>Dosen</mat-label>
+      <mat-label>Kelas</mat-label>
       <input
         type="text"
-        placeholder="Pilih Dosen"
+        placeholder="Pilih Kelas"
         aria-label="Number"
         matInput
         [matAutocomplete]="auto"
@@ -33,7 +33,10 @@ const noop = () => {};
         #auto="matAutocomplete"
         [displayWith]="displayFn.bind(this)"
       >
-        <mat-option *ngFor="let option of dosen" [value]="option.kode_dosen">
+        <mat-option
+          *ngFor="let option of kelas"
+          [value]="option.id_master_kelas"
+        >
           {{ option.nama }}
         </mat-option>
       </mat-autocomplete>
@@ -42,21 +45,21 @@ const noop = () => {};
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: DosenDdlComponent,
+      useExisting: KelasDdlComponent,
       multi: true,
     },
   ],
 })
-export class DosenDdlComponent
+export class KelasDdlComponent
   extends AppComponentBase
   implements OnInit, ControlValueAccessor {
   private innerValue: any = "";
-  dosen;
+  kelas;
 
   onChange: (value: string) => void;
 
   @Input() isDisabled: boolean = false;
-  @Input() selectedDosen: number = undefined;
+  @Input() selectedKelas: number = undefined;
 
   isLoading = false;
 
@@ -71,7 +74,7 @@ export class DosenDdlComponent
     self.isLoading = true;
     this._krsService.getAllKelas().subscribe(
       (result) => {
-        this.dosen = result;
+        this.kelas = result;
         self.isLoading = false;
       },
       (err) => {
@@ -83,7 +86,7 @@ export class DosenDdlComponent
   }
 
   ngOnChanges(): void {
-    this.selectedDosen = this.selectedDosen;
+    this.selectedKelas = this.selectedKelas;
   }
 
   get inputValue(): any {
@@ -113,7 +116,7 @@ export class DosenDdlComponent
 
   displayFn(value?: number) {
     return value
-      ? this.dosen.find((_) => _.kode_dosen === value).nama
+      ? this.kelas.find((_) => _.id_master_kelas === value).nama
       : undefined;
   }
 }

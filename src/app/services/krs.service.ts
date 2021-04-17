@@ -16,6 +16,9 @@ import { AppConfig } from "app/model/app-config";
 import { KrsResponse } from "app/model/krs-response";
 import { KrsPrintResponse } from "app/model/krs-print-response";
 import { KrsHeaderResponse } from "app/model/krs-header-response";
+import { Kelas } from "app/model/kelas";
+import { KrsDetail } from "app/model/krs-detail";
+import { PesertaByMatkul } from "app/model/pesertabymatkul";
 @Injectable({
   providedIn: "root",
 })
@@ -140,6 +143,71 @@ export class KrsService {
     params = params.append("nim", nim);
     return this.http.get<KrsHeaderResponse>(
       `${this.appConfig.apiUrlKrs}/krs/mahasiswa/header`,
+      {
+        params: params,
+      }
+    );
+  }
+
+  getAllKelas(): Observable<Kelas> {
+    return this.http.get<Kelas>(`${this.appConfig.apiUrlKrs}/dropdown/kelas`);
+  }
+
+  // http://localhost:1003/krs/detail?jenis_aplikasi=web&tahun_akademik=2020-2021&status_semester=2&id_master_jenjang=1&kode_prodi=K51&id_master_kelas=2
+  getKrsDetail(
+    jenis_aplikasi,
+    tahun_akademik,
+    status_semester,
+    id_master_jenjang,
+    kode_prodi,
+    id_master_kelas
+  ): Observable<KrsDetail> {
+    let params = new HttpParams();
+    params = params.append("jenis_aplikasi", jenis_aplikasi);
+    params = params.append("tahun_akademik", tahun_akademik);
+    params = params.append("status_semester", status_semester);
+    params = params.append("id_master_jenjang", id_master_jenjang);
+    params = params.append("kode_prodi", kode_prodi);
+    params = params.append("id_master_kelas", id_master_kelas);
+    return this.http.get<KrsDetail>(`${this.appConfig.apiUrlKrs}/krs/detail`, {
+      params: params,
+    });
+  }
+
+  // http://localhost:1003/krs/peserta?jenis_aplikasi=web&krs_id=7&tahun_akademik=2020-2021&status_semester=2&id_master_jenjang=1&kode_prodi=K51&id_master_kelas=2
+
+  getPesertaByMatkul(
+    jenis_aplikasi,
+    krs_id,
+    tahun_akademik,
+    status_semester,
+    id_master_jenjang,
+    kode_prodi,
+    id_master_kelas
+  ): Observable<PesertaByMatkul> {
+    let params = new HttpParams();
+    params = params.append("jenis_aplikasi", jenis_aplikasi);
+    params = params.append("krs_id", krs_id);
+    params = params.append("tahun_akademik", tahun_akademik);
+    params = params.append("status_semester", status_semester);
+    params = params.append("id_master_jenjang", id_master_jenjang);
+    params = params.append("kode_prodi", kode_prodi);
+    params = params.append("id_master_kelas", id_master_kelas);
+    return this.http.get<PesertaByMatkul>(
+      `${this.appConfig.apiUrlKrs}/krs/peserta`,
+      {
+        params: params,
+      }
+    );
+  }
+
+  // http://localhost:1003/krs/dosen/matkul?jenis_aplikasi=web&kode_matkul=Mkb0-3101
+  getDosenByMatkul(jenis_aplikasi, kode_matkul): Observable<PesertaByMatkul> {
+    let params = new HttpParams();
+    params = params.append("jenis_aplikasi", jenis_aplikasi);
+    params = params.append("kode_matkul", kode_matkul);
+    return this.http.get<PesertaByMatkul>(
+      `${this.appConfig.apiUrlKrs}/krs/dosen/matkul`,
       {
         params: params,
       }

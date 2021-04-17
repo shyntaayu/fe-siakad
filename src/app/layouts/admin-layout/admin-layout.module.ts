@@ -38,6 +38,7 @@ import { KrsService } from "app/services/krs.service";
 import { SweetAlert2Module } from "@sweetalert2/ngx-sweetalert2";
 import { MahasiswaService } from "app/services/mahasiswa.service";
 import { PresensiService } from "app/services/presensi.service";
+import { KartuUjianComponent } from "app/main/kartu-ujian/kartu-ujian.component";
 
 @NgModule({
   imports: [
@@ -77,6 +78,7 @@ import { PresensiService } from "app/services/presensi.service";
     SalinanNilaiComponent,
     KhsComponent,
     KrsComponent,
+    KartuUjianComponent,
   ],
   providers: [
     MainService,

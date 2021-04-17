@@ -15,6 +15,7 @@ import { RekapPresensiComponent } from "app/main/rekap-presensi/rekap-presensi.c
 import { PresensiComponent } from "app/main/presensi/presensi.component";
 import { AuthGuard } from "app/helpers/auth.guard";
 import { KrsComponent } from "app/main/krs/krs.component";
+import { KartuUjianComponent } from "app/main/kartu-ujian/kartu-ujian.component";
 
 export const AdminLayoutRoutes: Routes = [
   // {
@@ -90,7 +91,7 @@ export const AdminLayoutRoutes: Routes = [
   { path: "upgrade", component: UpgradeComponent, canActivate: [AuthGuard] },
   {
     path: "kartu-ujian",
-    component: PresensiComponent,
+    component: KartuUjianComponent,
     canActivate: [AuthGuard],
     data: { permission: "1" },
   },
@@ -121,6 +122,12 @@ export const AdminLayoutRoutes: Routes = [
   {
     path: "krs",
     component: KrsComponent,
+    canActivate: [AuthGuard],
+    data: { permission: "1" },
+  },
+  {
+    path: "presensi",
+    component: PresensiComponent,
     canActivate: [AuthGuard],
     data: { permission: "1" },
   },

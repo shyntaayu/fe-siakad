@@ -140,14 +140,22 @@ export const ROUTES: RouteInfo[] = [
     hidden: false,
     parent: "master",
   },
-  // {
-  //   path: "/master/dosen",
-  //   title: "Dosen",
-  //   icon: "group",
-  //   class: "",
-  //   hidden: false,
-  //   parent: "master",
-  // },
+  {
+    path: "/master/dosen",
+    title: "Dosen",
+    icon: "group",
+    class: "",
+    hidden: false,
+    parent: "master",
+  },
+  {
+    path: "/presensi",
+    title: "Presensi",
+    icon: "fact_check",
+    class: "",
+    hidden: false,
+    parent: "none",
+  },
 ];
 
 export const menu: AppMenuItem[] = [
@@ -158,6 +166,7 @@ export const menu: AppMenuItem[] = [
   new AppMenuItem("Salinan Nilai", "1", "content_paste", "/salinan-nilai"),
   new AppMenuItem("KHS", "1", "file_copy", "/khs"),
   new AppMenuItem("KRS", "1", "task_alt", "/krs"),
+  new AppMenuItem("Presensi", "1", "fact_check", "/presensi"),
   new AppMenuItem("Master", "1", "apps", "", [
     new AppMenuItem("User", "1", "badge", "/master/user"),
     new AppMenuItem("Role", "1", "lock", "/master/role"),

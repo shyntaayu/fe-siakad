@@ -15,26 +15,26 @@ import { KrsService } from "app/services/krs.service";
 import { AppComponentBase } from "shared/app-component-base";
 const noop = () => {};
 @Component({
-  selector: "dosen-ddl",
+  selector: "jenis-ddl",
   template: `<div [busyIf]="isLoading">
     <mat-form-field class="example-full-width">
-      <mat-label>Dosen</mat-label>
+      <mat-label>Jenis</mat-label>
       <input
         type="text"
-        placeholder="Pilih Dosen"
+        placeholder="Pilih jenis"
         aria-label="Number"
         matInput
         [matAutocomplete]="auto"
         [(ngModel)]="inputValue"
-        (optionSelected)="onChange($event.option.value)"
       />
       <mat-autocomplete
+        (optionSelected)="selectedSmt.emit(inputValue)"
         autoActiveFirstOption
         #auto="matAutocomplete"
         [displayWith]="displayFn.bind(this)"
       >
-        <mat-option *ngFor="let option of dosen" [value]="option.kode_dosen">
-          {{ option.nama }}
+        <mat-option *ngFor="let option of jenis" [value]="option.value">
+          {{ option.value }}
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>
@@ -42,21 +42,22 @@ const noop = () => {};
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: DosenDdlComponent,
+      useExisting: JenisDdlComponent,
       multi: true,
     },
   ],
 })
-export class DosenDdlComponent
+export class JenisDdlComponent
   extends AppComponentBase
   implements OnInit, ControlValueAccessor {
   private innerValue: any = "";
-  dosen;
+  jenis;
 
   onChange: (value: string) => void;
 
   @Input() isDisabled: boolean = false;
-  @Input() selectedDosen: number = undefined;
+  @Input() selectedJenis: number = undefined;
+  @Output() selectedSmt: EventEmitter<any> = new EventEmitter<any>();
 
   isLoading = false;
 
@@ -69,21 +70,25 @@ export class DosenDdlComponent
   ngOnInit(): void {
     let self = this;
     self.isLoading = true;
-    this._krsService.getAllKelas().subscribe(
-      (result) => {
-        this.dosen = result;
-        self.isLoading = false;
+    this.jenis = [
+      {
+        value: "Kelas",
       },
-      (err) => {
-        self.isLoading = false;
-        console.error(err);
-        this.showMessage("Eror!", err.message, "error");
-      }
-    );
+      {
+        value: "UTS",
+      },
+      {
+        value: "UAS",
+      },
+      {
+        value: "Praktikum",
+      },
+    ];
+    self.isLoading = false;
   }
 
   ngOnChanges(): void {
-    this.selectedDosen = this.selectedDosen;
+    this.selectedJenis = this.selectedJenis;
   }
 
   get inputValue(): any {
@@ -112,8 +117,6 @@ export class DosenDdlComponent
   }
 
   displayFn(value?: number) {
-    return value
-      ? this.dosen.find((_) => _.kode_dosen === value).nama
-      : undefined;
+    return value ? this.jenis.find((_) => _.value === value).value : undefined;
   }
 }

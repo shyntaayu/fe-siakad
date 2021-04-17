@@ -1,14 +1,9 @@
 import { Component, Injector, OnInit } from "@angular/core";
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { AppConfig } from "app/model/app-config";
-import { KrsService } from "app/services/krs.service";
 import { MahasiswaService } from "app/services/mahasiswa.service";
+import { PresensiService } from "app/services/presensi.service";
 import { MessageService, SelectItem } from "primeng/api";
 import { finalize } from "rxjs/operators";
 import { AppComponentBase } from "shared/app-component-base";
@@ -16,10 +11,11 @@ import { MainService } from "../main.service";
 import { Product } from "../model/product";
 
 @Component({
-  selector: "app-krs",
-  templateUrl: "./krs.component.html",
+  selector: "app-kartu-ujian",
+  templateUrl: "./kartu-ujian.component.html",
+  styleUrls: ["./kartu-ujian.component.css"],
 })
-export class KrsComponent extends AppComponentBase implements OnInit {
+export class KartuUjianComponent extends AppComponentBase implements OnInit {
   profileForm: FormGroup;
   options: string[] = ["One", "Two", "Three"];
   products: Product[];
@@ -37,8 +33,7 @@ export class KrsComponent extends AppComponentBase implements OnInit {
   loading2 = false;
   model;
   nim;
-  listMatkul = [];
-  kelas;
+  listPresensi = [];
 
   constructor(
     private mahasiswaService: MahasiswaService,
@@ -47,32 +42,19 @@ export class KrsComponent extends AppComponentBase implements OnInit {
     private messageService: MessageService,
     injector: Injector,
     private appConfig: AppConfig,
-    private krsService: KrsService,
+    private presensiService: PresensiService,
     private router: Router
   ) {
     super(injector);
     this.profileForm = this.fb.group({
       jenjang: ["", Validators.required],
       semester: ["", Validators.required],
-      kelas: ["", Validators.required],
+      // tahun: ["", Validators.required],
       jurusan: ["", Validators.required],
     });
   }
 
-  ngOnInit(): void {
-    this.productService.getProductsSmall().then((data) => {
-      this.products = data;
-      console.log(data);
-    });
-    this.productService
-      .getProductsSmall()
-      .then((data) => (this.products2 = data));
-    this.statuses = [
-      { label: "In Stock", value: "INSTOCK" },
-      { label: "Low Stock", value: "LOWSTOCK" },
-      { label: "Out of Stock", value: "OUTOFSTOCK" },
-    ];
-  }
+  ngOnInit(): void {}
 
   onRowSelect(event) {
     console.log(event);
@@ -87,8 +69,12 @@ export class KrsComponent extends AppComponentBase implements OnInit {
 
   getMatkulByMhs(nim) {
     this.loading2 = true;
-    this.krsService
-      .getKrs2(this.appConfig.jenisAplikasiString, nim, this.model.semester)
+    this.presensiService
+      .getLaporanPresensi(
+        this.appConfig.jenisAplikasiString,
+        nim,
+        this.model.semester
+      )
       .pipe(
         finalize(() => {
           this.loading = false;
@@ -97,7 +83,7 @@ export class KrsComponent extends AppComponentBase implements OnInit {
       )
       .subscribe(
         (data) => {
-          this.listMatkul = data.result;
+          this.listPresensi = data.result;
           console.log(data);
         },
         (error) => {
@@ -116,31 +102,6 @@ export class KrsComponent extends AppComponentBase implements OnInit {
     });
   }
 
-  onRowEditInit(product: Product) {
-    this.clonedProducts[product.id] = { ...product };
-  }
-
-  onRowEditSave(product: Product) {
-    if (product.price > 0) {
-      delete this.clonedProducts[product.id];
-      this.messageService.add({
-        severity: "success",
-        summary: "Success",
-        detail: "Product is updated",
-      });
-    } else {
-      this.messageService.add({
-        severity: "error",
-        summary: "Error",
-        detail: "Invalid Price",
-      });
-    }
-  }
-
-  onRowEditCancel(product: Product, index: number) {
-    this.products2[index] = this.clonedProducts[product.id];
-    delete this.clonedProducts[product.id];
-  }
   onSubmit() {
     console.warn(this.profileForm.value);
     this.model = this.profileForm.value;
@@ -150,7 +111,7 @@ export class KrsComponent extends AppComponentBase implements OnInit {
   getMahasiswa2() {
     this.loading = true;
     this.loading1 = true;
-    this.listMatkul = [];
+    this.listPresensi = [];
     this.mahasiswaService
       .getMahasiswas2(
         this.appConfig.jenisAplikasiString,

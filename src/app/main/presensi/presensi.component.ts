@@ -43,15 +43,18 @@ export class PresensiComponent extends AppComponentBase implements OnInit {
   semester;
   prodi;
   jenjang;
-  listMahasiswa;
   loading1 = false;
   loading2 = false;
   model;
   nim;
-  listPresensi = [];
+  listMahasiswa = [];
+  listMatkul = [];
+  jenis;
+  kelas;
+  krsid;
 
   constructor(
-    private mahasiswaService: MahasiswaService,
+    private krsService: KrsService,
     private fb: FormBuilder,
     private productService: MainService,
     private messageService: MessageService,
@@ -64,8 +67,10 @@ export class PresensiComponent extends AppComponentBase implements OnInit {
     this.profileForm = this.fb.group({
       jenjang: ["", Validators.required],
       semester: ["", Validators.required],
-      // tahun: ["", Validators.required],
+      jenis: ["", Validators.required],
       jurusan: ["", Validators.required],
+      tahun: ["", Validators.required],
+      kelas: ["", Validators.required],
     });
   }
 
@@ -75,20 +80,24 @@ export class PresensiComponent extends AppComponentBase implements OnInit {
     console.log(event);
     this.messageService.add({
       severity: "info",
-      summary: "Mahasiswa Selected",
-      detail: event.data.nama,
+      summary: "Mata Kuliah Selected",
+      detail: event.data.nama_matkul,
     });
-    this.nim = event.data.nim;
-    this.getMatkulByMhs(this.nim);
+    this.krsid = event.data.krs_id;
+    this.getMhsByMatkul();
   }
 
-  getMatkulByMhs(nim) {
+  getMhsByMatkul() {
     this.loading2 = true;
-    this.presensiService
-      .getLaporanPresensi(
+    this.krsService
+      .getPesertaByMatkul(
         this.appConfig.jenisAplikasiString,
-        nim,
-        this.model.semester
+        this.krsid,
+        this.model.tahun,
+        this.model.semester,
+        this.model.jenjang,
+        this.model.jurusan,
+        this.model.kelas
       )
       .pipe(
         finalize(() => {
@@ -98,7 +107,7 @@ export class PresensiComponent extends AppComponentBase implements OnInit {
       )
       .subscribe(
         (data) => {
-          this.listPresensi = data.result;
+          this.listMahasiswa = data.result;
           console.log(data);
         },
         (error) => {
@@ -145,19 +154,21 @@ export class PresensiComponent extends AppComponentBase implements OnInit {
   onSubmit() {
     console.warn(this.profileForm.value);
     this.model = this.profileForm.value;
-    this.getMahasiswa2();
+    this.getMatkul();
   }
 
-  getMahasiswa2() {
+  getMatkul() {
     this.loading = true;
     this.loading1 = true;
-    this.listPresensi = [];
-    this.mahasiswaService
-      .getMahasiswas2(
+    this.listMahasiswa = [];
+    this.krsService
+      .getKrsDetail(
         this.appConfig.jenisAplikasiString,
+        this.model.tahun,
+        this.model.semester,
         this.model.jenjang,
         this.model.jurusan,
-        this.model.semester
+        this.model.kelas
       )
       .pipe(
         finalize(() => {
@@ -167,7 +178,7 @@ export class PresensiComponent extends AppComponentBase implements OnInit {
       )
       .subscribe(
         (data) => {
-          this.listMahasiswa = data.result;
+          this.listMatkul = data.result;
           console.log(data);
         },
         (error) => {
@@ -181,7 +192,7 @@ export class PresensiComponent extends AppComponentBase implements OnInit {
   getNew(param) {
     console.log(param);
     if (this.model) this.model.semester = param;
-    if (this.nim) this.getMatkulByMhs(this.nim);
+    if (this.nim) this.getMhsByMatkul();
   }
 
   print(type) {
