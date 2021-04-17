@@ -77,10 +77,10 @@ export class PresensiComponent extends AppComponentBase implements OnInit {
     });
     this.secondForm = this.fb.group({
       dosen: ["", Validators.required],
-      // semester: ["", Validators.required],
-      // jenis: ["", Validators.required],
-      // jurusan: ["", Validators.required],
-      // tahun: ["", Validators.required],
+      sesi: [""],
+      ruangan: [""],
+      jammulai: [""],
+      jamselesai: [""],
       // kelas: ["", Validators.required],
     });
   }

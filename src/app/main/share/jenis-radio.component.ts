@@ -21,6 +21,7 @@ const noop = () => {};
       aria-labelledby="example-radio-group-label"
       class="example-radio-group"
       [(ngModel)]="inputValue"
+      color="primary"
     >
       <mat-radio-button
         class="example-radio-button"

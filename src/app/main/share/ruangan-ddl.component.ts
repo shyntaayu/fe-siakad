@@ -15,25 +15,25 @@ import { KrsService } from "app/services/krs.service";
 import { AppComponentBase } from "shared/app-component-base";
 const noop = () => {};
 @Component({
-  selector: "sesi-ddl",
+  selector: "ruangan-ddl",
   template: `<div [busyIf]="isLoading">
     <mat-form-field class="example-full-width">
-      <mat-label>Sesi</mat-label>
+      <mat-label>Ruangan</mat-label>
       <input
         type="text"
-        placeholder="Pilih Sesi"
+        placeholder="Pilih Ruangan"
         aria-label="Number"
         matInput
         [matAutocomplete]="auto"
         [(ngModel)]="inputValue"
+        (optionSelected)="onChange($event.option.value)"
       />
       <mat-autocomplete
-        (optionSelected)="selectedSesi.emit(inputValue)"
         autoActiveFirstOption
         #auto="matAutocomplete"
         [displayWith]="displayFn.bind(this)"
       >
-        <mat-option *ngFor="let option of sesi" [value]="option.value">
+        <mat-option *ngFor="let option of ruangan" [value]="option.ruangan_id">
           {{ option.nama }}
         </mat-option>
       </mat-autocomplete>
@@ -42,22 +42,21 @@ const noop = () => {};
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: SesiDdlComponent,
+      useExisting: RuanganDdlComponent,
       multi: true,
     },
   ],
 })
-export class SesiDdlComponent
+export class RuanganDdlComponent
   extends AppComponentBase
   implements OnInit, ControlValueAccessor {
   private innerValue: any = "";
-  sesi;
+  ruangan;
 
   onChange: (value: string) => void;
 
   @Input() isDisabled: boolean = false;
-  @Input() inputSesi: number = undefined;
-  @Output() selectedSesi: EventEmitter<any> = new EventEmitter<any>();
+  @Input() selectedRuangan: number = undefined;
 
   isLoading = false;
 
@@ -70,21 +69,21 @@ export class SesiDdlComponent
   ngOnInit(): void {
     let self = this;
     self.isLoading = true;
-    this.sesi = [
-      {
-        value: 1,
-        nama: "Sebelum UTS",
+    this._krsService.getAllRuangan().subscribe(
+      (result) => {
+        this.ruangan = result;
+        self.isLoading = false;
       },
-      {
-        value: 2,
-        nama: "Setelah UTS",
-      },
-    ];
-    self.isLoading = false;
+      (err) => {
+        self.isLoading = false;
+        console.error(err);
+        this.showMessage("Eror!", err.message, "error");
+      }
+    );
   }
 
   ngOnChanges(): void {
-    this.selectedSesi = this.selectedSesi;
+    this.selectedRuangan = this.selectedRuangan;
   }
 
   get inputValue(): any {
@@ -113,6 +112,8 @@ export class SesiDdlComponent
   }
 
   displayFn(value?: number) {
-    return value ? this.sesi.find((_) => _.value === value).nama : undefined;
+    return value
+      ? this.ruangan.find((_) => _.ruangan_id === value).nama
+      : undefined;
   }
 }

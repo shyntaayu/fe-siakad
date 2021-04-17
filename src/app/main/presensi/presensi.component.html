@@ -54,8 +54,32 @@
                                     </dosen-by-matkul-ddl>
                                 </div>
                             </div>
-                            <button mat-raised-button type="submit" class="btn btn-info pull-right"
-                                [disabled]="!secondForm.valid" [loading]="loading">Cari</button>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <sesi-ddl formControlName="sesi"></sesi-ddl>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <ruangan-ddl formControlName="ruangan"></ruangan-ddl>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-form-field">
+                                        <mat-label>Jam Mulai</mat-label>
+                                        <input matInput type="time" formControlName="jammulai">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-form-field">
+                                        <mat-label>Jam Selesai</mat-label>
+                                        <input matInput type="time" formControlName="jamselesai">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <!-- <button mat-raised-button type="submit" class="btn btn-info pull-right"
+                                [disabled]="!secondForm.valid" [loading]="loading">Cari</button> -->
                             <div class="clearfix"></div>
                         </form>
                     </div>
@@ -104,14 +128,6 @@
                                 </tr>
                             </ng-template>
                         </p-table>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12"> <button mat-raised-button type="button" class="btn btn-success pull-right"
-                            [disabled]="this.listMatkul.length==0" (click)="print(2)">Print Kartu UAS</button>
-                        <button mat-raised-button type="button" class="btn btn-warning pull-right"
-                            [disabled]="this.listMatkul.length==0" (click)="print(1)" style="margin-right: 1rem;">Print
-                            Kartu UTS</button>
                     </div>
                 </div>
             </div>
@@ -169,6 +185,27 @@
                 </div>
             </div>
         </div>
-
+        <div class="row" style="margin-top: -30px;">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="card card-stats">
+                    <div class="card-header card-header-danger card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">print</i>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="col-md-12"> <button mat-raised-button type="button" class="btn btn-success"
+                                [disabled]="this.listMahasiswa.length==0" (click)="print(2)"
+                                style="margin-right: 1rem;">Presensi</button>
+                            <button mat-raised-button type="button" class="btn btn-warning"
+                                [disabled]="this.listMahasiswa.length==0" (click)="print(1)"
+                                style="margin-right: 1rem;">Hadir Dosen</button>
+                            <button mat-raised-button type="button" class="btn btn-rose"
+                                [disabled]="this.listMahasiswa.length==0" (click)="print(1)">Berita Acara</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
