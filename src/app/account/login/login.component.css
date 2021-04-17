@@ -1,6 +1,6 @@
 .bg {
-  background: url(/assets/img/cover.jpeg) no-repeat no-repeat center center
-    fixed;
+  background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 1)),
+    url(/assets/img/cover.jpeg) no-repeat no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
