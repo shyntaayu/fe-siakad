@@ -19,6 +19,7 @@ import { KrsHeaderResponse } from "app/model/krs-header-response";
 import { Kelas } from "app/model/kelas";
 import { KrsDetail } from "app/model/krs-detail";
 import { PesertaByMatkul } from "app/model/pesertabymatkul";
+import { DosenByMatkul } from "app/model/dosen-by-matkul";
 @Injectable({
   providedIn: "root",
 })
@@ -202,11 +203,11 @@ export class KrsService {
   }
 
   // http://localhost:1003/krs/dosen/matkul?jenis_aplikasi=web&kode_matkul=Mkb0-3101
-  getDosenByMatkul(jenis_aplikasi, kode_matkul): Observable<PesertaByMatkul> {
+  getDosenByMatkul(jenis_aplikasi, kode_matkul): Observable<DosenByMatkul> {
     let params = new HttpParams();
     params = params.append("jenis_aplikasi", jenis_aplikasi);
     params = params.append("kode_matkul", kode_matkul);
-    return this.http.get<PesertaByMatkul>(
+    return this.http.get<DosenByMatkul>(
       `${this.appConfig.apiUrlKrs}/krs/dosen/matkul`,
       {
         params: params,

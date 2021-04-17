@@ -5,6 +5,7 @@ export interface KrsDetailResult {
   nama_matkul: string;
   sks: number;
   dosen_pengampu: string;
+  nip: string;
 }
 
 export interface KrsDetail {

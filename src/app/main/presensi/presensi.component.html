@@ -7,30 +7,29 @@
                         <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
                             <div class="row">
                                 <div class="col-md-4">
-                                    <tahun-ddl formControlName="tahun" [(ngModel)]="tahun">
+                                    <tahun-ddl formControlName="tahun">
                                     </tahun-ddl>
                                 </div>
                                 <div class="col-md-4">
-                                    <semester-ddl formControlName="semester" [(ngModel)]="semester">
+                                    <semester-ddl formControlName="semester">
                                     </semester-ddl>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4">
-                                    <jenjang-ddl formControlName="jenjang" [(ngModel)]="jenjang">
+                                    <jenjang-ddl formControlName="jenjang">
                                     </jenjang-ddl>
                                 </div>
                                 <div class="col-md-4">
-                                    <prodi-ddl formControlName="jurusan" [(ngModel)]="prodi" #hasMessage>
+                                    <prodi-ddl formControlName="jurusan">
                                     </prodi-ddl>
                                 </div>
                                 <div class="col-md-4">
-                                    <kelas-ddl formControlName="kelas" [(ngModel)]="kelas"
-                                        (selectedSmt)="getNew($event)">
+                                    <kelas-ddl formControlName="kelas" (selectedSmt)="getNew($event)">
                                     </kelas-ddl>
                                 </div>
                                 <div class="col-md-12">
-                                    <jenis-radio formControlName="jenis" [(ngModel)]="jenis">
+                                    <jenis-radio formControlName="jenis">
                                     </jenis-radio>
                                 </div>
                             </div>
@@ -47,41 +46,17 @@
             <div class="col-md-4">
                 <div class="card" [busyIf]="loading">
                     <div class="card-body">
-                        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-                            <!-- <div class="row">
-                                <div class="col-md-4">
-                                    <tahun-ddl formControlName="tahun" [(ngModel)]="tahun">
-                                    </tahun-ddl>
-                                </div>
-                                <div class="col-md-4">
-                                    <semester-ddl formControlName="semester" [(ngModel)]="semester">
-                                    </semester-ddl>
-                                </div>
-                            </div>
+                        <form [formGroup]="secondForm" (ngSubmit)="onSubmitSecond()">
                             <div class="row">
-                                <div class="col-md-4">
-                                    <jenjang-ddl formControlName="jenjang" [(ngModel)]="jenjang">
-                                    </jenjang-ddl>
-                                </div>
-                                <div class="col-md-4">
-                                    <prodi-ddl formControlName="jurusan" [(ngModel)]="prodi" #hasMessage>
-                                    </prodi-ddl>
-                                </div>
-                                <div class="col-md-4">
-                                    <kelas-ddl formControlName="kelas" [(ngModel)]="kelas"
-                                        (selectedSmt)="getNew($event)">
-                                    </kelas-ddl>
-                                </div>
-                                <div class="col-md-4">
-                                    <jenis-radio formControlName="jenis" [(ngModel)]="jenis">
-                                    </jenis-radio>
+                                <div class="col-md-12">
+                                    <dosen-by-matkul-ddl [kodeMatkul]="kode_matkul" [nip]="nip"
+                                        (selectedDosen)="getDosen($event)" formControlName="dosen">
+                                    </dosen-by-matkul-ddl>
                                 </div>
                             </div>
-
                             <button mat-raised-button type="submit" class="btn btn-info pull-right"
-                                [disabled]="!profileForm.valid" [loading]="loading">Cari</button>
-                            <div class="clearfix"></div> -->
-
+                                [disabled]="!secondForm.valid" [loading]="loading">Cari</button>
+                            <div class="clearfix"></div>
                         </form>
                     </div>
                 </div>

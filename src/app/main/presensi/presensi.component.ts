@@ -32,6 +32,7 @@ interface Food {
 })
 export class PresensiComponent extends AppComponentBase implements OnInit {
   profileForm: FormGroup;
+  secondForm: FormGroup;
   options: string[] = ["One", "Two", "Three"];
   products: Product[];
   selectedProduct2: Product;
@@ -52,6 +53,8 @@ export class PresensiComponent extends AppComponentBase implements OnInit {
   jenis;
   kelas;
   krsid;
+  kode_matkul;
+  nip;
 
   constructor(
     private krsService: KrsService,
@@ -72,6 +75,14 @@ export class PresensiComponent extends AppComponentBase implements OnInit {
       tahun: ["", Validators.required],
       kelas: ["", Validators.required],
     });
+    this.secondForm = this.fb.group({
+      dosen: ["", Validators.required],
+      // semester: ["", Validators.required],
+      // jenis: ["", Validators.required],
+      // jurusan: ["", Validators.required],
+      // tahun: ["", Validators.required],
+      // kelas: ["", Validators.required],
+    });
   }
 
   ngOnInit(): void {}
@@ -84,11 +95,13 @@ export class PresensiComponent extends AppComponentBase implements OnInit {
       detail: event.data.nama_matkul,
     });
     this.krsid = event.data.krs_id;
+    this.kode_matkul = event.data.kode_matkul;
+    this.nip = event.data.nip;
     this.getMhsByMatkul();
   }
 
   getMhsByMatkul() {
-    this.loading2 = true;
+    this.loading1 = true;
     this.krsService
       .getPesertaByMatkul(
         this.appConfig.jenisAplikasiString,
@@ -102,7 +115,7 @@ export class PresensiComponent extends AppComponentBase implements OnInit {
       .pipe(
         finalize(() => {
           this.loading = false;
-          this.loading2 = false;
+          this.loading1 = false;
         })
       )
       .subscribe(
@@ -159,7 +172,7 @@ export class PresensiComponent extends AppComponentBase implements OnInit {
 
   getMatkul() {
     this.loading = true;
-    this.loading1 = true;
+    this.loading2 = true;
     this.listMahasiswa = [];
     this.krsService
       .getKrsDetail(
@@ -173,7 +186,7 @@ export class PresensiComponent extends AppComponentBase implements OnInit {
       .pipe(
         finalize(() => {
           this.loading = false;
-          this.loading1 = false;
+          this.loading2 = false;
         })
       )
       .subscribe(
@@ -205,5 +218,8 @@ export class PresensiComponent extends AppComponentBase implements OnInit {
         window.open(link, "_blank");
       });
     }
+  }
+  getDosen(a) {
+    console.log("m111111", a);
   }
 }

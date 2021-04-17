@@ -16,7 +16,7 @@ import { KelasDdlComponent } from "./kelas-ddl.component";
 import { JenisDdlComponent } from "./jenis-ddl.component";
 import { JenisRadioComponent } from "./jenis-radio.component";
 import { MatRadioModule } from "@angular/material/radio";
-import { DosenDdlComponent } from "./dosen-ddl.component";
+import { DosenByMatkulDdlComponent } from "./dosen-by-matkul-ddl.component";
 
 @NgModule({
   imports: [
@@ -30,7 +30,7 @@ import { DosenDdlComponent } from "./dosen-ddl.component";
     MatRadioModule,
   ],
   declarations: [
-    DosenDdlComponent,
+    DosenByMatkulDdlComponent,
     ControlMessageComponent,
     FormControlStyleComponent,
     ProdiDdlComponent,
@@ -43,7 +43,7 @@ import { DosenDdlComponent } from "./dosen-ddl.component";
     JenisRadioComponent,
   ],
   exports: [
-    DosenDdlComponent,
+    DosenByMatkulDdlComponent,
     ControlMessageComponent,
     FormControlStyleComponent,
     ProdiDdlComponent,
