@@ -49,7 +49,7 @@ export class KhsComponent extends AppComponentBase implements OnInit {
     this.profileForm = this.fb.group({
       jenjang: ["", Validators.required],
       semester: ["", Validators.required],
-      // tahun: ["", Validators.required],
+      kelas: ["", Validators.required],
       jurusan: ["", Validators.required],
     });
   }
@@ -151,7 +151,8 @@ export class KhsComponent extends AppComponentBase implements OnInit {
         this.appConfig.jenisAplikasiString,
         this.model.jenjang,
         this.model.jurusan,
-        this.model.semester
+        this.model.semester,
+        this.model.kelas
       )
       .pipe(
         finalize(() => {

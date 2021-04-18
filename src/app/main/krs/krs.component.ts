@@ -156,7 +156,8 @@ export class KrsComponent extends AppComponentBase implements OnInit {
         this.appConfig.jenisAplikasiString,
         this.model.jenjang,
         this.model.jurusan,
-        this.model.semester
+        this.model.semester,
+        this.model.kelas
       )
       .pipe(
         finalize(() => {

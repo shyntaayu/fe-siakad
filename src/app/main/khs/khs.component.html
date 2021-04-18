@@ -15,17 +15,18 @@
                                     </prodi-ddl>
                                 </div>
                                 <div class="col-md-4">
+                                    <kelas-ddl formControlName="kelas" [(ngModel)]="kelas">
+                                    </kelas-ddl>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
                                     <smtangka-ddl formControlName="semester" [(ngModel)]="semester"
                                         (selectedSmt)="getNew($event)">
                                     </smtangka-ddl>
                                 </div>
                             </div>
-                            <!-- <div class="row">
-                                <div class="col-md-4">
-                                    <tahun-ddl formControlName="tahun" [(ngModel)]="tahun">
-                                    </tahun-ddl>
-                                </div>
-                            </div> -->
                             <button mat-raised-button type="submit" class="btn btn-warning pull-right"
                                 [disabled]="!profileForm.valid" [loading]="loading">Cari</button>
                             <div class="clearfix"></div>
