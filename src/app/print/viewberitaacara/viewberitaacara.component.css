@@ -1,7 +1,6 @@
 .invoice {
   page-break-after: always;
-  background-color: #fff !important;
-  height: 100%;
+  margin: 0px 113px;
 }
 
 .invoice:last-child {

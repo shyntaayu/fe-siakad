@@ -30,8 +30,11 @@ export class PrintComponent implements OnInit {
     let a;
     if (this.isNumber(urlArray[urlArray.length - 2])) {
       a = urlArray[urlArray.length - 3];
+    }
+    if (this.isNumber(urlArray[urlArray.length - 1])) {
+      a = urlArray[urlArray.length - 3];
     } else {
-      a = urlArray[urlArray.length - 2];
+      a = urlArray[urlArray.length - 1];
     }
     this.title = a.replace("-", " ");
     console.log(this.title);

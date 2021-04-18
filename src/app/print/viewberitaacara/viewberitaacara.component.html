@@ -1,192 +1,295 @@
 <div class="invoice" *ngIf="data">
     <!-- <h1>Invoice Num. {{ invoice }}</h1>
     Amount: {{ (invoiceDetails[i] | async)?.amount }} -->
-    <table align="center" border="0" width="900" style="BORDER-COLLAPSE:COLLAPSE; margin-top: 30px;">
-        <tbody>
-            <tr align="center">
-                <td rowspan="3" align="right"><img src="/assets/img/stimata.jpeg" height="120" width="90" alt="logo">
-                </td>
-                <td>
-                    <font size="4"><span style="font-weight: bold;"> SEKOLAH TINGGI MANAJEMEN INFORMATIKA DAN KOMPUTER
-                        </span></font>
-                </td>
-            </tr>
-            <tr align="center">
-                <td>
-                    <font size="6"><span style="font-weight: bold;"> STMIK PPKIA PRADNYA PARAMITA</span></font>
-                </td>
-            </tr>
-            <tr align="center">
-                <td>
-                    <font size="3">Jl. Laksda Adi Sucipto 249 A Malang 65141, Telp (0341) 412699, Fax (0341)
-                        412782<br>Official Website: www.stimata.ac.id</font>
-                </td>
-            </tr>
-        </tbody>
-    </table>
     <br>
-    <div style="text-align:center;">
-        <font size="6"><span style="font-weight: bold;">KARTU RENCANA STUDI</span></font>
-    </div>
-    <table border="0" align="center" *ngIf="header">
-        <tbody>
-            <tr>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td>
-                    <font size="3">Nama</font>
-                </td>
-                <td>:</td>
-                <td>
-                    <font size="3">{{header.nama}}</font>
-                </td>
-                <td width="70"> &nbsp; </td>
-                <td>
-                    <font size="3">Jenjang</font>
-                </td>
-                <td>:</td>
-                <td>
-                    <font size="3">{{header.jenjang}}</font>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <font size="3">NIM</font>
-                </td>
-                <td>:</td>
-                <td>
-                    <font size="3">{{header.nim}}</font>
-                </td>
-                <td> &nbsp; </td>
-                <td>
-                    <font size="3">Program Studi</font>
-                </td>
-                <td>:</td>
-                <td>
-                    <font size="3">{{header.prodi}}</font>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <font size="3">Semester</font>
-                </td>
-                <td>:</td>
-                <td>
-                    <font size="3">{{semester}}</font>
-                </td>
-                <td> &nbsp; </td>
-                <td>
-                    <font size="3">Dosen Wali</font>
-                </td>
-                <td>:</td>
-                <td>
-                    <font size="3">{{header.dosen}}</font>
-                </td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-            </tr>
-        </tbody>
-    </table>
-    <table border="1" style="BORDER-COLLAPSE:COLLAPSE;" align="center" cellpadding="3">
-        <tbody>
-            <tr align="center">
-                <td>
-                    <font size="3"><span style="font-weight: bold;">No.</span></font>
-                </td>
-                <td>
-                    <font size="3"><span style="font-weight: bold;">Kode MTK</span></font>
-                </td>
-                <td>
-                    <font size="3"><span style="font-weight: bold;">Mata Kuliah</span></font>
-                </td>
-                <td>
-                    <font size="3"><span style="font-weight: bold;">sks</span></font>
-                </td>
-                <td>
-                    <font size="3"><span style="font-weight: bold;">Status</span></font>
-                </td>
-                <td>
-                    <font size="3"><span style="font-weight: bold;">Wajib/Pilihan</span></font>
-                </td>
-            </tr>
-            <tr class="white" *ngFor="let a of data; let i = index">
-                <td align="center">
-                    <font size="2">{{i+1}}.</font>
-                </td>
-                <td>
-                    <font size="3">{{a.kode_matkul}}</font>
-                </td>
-                <td>
-                    <font size="3">{{a.nama}}</font>
-                </td>
-                <td align="center">
-                    <font size="2">{{a.sks}}</font>
-                </td>
-                <td align="center">
-                    <font size="2">{{setStatusMatkul(a.status_matkul)}}</font>
-                </td>
-                <td>
-                    <font size="3">{{a.status}}</font>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table border="0" style="BORDER-COLLAPSE:COLLAPSE;" align="center">
-        <tbody>
-            <tr>
-                <td>
-                    <font size="3">Total sks</font>
-                </td>
-                <td>:</td>
-                <td>
-                    <font size="3"><span style="font-weight: bold;">{{totalSks}}</span></font>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <br>
-    <table border="0" width="700" style="BORDER-COLLAPSE:COLLAPSE;" align="center" *ngIf="header">
-        <tbody>
-            <tr align="center">
-                <td width="400">&nbsp;</td>
-                <td witdh="200">&nbsp;</td>
-                <td witdh="100">
-                    <font size="3">Malang, {{current_date | date:('dd MMMM yyyy')}} </font>
-                </td>
-            </tr>
-            <tr>
-                <td width="300">
-                    <font size="3">
-                        <div style="text-align:center;">Dosen Penasehat Akademik</div>
-                    </font>
-                </td>
-                <td witdh="200">&nbsp;</td>
-                <td witdh="100">
-                    <font size="3">
-                        <div style="text-align:center;">Mahasiswa,</div>
-                    </font>
-                </td>
-            </tr>
-            <tr>
-                <td><br><br><br><br></td>
-            </tr>
-            <tr>
-                <td width="300">
-                    <font size="3">
-                        <div style="text-align:center;"><span style="font-weight: bold;">{{header.dosen}}</span>
-                        </div>
-                    </font>
-                </td>
-                <td witdh="200">&nbsp;</td>
-                <td witdh="100">
-                    <font size="3">
-                        <div style="text-align:center;"><span style="font-weight: bold;">{{header.nama}}</span>
-                        </div>
-                    </font>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <center>
+        <table border="1" style="BORDER-COLLAPSE:COLLAPSE;border-color:#000000;">
+            <tbody>
+                <tr>
+                    <td rowspan="2" width="90">
+                        <center> <img src="/assets/img/stimata.jpeg" height="90"> </center>
+                    </td>
+                    <td colspan="2">
+                        <center> STMIK PPKIA PRADNYA PARAMITA MALANG </center>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table border="0">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <font size="2">KODE Form</font>
+                                    </td>
+                                    <td> :</td>
+                                    <td>
+                                        <font size="2"> FM-BAAK-023</font>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <font size="2">REVISI</font>
+                                    </td>
+                                    <td>:</td>
+                                    <td>
+                                        <font size="2">00</font>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <font size="2">TANGGAL</font>
+                                    </td>
+                                    <td>:</td>
+                                    <td>
+                                        <font size="2"> 20 Juli 2010</font>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </center>
+    <center><br><span style="font-weight: bold;">BERITA ACARA</span><br>
+    </center>
+    <center>
+        <table border="0">
+            <tbody>
+                <tr>
+                    <td width="110">
+                        <font size="2">Program Studi</font>
+                    </td>
+                    <td>
+                        <font size="2">:</font>
+                    </td>
+                    <td width="300">
+                        <font size="2">S-1 Sistem Informasi B</font>
+                    </td>
+                    <td width="20">&nbsp;</td>
+                    <td width="190">
+                        <font size="2">Jumlah Peserta Terdaftar</font>
+                    </td>
+                    <td>
+                        <font size="2">:</font>
+                    </td>
+                    <td>
+                        <font size="2">9 </font>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <font size="2">Kode MTK / sks</font>
+                    </td>
+                    <td>
+                        <font size="2">:</font>
+                    </td>
+                    <td>
+                        <font size="2">MKB0-5137 / 2</font>
+                    </td>
+                    <td width="20">&nbsp;</td>
+                    <td>
+                        <font size="2">Jumlah Peserta Hadir</font>
+                    </td>
+                    <td>
+                        <font size="2">: </font>
+                    </td>
+                    <td>_____</td>
+                </tr>
+                <tr>
+                    <td>
+                        <font size="2">Matakuliah</font>
+                    </td>
+                    <td>
+                        <font size="2">:</font>
+                    </td>
+                    <td>
+                        <font size="2">PEMROGRAMAN WEB 1 </font>
+                    </td>
+                    <td width="20">&nbsp;</td>
+                    <td>
+                        <font size="2">Jumlah Peserta Tidak Hadir</font>
+                    </td>
+                    <td>
+                        <font size="2">: </font>
+                    </td>
+                    <td>_____</td>
+                </tr>
+            </tbody>
+        </table>
+    </center>
+    <center>
+        _________________________________________________________________________________________________________<br><br>
+        <center>
+            _________________________________________________________________________________________________________<br><br>
+            <center>
+                _________________________________________________________________________________________________________<br><br>
+                <center>
+                    <table border="1" style="BORDER-COLLAPSE:COLLAPSE;border-color:#000000;">
+                        <tbody>
+                            <tr>
+                                <td colspan="5">
+                                    <font size="2">
+                                        <center>DATA PELANGGARAN / KECURANGAN <br> PELAKSANAAN UJIAN </center>
+                                    </font>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="30" height="30">
+                                    <font size="2">
+                                        <center>NO</center>
+                                    </font>
+                                </td>
+                                <td width="100">
+                                    <font size="2">
+                                        <center>NIM</center>
+                                    </font>
+                                </td>
+                                <td width="200">
+                                    <font size="2">
+                                        <center>NAMA</center>
+                                    </font>
+                                </td>
+                                <td width="250">
+                                    <font size="2">
+                                        <center>BENTUK PELANGGARAN</center>
+                                    </font>
+                                </td>
+                                <td width="100">
+                                    <font size="2">
+                                        <center>KETERANGAN</center>
+                                    </font>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="30">
+                                    <font size="2">
+                                        <center>1.</center>
+                                    </font>
+                                </td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td height="30">
+                                    <font size="2">
+                                        <center>2.</center>
+                                    </font>
+                                </td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td height="30">
+                                    <font size="2">
+                                        <center>3.</center>
+                                    </font>
+                                </td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td height="30">
+                                    <font size="2">
+                                        <center>4.</center>
+                                    </font>
+                                </td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td height="30">
+                                    <font size="2">
+                                        <center>5.</center>
+                                    </font>
+                                </td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </center>
+                <center>
+                    <table border="0">
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <font size="2">
+                                        <center>Malang, ____________________</center>
+                                    </font>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <center>(.................................)</center>
+                                </td>
+                                <td></td>
+                                <td>
+                                    <center>(.................................)</center>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <font size="2">
+                                        <center>Mengetahui</center>
+                                    </font>
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <font size="2">
+                                        <center>Andri Prasetyo, S.E.,MMSI</center>
+                                    </font>
+                                </td>
+                                <td></td>
+                                <td>
+                                    <font size="2">
+                                        <center>Evy Sophia, S.Pd.,MMSI</center>
+                                    </font>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </center>
+                <p align="left">Pengawas ujian diwajibkan mengisi berita acara ini, apapun kejadian dalam pelaksanaan
+                    ujian tersebut.
+
+                </p>
+            </center>
+        </center>
+    </center>
 </div>

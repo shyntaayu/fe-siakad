@@ -1,189 +1,409 @@
 <div class="invoice" *ngFor="let invoice of invoiceIds; let i = index">
-    <!-- <h1>Invoice Num. {{ invoice }}</h1>
-    Amount: {{ (invoiceDetails[i] | async)?.amount }} -->
-    <div style="text-align:center;">
-        <font size="6"><span style="font-weight: bold;">KARTU RENCANA STUDI</span></font>
-    </div>
-    <table border="0" align="center">
-        <tbody>
-            <tr>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td>
-                    <font size="3">Nama</font>
-                </td>
-                <td>:</td>
-                <td>
-                    <font size="3">SHYNTA AYU DWI DARMAWAN</font>
-                </td>
-                <td width="70"> &nbsp; </td>
-                <td>
-                    <font size="3">Jenjang</font>
-                </td>
-                <td>:</td>
-                <td>
-                    <font size="3">S1</font>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <font size="3">NIM</font>
-                </td>
-                <td>:</td>
-                <td>
-                    <font size="3">17.51.0016</font>
-                </td>
-                <td> &nbsp; </td>
-                <td>
-                    <font size="3">Program Studi</font>
-                </td>
-                <td>:</td>
-                <td>
-                    <font size="3">S-1 SISTEM INFORMASI</font>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <font size="3">Semester</font>
-                </td>
-                <td>:</td>
-                <td>
-                    <font size="3">GENAP 2020-2021</font>
-                </td>
-                <td> &nbsp; </td>
-                <td>
-                    <font size="3">Dosen Wali</font>
-                </td>
-                <td>:</td>
-                <td>
-                    <font size="3">Nasrul Firdaus, S.Kom.,MMSI</font>
-                </td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-            </tr>
-        </tbody>
-    </table>
-    <table border="1" style="BORDER-COLLAPSE:COLLAPSE;" align="center" cellpadding="3">
-        <tbody>
-            <tr align="center">
-                <td>
-                    <font size="3"><span style="font-weight: bold;">No.</span></font>
-                </td>
-                <td>
-                    <font size="3"><span style="font-weight: bold;">Kode MTK</span></font>
-                </td>
-                <td>
-                    <font size="3"><span style="font-weight: bold;">Mata Kuliah</span></font>
-                </td>
-                <td>
-                    <font size="3"><span style="font-weight: bold;">sks</span></font>
-                </td>
-                <td>
-                    <font size="3"><span style="font-weight: bold;">Status</span></font>
-                </td>
-                <td>
-                    <font size="3"><span style="font-weight: bold;">Wajib/Pilihan</span></font>
-                </td>
-            </tr>
-            <tr class="white">
-                <td align="center">
-                    <font size="2">1.</font>
-                </td>
-                <td>
-                    <font size="3">MBB0-5101</font>
-                </td>
-                <td>
-                    <font size="3">Perilaku Dalam Berorganisasi</font>
-                </td>
-                <td align="center">
-                    <font size="2">2</font>
-                </td>
-                <td align="center">
-                    <font size="2">Baru</font>
-                </td>
-                <td>
-                    <font size="3">Wajib</font>
-                </td>
-            </tr>
-            <tr class="white">
-                <td align="center">
-                    <font size="2">2.</font>
-                </td>
-                <td>
-                    <font size="3">MPB0-5104</font>
-                </td>
-                <td>
-                    <font size="3">Skripsi</font>
-                </td>
-                <td align="center">
-                    <font size="2">4</font>
-                </td>
-                <td align="center">
-                    <font size="2">Baru</font>
-                </td>
-                <td>
-                    <font size="3">Wajib</font>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table border="0" style="BORDER-COLLAPSE:COLLAPSE;" align="center">
-        <tbody>
-            <tr>
-                <td>
-                    <font size="3">Total sks</font>
-                </td>
-                <td>:</td>
-                <td>
-                    <font size="3"><span style="font-weight: bold;">6</span></font>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <br>
-    <table border="0" width="700" style="BORDER-COLLAPSE:COLLAPSE;" align="center">
-        <tbody>
-            <tr align="center">
-                <td width="400">&nbsp;</td>
-                <td witdh="200">&nbsp;</td>
-                <td witdh="100">
-                    <font size="3">Malang, 03 April 2021 </font>
-                </td>
-            </tr>
-            <tr>
-                <td width="300">
-                    <font size="3">
-                        <div style="text-align:center;">Dosen Penasehat Akademik</div>
-                    </font>
-                </td>
-                <td witdh="200">&nbsp;</td>
-                <td witdh="100">
-                    <font size="3">
-                        <div style="text-align:center;">Mahasiswa,</div>
-                    </font>
-                </td>
-            </tr>
-            <tr>
-                <td><br><br><br><br></td>
-            </tr>
-            <tr>
-                <td width="300">
-                    <font size="3">
-                        <div style="text-align:center;"><span style="font-weight: bold;">Nasrul Firdaus,
-                                S.Kom.,MMSI</span>
-                        </div>
-                    </font>
-                </td>
-                <td witdh="200">&nbsp;</td>
-                <td witdh="100">
-                    <font size="3">
-                        <div style="text-align:center;"><span style="font-weight: bold;">SHYNTA AYU DWI DARMAWAN</span>
-                        </div>
-                    </font>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <center>
+        <table border="0">
+            <tbody>
+                <tr>
+                    <td rowspan="3">
+                        <center><img src="stmik.jpeg" height="80"></center>
+                    </td>
+                    <td width="50">&nbsp;</td>
+                    <td>
+                        <font size="4">
+                            <center><b>STMIK PPKIA PRADNYA PARAMITA MALANG</b></center>
+                        </font>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="50">&nbsp;</td>
+                    <td>
+                        <font size="2">
+                            <center>JL. LAKSDA ADI SUCIPTO 249 A MALANG, TELP (0341) 412699</center>
+                        </font>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="50">&nbsp;</td>
+                    <td>
+                        <font size="4">
+                            <center><b>PRESENSI KELAS</b></center>
+                        </font>
+                    </td>
+                </tr>
+            </tbody>
+        </table><br>
+        <center>
+            <table border="0">
+                <tbody>
+                    <tr>
+                        <td width="110">
+                            <font size="2">MATA KULIAH</font>
+                        </td>
+                        <td>:</td>
+                        <td width="365">
+                            <font size="2">JARINGAN KOMPUTER</font>
+                        </td>
+                        <td width="20">&nbsp;</td>
+                        <td width="85">
+                            <font size="2">SEMESTER</font>
+                        </td>
+                        <td>:</td>
+                        <td width="70">
+                            <font size="2">GENAP</font>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <font size="2">KODE MTK/sks</font>
+                        </td>
+                        <td>:</td>
+                        <td>
+                            <font size="2">MKB0-5118 / 3 sks</font>
+                        </td>
+                        <td>&nbsp;</td>
+                        <td>
+                            <font size="2">TAHUN</font>
+                        </td>
+                        <td>:</td>
+                        <td>
+                            <font size="2">2016/2017</font>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <font size="2">PROG. STUDI</font>
+                        </td>
+                        <td>:</td>
+                        <td>
+                            <font size="2">S-1 SISTEM INFORMASI B</font>
+                        </td>
+                        <td>&nbsp;</td>
+                        <td>
+                            <font size="2">TGL. CETAK</font>
+                        </td>
+                        <td>:</td>
+                        <td>
+                            <font size="2">17/04/2021</font>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table style="BORDER-COLLAPSE:COLLAPSE; BORDER-COLOR:BLACK;" border="1" cellpadding="0" cellspacing="0"
+                height="100">
+                <tbody>
+                    <tr height="25">
+                        <td rowspan="3" width="30">
+                            <center><b>
+                                    <font size="2">NO</font>
+                                </b></center>
+                        </td>
+                        <td rowspan="3" width="80">
+                            <center><b>
+                                    <font size="2">NIM</font>
+                                </b></center>
+                        </td>
+                        <td rowspan="3" width="250">
+                            <center><b>
+                                    <font size="2">NAMA MAHASISWA</font>
+                                </b></center>
+                        </td>
+                        <td colspan="8">
+                            <center><b>
+                                    <font size="2">TANDA TANGAN</font>
+                                </b></center>
+                        </td>
+                    </tr>
+                    <tr height="25">
+                        <td width="40">
+                            <font size="2">
+                                <center>MG-8</center>
+                            </font>
+                        </td>
+                        <td width="40">
+                            <font size="2">
+                                <center>MG-9</center>
+                            </font>
+                        </td>
+                        <td width="40">
+                            <font size="2">
+                                <center>MG-10</center>
+                            </font>
+                        </td>
+                        <td width="40">
+                            <font size="2">
+                                <center>MG-11</center>
+                            </font>
+                        </td>
+                        <td width="40">
+                            <font size="2">
+                                <center>MG-12</center>
+                            </font>
+                        </td>
+                        <td width="40">
+                            <font size="2">
+                                <center>MG-13</center>
+                            </font>
+                        </td>
+                        <td width="40">
+                            <font size="2">
+                                <center>MG-14</center>
+                            </font>
+                        </td>
+                        <td width="40">
+                            <font size="2">
+                                <center>UAS</center>
+                            </font>
+                        </td>
+                    </tr>
+                    <tr height="25">
+                        <td width="40">&nbsp;</td>
+                        <td width="40">&nbsp;</td>
+                        <td width="40">&nbsp;</td>
+                        <td width="40">&nbsp;</td>
+                        <td width="40">&nbsp;</td>
+                        <td width="40">&nbsp;</td>
+                        <td width="40">&nbsp;</td>
+                        <td width="40">&nbsp;</td>
+                    </tr>
+                    <tr height="30">
+                        <td>
+                            <center>
+                                <font size="2">1</font>
+                            </center>
+                        </td>
+                        <td>
+                            <center>
+                                <font size="2">14.51.0009</font>
+                            </center>
+                        </td>
+                        <td>
+                            <font size="2">&nbsp;ERICK SATIA</font>
+                        </td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr height="30">
+                        <td>
+                            <center>
+                                <font size="2">2</font>
+                            </center>
+                        </td>
+                        <td>
+                            <center>
+                                <font size="2">14.51.0022</font>
+                            </center>
+                        </td>
+                        <td>
+                            <font size="2">&nbsp;AJI MAULIDIO INDRA RUKMANA</font>
+                        </td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr height="30">
+                        <td>
+                            <center>
+                                <font size="2">3</font>
+                            </center>
+                        </td>
+                        <td>
+                            <center>
+                                <font size="2">15.51.0002</font>
+                            </center>
+                        </td>
+                        <td>
+                            <font size="2">&nbsp;MENTARI PUTRI FIRDAUSI</font>
+                        </td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr height="30">
+                        <td>
+                            <center>
+                                <font size="2">4</font>
+                            </center>
+                        </td>
+                        <td>
+                            <center>
+                                <font size="2">15.51.0009</font>
+                            </center>
+                        </td>
+                        <td>
+                            <font size="2">&nbsp;AHMAD SYARIF ROSIDY</font>
+                        </td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr height="30">
+                        <td>
+                            <center>
+                                <font size="2">5</font>
+                            </center>
+                        </td>
+                        <td>
+                            <center>
+                                <font size="2">15.51.0010</font>
+                            </center>
+                        </td>
+                        <td>
+                            <font size="2">&nbsp;EGA SETYA PUTRA</font>
+                        </td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr height="30">
+                        <td>
+                            <center>
+                                <font size="2">6</font>
+                            </center>
+                        </td>
+                        <td>
+                            <center>
+                                <font size="2">15.51.0029</font>
+                            </center>
+                        </td>
+                        <td>
+                            <font size="2">&nbsp;ACHMAD FIKRI ZULFIKAR</font>
+                        </td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr height="30">
+                        <td>
+                            <center>
+                                <font size="2">7</font>
+                            </center>
+                        </td>
+                        <td>
+                            <center>
+                                <font size="2">15.51.0031</font>
+                            </center>
+                        </td>
+                        <td>
+                            <font size="2">&nbsp;ABDUL CHAMID</font>
+                        </td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr height="30">
+                        <td>
+                            <center>
+                                <font size="2">8</font>
+                            </center>
+                        </td>
+                        <td>
+                            <center>
+                                <font size="2">15.51.0033</font>
+                            </center>
+                        </td>
+                        <td>
+                            <font size="2">&nbsp;SITI NUR KOIROH</font>
+                        </td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr height="30">
+                        <td>
+                            <center>
+                                <font size="2">9</font>
+                            </center>
+                        </td>
+                        <td>
+                            <center>
+                                <font size="2">15.51.0035</font>
+                            </center>
+                        </td>
+                        <td>
+                            <font size="2">&nbsp;HARI SUSANTO</font>
+                        </td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr height="30">
+                        <td colspan="3">
+                            <center>
+                                <font size="2">TANDA TANGAN DOSEN</font>
+                            </center>
+                        </td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr height="30">
+                        <td colspan="3">
+                            <center>
+                                <font size="2">JUMLAH HADIR</font>
+                            </center>
+                        </td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                </tbody>
+            </table>
+        </center>
+        <script language="JavaScript">window.print();</script>
+    </center>
 </div>
