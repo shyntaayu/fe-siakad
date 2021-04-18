@@ -3,6 +3,7 @@ import { Routes, RouterModule } from "@angular/router";
 import { AuthGuard } from "app/helpers/auth.guard";
 import { PrintLayoutComponent } from "./print-layout/print-layout.component";
 import { ViewBeritaAcaraComponent } from "./viewberitaacara/viewberitaacara.component";
+import { ViewKehadiranComponent } from "./viewkehadiran/viewkehadiran.component";
 import { ViewKhsComponent } from "./viewkhs/viewkhs.component";
 import { ViewKrsComponent } from "./viewkrs/viewkrs.component";
 import { ViewpresensiComponent } from "./viewpresensi-backup/viewpresensi.component";
@@ -40,6 +41,10 @@ const routes: Routes = [
       {
         path: "absensi",
         component: ViewPresensiKelasComponent,
+      },
+      {
+        path: "kehadiran",
+        component: ViewKehadiranComponent,
       },
     ],
   },
