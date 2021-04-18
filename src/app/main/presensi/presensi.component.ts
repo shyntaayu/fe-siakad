@@ -240,7 +240,7 @@ export class PresensiComponent extends AppComponentBase implements OnInit {
         window.open(link, "_blank");
       });
     }
-    if (type == 1) {
+    if (type == 3) {
       let link = "/print/berita-acara";
       this.router.navigate([]).then((result) => {
         window.open(link, "_blank");
