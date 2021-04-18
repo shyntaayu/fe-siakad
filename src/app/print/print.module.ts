@@ -11,6 +11,7 @@ import { ViewKrsComponent } from "./viewkrs/viewkrs.component";
 import { ViewKhsComponent } from "./viewkhs/viewkhs.component";
 import { ViewBeritaAcaraComponent } from "./viewberitaacara/viewberitaacara.component";
 import { ViewSalinanNilaiComponent } from "./viewsalinannilai/viewsalinannilai.component";
+import { ViewPresensiKelasComponent } from "./viewpresensi/viewpresensi.component";
 
 @NgModule({
   imports: [CommonModule, PrintRoutingModule, RouterModule],
@@ -22,6 +23,7 @@ import { ViewSalinanNilaiComponent } from "./viewsalinannilai/viewsalinannilai.c
     ViewKhsComponent,
     ViewBeritaAcaraComponent,
     ViewSalinanNilaiComponent,
+    ViewPresensiKelasComponent,
   ],
   exports: [
     ViewpresensiComponent,
@@ -31,6 +33,7 @@ import { ViewSalinanNilaiComponent } from "./viewsalinannilai/viewsalinannilai.c
     ViewKhsComponent,
     ViewBeritaAcaraComponent,
     ViewSalinanNilaiComponent,
+    ViewPresensiKelasComponent,
   ],
   providers: [PrintService],
   bootstrap: [PrintComponent],

@@ -56,7 +56,7 @@ a[data-toggle="collapse"][aria-expanded="true"] .caret {
     display: block;
   }
   button {
-    display: none;
+    display: none !important;
   }
 
   body {
