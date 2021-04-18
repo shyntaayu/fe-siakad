@@ -1,10 +1,34 @@
 <div class="invoice" *ngIf="data">
     <!-- <h1>Invoice Num. {{ invoice }}</h1>
     Amount: {{ (invoiceDetails[i] | async)?.amount }} -->
+    <table align="center" border="0" width="900" style="BORDER-COLLAPSE:COLLAPSE; margin-top: 30px;">
+        <tbody>
+            <tr align="center">
+                <td rowspan="3" align="right"><img src="/assets/img/stimata.jpeg" height="120" width="90" alt="logo">
+                </td>
+                <td>
+                    <font size="4"><span style="font-weight: bold;"> SEKOLAH TINGGI MANAJEMEN INFORMATIKA DAN KOMPUTER
+                        </span></font>
+                </td>
+            </tr>
+            <tr align="center">
+                <td>
+                    <font size="6"><span style="font-weight: bold;"> STMIK PPKIA PRADNYA PARAMITA</span></font>
+                </td>
+            </tr>
+            <tr align="center">
+                <td>
+                    <font size="3">JJL. LAKSDA ADI SUCIPTO 249 A MALANG, TELP (0341) 412699, FAX (0341) 412782<br>
+                    </font>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
     <div style="text-align:center;">
         <font size="6"><span style="font-weight: bold;">KARTU HASIL STUDI</span></font>
     </div>
-    <table border="0" align="center" *ngIf="header">
+    <table border="0" align="center" *ngIf="header" style="width: 100%;">
         <tbody>
             <tr>
                 <td>&nbsp;</td>
@@ -65,38 +89,38 @@
             </tr>
         </tbody>
     </table>
-    <table border="1" style="BORDER-COLLAPSE:COLLAPSE;" align="center" cellpadding="3">
+    <!-- <table border="1" style="BORDER-COLLAPSE:COLLAPSE;" align="center" cellpadding="3" style="width: 100%;">
         <tbody>
-            <tr align="center">
+            <tr align="center" height="30" class="silver">
                 <td>
-                    <font size="3"><span style="font-weight: bold;">No.</span></font>
+                    <font size="3">No.</font>
                 </td>
                 <td>
-                    <font size="3"><span style="font-weight: bold;">Kode MTK</span></font>
+                    <font size="3">Kode MTK</font>
                 </td>
                 <td>
-                    <font size="3"><span style="font-weight: bold;">Mata Kuliah</span></font>
+                    <font size="3">Mata Kuliah</font>
                 </td>
                 <td>
-                    <font size="3"><span style="font-weight: bold;">sks</span></font>
+                    <font size="3">sks</font>
                 </td>
                 <td>
-                    <font size="3"><span style="font-weight: bold;">Nilai</span></font>
+                    <font size="3">Nilai</font>
                 </td>
                 <td>
-                    <font size="3"><span style="font-weight: bold;">Indeks</span></font>
+                    <font size="3">Indeks</font>
                 </td>
                 <td>
-                    <font size="3"><span style="font-weight: bold;">Bobot</span></font>
+                    <font size="3">Bobot</font>
                 </td>
                 <td>
-                    <font size="3"><span style="font-weight: bold;">Predikat</span></font>
+                    <font size="3">Predikat</font>
                 </td>
                 <td>
-                    <font size="3"><span style="font-weight: bold;">Ket.</span></font>
+                    <font size="3">Ket.</font>
                 </td>
             </tr>
-            <tr class="white" *ngFor="let a of data; let i = index">
+            <tr class="white" *ngFor="let a of data; let i = index" height="30">
                 <td align="center">
                     <font size="2">{{i+1}}.</font>
                 </td>
@@ -126,8 +150,119 @@
                 </td>
             </tr>
         </tbody>
+    </table> -->
+    <table style="BORDER-COLLAPSE:COLLAPSE;" width="100%" frame="below" border="1">
+        <tbody>
+            <tr>
+                <td width="*"></td>
+            </tr>
+        </tbody>
     </table>
-    <table border="0" align="center" *ngIf="header">
+    <table style="BORDER-COLLAPSE:COLLAPSE;" frame="vsides" rules="cols" cellpadding="0" cellspacing="5" height="30"
+        width="100%" border="1">
+        <tbody>
+            <tr class="silver" height="30">
+                <td>
+                    <center>
+                        <font size="2">&nbsp;No&nbsp;</font>
+                    </center>
+                </td>
+                <td width="100">
+                    <center>
+                        <font size="2">Kode MTK</font>
+                    </center>
+                </td>
+                <td width="360">
+                    <center>
+                        <font size="2">Mata Kuliah</font>
+                    </center>
+                </td>
+                <td>
+                    <center>
+                        <font size="2">&nbsp;sks&nbsp;</font>
+                    </center>
+                </td>
+                <td>
+                    <center>
+                        <font size="2">&nbsp;Nilai&nbsp;</font>
+                    </center>
+                </td>
+                <td>
+                    <center>
+                        <font size="2">&nbsp;Indeks&nbsp;</font>
+                    </center>
+                </td>
+                <td>
+                    <center>
+                        <font size="2">&nbsp;Bobot&nbsp;</font>
+                    </center>
+                </td>
+                <td width="50">
+                    <center>
+                        <font size="2">&nbsp;Predikat&nbsp;</font>
+                    </center>
+                </td>
+                <td>
+                    <center>
+                        <font size="2">&nbsp;Ket.&nbsp;</font>
+                    </center>
+                </td>
+            </tr>
+            <tr height="30" *ngFor="let a of data; let i = index">
+                <td>
+                    <center>
+                        <font size="2">{{i+1}}</font>
+                    </center>
+                </td>
+                <td>
+                    <center>
+                        <font size="2">{{a.kode_matkul}}</font>
+                    </center>
+                </td>
+                <td>
+                    <font size="2">&nbsp;&nbsp;{{a.nama}}</font>
+                </td>
+                <td>
+                    <center>
+                        <font size="2">{{a.sks}}</font>
+                    </center>
+                </td>
+                <td>
+                    <center>
+                        <font size="2">{{a.sks}}</font>
+                    </center>
+                </td>
+                <td>
+                    <center>
+                        <font size="2">{{a.sks}}</font>
+                    </center>
+                </td>
+                <td>
+                    <center>
+                        <font size="2">{{a.sks}}</font>
+                    </center>
+                </td>
+                <td>
+                    <center>
+                        <font size="1">{{a.sks}}</font>
+                    </center>
+                </td>
+                <td>
+                    <center>
+                        <font size="1">&nbsp;{{setStatusMatkul(a.status_matkul)}}&nbsp;</font>
+                    </center>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table style="BORDER-COLLAPSE:COLLAPSE;" width="100%" frame="above" border="1">
+        <tbody>
+            <tr>
+                <td width="*"></td>
+            </tr>
+        </tbody>
+    </table>
+    <table border="0" align="center" *ngIf="header" style="width: 100%;">
         <tbody>
             <tr>
                 <td>&nbsp;</td>
@@ -189,23 +324,17 @@
         </tbody>
     </table>
     <br>
-    <table border="0" width="700" style="BORDER-COLLAPSE:COLLAPSE;" align="center" *ngIf="header">
+    <table border="0" width="700" style="BORDER-COLLAPSE:COLLAPSE;width: 100%;" align="center" *ngIf="header">
         <tbody>
             <tr align="left">
-                <td width="400">&nbsp;</td>
-                <td witdh="200">&nbsp;</td>
-                <td witdh="100">
+                <td width="70%">&nbsp;</td>
+                <td witdh="*">
                     <font size="3">Malang, {{current_date | date:('dd MMMM yyyy')}} </font>
                 </td>
             </tr>
             <tr>
-                <td width="300">
-                    <font size="3">
-                        <div style="text-align:center;"></div>
-                    </font>
-                </td>
-                <td witdh="100">&nbsp;</td>
-                <td witdh="200">
+                <td width="50%">&nbsp;</td>
+                <td witdh="*">
                     <font size="3">
                         <div style="text-align:left;">Ka. Prodi. {{header.jenjang}}-{{header.prodi}}</div>
                     </font>
@@ -215,16 +344,10 @@
                 <td><br><br><br><br></td>
             </tr>
             <tr>
-                <td width="300">
+                <td width="70%">&nbsp;</td>
+                <td witdh="*">
                     <font size="3">
-                        <div style="text-align:center;"><span style="font-weight: bold;"></span>
-                        </div>
-                    </font>
-                </td>
-                <td witdh="100">&nbsp;</td>
-                <td witdh="200">
-                    <font size="3">
-                        <div style="text-align:left;"><span style="font-weight: bold;">{{footer.nama_kaprodi}}</span>
+                        <div style="text-align:left;">{{footer.nama_kaprodi}}
                         </div>
                     </font>
                 </td>

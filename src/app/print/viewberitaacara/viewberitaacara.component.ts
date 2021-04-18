@@ -7,11 +7,13 @@ import { AppComponentBase } from "shared/app-component-base";
 import { PrintService } from "../print.service";
 
 @Component({
-  selector: "app-viewkrs",
-  templateUrl: "./viewkrs.component.html",
-  styleUrls: ["./viewkrs.component.css"],
+  selector: "app-viewberitaacara",
+  templateUrl: "./viewberitaacara.component.html",
+  styleUrls: ["./viewberitaacara.component.css"],
 })
-export class ViewKrsComponent extends AppComponentBase implements OnInit {
+export class ViewBeritaAcaraComponent
+  extends AppComponentBase
+  implements OnInit {
   data;
   nim;
   semester;

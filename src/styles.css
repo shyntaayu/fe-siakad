@@ -59,6 +59,10 @@ a[data-toggle="collapse"][aria-expanded="true"] .caret {
     display: none;
   }
 
+  body {
+    -webkit-print-color-adjust: exact !important;
+  }
+
   * {
     font-family: "Times New Roman", Times, serif;
     color: #000;
