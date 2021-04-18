@@ -6,6 +6,7 @@ import { ViewBeritaAcaraComponent } from "./viewberitaacara/viewberitaacara.comp
 import { ViewKehadiranComponent } from "./viewkehadiran/viewkehadiran.component";
 import { ViewKhsComponent } from "./viewkhs/viewkhs.component";
 import { ViewKrsComponent } from "./viewkrs/viewkrs.component";
+import { ViewKuasComponent } from "./viewkuas/viewkuas.component";
 import { ViewpresensiComponent } from "./viewpresensi-backup/viewpresensi.component";
 import { ViewPresensiKelasComponent } from "./viewpresensi/viewpresensi.component";
 import { ViewSalinanNilaiComponent } from "./viewsalinannilai/viewsalinannilai.component";
@@ -45,6 +46,10 @@ const routes: Routes = [
       {
         path: "kehadiran",
         component: ViewKehadiranComponent,
+      },
+      {
+        path: "kartu-uas",
+        component: ViewKuasComponent,
       },
     ],
   },
