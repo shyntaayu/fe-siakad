@@ -20,6 +20,22 @@ export class ViewPresensiKelasComponent
   current_date = Date.now();
   header;
   totalSks;
+  jenjang;
+  jurusan;
+  kelas;
+  key;
+  tahun_akademik;
+  matkul;
+  dosen;
+  dosenNew;
+  nama_matkul;
+  sks;
+  kode_matkul;
+  jenis;
+  title;
+  tipe;
+  sesi;
+  listMahasiswa;
 
   constructor(
     private printService: PrintService,
@@ -30,12 +46,39 @@ export class ViewPresensiKelasComponent
   ) {
     super(injector);
     // this.nim = localStorage.getItem("sinim");
-    // this.semester = localStorage.getItem("sismt");
-    this.nim = route.snapshot.params["nim"];
-    this.semester = route.snapshot.params["semester"];
+    this.matkul = JSON.parse(localStorage.getItem("simatkul"));
+    this.key = JSON.parse(localStorage.getItem("sikey"));
+    this.listMahasiswa = JSON.parse(localStorage.getItem("simahasiswa"));
+    this.sesi = +localStorage.getItem("sisesi");
+    this.getJenjang();
+    this.getJurusan();
+    this.tahun_akademik = this.key.tahun;
+    this.getKelas();
+    this.getSemester();
+    this.getMatkul();
+    this.jenis = this.key.jenis;
+    switch (this.jenis) {
+      case "Kelas":
+        this.title = "KELAS";
+        this.tipe = 1;
+        break;
+      case "Praktikum":
+        this.tipe = 2;
+        this.title = "UJIAN PRAKTIKUM";
+        break;
+      case "UTS":
+        this.title = "UJIAN TENGAH SEMESTER";
+        this.tipe = 3;
+        break;
+      case "UAS":
+        this.title = "UJIAN AKHIR SEMESTER";
+        this.tipe = 4;
+        break;
+    }
   }
 
   ngOnInit() {
+    // JSON.parse(localStorage.getItem('UploadSchedulerPrice'));
     this.krsService
       .getKrsBody(this.appConfig.jenisAplikasiString, this.nim, this.semester)
       .pipe(
@@ -72,5 +115,66 @@ export class ViewPresensiKelasComponent
           this.showMessage("Eror!", error.message, "error");
         }
       );
+  }
+
+  getJenjang() {
+    this.krsService.getAllJenjang().subscribe(
+      (result) => {
+        this.jenjang = result.result.find(
+          (_) => _.id_master_jenjang == this.key.jenjang
+        ).nama;
+      },
+      (err) => {
+        this.showMessage("Eror!", err.message, "error");
+      }
+    );
+  }
+
+  getJurusan() {
+    this.krsService.getAllProdi().subscribe(
+      (result) => {
+        this.jurusan = result.result.find(
+          (_) => _.kode_prodi == this.key.jurusan
+        ).nama;
+      },
+      (err) => {
+        this.showMessage("Eror!", err.message, "error");
+      }
+    );
+  }
+
+  getKelas() {
+    this.krsService.getAllKelas().subscribe(
+      (result) => {
+        this.kelas = result.result.find(
+          (_) => _.id_master_kelas == this.key.kelas
+        ).nama;
+      },
+      (err) => {
+        this.showMessage("Eror!", err.message, "error");
+      }
+    );
+  }
+  getSemester() {
+    this.krsService.getAllSemester().subscribe(
+      (result) => {
+        this.semester = result.result.find(
+          (_) => _.value == this.key.semester
+        ).nama;
+      },
+      (err) => {
+        this.showMessage("Eror!", err.message, "error");
+      }
+    );
+  }
+  getMatkul() {
+    this.dosen = this.matkul.dosen_pengampu;
+    this.dosenNew = localStorage.getItem("sidosennew");
+    if (this.dosenNew != "undefined" && this.dosenNew != undefined) {
+      this.dosen = this.dosenNew;
+    }
+    this.nama_matkul = this.matkul.nama_matkul;
+    this.kode_matkul = this.matkul.kode_matkul;
+    this.sks = this.matkul.sks;
   }
 }

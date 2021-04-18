@@ -74,7 +74,7 @@ export class KelasDdlComponent
     self.isLoading = true;
     this._krsService.getAllKelas().subscribe(
       (result) => {
-        this.kelas = result;
+        this.kelas = result.result;
         self.isLoading = false;
       },
       (err) => {

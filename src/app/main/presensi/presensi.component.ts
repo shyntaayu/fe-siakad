@@ -55,6 +55,14 @@ export class PresensiComponent extends AppComponentBase implements OnInit {
   krsid;
   kode_matkul;
   nip;
+  listDosen = [];
+  dosen;
+  sesi;
+  ruangan;
+  jammulai;
+  jamselesai;
+  selectedMatkul;
+  selectedDosenNew;
 
   constructor(
     private krsService: KrsService,
@@ -97,6 +105,7 @@ export class PresensiComponent extends AppComponentBase implements OnInit {
     this.krsid = event.data.krs_id;
     this.kode_matkul = event.data.kode_matkul;
     this.nip = event.data.nip;
+    this.selectedMatkul = event.data;
     this.getMhsByMatkul();
   }
 
@@ -210,10 +219,29 @@ export class PresensiComponent extends AppComponentBase implements OnInit {
 
   print(type) {
     console.log("type----", type);
-    // localStorage.setItem("sinim", this.nim);
-    // localStorage.setItem("sismt", this.model.semester);
+    localStorage.setItem("simatkul", JSON.stringify(this.selectedMatkul));
+    localStorage.setItem("sikey", JSON.stringify(this.model));
+    localStorage.setItem("sidosennew", this.selectedDosenNew);
+    localStorage.setItem("sisesi", this.sesi);
+    localStorage.setItem("siruangan", this.ruangan);
+    localStorage.setItem("sijammulai", this.jamselesai);
+    localStorage.setItem("sijamselesai", this.jammulai);
+    localStorage.setItem("simahasiswa", JSON.stringify(this.listMahasiswa));
+
     if (type == 1) {
-      let link = "/print/krs/" + this.nim + "/" + this.semester;
+      let link = "/print/absensi";
+      this.router.navigate([]).then((result) => {
+        window.open(link, "_blank");
+      });
+    }
+    if (type == 2) {
+      let link = "/print/kehadiran";
+      this.router.navigate([]).then((result) => {
+        window.open(link, "_blank");
+      });
+    }
+    if (type == 1) {
+      let link = "/print/berita-acara";
       this.router.navigate([]).then((result) => {
         window.open(link, "_blank");
       });
@@ -221,5 +249,24 @@ export class PresensiComponent extends AppComponentBase implements OnInit {
   }
   getDosen(a) {
     console.log("m111111", a);
+    this.krsService
+      .getDosenByMatkul(this.appConfig.jenisAplikasiString, this.kode_matkul)
+      .subscribe(
+        (data) => {
+          this.listDosen = data.result;
+          this.selectedDosenNew = this.listDosen.find((_) => _.nip === a).nama;
+        },
+        (err) => {
+          console.error(err);
+          this.showMessage("Eror!", err.message, "error");
+        }
+      );
+  }
+
+  modelChangeFn(value, field) {
+    // localStorage.setItem("si" + field, value);
+  }
+  getSemester(a) {
+    console.log("------", a);
   }
 }

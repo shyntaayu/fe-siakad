@@ -70,7 +70,7 @@ export class TahunDdlComponent
     self.isLoading = true;
     this._krsService.getAllTahun().subscribe(
       (result) => {
-        this.tahun = result;
+        this.tahun = result.result;
         self.isLoading = false;
       },
       (err) => {

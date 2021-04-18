@@ -11,7 +11,7 @@
                                     </tahun-ddl>
                                 </div>
                                 <div class="col-md-4">
-                                    <semester-ddl formControlName="semester">
+                                    <semester-ddl formControlName="semester" (selectedSemester2)="getSemester($event)">
                                     </semester-ddl>
                                 </div>
                             </div>
@@ -46,42 +46,44 @@
             <div class="col-md-4">
                 <div class="card" [busyIf]="loading">
                     <div class="card-body">
-                        <form [formGroup]="secondForm" (ngSubmit)="onSubmitSecond()">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <dosen-by-matkul-ddl [kodeMatkul]="kode_matkul" [nip]="nip"
-                                        (selectedDosen)="getDosen($event)" formControlName="dosen">
-                                    </dosen-by-matkul-ddl>
-                                </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <dosen-by-matkul-ddl [kodeMatkul]="kode_matkul" [nip]="nip"
+                                    (selectedDosen)="getDosen($event)" [(ngModel)]="dosen">
+                                </dosen-by-matkul-ddl>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <sesi-ddl formControlName="sesi"></sesi-ddl>
-                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <sesi-ddl [(ngModel)]="sesi" (ngModelChange)="modelChangeFn($event, 'sesi')">
+                                </sesi-ddl>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <ruangan-ddl formControlName="ruangan"></ruangan-ddl>
-                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <ruangan-ddl [(ngModel)]="ruangan" (ngModelChange)="modelChangeFn($event, 'ruangan')">
+                                </ruangan-ddl>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <mat-form-field class="example-form-field">
-                                        <mat-label>Jam Mulai</mat-label>
-                                        <input matInput type="time" formControlName="jammulai">
-                                    </mat-form-field>
-                                </div>
-                                <div class="col-md-6">
-                                    <mat-form-field class="example-form-field">
-                                        <mat-label>Jam Selesai</mat-label>
-                                        <input matInput type="time" formControlName="jamselesai">
-                                    </mat-form-field>
-                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <mat-form-field class="example-form-field">
+                                    <mat-label>Jam Mulai</mat-label>
+                                    <input matInput type="time" [(ngModel)]="jammulai"
+                                        (ngModelChange)="modelChangeFn($event,'jammulai')">
+                                </mat-form-field>
                             </div>
-                            <!-- <button mat-raised-button type="submit" class="btn btn-info pull-right"
+                            <div class="col-md-6">
+                                <mat-form-field class="example-form-field">
+                                    <mat-label>Jam Selesai</mat-label>
+                                    <input matInput type="time" [(ngModel)]="jamselesai"
+                                        (ngModelChange)="modelChangeFn($event, 'jamselesai')">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <!-- <button mat-raised-button type="submit" class="btn btn-info pull-right"
                                 [disabled]="!secondForm.valid" [loading]="loading">Cari</button> -->
-                            <div class="clearfix"></div>
-                        </form>
+                        <div class="clearfix"></div>
                     </div>
                 </div>
             </div>
@@ -195,13 +197,13 @@
                     </div>
                     <div class="card-body">
                         <div class="col-md-12"> <button mat-raised-button type="button" class="btn btn-success"
-                                [disabled]="this.listMahasiswa.length==0" (click)="print(2)"
+                                [disabled]="this.listMahasiswa.length==0" (click)="print(1)"
                                 style="margin-right: 1rem;">Presensi</button>
                             <button mat-raised-button type="button" class="btn btn-warning"
-                                [disabled]="this.listMahasiswa.length==0" (click)="print(1)"
+                                [disabled]="this.listMahasiswa.length==0" (click)="print(2)"
                                 style="margin-right: 1rem;">Hadir Dosen</button>
                             <button mat-raised-button type="button" class="btn btn-rose"
-                                [disabled]="this.listMahasiswa.length==0" (click)="print(1)">Berita Acara</button>
+                                [disabled]="this.listMahasiswa.length==0" (click)="print(3)">Berita Acara</button>
                         </div>
                     </div>
                 </div>

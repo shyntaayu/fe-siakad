@@ -33,7 +33,7 @@ const noop = () => {};
         #auto="matAutocomplete"
         [displayWith]="displayFn.bind(this)"
       >
-        <mat-option *ngFor="let option of ruangan" [value]="option.ruangan_id">
+        <mat-option *ngFor="let option of ruangan" [value]="option.nama">
           {{ option.nama }}
         </mat-option>
       </mat-autocomplete>
@@ -71,7 +71,7 @@ export class RuanganDdlComponent
     self.isLoading = true;
     this._krsService.getAllRuangan().subscribe(
       (result) => {
-        this.ruangan = result;
+        this.ruangan = result.result;
         self.isLoading = false;
       },
       (err) => {
@@ -112,8 +112,6 @@ export class RuanganDdlComponent
   }
 
   displayFn(value?: number) {
-    return value
-      ? this.ruangan.find((_) => _.ruangan_id === value).nama
-      : undefined;
+    return value ? this.ruangan.find((_) => _.nama === value).nama : undefined;
   }
 }

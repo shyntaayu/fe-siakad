@@ -71,7 +71,7 @@ export class SemesterDdlComponent
     self.isLoading = true;
     this._krsService.getAllSemester().subscribe(
       (result) => {
-        this.semester = result;
+        this.semester = result.result;
         self.isLoading = false;
       },
       (err) => {

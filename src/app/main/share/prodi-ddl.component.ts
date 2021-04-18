@@ -71,7 +71,7 @@ export class ProdiDdlComponent
     self.isLoading = true;
     this._krsService.getAllProdi().subscribe(
       (result) => {
-        this.prodi = result;
+        this.prodi = result.result;
         self.isLoading = false;
       },
       (err) => {

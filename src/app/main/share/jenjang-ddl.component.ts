@@ -74,7 +74,7 @@ export class JenjangDdlComponent
     self.isLoading = true;
     this._krsService.getAllJenjang().subscribe(
       (result) => {
-        this.jenjang = result;
+        this.jenjang = result.result;
         self.isLoading = false;
       },
       (err) => {
