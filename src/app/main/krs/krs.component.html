@@ -73,18 +73,18 @@
                                     </th>
                                     <th pSortableColumn="nama">Nama <p-sortIcon field="nama"></p-sortIcon>
                                     </th>
-                                    <th pSortableColumn="uts">UTS <p-sortIcon field="uts"></p-sortIcon>
+                                    <!-- <th pSortableColumn="uts">UTS <p-sortIcon field="uts"></p-sortIcon>
                                     </th>
                                     <th pSortableColumn="uas">UAS <p-sortIcon field="uas"></p-sortIcon>
-                                    </th>
+                                    </th> -->
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" let-mahasiswa>
                                 <tr [pSelectableRow]="mahasiswa">
                                     <td>{{mahasiswa.nim}}</td>
                                     <td>{{mahasiswa.nama}}</td>
-                                    <td>{{mahasiswa.uts}}</td>
-                                    <td>{{mahasiswa.uas}}</td>
+                                    <!-- <td>{{mahasiswa.uts}}</td>
+                                    <td>{{mahasiswa.uas}}</td> -->
                                 </tr>
                             </ng-template>
                         </p-table>

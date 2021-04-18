@@ -35,7 +35,7 @@
         <font size="5"><span style="font-weight: bold;">KARTU UJIAN TENGAH SEMESTER <br><br></span></font>
     </div>
     <center>
-        <table border="0" width="100%">
+        <table border="0" width="100%" *ngIf="header">
             <tbody>
                 <tr>
                     <td>
@@ -43,14 +43,14 @@
                     </td>
                     <td>:</td>
                     <td>
-                        <font size="2">Eka Yuniar</font>
+                        <font size="2">{{header.nama}}</font>
                     </td>
                     <td>
                         <font size="2">Jenjang</font>
                     </td>
                     <td>:</td>
                     <td>
-                        <font size="2">S-1</font>
+                        <font size="2">{{header.jenjang}}</font>
                     </td>
                 </tr>
                 <tr>
@@ -59,14 +59,14 @@
                     </td>
                     <td>:</td>
                     <td>
-                        <font size="2">10.51.0016</font>
+                        <font size="2">{{header.nim}}</font>
                     </td>
                     <td>
                         <font size="2">Program Studi</font>
                     </td>
                     <td>:</td>
                     <td>
-                        <font size="2">Sistem Informasi </font>
+                        <font size="2">{{header.prodi}} </font>
                     </td>
                 </tr>
                 <tr>
@@ -75,14 +75,14 @@
                     </td>
                     <td>:</td>
                     <td>
-                        <font size="2">Sujito, S.Kom., M.Pd.MMSI</font>
+                        <font size="2">{{header.dosen}}</font>
                     </td>
                     <td>
                         <font size="2">Semester/TA</font>
                     </td>
                     <td>:</td>
                     <td>
-                        <font size="2">Gasal &nbsp; 2010/2011</font>
+                        <font size="2">{{semester}} / {{tahun_akademik}}</font>
                     </td>
                 </tr>
             </tbody>
@@ -130,238 +130,28 @@
                             </center>
                         </td>
                     </tr>
-                    <tr height="30">
+                    <tr height="30" *ngFor="let a of data; let i = index">
                         <td>
                             <center>
-                                <font size="2">1</font>
+                                <font size="2">{{i+1}}</font>
                             </center>
                         </td>
                         <td>
                             <center>
-                                <font size="2">MKB0-5101</font>
+                                <font size="2">{{a.kode_matkul}}</font>
                             </center>
                         </td>
                         <td>
-                            <font size="2">Pengantar Teknologi Informasi</font>
+                            <font size="2">{{a.nama}}</font>
                         </td>
                         <td>
                             <center>
-                                <font size="2">3</font>
-                            </center>
-                        </td>
-                        <td>
-                            <center>
-                                <font size="2">Baru</font>
+                                <font size="2">{{a.sks}}</font>
                             </center>
                         </td>
                         <td>
                             <center>
-                                <font size="2">&nbsp;</font>
-                            </center>
-                        </td>
-                    </tr>
-                    <tr height="30">
-                        <td>
-                            <center>
-                                <font size="2">2</font>
-                            </center>
-                        </td>
-                        <td>
-                            <center>
-                                <font size="2">MKB0-5103</font>
-                            </center>
-                        </td>
-                        <td>
-                            <font size="2">Praktikum Paket Program Aplikasi</font>
-                        </td>
-                        <td>
-                            <center>
-                                <font size="2">1</font>
-                            </center>
-                        </td>
-                        <td>
-                            <center>
-                                <font size="2">Baru</font>
-                            </center>
-                        </td>
-                        <td>
-                            <center>
-                                <font size="2">&nbsp;</font>
-                            </center>
-                        </td>
-                    </tr>
-                    <tr height="30">
-                        <td>
-                            <center>
-                                <font size="2">3</font>
-                            </center>
-                        </td>
-                        <td>
-                            <center>
-                                <font size="2">MKB0-5126</font>
-                            </center>
-                        </td>
-                        <td>
-                            <font size="2">Paket Program Aplikasi</font>
-                        </td>
-                        <td>
-                            <center>
-                                <font size="2">2</font>
-                            </center>
-                        </td>
-                        <td>
-                            <center>
-                                <font size="2">Baru</font>
-                            </center>
-                        </td>
-                        <td>
-                            <center>
-                                <font size="2">&nbsp;</font>
-                            </center>
-                        </td>
-                    </tr>
-                    <tr height="30">
-                        <td>
-                            <center>
-                                <font size="2">4</font>
-                            </center>
-                        </td>
-                        <td>
-                            <center>
-                                <font size="2">MKK0-5101</font>
-                            </center>
-                        </td>
-                        <td>
-                            <font size="2">Logika Informatika</font>
-                        </td>
-                        <td>
-                            <center>
-                                <font size="2">3</font>
-                            </center>
-                        </td>
-                        <td>
-                            <center>
-                                <font size="2">Baru</font>
-                            </center>
-                        </td>
-                        <td>
-                            <center>
-                                <font size="2">&nbsp;</font>
-                            </center>
-                        </td>
-                    </tr>
-                    <tr height="30">
-                        <td>
-                            <center>
-                                <font size="2">5</font>
-                            </center>
-                        </td>
-                        <td>
-                            <center>
-                                <font size="2">MKK0-5102</font>
-                            </center>
-                        </td>
-                        <td>
-                            <font size="2">Manajemen Umum</font>
-                        </td>
-                        <td>
-                            <center>
-                                <font size="2">2</font>
-                            </center>
-                        </td>
-                        <td>
-                            <center>
-                                <font size="2">Baru</font>
-                            </center>
-                        </td>
-                        <td>
-                            <center>
-                                <font size="2">&nbsp;</font>
-                            </center>
-                        </td>
-                    </tr>
-                    <tr height="30">
-                        <td>
-                            <center>
-                                <font size="2">6</font>
-                            </center>
-                        </td>
-                        <td>
-                            <center>
-                                <font size="2">MKK0-5103</font>
-                            </center>
-                        </td>
-                        <td>
-                            <font size="2">Kalkulus</font>
-                        </td>
-                        <td>
-                            <center>
-                                <font size="2">2</font>
-                            </center>
-                        </td>
-                        <td>
-                            <center>
-                                <font size="2">Baru</font>
-                            </center>
-                        </td>
-                        <td>
-                            <center>
-                                <font size="2">&nbsp;</font>
-                            </center>
-                        </td>
-                    </tr>
-                    <tr height="30">
-                        <td>
-                            <center>
-                                <font size="2">7</font>
-                            </center>
-                        </td>
-                        <td>
-                            <center>
-                                <font size="2">MKK0-5107</font>
-                            </center>
-                        </td>
-                        <td>
-                            <font size="2">Statistik</font>
-                        </td>
-                        <td>
-                            <center>
-                                <font size="2">3</font>
-                            </center>
-                        </td>
-                        <td>
-                            <center>
-                                <font size="2">Baru</font>
-                            </center>
-                        </td>
-                        <td>
-                            <center>
-                                <font size="2">&nbsp;</font>
-                            </center>
-                        </td>
-                    </tr>
-                    <tr height="30">
-                        <td>
-                            <center>
-                                <font size="2">8</font>
-                            </center>
-                        </td>
-                        <td>
-                            <center>
-                                <font size="2">MPK0-5101</font>
-                            </center>
-                        </td>
-                        <td>
-                            <font size="2">Bahasa Inggris Profesi</font>
-                        </td>
-                        <td>
-                            <center>
-                                <font size="2">2</font>
-                            </center>
-                        </td>
-                        <td>
-                            <center>
-                                <font size="2">Baru</font>
+                                <font size="2">{{setStatusMatkul(a.status_matkul)}}</font>
                             </center>
                         </td>
                         <td>
@@ -384,57 +174,44 @@
             <table border="0" width="100%">
                 <tbody>
                     <tr>
-                        <td>
-                            <font size="2">&nbsp;<br><br></font>
-                        </td>
-                        <td>
-                            <font size="2">&nbsp;<br><br></font>
-                        </td>
-                        <td>
-                            <font size="2">&nbsp;<br><br></font>
-                        </td>
-                        <td>
-                            <font size="2">&nbsp;<br><br></font>
-                        </td>
-                        <td align="left" valign="top">
-                            <font size="2"><span style="font-weight: bold;">Total SKS: 18</span></font>
+                        <td align="center" valign="top">
+                            <font size="2"><span style="font-weight: bold;">Total SKS: {{totalSks}}</span></font>
                         </td>
                     </tr>
                     <tr></tr>
                 </tbody>
             </table>
-            <center>
-                <table border="0" width="100%">
-                    <tbody>
-                        <tr>
-                            <td width="500">&nbsp;</td>
-                            <td>
-                                <font size="2">Malang, 17/04/2021</font>
-                            </td>
-                        </tr>
-                        <tr>
-                        </tr>
-                        <tr>
-                            <td width="500">&nbsp;</td>
-                            <td>
-                                <font size="2">Koord. BAAK</font>
-                            </td>
-                        </tr>
-                        <tr>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td><img src="eka y.png" height="80"></td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>
-                                <font size="2">Eka Yuniar, S.Kom., MMSI</font>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </center>
+            <br>
+            <table border="0" width="100%">
+                <tbody>
+                    <tr>
+                        <td width="60%">&nbsp;</td>
+                        <td>
+                            <font size="2">Malang, {{current_date | date:('dd MMMM yyyy')}}</font>
+                        </td>
+                    </tr>
+                    <tr>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>
+                            <font size="2">Koord. BAAK</font>
+                        </td>
+                    </tr>
+                    <tr>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td><img src="eka y.png" height="80"></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>
+                            <font size="2">Eka Yuniar, S.Kom., MMSI</font>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </center>
     </center>
 </div>

@@ -18,6 +18,7 @@ export class ViewKutsComponent extends AppComponentBase implements OnInit {
   current_date = Date.now();
   header;
   totalSks;
+  tahun_akademik;
 
   constructor(
     private printService: PrintService,
@@ -60,6 +61,8 @@ export class ViewKutsComponent extends AppComponentBase implements OnInit {
       .subscribe(
         (data) => {
           this.data = data.result;
+          if (data.result.length > 0)
+            this.tahun_akademik = data.result[0].tahun_akademik;
           this.totalSks = this.data.reduce((total, num) => {
             return total + num.sks;
           }, 0);

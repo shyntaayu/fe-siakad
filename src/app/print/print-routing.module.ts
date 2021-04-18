@@ -49,11 +49,11 @@ const routes: Routes = [
         component: ViewKehadiranComponent,
       },
       {
-        path: "kartu-uas",
+        path: "kartu-uas/:nim/:semester",
         component: ViewKuasComponent,
       },
       {
-        path: "kartu-uts",
+        path: "kartu-uts/:nim/:semester",
         component: ViewKutsComponent,
       },
     ],

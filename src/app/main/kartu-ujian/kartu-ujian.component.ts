@@ -150,7 +150,13 @@ export class KartuUjianComponent extends AppComponentBase implements OnInit {
     // localStorage.setItem("sinim", this.nim);
     // localStorage.setItem("sismt", this.model.semester);
     if (type == 1) {
-      let link = "/print/krs/" + this.nim + "/" + this.semester;
+      let link = "/print/kartu-uts/" + this.nim + "/" + this.semester;
+      this.router.navigate([]).then((result) => {
+        window.open(link, "_blank");
+      });
+    }
+    if (type == 2) {
+      let link = "/print/kartu-uas/" + this.nim + "/" + this.semester;
       this.router.navigate([]).then((result) => {
         window.open(link, "_blank");
       });
