@@ -18,6 +18,22 @@ export class ViewKehadiranComponent extends AppComponentBase implements OnInit {
   current_date = Date.now();
   header;
   totalSks;
+  jenjang;
+  jurusan;
+  kelas;
+  key;
+  tahun_akademik;
+  matkul;
+  dosen;
+  dosenNew;
+  nama_matkul;
+  sks;
+  kode_matkul;
+  sesi;
+  jammulai;
+  jamselesai;
+  ruangan;
+  listTime = [];
 
   constructor(
     private printService: PrintService,
@@ -27,48 +43,87 @@ export class ViewKehadiranComponent extends AppComponentBase implements OnInit {
     route: ActivatedRoute
   ) {
     super(injector);
-    // this.nim = localStorage.getItem("sinim");
-    // this.semester = localStorage.getItem("sismt");
-    this.nim = route.snapshot.params["nim"];
-    this.semester = route.snapshot.params["semester"];
+    this.matkul = JSON.parse(localStorage.getItem("simatkul"));
+    this.key = JSON.parse(localStorage.getItem("sikey"));
+    this.sesi = +localStorage.getItem("sisesi");
+    this.jammulai = localStorage.getItem("sijammulai");
+    this.jamselesai = localStorage.getItem("sijamselesai");
+    this.ruangan = localStorage.getItem("siruangan");
+    this.getMatkul();
+    this.getJenjang();
+    this.getJurusan();
+    this.tahun_akademik = this.key.tahun;
+    this.getKelas();
+    this.getSemester();
   }
 
   ngOnInit() {
-    this.krsService
-      .getKrsBody(this.appConfig.jenisAplikasiString, this.nim, this.semester)
-      .pipe(
-        finalize(() => {
-          this.krsService
-            .getKrsHeader(this.nim)
-            .pipe(
-              finalize(() => {
-                // this.printService.onDataReady();
-              })
-            )
-            .subscribe(
-              (data) => {
-                this.header = data.result[0];
-                console.log(data);
-              },
-              (error) => {
-                console.log(error);
-                this.showMessage("Eror!", error.message, "error");
-              }
-            );
-        })
-      )
-      .subscribe(
-        (data) => {
-          this.data = data.result;
-          this.totalSks = this.data.reduce((total, num) => {
-            return total + num.sks;
-          }, 0);
-          console.log(data);
-        },
-        (error) => {
-          console.log(error);
-          this.showMessage("Eror!", error.message, "error");
-        }
-      );
+    if (this.sesi == 1) {
+      this.listTime = ["I", "II", "III", "IV", "V", "VI", "VII"];
+    } else {
+      this.listTime = ["VIII", "IX", "X", "XI", "XII", "XIII", "XIV"];
+    }
+  }
+
+  getMatkul() {
+    this.dosen = this.matkul.dosen_pengampu;
+    this.dosenNew = localStorage.getItem("sidosennew");
+    if (this.dosenNew != "undefined" && this.dosenNew != undefined) {
+      this.dosen = this.dosenNew;
+    }
+    this.nama_matkul = this.matkul.nama_matkul;
+    this.kode_matkul = this.matkul.kode_matkul;
+    this.sks = this.matkul.sks;
+  }
+
+  getJenjang() {
+    this.krsService.getAllJenjang().subscribe(
+      (result) => {
+        this.jenjang = result.result.find(
+          (_) => _.id_master_jenjang == this.key.jenjang
+        ).nama;
+      },
+      (err) => {
+        this.showMessage("Eror!", err.message, "error");
+      }
+    );
+  }
+
+  getJurusan() {
+    this.krsService.getAllProdi().subscribe(
+      (result) => {
+        this.jurusan = result.result.find(
+          (_) => _.kode_prodi == this.key.jurusan
+        ).nama;
+      },
+      (err) => {
+        this.showMessage("Eror!", err.message, "error");
+      }
+    );
+  }
+
+  getKelas() {
+    this.krsService.getAllKelas().subscribe(
+      (result) => {
+        this.kelas = result.result.find(
+          (_) => _.id_master_kelas == this.key.kelas
+        ).nama;
+      },
+      (err) => {
+        this.showMessage("Eror!", err.message, "error");
+      }
+    );
+  }
+  getSemester() {
+    this.krsService.getAllSemester().subscribe(
+      (result) => {
+        this.semester = result.result.find(
+          (_) => _.value == this.key.semester
+        ).nama;
+      },
+      (err) => {
+        this.showMessage("Eror!", err.message, "error");
+      }
+    );
   }
 }

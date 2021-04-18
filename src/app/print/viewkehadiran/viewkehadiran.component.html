@@ -1,4 +1,4 @@
-<div class="invoice" *ngIf="data">
+<div class="invoice" *ngIf="nama_matkul">
     <!-- <h1>Invoice Num. {{ invoice }}</h1>
     Amount: {{ (invoiceDetails[i] | async)?.amount }} -->
     <br>
@@ -71,7 +71,7 @@
                                 </td>
                                 <td>:</td>
                                 <td width="340">
-                                    <font size="2">Pemrograman Web 1</font>
+                                    <font size="2">{{nama_matkul}}</font>
                                 </td>
                                 <td>&nbsp;</td>
                                 <td width="100">
@@ -79,7 +79,7 @@
                                 </td>
                                 <td>:</td>
                                 <td>
-                                    <font size="2">Gasal</font>
+                                    <font size="2">{{semester}}</font>
                                 </td>
                             </tr>
                             <tr>
@@ -88,7 +88,7 @@
                                 </td>
                                 <td>:</td>
                                 <td>
-                                    <font size="2">MKB0-5137 / 2 sks</font>
+                                    <font size="2">{{kode_matkul}} / {{sks}} sks</font>
                                 </td>
                                 <td>&nbsp;</td>
                                 <td>
@@ -96,7 +96,7 @@
                                 </td>
                                 <td>:</td>
                                 <td>
-                                    <font size="2">2018/2019</font>
+                                    <font size="2">{{tahun_akademik}}</font>
                                 </td>
                             </tr>
                             <tr>
@@ -105,7 +105,7 @@
                                 </td>
                                 <td>:</td>
                                 <td>
-                                    <font size="2">Andri Prasetyo, S.E.,MMSI</font>
+                                    <font size="2">{{dosen}}</font>
                                 </td>
                                 <td>&nbsp;</td>
                                 <td>
@@ -113,7 +113,7 @@
                                 </td>
                                 <td>:</td>
                                 <td>
-                                    <font size="2">Lab. ApKom</font>
+                                    <font size="2">{{ruangan=='undefined'?'-':ruangan}}</font>
                                 </td>
                             </tr>
                             <tr>
@@ -122,7 +122,7 @@
                                 </td>
                                 <td>:</td>
                                 <td>
-                                    <font size="2">S-1 Sistem Informasi B</font>
+                                    <font size="2">{{jenjang}} {{jurusan}} {{kelas}}</font>
                                 </td>
                                 <td>&nbsp;</td>
                                 <td>
@@ -130,7 +130,9 @@
                                 </td>
                                 <td> : </td>
                                 <td>
-                                    <font size="2">17.50--19.30</font>
+                                    <font size="2">
+                                        {{jammulai=='undefined'?'-':jammulai}}--{{jamselesai=='undefined'?'-':jamselesai}}
+                                    </font>
                                 </td>
                             </tr>
                         </tbody>
@@ -197,100 +199,10 @@
                                     </center>
                                 </td>
                             </tr>
-                            <tr>
+                            <tr *ngFor="let a of listTime">
                                 <td height="80">
                                     <center>
-                                        <font size="2">VIII</font>
-                                    </center>
-                                </td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                            </tr>
-                            <tr>
-                                <td height="80">
-                                    <center>
-                                        <font size="2">IX</font>
-                                    </center>
-                                </td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                            </tr>
-                            <tr>
-                                <td height="80">
-                                    <center>
-                                        <font size="2">X</font>
-                                    </center>
-                                </td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                            </tr>
-                            <tr>
-                                <td height="80">
-                                    <center>
-                                        <font size="2">XI</font>
-                                    </center>
-                                </td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                            </tr>
-                            <tr>
-                                <td height="80">
-                                    <center>
-                                        <font size="2">XII</font>
-                                    </center>
-                                </td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                            </tr>
-                            <tr>
-                                <td height="80">
-                                    <center>
-                                        <font size="2">XIII</font>
-                                    </center>
-                                </td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                            </tr>
-                            <tr>
-                                <td height="80">
-                                    <center>
-                                        <font size="2">XIV</font>
+                                        <font size="2">{{a}}</font>
                                     </center>
                                 </td>
                                 <td>&nbsp;</td>
