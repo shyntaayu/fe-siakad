@@ -6,6 +6,7 @@ import { ViewBeritaAcaraComponent } from "./viewberitaacara/viewberitaacara.comp
 import { ViewKhsComponent } from "./viewkhs/viewkhs.component";
 import { ViewKrsComponent } from "./viewkrs/viewkrs.component";
 import { ViewpresensiComponent } from "./viewpresensi-backup/viewpresensi.component";
+import { ViewSalinanNilaiComponent } from "./viewsalinannilai/viewsalinannilai.component";
 
 const routes: Routes = [
   {
@@ -30,6 +31,10 @@ const routes: Routes = [
       {
         path: "beritaacara",
         component: ViewBeritaAcaraComponent,
+      },
+      {
+        path: "salinannilai",
+        component: ViewSalinanNilaiComponent,
       },
     ],
   },
