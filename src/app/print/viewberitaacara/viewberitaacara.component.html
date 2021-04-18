@@ -1,4 +1,4 @@
-<div class="invoice" *ngIf="data">
+<div class="invoice" *ngIf="nama_matkul">
     <!-- <h1>Invoice Num. {{ invoice }}</h1>
     Amount: {{ (invoiceDetails[i] | async)?.amount }} -->
     <br>
@@ -64,7 +64,7 @@
                         <font size="2">:</font>
                     </td>
                     <td width="300">
-                        <font size="2">S-1 Sistem Informasi B</font>
+                        <font size="2">{{jenjang}} {{jurusan}} {{kelas}}</font>
                     </td>
                     <td width="20">&nbsp;</td>
                     <td width="190">
@@ -74,7 +74,7 @@
                         <font size="2">:</font>
                     </td>
                     <td>
-                        <font size="2">9 </font>
+                        <font size="2">{{jmlMahasiswa}} </font>
                     </td>
                 </tr>
                 <tr>
@@ -85,7 +85,7 @@
                         <font size="2">:</font>
                     </td>
                     <td>
-                        <font size="2">MKB0-5137 / 2</font>
+                        <font size="2">{{kode_matkul}} / {{sks}}</font>
                     </td>
                     <td width="20">&nbsp;</td>
                     <td>
@@ -104,7 +104,7 @@
                         <font size="2">:</font>
                     </td>
                     <td>
-                        <font size="2">PEMROGRAMAN WEB 1 </font>
+                        <font size="2">{{nama_matkul}} </font>
                     </td>
                     <td width="20">&nbsp;</td>
                     <td>
