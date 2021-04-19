@@ -6,4 +6,5 @@ export abstract class AppConfig {
   apiUrlPresensi: string;
   jenisAplikasi: number;
   jenisAplikasiString: string;
+  apiUrlKhs: string;
 }

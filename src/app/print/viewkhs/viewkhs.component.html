@@ -81,7 +81,7 @@
                 </td>
                 <td>:</td>
                 <td>
-                    <font size="3">{{header.semester}}</font>
+                    <font size="3">{{semester}}</font>
                 </td>
             </tr>
             <tr>
@@ -220,7 +220,7 @@
                     </center>
                 </td>
                 <td>
-                    <font size="2">&nbsp;&nbsp;{{a.nama}}</font>
+                    <font size="2">&nbsp;&nbsp;{{a.nama_matkul}}</font>
                 </td>
                 <td>
                     <center>
@@ -229,22 +229,22 @@
                 </td>
                 <td>
                     <center>
-                        <font size="2">{{a.sks}}</font>
+                        <font size="2">{{a.nilai}}</font>
                     </center>
                 </td>
                 <td>
                     <center>
-                        <font size="2">{{a.sks}}</font>
+                        <font size="2">{{a.indeks}}</font>
                     </center>
                 </td>
                 <td>
                     <center>
-                        <font size="2">{{a.sks}}</font>
+                        <font size="2">{{a.bobot}}</font>
                     </center>
                 </td>
                 <td>
                     <center>
-                        <font size="1">{{a.sks}}</font>
+                        <font size="1">{{a.predikat}}</font>
                     </center>
                 </td>
                 <td>
@@ -262,7 +262,7 @@
             </tr>
         </tbody>
     </table>
-    <table border="0" align="center" *ngIf="header" style="width: 100%;">
+    <table border="0" align="center" *ngIf="other" style="width: 100%;">
         <tbody>
             <tr>
                 <td>&nbsp;</td>
@@ -273,7 +273,7 @@
                 </td>
                 <td>:</td>
                 <td>
-                    <font size="3">{{header.nama}}</font>
+                    <font size="3">{{other.total_bobot}}</font>
                 </td>
                 <td width="70"> &nbsp; </td>
                 <td>
@@ -281,7 +281,7 @@
                 </td>
                 <td>:</td>
                 <td>
-                    <font size="3">{{header.jenjang}}</font>
+                    <font size="3">{{other.ip}}</font>
                 </td>
             </tr>
             <tr>
@@ -290,7 +290,7 @@
                 </td>
                 <td>:</td>
                 <td>
-                    <font size="3">{{header.nim}}</font>
+                    <font size="3">{{other.total_sks}} sks</font>
                 </td>
                 <td> &nbsp; </td>
                 <td>
@@ -298,7 +298,7 @@
                 </td>
                 <td>:</td>
                 <td>
-                    <font size="3">{{header.prodi}}</font>
+                    <font size="3">{{other.ipk}}</font>
                 </td>
             </tr>
             <tr>
@@ -307,7 +307,7 @@
                 </td>
                 <td>:</td>
                 <td>
-                    <font size="3">{{header.dosen}}</font>
+                    <font size="3">{{other.totalTempuhSKS}} sks</font>
                 </td>
                 <td> &nbsp; </td>
                 <td>
@@ -315,7 +315,7 @@
                 </td>
                 <td>:</td>
                 <td>
-                    <font size="3">{{header.semester}}</font>
+                    <font size="3">{{beban}} sks</font>
                 </td>
             </tr>
             <tr>

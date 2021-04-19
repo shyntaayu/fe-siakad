@@ -1,6 +1,7 @@
 import { Component, Injector, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { AppConfig } from "app/model/app-config";
+import { KhsService } from "app/services/khs.service";
 import { KrsService } from "app/services/krs.service";
 import { finalize } from "rxjs/operators";
 import { AppComponentBase } from "shared/app-component-base";
@@ -19,10 +20,13 @@ export class ViewKhsComponent extends AppComponentBase implements OnInit {
   header;
   totalSks;
   footer;
+  other;
+  beban;
 
   constructor(
     private printService: PrintService,
-    private khsService: KrsService,
+    private krsService: KrsService,
+    private khsService: KhsService,
     private appConfig: AppConfig,
     injector: Injector,
     route: ActivatedRoute
@@ -36,10 +40,10 @@ export class ViewKhsComponent extends AppComponentBase implements OnInit {
 
   ngOnInit() {
     this.khsService
-      .getKrsBody(this.appConfig.jenisAplikasiString, this.nim, this.semester)
+      .getKhs(this.appConfig.jenisAplikasiString, this.nim, this.semester)
       .pipe(
         finalize(() => {
-          this.khsService
+          this.krsService
             .getKrsHeader(this.nim)
             .pipe(
               finalize(() => {
@@ -60,11 +64,14 @@ export class ViewKhsComponent extends AppComponentBase implements OnInit {
       )
       .subscribe(
         (data) => {
-          this.data = data.result;
-          this.footer = data.result[0];
-          this.totalSks = this.data.reduce((total, num) => {
-            return total + num.sks;
-          }, 0);
+          this.footer = data.list_khs[0];
+          this.totalSks = data.total_sks;
+          this.data = data.list_khs;
+          this.other = data;
+
+          if (data.ip <= 2) this.beban = 20;
+          else this.beban = 24;
+
           console.log(data);
         },
         (error) => {
