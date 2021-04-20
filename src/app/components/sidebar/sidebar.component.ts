@@ -160,13 +160,13 @@ export const ROUTES: RouteInfo[] = [
 
 export const menu: AppMenuItem[] = [
   new AppMenuItem("Dashboard", "1", "dashboard", "/dashboard"),
+  new AppMenuItem("KRS", "1", "task_alt", "/krs"),
   new AppMenuItem("Kartu Ujian", "1", "list_alt", "/kartu-ujian"),
+  new AppMenuItem("KHS", "1", "file_copy", "/khs"),
+  new AppMenuItem("Presensi", "1", "fact_check", "/presensi"),
   new AppMenuItem("Rekap Presensi", "1", "folder_open", "/rekap-presensi"),
   new AppMenuItem("Revisi Nilai", "1", "create", "/input-nilai"),
   new AppMenuItem("Salinan Nilai", "1", "content_paste", "/salinan-nilai"),
-  new AppMenuItem("KHS", "1", "file_copy", "/khs"),
-  new AppMenuItem("KRS", "1", "task_alt", "/krs"),
-  new AppMenuItem("Presensi", "1", "fact_check", "/presensi"),
   new AppMenuItem("Master", "1", "apps", "", [
     new AppMenuItem("User", "1", "badge", "/master/user"),
     new AppMenuItem("Role", "1", "lock", "/master/role"),
