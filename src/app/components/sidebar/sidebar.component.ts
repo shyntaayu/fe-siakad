@@ -54,6 +54,14 @@ export const ROUTES: RouteInfo[] = [
     parent: "none",
   },
   {
+    path: "/transkrip-nilai",
+    title: "Transkrip Nilai",
+    icon: "school",
+    class: "",
+    hidden: false,
+    parent: "none",
+  },
+  {
     path: "/khs",
     title: "KHS",
     icon: "file_copy",
@@ -168,6 +176,7 @@ export const menu: AppMenuItem[] = [
   new AppMenuItem("Rekap Presensi", "1", "folder_open", "/rekap-presensi"),
   new AppMenuItem("Revisi Nilai", "1", "create", "/input-nilai"),
   new AppMenuItem("Salinan Nilai", "1", "content_paste", "/salinan-nilai"),
+  new AppMenuItem("Transkrip Nilai", "1", "school", "/transkrip-nilai"),
   new AppMenuItem("Master", "1", "apps", "", [
     new AppMenuItem("User", "1", "badge", "/master/user"),
     new AppMenuItem("Role", "1", "lock", "/master/role"),

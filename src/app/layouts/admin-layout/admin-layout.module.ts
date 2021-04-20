@@ -41,6 +41,7 @@ import { PresensiService } from "app/services/presensi.service";
 import { KartuUjianComponent } from "app/main/kartu-ujian/kartu-ujian.component";
 import { KhsService } from "app/services/khs.service";
 import { MatIconModule } from "@angular/material/icon";
+import { TranskripNilaiComponent } from "app/main/transkrip-nilai/transkrip-nilai.component";
 
 @NgModule({
   imports: [
@@ -82,6 +83,7 @@ import { MatIconModule } from "@angular/material/icon";
     KhsComponent,
     KrsComponent,
     KartuUjianComponent,
+    TranskripNilaiComponent,
   ],
   providers: [
     MainService,

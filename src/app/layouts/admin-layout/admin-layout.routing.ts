@@ -16,6 +16,7 @@ import { PresensiComponent } from "app/main/presensi/presensi.component";
 import { AuthGuard } from "app/helpers/auth.guard";
 import { KrsComponent } from "app/main/krs/krs.component";
 import { KartuUjianComponent } from "app/main/kartu-ujian/kartu-ujian.component";
+import { TranskripNilaiComponent } from "app/main/transkrip-nilai/transkrip-nilai.component";
 
 export const AdminLayoutRoutes: Routes = [
   // {
@@ -128,6 +129,12 @@ export const AdminLayoutRoutes: Routes = [
   {
     path: "presensi",
     component: PresensiComponent,
+    canActivate: [AuthGuard],
+    data: { permission: "1" },
+  },
+  {
+    path: "transkrip-nilai",
+    component: TranskripNilaiComponent,
     canActivate: [AuthGuard],
     data: { permission: "1" },
   },
