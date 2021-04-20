@@ -118,7 +118,7 @@ export class UserComponent extends AppComponentBase implements OnInit {
     model.password = q.password;
     model.penginput = this.authenticationService.userValue["username"];
     model.role = q.role;
-    model.status = q.status;
+    model.statuslogin = q.status;
     model.username = q.username;
     model.login_id = this.user.login_id;
     if (this.type == 1) {
@@ -273,7 +273,7 @@ export class UserComponent extends AppComponentBase implements OnInit {
       this.fields[0].value = user.username;
       this.fields[1].value = user.password;
       this.fields[2].value = user.master_hak_akses_id.toString();
-      this.fields[3].value = user.status.toString();
+      this.fields[3].value = user.statuslogin.toString();
     } else {
       this.user = {};
       this.fields[0].value = undefined;

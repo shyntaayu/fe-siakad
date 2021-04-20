@@ -2,6 +2,7 @@ import { Component, Injector, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { AppConfig } from "app/model/app-config";
 import { KrsService } from "app/services/krs.service";
+import { PresensiService } from "app/services/presensi.service";
 import { finalize } from "rxjs/operators";
 import { AppComponentBase } from "shared/app-component-base";
 import { PrintService } from "../print.service";
@@ -19,10 +20,13 @@ export class ViewKuasComponent extends AppComponentBase implements OnInit {
   header;
   totalSks;
   tahun_akademik;
+  dataKrs;
+  loading = false;
 
   constructor(
     private printService: PrintService,
     private krsService: KrsService,
+    private presensiService: PresensiService,
     private appConfig: AppConfig,
     injector: Injector,
     route: ActivatedRoute
@@ -35,6 +39,7 @@ export class ViewKuasComponent extends AppComponentBase implements OnInit {
   }
 
   ngOnInit() {
+    this.loading = true;
     this.krsService
       .getKrsBody(this.appConfig.jenisAplikasiString, this.nim, this.semester)
       .pipe(
@@ -43,7 +48,42 @@ export class ViewKuasComponent extends AppComponentBase implements OnInit {
             .getKrsHeader(this.nim)
             .pipe(
               finalize(() => {
-                // this.printService.onDataReady();
+                this.presensiService
+                  .getLaporanPresensi(
+                    this.appConfig.jenisAplikasiString,
+                    this.nim,
+                    this.semester
+                  )
+                  .pipe(
+                    finalize(() => {
+                      this.loading = false;
+                      // this.printService.onDataReady();
+                    })
+                  )
+                  .subscribe(
+                    (data) => {
+                      data.result.map((list) => {
+                        let hadir = list.data_presensi.Hadir;
+                        let alpha = list.data_presensi.Alpha;
+                        console.log(alpha, hadir);
+                        let persen = ((hadir - alpha) / hadir) * 100;
+                        persen = isNaN(persen) ? 0 : persen;
+                        console.log(persen);
+                        let cekal = false;
+                        if (persen < 64) {
+                          cekal = true;
+                        }
+                        list["cekal"] = cekal;
+                        list["persen"] = persen;
+                      });
+                      this.data = data.result;
+                      console.log(data.result);
+                    },
+                    (error) => {
+                      console.log(error);
+                      this.showMessage("Eror!", error.message, "error");
+                    }
+                  );
               })
             )
             .subscribe(
@@ -60,10 +100,10 @@ export class ViewKuasComponent extends AppComponentBase implements OnInit {
       )
       .subscribe(
         (data) => {
-          this.data = data.result;
+          this.dataKrs = data.result;
           if (data.result.length > 0)
             this.tahun_akademik = data.result[0].tahun_akademik;
-          this.totalSks = this.data.reduce((total, num) => {
+          this.totalSks = this.dataKrs.reduce((total, num) => {
             return total + num.sks;
           }, 0);
           console.log(data);

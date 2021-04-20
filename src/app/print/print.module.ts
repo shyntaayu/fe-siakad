@@ -15,9 +15,10 @@ import { ViewPresensiKelasComponent } from "./viewpresensi/viewpresensi.componen
 import { ViewKehadiranComponent } from "./viewkehadiran/viewkehadiran.component";
 import { ViewKuasComponent } from "./viewkuas/viewkuas.component";
 import { ViewKutsComponent } from "./viewkuts/viewkuts.component";
+import { UtilsModule } from "shared/utils/utils.module";
 
 @NgModule({
-  imports: [CommonModule, PrintRoutingModule, RouterModule],
+  imports: [CommonModule, PrintRoutingModule, RouterModule, UtilsModule],
   declarations: [
     ViewpresensiComponent,
     PrintLayoutComponent,

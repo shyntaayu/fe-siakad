@@ -358,4 +358,9 @@ export abstract class AppComponentBase {
     ];
     return status.find((x) => x.value == a).name;
   }
+
+  setTahunMasuk(a) {
+    let angkatan = a.substr(0, 2);
+    return "20" + +angkatan + "-" + "20" + (+angkatan + 1);
+  }
 }

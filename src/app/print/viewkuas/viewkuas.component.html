@@ -1,8 +1,8 @@
-<div class="invoice" *ngIf="data">
+<div class="invoice" [busyIf]="loading">
     <!-- <h1>Invoice Num. {{ invoice }}</h1>
     Amount: {{ (invoiceDetails[i] | async)?.amount }} -->
     <br>
-    <table border="1" style="BORDER-COLLAPSE:COLLAPSE;" width="100%">
+    <table border="1" style="BORDER-COLLAPSE:COLLAPSE;" width="100%" *ngIf="data">
         <tbody>
             <tr>
                 <td rowspan="2">
@@ -211,11 +211,11 @@
                 </td>
                 <td>
                     <center>
-                        <font class="white" size="3">{{a.kode_matkul}}</font>
+                        <font class="white" size="3">{{a.kodematkul}}</font>
                     </center>
                 </td>
                 <td>
-                    <font class="white" size="3">{{a.nama}}</font>
+                    <font class="white" size="3">{{a.matakuliah}}</font>
                 </td>
                 <td>
                     <center>
@@ -224,7 +224,7 @@
                 </td>
                 <td>
                     <center>
-                        <font size="3">100 %</font>
+                        <font size="3">{{a.persen}} %</font>
                     </center>
                 </td>
                 <td>&nbsp;</td>
@@ -252,7 +252,9 @@
             <tr>
             </tr>
             <tr>
-                <td><img src="eka y.png" height="80"></td>
+                <td><br><br><br>
+                    <!-- <img src="eka y.png" height="80"> -->
+                </td>
             </tr>
             <tr>
                 <td>
