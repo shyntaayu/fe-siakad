@@ -16,6 +16,7 @@ import { ViewKehadiranComponent } from "./viewkehadiran/viewkehadiran.component"
 import { ViewKuasComponent } from "./viewkuas/viewkuas.component";
 import { ViewKutsComponent } from "./viewkuts/viewkuts.component";
 import { UtilsModule } from "shared/utils/utils.module";
+import { ViewTranskripNilaiComponent } from "./viewtranskripnilai/viewtranskripnilai.component";
 
 @NgModule({
   imports: [CommonModule, PrintRoutingModule, RouterModule, UtilsModule],
@@ -31,6 +32,7 @@ import { UtilsModule } from "shared/utils/utils.module";
     ViewKehadiranComponent,
     ViewKuasComponent,
     ViewKutsComponent,
+    ViewTranskripNilaiComponent,
   ],
   exports: [
     ViewpresensiComponent,
@@ -44,6 +46,7 @@ import { UtilsModule } from "shared/utils/utils.module";
     ViewKehadiranComponent,
     ViewKuasComponent,
     ViewKutsComponent,
+    ViewTranskripNilaiComponent,
   ],
   providers: [PrintService],
   bootstrap: [PrintComponent],

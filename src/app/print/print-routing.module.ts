@@ -11,6 +11,7 @@ import { ViewKutsComponent } from "./viewkuts/viewkuts.component";
 import { ViewpresensiComponent } from "./viewpresensi-backup/viewpresensi.component";
 import { ViewPresensiKelasComponent } from "./viewpresensi/viewpresensi.component";
 import { ViewSalinanNilaiComponent } from "./viewsalinannilai/viewsalinannilai.component";
+import { ViewTranskripNilaiComponent } from "./viewtranskripnilai/viewtranskripnilai.component";
 
 const routes: Routes = [
   {
@@ -55,6 +56,10 @@ const routes: Routes = [
       {
         path: "kartu-uts/:nim/:semester",
         component: ViewKutsComponent,
+      },
+      {
+        path: "transkrip-nilai/:nim",
+        component: ViewTranskripNilaiComponent,
       },
     ],
   },

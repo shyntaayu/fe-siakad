@@ -1,0 +1,322 @@
+<center>
+    <p>
+        <font size="3"><span style="font-weight: bold;">YAYASAN PRADNYA PARAMITHA<br>
+                SEKOLAH TINGGI MANAJEMEN INFORMATIKA DAN KOMPUTER<br>
+                PPKIA PRADNYA PARAMITA</span></font><br><br>
+        <font size="5"><u>TRANSKRIP AKADEMIK</u></font><br>
+        <font size="2">Lampiran Ijazah Nomor: 572012021000146</font> <br>
+        <font size="2">SK Pendirian Sekolah Tinggi nomor: 114/D/0/2000, tanggal 26 Juli 2000</font>
+    </p>
+</center>
+<center>
+    <table border="0" style="BORDER-COLLAPSE:COLLAPSE;" width="100%" *ngIf="mahasiswa">
+        <tbody>
+            <tr>
+                <td></td>
+                <td>
+                    <font size="2">Nama</font>
+                </td>
+                <td>:</td>
+                <td>
+                    <font size="2">{{mahasiswa.nama}}</font>
+                </td>
+                <td> &nbsp; </td>
+                <td>
+                    <font size="2">Jenjang/Program Studi</font>
+                </td>
+                <td>:</td>
+                <td>
+                    <font size="2">{{mahasiswa.jenjang}}/{{mahasiswa.prodi}}</font>
+                </td>
+            </tr>
+            <tr>
+                <td width="10"></td>
+                <td>
+                    <font size="2">NIM</font>
+                </td>
+                <td>:</td>
+                <td>
+                    <font size="2">{{nim}}</font>
+                </td>
+                <td>&nbsp;</td>
+                <td>
+                    <font size="2">Tahun Akademik Masuk</font>
+                </td>
+                <td>:</td>
+                <td>
+                    <font size="2">{{setTahunMasuk(nim)}}</font>
+                </td>
+            </tr>
+            <tr>
+                <td width="10"></td>
+                <td>
+                    <font size="2">Tempat, Tgl Lahir</font>
+                </td>
+                <td>:</td>
+                <td>
+                    <font size="2">{{mahasiswa.tempat_lahir}}, {{mahasiswa.tgl_lahir}}</font>
+                </td>
+                <td></td>
+
+                <td>
+                    <font size="2">Status</font>
+                </td>
+                <td>:</td>
+                <td>
+                    <font size="2">PINDAHAN</font>
+                </td>
+            </tr>
+
+            <tr>
+                <td width="10"></td>
+                <td>
+                    <font size="2">NIK</font>
+                </td>
+                <td>:</td>
+                <td>
+                    <font size="2">{{mahasiswa.nik}}</font>
+                </td>
+                <td></td>
+
+                <td>
+                    <font size="2">Tanggal Lulus</font>
+                </td>
+                <td>:</td>
+                <td>
+                    <font size="2">24 Februari 2021</font>
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+            </tr>
+        </tbody>
+    </table>
+</center>
+<table border="0" style="BORDER-COLLAPSE:COLLAPSE;" width="700">
+    <tbody>
+        <tr>
+            <td>
+                <font size="2">
+                    <font size="2"> Mahasiswa tersebut telah dinyatakan LULUS Strata 1 dengan Skripsi:</font>
+                </font>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <center>
+                    <font size="2"></font>
+                </center>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <font size="2">Adapun mata kuliah yang sudah ditempuh beserta nilainya sebagai berikut:</font>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+<table border="1" style="BORDER-COLLAPSE:COLLAPSE;" width="100%" align="center" frame="hsides" rules="rows">
+    <tbody>
+        <tr>
+            <td valign="top">
+                <table border="1" style="BORDER-COLLAPSE:COLLAPSE;" width="100%" align="center" frame="vsides"
+                    rules="cols">
+                    <tbody>
+                        <tr align="center" bgcolor="silver" valign="center">
+                            <td width="15" height="20">
+                                <font size="1">No.</font>
+                            </td>
+                            <td width="75">
+                                <font size="1">&nbsp;Kode MTK&nbsp;</font>
+                            </td>
+                            <td width="245">
+                                <font size="1" style="Times New Roman">&nbsp;Nama MTK&nbsp;</font>
+                            </td>
+                            <td width="17">
+                                <font size="1">&nbsp;sks&nbsp;</font>
+                            </td>
+                            <td width="21">
+                                <font size="1">&nbsp;Nilai&nbsp;</font>
+                            </td>
+                        </tr>
+                        <tr bgcolor="white" *ngFor="let a of dataLeft; let i = index">
+                            <td>
+                                <font size="1">&nbsp;{{i+1}}&nbsp;</font>
+                            </td>
+                            <td>
+                                <font size="1">
+                                    <center>{{a.kode_matkul}}</center>
+                                </font>
+                            </td>
+                            <td>
+                                <font size="1">&nbsp;{{a.nama}}&nbsp;</font>
+                            </td>
+                            <td align="center">
+                                <font size="1">&nbsp;{{a.sks}}&nbsp;</font>
+                            </td>
+                            <td>
+                                <font size="1">&nbsp;&nbsp;&nbsp;{{a.nilai}}&nbsp;</font>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+            <td valign="top">
+                <table border="1" style="BORDER-COLLAPSE:COLLAPSE;" width="100%" frame="vsides" rules="cols">
+                    <tbody>
+                        <tr align="center" bgcolor="silver" valign="center">
+                            <td width="15" height="20">
+                                <font size="1">No.</font>
+                            </td>
+                            <td width="75">
+                                <font size="1">&nbsp;Kode MTK&nbsp;</font>
+                            </td>
+                            <td width="245">
+                                <font size="1" style="Times New Roman">&nbsp;Nama MTK&nbsp;</font>
+                            </td>
+                            <td width="17">
+                                <font size="1">&nbsp;sks&nbsp;</font>
+                            </td>
+                            <td width="21">
+                                <font size="1">&nbsp;Nilai&nbsp;</font>
+                            </td>
+                        </tr>
+                        <tr bgcolor="white" *ngFor="let a of dataRight; let i = index">
+                            <td>
+                                <font size="1">&nbsp;{{i+1+half}}&nbsp;</font>
+                            </td>
+                            <td>
+                                <font size="1">
+                                    <center>{{a.kode_matkul}}</center>
+                                </font>
+                            </td>
+                            <td>
+                                <font size="1">&nbsp;{{a.nama}}&nbsp;</font>
+                            </td>
+                            <td align="center">
+                                <font size="1">&nbsp;{{a.sks}}&nbsp;</font>
+                            </td>
+                            <td>
+                                <font size="1">&nbsp;&nbsp;&nbsp;{{a.nilai}}&nbsp;</font>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+<table border="0" width="100%" style="BORDER-COLLAPSE:COLLAPSE" *ngIf="footer">
+    <tbody>
+        <tr>
+            <td></td>
+            <td width="24%">
+                <font size="2">Total sks yang telah ditempuh</font>
+            </td>
+            <td width="40%">
+                <font size="2">&nbsp;: {{footer.totalTempuhSKS}}</font>
+            </td>
+            <td>
+                <font size="2">Indeks Prestasi Kumulatif (IPK) : {{footer.ipk}}</font>
+            </td>
+        </tr>
+        <!-- <tr><td width="4%"></td><td width="23%"><font size="2">Total sks yang telah ditempuh</td><td width="37%"><font size="2">&nbsp;: 150<td><font size="2">Indeks Prestasi Kumulatif (IPK) : 2.89</td></tr> -->
+        <tr>
+            <td width="2%"></td>
+            <td>
+                <font size="2">Predikat kelulusan</font>
+            </td>
+            <td>
+                <font size="2">&nbsp;: Memuaskan</font>
+            </td>
+            <td>&nbsp;</td>
+        </tr>
+    </tbody>
+</table>
+
+
+<table border="0" width="100%" style="BORDER-COLLAPSE:COLLAPSE;">
+    <tbody>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td width="40%">
+                <font size="2">&nbsp;</font>
+            </td>
+            <td width="24%">
+                <font size="2">&nbsp;</font>
+            </td>
+            <td>
+                <font size="2">Malang, {{current_date | date:('dd MMMM yyyy')}}</font>
+            </td>
+        </tr>
+
+        <tr>
+            <td width="2%"></td>
+            <td>
+                <font size="2">Ketua,</font>
+            </td>
+            <td>
+                <font size="2">&nbsp;</font>
+            </td>
+            <td>
+                <font size="2">Ketua Program Studi,</font>
+            </td>
+        </tr>
+        <tr>
+            <td width="2%"></td>
+            <td>
+                <font size="2"></font>
+            </td>
+            <td>
+                <font size="2">&nbsp;</font>
+            </td>
+            <td>
+                <font size="2">&nbsp;</font>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr *ngIf="mahasiswa">
+            <td width="2%"></td>
+            <td>
+                <font size="2"><u><span style="font-weight: bold;">Dr. Tubagus Mohammad Akhriza, S.Si., MMSI.</span></u>
+                </font>
+            </td>
+            <td>
+                <font size="2">&nbsp;</font>
+            </td>
+            <td>
+                <font size="2"><u><span style="font-weight: bold;">{{mahasiswa.nama_kaprodi}}</span></u></font>
+            </td>
+        </tr>
+        <tr *ngIf="mahasiswa">
+            <td width="2%"></td>
+            <td>
+                <font size="2">NIK 00.12.01.002</font>
+            </td>
+            <td>
+                <font size="2">&nbsp;</font>
+            </td>
+            <td>
+                <font size="2">NIK {{mahasiswa.kaprodi}}</font>
+            </td>
+        </tr>
+
+
+
+    </tbody>
+</table>
