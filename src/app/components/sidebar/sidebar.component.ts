@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthenticationService } from "app/services/authentication.service";
+import { CookieService } from "ngx-cookie-service";
 import { AppMenuItem } from "./app-menu-item";
 
 declare const $: any;
@@ -183,8 +184,12 @@ export class SidebarComponent implements OnInit {
   menuDashboard;
   menuNone;
   menuNew: any[];
+  userFromApi;
 
-  constructor(private authenticationService: AuthenticationService) {}
+  constructor(
+    private authenticationService: AuthenticationService,
+    private cookieService: CookieService
+  ) {}
 
   ngOnInit() {
     // this.menuDashboard = ROUTES.filter(
@@ -194,6 +199,9 @@ export class SidebarComponent implements OnInit {
     // this.menuNone = ROUTES.filter((menuItem) => menuItem.parent == "none");
     console.log(menu);
     this.menuNew = menu;
+    let a = JSON.parse(this.cookieService.get("userMe"));
+    console.log(a);
+    this.userFromApi = a ? a.username : null;
   }
   isMobileMenu() {
     if ($(window).width() > 991) {
@@ -210,5 +218,9 @@ export class SidebarComponent implements OnInit {
       );
     }
     return true;
+  }
+
+  logout() {
+    this.authenticationService.logout();
   }
 }

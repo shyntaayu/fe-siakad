@@ -5,27 +5,27 @@
     <table border="1" style="BORDER-COLLAPSE:COLLAPSE;" width="100%" *ngIf="data">
         <tbody>
             <tr>
-                <td rowspan="2">
-                    <center><img src="/assets/img/stimata.jpeg" width="80"></center>
+                <td rowspan="2" align="center">
+                    <img src="/assets/img/stimata.jpeg" width="80">
                 </td>
-                <td colspan="2">
-                    <center>
-                        <font size="4"><span style="font-weight: bold;">STMIK PPKIA PRADNYA PARAMITA</span> <br>
-                            <font size="3">Kampus : Jl. Laksda Adi Sucipto 249 A Malang <br>
-                                <font size="2">Telp. (0341) 412699, Fax. (0341) 412782</font>
-                            </font>
+                <td colspan="2" align="center">
+
+                    <font size="4"><span style="font-weight: bold;">STMIK PPKIA PRADNYA PARAMITA</span> <br>
+                        <font size="3">Kampus : Jl. Laksda Adi Sucipto 249 A Malang <br>
+                            <font size="2">Telp. (0341) 412699, Fax. (0341) 412782</font>
                         </font>
-                    </center>
+                    </font>
+
                 </td>
             </tr>
             <tr>
-                <td>
-                    <center>
-                        <font size="3"><span style="font-weight: bold;">FORMULIR<br>KARTU UJIAN AKHIR<br>SEMESTER
-                                {{semester}}
-                                <br> TAHUN AJARAN
-                                {{tahun_akademik}}</span></font>
-                    </center>
+                <td align="center">
+
+                    <font size="3"><span style="font-weight: bold;">FORMULIR<br>KARTU UJIAN AKHIR<br>SEMESTER
+                            {{semester}}
+                            <br> TAHUN AJARAN
+                            {{tahun_akademik}}</span></font>
+
                 </td>
                 <td>
                     <table border="0" style="BORDER-COLLAPSE:COLLAPSE;" width="100%">
@@ -172,60 +172,40 @@
         cellspacing="0" height="25">
         <tbody>
             <tr class="gray" height="35">
-                <td width="30">
-                    <center>
-                        <font size="2">No</font>
-                    </center>
+                <td width="30" align="center">
+                    <font size="2">No</font>
                 </td>
-                <td width="90">
-                    <center>
-                        <font size="2">KODE MTK</font>
-                    </center>
+                <td width="90" align="center">
+                    <font size="2">KODE MTK</font>
                 </td>
-                <td width="295">
-                    <center>
-                        <font size="2">NAMA MATA KULIAH</font>
-                    </center>
+                <td width="295" align="center">
+                    <font size="2">NAMA MATA KULIAH</font>
                 </td>
-                <td width="50">
-                    <center>
-                        <font size="2">SKS</font>
-                    </center>
+                <td width="50" align="center">
+                    <font size="2">SKS</font>
                 </td>
-                <td width="40">
-                    <center>
-                        <font size="1">PROSEN-<br>TASE</font>
-                    </center>
+                <td width="40" align="center">
+                    <font size="1">PROSEN-<br>TASE</font>
                 </td>
-                <td width="90">
-                    <center>
-                        <font size="1">TTD PENGAWAS</font>
-                    </center>
+                <td width="90" align="center">
+                    <font size="1">TTD PENGAWAS</font>
                 </td>
             </tr>
-            <tr class="white" height="30" *ngFor="let a of data; let i = index">
-                <td>
-                    <center>
-                        <font class="white" size="3">{{i+1}}</font>
-                    </center>
+            <tr class="white" height="30" *ngFor="let a of data; let i = index" align="center">
+                <td align="center">
+                    <font class="white" size="3">{{i+1}}</font>
                 </td>
-                <td>
-                    <center>
-                        <font class="white" size="3">{{a.kodematkul}}</font>
-                    </center>
+                <td align="center">
+                    <font class="white" size="3">{{a.kodematkul}}</font>
                 </td>
                 <td>
                     <font class="white" size="3">{{a.matakuliah}}</font>
                 </td>
-                <td>
-                    <center>
-                        <font class="white" size="3">{{a.sks}}</font>
-                    </center>
+                <td align="center">
+                    <font class="white" size="3">{{a.sks}}</font>
                 </td>
-                <td>
-                    <center>
-                        <font size="3">{{a.persen}} %</font>
-                    </center>
+                <td align="center">
+                    <font size="3">{{a.persen}} %</font>
                 </td>
                 <td>&nbsp;</td>
             </tr>

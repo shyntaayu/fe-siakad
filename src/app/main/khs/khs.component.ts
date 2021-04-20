@@ -34,6 +34,7 @@ export class KhsComponent extends AppComponentBase implements OnInit {
   model;
   nim;
   listMatkul = [];
+  kelas;
 
   constructor(
     private mahasiswaService: MahasiswaService,
