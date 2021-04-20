@@ -16,8 +16,6 @@ import { Product } from "../model/product";
   styleUrls: ["./salinan-nilai.component.css"],
 })
 export class SalinanNilaiComponent extends AppComponentBase implements OnInit {
-  options: string[] = ["One", "Two", "Three"];
-  products: Product[];
   selectedProduct2;
   nim;
   loading = false;
@@ -27,8 +25,6 @@ export class SalinanNilaiComponent extends AppComponentBase implements OnInit {
   mahasiswa;
 
   constructor(
-    private fb: FormBuilder,
-    private productService: MainService,
     private messageService: MessageService,
     private mahasiswaService: MahasiswaService,
     private khsService: KhsService,
@@ -39,12 +35,7 @@ export class SalinanNilaiComponent extends AppComponentBase implements OnInit {
     super(injector);
   }
 
-  ngOnInit(): void {
-    this.productService.getProductsSmall().then((data) => {
-      this.products = data;
-      console.log(data);
-    });
-  }
+  ngOnInit(): void {}
 
   onRowSelect(event) {
     this.messageService.add({

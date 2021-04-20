@@ -10,6 +10,7 @@ import { catchError, map } from "rxjs/operators";
 import { AppConfig } from "app/model/app-config";
 import { Khs } from "app/model/khs";
 import { SalinanNilai } from "app/model/salinan-nilai";
+import { NilaiModel } from "app/model/nilai-model";
 @Injectable({
   providedIn: "root",
 })
@@ -40,6 +41,11 @@ export class KhsService {
         params: params,
       }
     );
+  }
+
+  addNilaiKaprodi(data: NilaiModel): Observable<any> {
+    let API_URL = `${this.appConfig.apiUrlKhs}/nilai/kaprodi`;
+    return this.http.post(API_URL, data).pipe(catchError(this.errorMgmt));
   }
 
   // Error handling

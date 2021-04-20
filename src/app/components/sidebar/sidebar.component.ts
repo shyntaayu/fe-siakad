@@ -38,7 +38,7 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     path: "/input-nilai",
-    title: "Input Nilai",
+    title: "Revisi Nilai",
     icon: "create",
     class: "",
     hidden: false,
@@ -162,7 +162,7 @@ export const menu: AppMenuItem[] = [
   new AppMenuItem("Dashboard", "1", "dashboard", "/dashboard"),
   new AppMenuItem("Kartu Ujian", "1", "list_alt", "/kartu-ujian"),
   new AppMenuItem("Rekap Presensi", "1", "folder_open", "/rekap-presensi"),
-  new AppMenuItem("Input Nilai", "1", "create", "/input-nilai"),
+  new AppMenuItem("Revisi Nilai", "1", "create", "/input-nilai"),
   new AppMenuItem("Salinan Nilai", "1", "content_paste", "/salinan-nilai"),
   new AppMenuItem("KHS", "1", "file_copy", "/khs"),
   new AppMenuItem("KRS", "1", "task_alt", "/krs"),

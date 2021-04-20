@@ -1,109 +1,63 @@
 <div class="main-content">
     <div class="container-fluid">
-        <div class="row">
+        <div class="row" style="margin-top: -30px;">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <mat-form-field class="example-full-width">
-                                        <mat-label>Jenis</mat-label>
-                                        <input type="text" placeholder="Pilih Jenis" aria-label="Number" matInput
-                                            formControlName="jenis" [matAutocomplete]="auto">
-                                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                                            <mat-option *ngFor="let option of options" [value]="option">
-                                                {{option}}
-                                            </mat-option>
-                                        </mat-autocomplete>
-                                    </mat-form-field>
-                                </div>
-                                <div class="col-md-4">
-                                    <mat-form-field class="example-full-width">
-                                        <mat-label>Semester</mat-label>
-                                        <input type="text" placeholder="Pilih Semester" aria-label="Number" matInput
-                                            formControlName="semester" [matAutocomplete]="auto">
-                                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                                            <mat-option *ngFor="let option of options" [value]="option">
-                                                {{option}}
-                                            </mat-option>
-                                        </mat-autocomplete>
-                                    </mat-form-field>
-                                </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>NIM</mat-label>
+                                    <input matInput type="text" [(ngModel)]="nim" (keyup)="applyFilter(nim)">
+                                    <button mat-button *ngIf="nim" matSuffix mat-icon-button aria-label="Clear"
+                                        (click)="nim=''">
+                                        <mat-icon>close</mat-icon>
+                                    </button>
+                                </mat-form-field>
                             </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <mat-form-field class="example-full-width">
-                                        <mat-label>Tahun Ajaran</mat-label>
-                                        <input type="text" placeholder="Pilih Tahun Ajaran" aria-label="Number" matInput
-                                            formControlName="tahun" [matAutocomplete]="auto">
-                                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                                            <mat-option *ngFor="let option of options" [value]="option">
-                                                {{option}}
-                                            </mat-option>
-                                        </mat-autocomplete>
-                                    </mat-form-field>
-                                </div>
-                                <div class="col-md-4">
-                                    <mat-form-field class="example-full-width">
-                                        <mat-label>Jurusan</mat-label>
-                                        <input type="text" placeholder="Pilih Jurusan" aria-label="Number" matInput
-                                            formControlName="jurusan" [matAutocomplete]="auto">
-                                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                                            <mat-option *ngFor="let option of options" [value]="option">
-                                                {{option}}
-                                            </mat-option>
-                                        </mat-autocomplete>
-                                    </mat-form-field>
-                                </div>
+                            <div class="col-md-4">
+                                <kaprodi-ddl [(ngModel)]="kaprodi">
+                                </kaprodi-ddl>
                             </div>
-                            <button mat-raised-button type="submit" class="btn btn-danger pull-right"
-                                [disabled]="!profileForm.valid">Cari</button>
-                            <div class="clearfix"></div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <p-toast></p-toast>
-        <div class="row">
+        <div class="row" style="margin-top: -30px;">
             <div class="col-md-6">
-                <div class="card">
+                <div class="card" [busyIf]="loading">
                     <div class="card-body">
-                        <p-table #dt1 [value]="products" selectionMode="single" [(selection)]="selectedProduct2"
-                            dataKey="code" (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)"
-                            [paginator]="true" [rows]="10" [showCurrentPageReport]="true" sortMode="multiple"
+                        <p-table #dt1 [value]="listMahasiswa" selectionMode="single" [(selection)]="selectedProduct2"
+                            dataKey="nim" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10"
+                            [showCurrentPageReport]="true" sortMode="multiple"
                             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                            [globalFilterFields]="['name','code','category','quantity']"
-                            [rowsPerPageOptions]="[10,25,50]">
+                            [globalFilterFields]="['nim','nama']" [rowsPerPageOptions]="[10,25,50]">
                             <ng-template pTemplate="caption">
-                                <div class="p-d-flex">
-                                    <span class="p-input-icon-right p-ml-auto">
+                                <div class="table-header">
+                                    List Mahasiswa
+                                    <br><br>
+                                    <span class="p-input-icon-left">
                                         <i class="pi pi-search"></i>
                                         <input pInputText type="text"
                                             (input)="dt1.filterGlobal($event.target.value, 'contains')"
-                                            placeholder="Search keyword" />
+                                            placeholder="Search..." />
                                     </span>
                                 </div>
                             </ng-template>
                             <ng-template pTemplate="header">
                                 <tr>
-                                    <th pSortableColumn="code">Code <p-sortIcon field="code"></p-sortIcon>
+                                    <th pSortableColumn="nim">NIM <p-sortIcon field="nim"></p-sortIcon>
                                     </th>
-                                    <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon>
-                                    </th>
-                                    <th pSortableColumn="category">Category <p-sortIcon field="category"></p-sortIcon>
-                                    </th>
-                                    <th pSortableColumn="quantity">Quantity <p-sortIcon field="quantity"></p-sortIcon>
+                                    <th pSortableColumn="nama">Nama <p-sortIcon field="nama"></p-sortIcon>
                                     </th>
                                 </tr>
                             </ng-template>
-                            <ng-template pTemplate="body" let-product>
-                                <tr [pSelectableRow]="product">
-                                    <td>{{product.code}}</td>
-                                    <td>{{product.name}}</td>
-                                    <td>{{product.category}}</td>
-                                    <td>{{product.quantity}}</td>
+                            <ng-template pTemplate="body" let-mahasiswa>
+                                <tr [pSelectableRow]="mahasiswa">
+                                    <td>{{mahasiswa.nim}}</td>
+                                    <td>{{mahasiswa.nama}}</td>
                                 </tr>
                             </ng-template>
                         </p-table>
@@ -111,83 +65,77 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="card">
+                <div class="card" [busyIf]="loading2">
                     <div class="card-body">
-                        <p-table #dt2 [value]="products2" dataKey="id" editMode="row" [paginator]="true" [rows]="10"
-                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                            [showCurrentPageReport]="true" [globalFilterFields]="['name','code','category','quantity']"
+                        <p-table #dt2 [value]="listNilai" dataKey="kode_matkul" editMode="row" [paginator]="true"
+                            [rows]="10" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                            [showCurrentPageReport]="true" [globalFilterFields]="['kode_matkul','nama','nilai']"
                             [rowsPerPageOptions]="[10,25,50]">
                             <ng-template pTemplate="caption">
-                                <div class="p-d-flex">
-                                    <span class="p-input-icon-right p-ml-auto">
+                                <div class="table-header">
+                                    List Nilai
+                                    <br><br>
+                                    <span class="p-input-icon-left">
                                         <i class="pi pi-search"></i>
                                         <input pInputText type="text"
                                             (input)="dt2.filterGlobal($event.target.value, 'contains')"
-                                            placeholder="Search keyword" />
+                                            placeholder="Search..." />
                                     </span>
                                 </div>
                             </ng-template>
                             <ng-template pTemplate="header">
                                 <tr>
-                                    <th>Code</th>
-                                    <th>Name</th>
-                                    <th>Category</th>
-                                    <th>Quantity</th>
+                                    <th>Kode</th>
+                                    <th>Nama</th>
+                                    <th>Nilai</th>
                                     <th style="width:8rem"></th>
                                 </tr>
                             </ng-template>
-                            <ng-template pTemplate="body" let-product let-editing="editing" let-ri="rowIndex">
-                                <tr [pEditableRow]="product">
+                            <ng-template pTemplate="body" let-nilai let-editing="editing" let-ri="rowIndex">
+                                <tr [pEditableRow]="nilai">
                                     <td>
                                         <p-cellEditor>
                                             <ng-template pTemplate="input">
-                                                <input pInputText type="text" [(ngModel)]="product.code">
+                                                <!-- <input pInputText type="text" [(ngModel)]="nilai.kode_matkul"> -->
+                                                {{nilai.kode_matkul}}
                                             </ng-template>
                                             <ng-template pTemplate="output">
-                                                {{product.code}}
+                                                {{nilai.kode_matkul}}
                                             </ng-template>
                                         </p-cellEditor>
                                     </td>
                                     <td>
                                         <p-cellEditor>
                                             <ng-template pTemplate="input">
-                                                <input pInputText type="text" [(ngModel)]="product.name" required>
+                                                <!-- <input pInputText type="text" [(ngModel)]="nilai.nama" required> -->
+                                                {{nilai.nama}}
                                             </ng-template>
                                             <ng-template pTemplate="output">
-                                                {{product.name}}
+                                                {{nilai.nama}}
                                             </ng-template>
                                         </p-cellEditor>
                                     </td>
                                     <td>
                                         <p-cellEditor>
                                             <ng-template pTemplate="input">
-                                                <p-dropdown [options]="statuses" [(ngModel)]="product.inventoryStatus"
+                                                <!-- <input pInputText type="text" [(ngModel)]="nilai.nilai"> -->
+                                                <p-dropdown [options]="nilaies" [(ngModel)]="nilai.nilai"
                                                     [style]="{'width':'100%'}"></p-dropdown>
                                             </ng-template>
                                             <ng-template pTemplate="output">
-                                                {{product.inventoryStatus}}
-                                            </ng-template>
-                                        </p-cellEditor>
-                                    </td>
-                                    <td>
-                                        <p-cellEditor>
-                                            <ng-template pTemplate="input">
-                                                <input pInputText type="text" [(ngModel)]="product.price">
-                                            </ng-template>
-                                            <ng-template pTemplate="output">
-                                                {{product.price | currency: 'USD'}}
+                                                {{nilai.nilai}}
                                             </ng-template>
                                         </p-cellEditor>
                                     </td>
                                     <td style="text-align:center">
-                                        <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow
-                                            icon="pi pi-pencil" (click)="onRowEditInit(product)"
+                                        <button *ngIf="!editing&&kaprodi" pButton pRipple type="button" pInitEditableRow
+                                            icon="pi pi-pencil" (click)="onRowEditInit(nilai)"
                                             class="p-button-rounded p-button-text"></button>
                                         <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow
-                                            icon="pi pi-check" (click)="onRowEditSave(product)"
+                                            icon="pi pi-check" (click)="onRowEditSave(nilai)"
                                             class="p-button-rounded p-button-text p-button-success p-mr-2"></button>
                                         <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow
-                                            icon="pi pi-times" (click)="onRowEditCancel(product, ri)"
+                                            icon="pi pi-times" (click)="onRowEditCancel()"
                                             class="p-button-rounded p-button-text p-button-danger"></button>
                                     </td>
                                 </tr>
@@ -196,10 +144,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12"><button mat-raised-button type="button" class="btn btn-success pull-right"
-                    [disabled]="!profileForm.valid">Simpan</button></div>
         </div>
     </div>
 </div>

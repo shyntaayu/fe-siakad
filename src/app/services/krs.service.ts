@@ -21,6 +21,7 @@ import { KrsDetail } from "app/model/krs-detail";
 import { PesertaByMatkul } from "app/model/pesertabymatkul";
 import { DosenByMatkul } from "app/model/dosen-by-matkul";
 import { Ruangan } from "app/model/ruangan";
+import { Kaprodi } from "app/model/kaprodi";
 @Injectable({
   providedIn: "root",
 })
@@ -219,6 +220,12 @@ export class KrsService {
   getAllRuangan(): Observable<Ruangan> {
     return this.http.get<Ruangan>(
       `${this.appConfig.apiUrlKrs}/dropdown/ruangan`
+    );
+  }
+
+  getAllKaprodi(): Observable<Kaprodi> {
+    return this.http.get<Kaprodi>(
+      `${this.appConfig.apiUrlKrs}/dropdown/kaprodi`
     );
   }
 

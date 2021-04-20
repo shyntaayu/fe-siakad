@@ -19,6 +19,7 @@ import { MatRadioModule } from "@angular/material/radio";
 import { DosenByMatkulDdlComponent } from "./dosen-by-matkul-ddl.component";
 import { SesiDdlComponent } from "./sesi-ddl.component";
 import { RuanganDdlComponent } from "./ruangan-ddl.component";
+import { KaprodiDdlComponent } from "./kaprodi-ddl.component";
 
 @NgModule({
   imports: [
@@ -45,6 +46,7 @@ import { RuanganDdlComponent } from "./ruangan-ddl.component";
     JenisRadioComponent,
     SesiDdlComponent,
     RuanganDdlComponent,
+    KaprodiDdlComponent,
   ],
   exports: [
     DosenByMatkulDdlComponent,
@@ -60,6 +62,7 @@ import { RuanganDdlComponent } from "./ruangan-ddl.component";
     JenisRadioComponent,
     SesiDdlComponent,
     RuanganDdlComponent,
+    KaprodiDdlComponent,
   ],
 })
 export class ShareModule {}
