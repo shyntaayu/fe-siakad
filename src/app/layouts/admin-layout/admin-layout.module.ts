@@ -40,6 +40,7 @@ import { MahasiswaService } from "app/services/mahasiswa.service";
 import { PresensiService } from "app/services/presensi.service";
 import { KartuUjianComponent } from "app/main/kartu-ujian/kartu-ujian.component";
 import { KhsService } from "app/services/khs.service";
+import { MatIconModule } from "@angular/material/icon";
 
 @NgModule({
   imports: [
@@ -63,6 +64,7 @@ import { KhsService } from "app/services/khs.service";
     InputTextModule,
     UtilsModule,
     SweetAlert2Module,
+    MatIconModule,
   ],
   declarations: [
     DashboardComponent,

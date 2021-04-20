@@ -37,7 +37,7 @@ const routes: Routes = [
         component: ViewBeritaAcaraComponent,
       },
       {
-        path: "salinan-nilai",
+        path: "salinan-nilai/:nim",
         component: ViewSalinanNilaiComponent,
       },
       {

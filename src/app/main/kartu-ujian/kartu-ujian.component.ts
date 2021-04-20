@@ -34,6 +34,7 @@ export class KartuUjianComponent extends AppComponentBase implements OnInit {
   model;
   nim;
   listPresensi = [];
+  kelas;
 
   constructor(
     private mahasiswaService: MahasiswaService,

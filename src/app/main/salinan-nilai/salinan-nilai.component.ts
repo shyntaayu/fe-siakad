@@ -1,6 +1,12 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Injector, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
+import { AppConfig } from "app/model/app-config";
+import { KhsService } from "app/services/khs.service";
+import { MahasiswaService } from "app/services/mahasiswa.service";
 import { MessageService } from "primeng/api";
+import { finalize } from "rxjs/operators";
+import { AppComponentBase } from "shared/app-component-base";
 import { MainService } from "../main.service";
 import { Product } from "../model/product";
 
@@ -9,20 +15,28 @@ import { Product } from "../model/product";
   templateUrl: "./salinan-nilai.component.html",
   styleUrls: ["./salinan-nilai.component.css"],
 })
-export class SalinanNilaiComponent implements OnInit {
-  profileForm: FormGroup;
+export class SalinanNilaiComponent extends AppComponentBase implements OnInit {
   options: string[] = ["One", "Two", "Three"];
   products: Product[];
   selectedProduct2;
+  nim;
+  loading = false;
+  loading2 = false;
+  listMahasiswa = [];
+  listNilai = [];
+  mahasiswa;
 
   constructor(
     private fb: FormBuilder,
     private productService: MainService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private mahasiswaService: MahasiswaService,
+    private khsService: KhsService,
+    injector: Injector,
+    private appConfig: AppConfig,
+    private router: Router
   ) {
-    this.profileForm = this.fb.group({
-      nim: ["", Validators.required],
-    });
+    super(injector);
   }
 
   ngOnInit(): void {
@@ -35,20 +49,74 @@ export class SalinanNilaiComponent implements OnInit {
   onRowSelect(event) {
     this.messageService.add({
       severity: "info",
-      summary: "Product Selected",
-      detail: event.data.name,
+      summary: "Mahasiwa Selected",
+      detail: event.data.nama,
     });
+    this.mahasiswa = event.data;
+    this.nim = event.data.nim;
+    this.getNilai(this.nim);
   }
 
   onRowUnselect(event) {
     this.messageService.add({
       severity: "info",
-      summary: "Product Unselected",
-      detail: event.data.name,
+      summary: "Mahasiswa Unselected",
+      detail: event.data.nama,
     });
   }
-  onSubmit() {
+  applyFilter(a) {
     // TODO: Use EventEmitter with form value
-    console.warn(this.profileForm.value);
+    console.log(a);
+    this.getMahasiswa();
+  }
+
+  getMahasiswa() {
+    this.loading = true;
+    this.listMahasiswa = [];
+    this.mahasiswaService
+      .getMahasiswaByNim(this.appConfig.jenisAplikasiString, this.nim)
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+        })
+      )
+      .subscribe(
+        (data) => {
+          this.listMahasiswa = data.result;
+          console.log(data);
+        },
+        (error) => {
+          console.log(error);
+          this.showMessage("Eror!", error.message, "error");
+        }
+      );
+  }
+
+  getNilai(a) {
+    this.loading2 = true;
+    this.khsService
+      .getSalinanNilai(this.appConfig.jenisAplikasiString, a)
+      .pipe(
+        finalize(() => {
+          this.loading2 = false;
+        })
+      )
+      .subscribe(
+        (data) => {
+          this.listNilai = data.result;
+          console.log(data);
+        },
+        (error) => {
+          console.log(error);
+          this.showMessage("Eror!", error.message, "error");
+        }
+      );
+  }
+
+  print() {
+    let link = "/print/salinan-nilai/" + this.nim;
+    this.router.navigate([]).then((result) => {
+      window.open(link, "_blank");
+    });
   }
 }
