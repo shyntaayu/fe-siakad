@@ -191,7 +191,8 @@
                     <font size="1">TTD PENGAWAS</font>
                 </td>
             </tr>
-            <tr class="white" height="30" *ngFor="let a of data; let i = index" align="center">
+            <tr class="white" height="30" align="center" *ngFor="let a of data; let i = index"
+                [ngClass]="{'row-cekal': a.cekal == true}">
                 <td align="center">
                     <font class="white" size="3">{{i+1}}</font>
                 </td>

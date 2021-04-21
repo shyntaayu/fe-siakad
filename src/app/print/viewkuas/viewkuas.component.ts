@@ -67,14 +67,16 @@ export class ViewKuasComponent extends AppComponentBase implements OnInit {
                         let alpha = list.data_presensi.Alpha;
                         console.log(alpha, hadir);
                         let persen = ((hadir - alpha) / hadir) * 100;
+                        console.log(persen, typeof persen);
                         persen = isNaN(persen) ? 0 : persen;
-                        console.log(persen);
+                        // console.log(persen);
                         let cekal = false;
                         if (persen < 64) {
                           cekal = true;
                         }
+                        let resultpersen = isFinite(persen) ? persen : 0;
                         list["cekal"] = cekal;
-                        list["persen"] = persen;
+                        list["persen"] = resultpersen;
                       });
                       this.data = data.result;
                       console.log(data.result);
