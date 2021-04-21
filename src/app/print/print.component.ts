@@ -45,11 +45,18 @@ export class PrintComponent implements OnInit {
     if (this.isNumber(urlArray[urlArray.length - 3])) {
       a = urlArray[urlArray.length - 4];
     }
+    if (this.isString(urlArray[urlArray.length - 1])) {
+      a = urlArray[urlArray.length - 1];
+    }
     this.title = a.replace("-", " ");
     console.log(this.title);
   }
 
   isNumber(myString) {
     return /\d/.test(myString);
+  }
+
+  isString(myString) {
+    return myString.match(/[a-zA-Z]/i);
   }
 }

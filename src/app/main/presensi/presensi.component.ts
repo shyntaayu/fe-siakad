@@ -111,15 +111,11 @@ export class PresensiComponent extends AppComponentBase implements OnInit {
 
   getMhsByMatkul() {
     this.loading1 = true;
-    this.krsService
-      .getPesertaByMatkul(
+    this.presensiService
+      .getPresensiMahasiswaPerMatkul(
         this.appConfig.jenisAplikasiString,
         this.krsid,
-        this.model.tahun,
-        this.model.semester,
-        this.model.jenjang,
-        this.model.jurusan,
-        this.model.kelas
+        1
       )
       .pipe(
         finalize(() => {

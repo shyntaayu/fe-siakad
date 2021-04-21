@@ -6,3 +6,6 @@
 .invoice:last-child {
   page-break-after: avoid;
 }
+:host ::ng-deep .row-cekal {
+  background-color: rgba(0, 0, 0, 0.15) !important;
+}

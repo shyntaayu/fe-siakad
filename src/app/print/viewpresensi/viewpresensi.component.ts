@@ -36,6 +36,7 @@ export class ViewPresensiKelasComponent
   tipe;
   sesi;
   listMahasiswa;
+  listFixMahasiswa;
 
   constructor(
     private printService: PrintService,
@@ -115,6 +116,28 @@ export class ViewPresensiKelasComponent
           this.showMessage("Eror!", error.message, "error");
         }
       );
+
+    this.listMahasiswa.map((m) => {
+      // let hadir=m.list_presensi_2.reduce((a, b) => a + b, 0)
+      let obj = m.list_presensi_2.reduce(function (acc, cur, i) {
+        acc["minggu" + (i + 1)] = cur;
+        return acc;
+      }, {});
+      let persen =
+        ((m.presensi.data_presensi.Hadir - m.presensi.data_presensi.Alpha) /
+          m.presensi.data_presensi.Hadir) *
+        100;
+      persen = isNaN(persen) ? 0 : persen;
+      console.log(persen);
+      let cekal = false;
+      if (persen < 64) {
+        cekal = true;
+      }
+      m["cekal"] = cekal;
+      Object.assign(m, obj);
+    });
+    this.listFixMahasiswa = this.listMahasiswa;
+    console.log("mee----", this.listMahasiswa);
   }
 
   getJenjang() {
