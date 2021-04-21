@@ -2,3 +2,6 @@
   padding-top: 0 !important;
   padding-bottom: 0 !important;
 }
+:host ::ng-deep .row-cekal {
+  background-color: rgba(0, 0, 0, 0.15) !important;
+}

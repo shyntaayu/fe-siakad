@@ -1,124 +1,55 @@
 <div class="main-content">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
+        <div class="row" style="margin-top: -30px;">
+            <div class="col-md-8">
+                <div class="card" [busyIf]="loading">
                     <div class="card-body">
                         <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
                             <div class="row">
                                 <div class="col-md-4">
-                                    <mat-form-field class="example-full-width">
-                                        <mat-label>Jenis</mat-label>
-                                        <input type="text" placeholder="Pilih Jenis" aria-label="Number" matInput
-                                            formControlName="jenis" [matAutocomplete]="auto">
-                                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                                            <mat-option *ngFor="let option of options" [value]="option">
-                                                {{option}}
-                                            </mat-option>
-                                        </mat-autocomplete>
-                                    </mat-form-field>
+                                    <tahun-ddl formControlName="tahun">
+                                    </tahun-ddl>
                                 </div>
                                 <div class="col-md-4">
-                                    <mat-form-field class="example-full-width">
-                                        <mat-label>Semester</mat-label>
-                                        <input type="text" placeholder="Pilih Semester" aria-label="Number" matInput
-                                            formControlName="semester" [matAutocomplete]="auto">
-                                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                                            <mat-option *ngFor="let option of options" [value]="option">
-                                                {{option}}
-                                            </mat-option>
-                                        </mat-autocomplete>
-                                    </mat-form-field>
+                                    <semester-ddl formControlName="semester" (selectedSemester2)="getSemester($event)">
+                                    </semester-ddl>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4">
-                                    <mat-form-field class="example-full-width">
-                                        <mat-label>Tahun Ajaran</mat-label>
-                                        <input type="text" placeholder="Pilih Tahun Ajaran" aria-label="Number" matInput
-                                            formControlName="tahun" [matAutocomplete]="auto">
-                                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                                            <mat-option *ngFor="let option of options" [value]="option">
-                                                {{option}}
-                                            </mat-option>
-                                        </mat-autocomplete>
-                                    </mat-form-field>
+                                    <jenjang-ddl formControlName="jenjang">
+                                    </jenjang-ddl>
                                 </div>
                                 <div class="col-md-4">
-                                    <mat-form-field class="example-full-width">
-                                        <mat-label>Jurusan</mat-label>
-                                        <input type="text" placeholder="Pilih Jurusan" aria-label="Number" matInput
-                                            formControlName="jurusan" [matAutocomplete]="auto">
-                                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                                            <mat-option *ngFor="let option of options" [value]="option">
-                                                {{option}}
-                                            </mat-option>
-                                        </mat-autocomplete>
-                                    </mat-form-field>
+                                    <prodi-ddl formControlName="jurusan">
+                                    </prodi-ddl>
+                                </div>
+                                <div class="col-md-4">
+                                    <kelas-ddl formControlName="kelas" (selectedSmt)="getNew($event)">
+                                    </kelas-ddl>
                                 </div>
                             </div>
-                            <button mat-raised-button type="submit" class="btn btn-danger pull-right"
-                                [disabled]="!profileForm.valid">Cari</button>
+
+                            <button mat-raised-button type="submit" class="btn btn-info" [disabled]="!profileForm.valid"
+                                [loading]="loading">Cari</button>
                             <div class="clearfix"></div>
+
                         </form>
                     </div>
                 </div>
             </div>
-        </div>
-        <p-toast></p-toast>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card">
+            <div class="col-md-4">
+                <div class="card" [busyIf]="loading2">
                     <div class="card-body">
-                        <p-table #dt1 [value]="products" selectionMode="single" [(selection)]="selectedProduct2"
-                            dataKey="code" (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)"
-                            [paginator]="true" [rows]="10" [showCurrentPageReport]="true" sortMode="multiple"
+                        <p-table #dt2 [value]="listMatkul" selectionMode="single" [(selection)]="selectedProduct2"
+                            dataKey="kode_matkul" (onRowSelect)="onRowSelect($event)"
+                            (onRowUnselect)="onRowUnselect($event)" editMode="row" [paginator]="true" [rows]="10"
                             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                            [globalFilterFields]="['name','code','category','quantity']"
+                            [showCurrentPageReport]="true" [globalFilterFields]="['nama_matkul','kode_matkul']"
                             [rowsPerPageOptions]="[10,25,50]">
                             <ng-template pTemplate="caption">
-                                <div class="p-d-flex">
-                                    <span class="p-input-icon-right p-ml-auto">
-                                        <i class="pi pi-search"></i>
-                                        <input pInputText type="text"
-                                            (input)="dt1.filterGlobal($event.target.value, 'contains')"
-                                            placeholder="Search keyword" />
-                                    </span>
-                                </div>
-                            </ng-template>
-                            <ng-template pTemplate="header">
-                                <tr>
-                                    <th pSortableColumn="code">Code <p-sortIcon field="code"></p-sortIcon>
-                                    </th>
-                                    <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon>
-                                    </th>
-                                    <th pSortableColumn="category">Category <p-sortIcon field="category"></p-sortIcon>
-                                    </th>
-                                    <th pSortableColumn="quantity">Quantity <p-sortIcon field="quantity"></p-sortIcon>
-                                    </th>
-                                </tr>
-                            </ng-template>
-                            <ng-template pTemplate="body" let-product>
-                                <tr [pSelectableRow]="product">
-                                    <td>{{product.code}}</td>
-                                    <td>{{product.name}}</td>
-                                    <td>{{product.category}}</td>
-                                    <td>{{product.quantity}}</td>
-                                </tr>
-                            </ng-template>
-                        </p-table>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <p-table #dt2 [value]="products2" dataKey="id" editMode="row" [paginator]="true" [rows]="10"
-                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                            [showCurrentPageReport]="true" [globalFilterFields]="['name','code','category','quantity']"
-                            [rowsPerPageOptions]="[10,25,50]">
-                            <ng-template pTemplate="caption">
-                                <div class="p-d-flex">
+                                <div class="table-header">
+                                    List Mata Kuliah<br><br>
                                     <span class="p-input-icon-right p-ml-auto">
                                         <i class="pi pi-search"></i>
                                         <input pInputText type="text"
@@ -129,67 +60,21 @@
                             </ng-template>
                             <ng-template pTemplate="header">
                                 <tr>
-                                    <th>Code</th>
-                                    <th>Name</th>
-                                    <th>Category</th>
-                                    <th>Quantity</th>
-                                    <th style="width:8rem"></th>
+                                    <th pSortableColumn="kode_matkul">Kode <p-sortIcon field="kode_matkul"></p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="nama_matkul">Nama <p-sortIcon field="nama_matkul">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="sks">SKS <p-sortIcon field="sks">
+                                        </p-sortIcon>
+                                    </th>
                                 </tr>
                             </ng-template>
-                            <ng-template pTemplate="body" let-product let-editing="editing" let-ri="rowIndex">
-                                <tr [pEditableRow]="product">
-                                    <td>
-                                        <p-cellEditor>
-                                            <ng-template pTemplate="input">
-                                                <input pInputText type="text" [(ngModel)]="product.code">
-                                            </ng-template>
-                                            <ng-template pTemplate="output">
-                                                {{product.code}}
-                                            </ng-template>
-                                        </p-cellEditor>
-                                    </td>
-                                    <td>
-                                        <p-cellEditor>
-                                            <ng-template pTemplate="input">
-                                                <input pInputText type="text" [(ngModel)]="product.name" required>
-                                            </ng-template>
-                                            <ng-template pTemplate="output">
-                                                {{product.name}}
-                                            </ng-template>
-                                        </p-cellEditor>
-                                    </td>
-                                    <td>
-                                        <p-cellEditor>
-                                            <ng-template pTemplate="input">
-                                                <p-dropdown [options]="statuses" [(ngModel)]="product.inventoryStatus"
-                                                    [style]="{'width':'100%'}"></p-dropdown>
-                                            </ng-template>
-                                            <ng-template pTemplate="output">
-                                                {{product.inventoryStatus}}
-                                            </ng-template>
-                                        </p-cellEditor>
-                                    </td>
-                                    <td>
-                                        <p-cellEditor>
-                                            <ng-template pTemplate="input">
-                                                <input pInputText type="text" [(ngModel)]="product.price">
-                                            </ng-template>
-                                            <ng-template pTemplate="output">
-                                                {{product.price | currency: 'USD'}}
-                                            </ng-template>
-                                        </p-cellEditor>
-                                    </td>
-                                    <td style="text-align:center">
-                                        <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow
-                                            icon="pi pi-pencil" (click)="onRowEditInit(product)"
-                                            class="p-button-rounded p-button-text"></button>
-                                        <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow
-                                            icon="pi pi-check" (click)="onRowEditSave(product)"
-                                            class="p-button-rounded p-button-text p-button-success p-mr-2"></button>
-                                        <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow
-                                            icon="pi pi-times" (click)="onRowEditCancel(product, ri)"
-                                            class="p-button-rounded p-button-text p-button-danger"></button>
-                                    </td>
+                            <ng-template pTemplate="body" let-matkul>
+                                <tr [pSelectableRow]="matkul">
+                                    <td>{{matkul.kode_matkul}}</td>
+                                    <td>{{matkul.nama_matkul}}</td>
+                                    <td>{{matkul.sks}}</td>
                                 </tr>
                             </ng-template>
                         </p-table>
@@ -197,9 +82,122 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12"><button mat-raised-button type="button" class="btn btn-success pull-right"
-                    [disabled]="!profileForm.valid">Simpan</button></div>
+        <p-toast></p-toast>
+        <div class="row" style="margin-top: -30px;">
+            <div class="col-md-12">
+                <div class="card" [busyIf]="loading1">
+                    <div class="card-body">
+                        <p-toolbar styleClass="p-mb-4">
+                            <ng-template pTemplate="left">
+                                <button type="button" pButton pRipple icon="pi pi-file-excel" label="Excel"
+                                    [disabled]="listMahasiswa.length==0" (click)="exportExcel()"
+                                    class="p-button-success p-mr-2" pTooltip="XLS" tooltipPosition="bottom"></button>
+                            </ng-template>
+                        </p-toolbar>
+                        <p-table #dt1 [value]="listMahasiswa" [paginator]="true" [rows]="10"
+                            [showCurrentPageReport]="true" sortMode="multiple"
+                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                            [globalFilterFields]="['nama','nim']" [rowsPerPageOptions]="[10,25,50]">
+                            <!-- <ng-template pTemplate="caption">
+                                <div class="p-d-flex">
+                                    <span class="p-input-icon-right p-ml-auto">
+                                        <i class="pi pi-search"></i>
+                                        <input pInputText type="text"
+                                            (input)="dt1.filterGlobal($event.target.value, 'contains')"
+                                            placeholder="Search keyword" />
+                                    </span>
+                                </div>
+                            </ng-template> -->
+                            <ng-template pTemplate="caption">
+                                <div class="table-header">
+                                    List Mahasiswa
+                                    <br><br>
+                                    <span class="p-input-icon-left">
+                                        <i class="pi pi-search"></i>
+                                        <input pInputText type="text"
+                                            (input)="dt1.filterGlobal($event.target.value, 'contains')"
+                                            placeholder="Search..." />
+                                    </span>
+                                </div>
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <!-- <th pSortableColumn="nim">NIM <p-sortIcon field="nim"></p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="nama">Nama <p-sortIcon field="nama"></p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="minggu1">M1<p-sortIcon field="minggu1"></p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="minggu2">M2<p-sortIcon field="minggu2"></p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="minggu3">M3<p-sortIcon field="minggu3"></p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="minggu4">M4<p-sortIcon field="minggu4"></p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="minggu5">M5<p-sortIcon field="minggu5"></p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="minggu6">M6<p-sortIcon field="minggu6"></p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="minggu7">M7<p-sortIcon field="minggu7"></p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="minggu8">M8<p-sortIcon field="minggu8"></p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="minggu9">M9<p-sortIcon field="minggu9"></p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="minggu10">M10<p-sortIcon field="minggu10"></p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="minggu11">M11<p-sortIcon field="minggu11"></p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="minggu12">M12<p-sortIcon field="minggu12"></p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="minggu13">M13<p-sortIcon field="minggu13"></p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="minggu14">M14<p-sortIcon field="minggu14"></p-sortIcon>
+                                    </th> -->
+                                    <th>NIM </th>
+                                    <th>Nama</th>
+                                    <th>M1</th>
+                                    <th>M2</th>
+                                    <th>M3</th>
+                                    <th>M4</th>
+                                    <th>M5</th>
+                                    <th>M6</th>
+                                    <th>M7</th>
+                                    <th>M8</th>
+                                    <th>M9</th>
+                                    <th>M10</th>
+                                    <th>M11</th>
+                                    <th>M12</th>
+                                    <th>M13</th>
+                                    <th>M14</th>
+                                    <th>Total</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-mahasiswa>
+                                <tr [pSelectableRow]="mahasiswa" [ngClass]="{'row-cekal': mahasiswa.cekal == true}">
+                                    <td>{{mahasiswa.nim}}</td>
+                                    <td>{{mahasiswa.nama}}</td>
+                                    <td>{{mahasiswa.minggu1}}</td>
+                                    <td>{{mahasiswa.minggu2}}</td>
+                                    <td>{{mahasiswa.minggu3}}</td>
+                                    <td>{{mahasiswa.minggu4}}</td>
+                                    <td>{{mahasiswa.minggu5}}</td>
+                                    <td>{{mahasiswa.minggu6}}</td>
+                                    <td>{{mahasiswa.minggu7}}</td>
+                                    <td>{{mahasiswa.minggu8}}</td>
+                                    <td>{{mahasiswa.minggu9}}</td>
+                                    <td>{{mahasiswa.minggu10}}</td>
+                                    <td>{{mahasiswa.minggu11}}</td>
+                                    <td>{{mahasiswa.minggu12}}</td>
+                                    <td>{{mahasiswa.minggu13}}</td>
+                                    <td>{{mahasiswa.minggu14}}</td>
+                                    <td>{{mahasiswa.presensi.data_presensi.Hadir}}</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

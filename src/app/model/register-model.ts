@@ -4,6 +4,6 @@ export class RegisterModel {
   username?: string;
   password?: string;
   role?: number;
-  statuslogin?: number;
+  statusLogin?: number;
   login_id?: number;
 }

@@ -42,6 +42,7 @@ import { KartuUjianComponent } from "app/main/kartu-ujian/kartu-ujian.component"
 import { KhsService } from "app/services/khs.service";
 import { MatIconModule } from "@angular/material/icon";
 import { TranskripNilaiComponent } from "app/main/transkrip-nilai/transkrip-nilai.component";
+import { ToolbarModule } from "primeng/toolbar";
 
 @NgModule({
   imports: [
@@ -66,6 +67,7 @@ import { TranskripNilaiComponent } from "app/main/transkrip-nilai/transkrip-nila
     UtilsModule,
     SweetAlert2Module,
     MatIconModule,
+    ToolbarModule,
   ],
   declarations: [
     DashboardComponent,

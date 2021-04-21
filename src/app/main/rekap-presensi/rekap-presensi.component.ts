@@ -1,64 +1,163 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Injector, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
+import { AppConfig } from "app/model/app-config";
+import { KrsService } from "app/services/krs.service";
+import { PresensiService } from "app/services/presensi.service";
 import { MessageService, SelectItem } from "primeng/api";
+import { finalize } from "rxjs/operators";
+import { AppComponentBase } from "shared/app-component-base";
 import { MainService } from "../main.service";
 import { Product } from "../model/product";
+import { jsPDF } from "jspdf";
+import "jspdf-autotable";
+import { saveAs } from "file-saver";
+import autoTable from "jspdf-autotable";
+import * as xlsx from "xlsx";
 
 @Component({
   selector: "app-rekap-presensi",
   templateUrl: "./rekap-presensi.component.html",
   styleUrls: ["./rekap-presensi.component.css"],
 })
-export class RekapPresensiComponent implements OnInit {
+export class RekapPresensiComponent extends AppComponentBase implements OnInit {
   profileForm: FormGroup;
+  secondForm: FormGroup;
   options: string[] = ["One", "Two", "Three"];
   products: Product[];
   selectedProduct2: Product;
   products2: Product[];
   clonedProducts: { [s: string]: Product } = {};
   statuses: SelectItem[];
+  loading = false;
+  tahun;
+  semester;
+  prodi;
+  jenjang;
+  loading1 = false;
+  loading2 = false;
+  model;
+  nim;
+  listMahasiswa = [];
+  listMatkul = [];
+  jenis;
+  kelas;
+  krsid;
+  kode_matkul;
+  nip;
+  listDosen = [];
+  dosen;
+  selectedMatkul;
+  selectedDosenNew;
+  jspdf = new jsPDF();
+  matkul;
+  jmlMahasiswa;
+
+  cols: any[];
+
+  exportColumns: any[];
 
   constructor(
+    private krsService: KrsService,
     private fb: FormBuilder,
     private productService: MainService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    injector: Injector,
+    private appConfig: AppConfig,
+    private presensiService: PresensiService,
+    private router: Router
   ) {
+    super(injector);
     this.profileForm = this.fb.group({
-      jenis: ["", Validators.required],
+      jenjang: ["", Validators.required],
       semester: ["", Validators.required],
-      tahun: ["", Validators.required],
       jurusan: ["", Validators.required],
+      tahun: ["", Validators.required],
+      kelas: ["", Validators.required],
     });
   }
 
   ngOnInit(): void {
-    this.productService.getProductsSmall().then((data) => {
-      this.products = data;
-      console.log(data);
-    });
-    this.productService
-      .getProductsSmall()
-      .then((data) => (this.products2 = data));
-    this.statuses = [
-      { label: "In Stock", value: "INSTOCK" },
-      { label: "Low Stock", value: "LOWSTOCK" },
-      { label: "Out of Stock", value: "OUTOFSTOCK" },
+    this.cols = [
+      { field: "code", header: "Code" },
+      { field: "name", header: "Name" },
+      { field: "category", header: "Category" },
+      { field: "quantity", header: "Quantity" },
     ];
+
+    this.exportColumns = this.cols.map((col) => ({
+      title: col.header,
+      dataKey: col.field,
+    }));
   }
 
   onRowSelect(event) {
+    console.log(event);
     this.messageService.add({
       severity: "info",
-      summary: "Product Selected",
-      detail: event.data.name,
+      summary: "Mata Kuliah Selected",
+      detail: event.data.nama_matkul,
     });
+    this.krsid = event.data.krs_id;
+    this.kode_matkul = event.data.kode_matkul;
+    this.matkul = event.data.nama_matkul;
+    this.nip = event.data.nip;
+    this.selectedMatkul = event.data;
+    this.getMhsByMatkul();
+  }
+
+  getMhsByMatkul() {
+    this.loading1 = true;
+    this.presensiService
+      .getPresensiMahasiswaPerMatkul(
+        this.appConfig.jenisAplikasiString,
+        this.krsid,
+        1
+      )
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+          this.loading1 = false;
+        })
+      )
+      .subscribe(
+        (data) => {
+          data.result.map((m) => {
+            // let hadir=m.list_presensi_2.reduce((a, b) => a + b, 0)
+            let obj = m.list_presensi_2.reduce(function (acc, cur, i) {
+              acc["minggu" + (i + 1)] = cur;
+              return acc;
+            }, {});
+            let persen =
+              ((m.presensi.data_presensi.Hadir -
+                m.presensi.data_presensi.Alpha) /
+                m.presensi.data_presensi.Hadir) *
+              100;
+            persen = isNaN(persen) ? 0 : persen;
+            console.log(persen);
+            let cekal = false;
+            if (persen < 64) {
+              cekal = true;
+            }
+            m["cekal"] = cekal;
+            Object.assign(m, obj);
+          });
+          this.listMahasiswa = data.result;
+          console.log("mee----", data.result);
+        },
+        (error) => {
+          console.log(error);
+          console.log(error.status);
+          this.showMessage("Eror!", error.message, "error");
+        }
+      );
   }
 
   onRowUnselect(event) {
     this.messageService.add({
       severity: "info",
-      summary: "Product Unselected",
-      detail: event.data.name,
+      summary: "Matakuliah Unselected",
+      detail: event.data.nama_matkul,
     });
   }
 
@@ -88,7 +187,96 @@ export class RekapPresensiComponent implements OnInit {
     delete this.clonedProducts[product.id];
   }
   onSubmit() {
-    // TODO: Use EventEmitter with form value
     console.warn(this.profileForm.value);
+    this.model = this.profileForm.value;
+    this.getMatkul();
+  }
+
+  getMatkul() {
+    this.loading = true;
+    this.loading2 = true;
+    this.listMahasiswa = [];
+    this.krsService
+      .getKrsDetail(
+        this.appConfig.jenisAplikasiString,
+        this.model.tahun,
+        this.model.semester,
+        this.model.jenjang,
+        this.model.jurusan,
+        this.model.kelas
+      )
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+          this.loading2 = false;
+        })
+      )
+      .subscribe(
+        (data) => {
+          this.listMatkul = data.result;
+          console.log(data);
+        },
+        (error) => {
+          console.log(error);
+          console.log(error.status);
+          this.showMessage("Eror!", error.message, "error");
+        }
+      );
+  }
+
+  getNew(param) {
+    console.log(param);
+    if (this.model) this.model.semester = param;
+    if (this.nim) this.getMhsByMatkul();
+  }
+
+  getDosen(a) {
+    console.log("m111111", a);
+    this.krsService
+      .getDosenByMatkul(this.appConfig.jenisAplikasiString, this.kode_matkul)
+      .subscribe(
+        (data) => {
+          this.listDosen = data.result;
+          this.selectedDosenNew = this.listDosen.find((_) => _.nip === a).nama;
+        },
+        (err) => {
+          console.error(err);
+          this.showMessage("Eror!", err.message, "error");
+        }
+      );
+  }
+
+  modelChangeFn(value, field) {
+    // localStorage.setItem("si" + field, value);
+  }
+  getSemester(a) {
+    console.log("------", a);
+  }
+
+  exportExcel() {
+    let cekalaja = this.listMahasiswa.filter((a) => a.cekal == true);
+    const worksheet = xlsx.utils.json_to_sheet(cekalaja);
+    const workbook = { Sheets: { data: worksheet }, SheetNames: ["data"] };
+    const excelBuffer: any = xlsx.write(workbook, {
+      bookType: "xlsx",
+      type: "array",
+    });
+    this.saveAsExcelFile(
+      excelBuffer,
+      "cekal_" + this.kode_matkul + "_" + this.matkul
+    );
+  }
+
+  saveAsExcelFile(buffer: any, fileName: string): void {
+    let EXCEL_TYPE =
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
+    let EXCEL_EXTENSION = ".xlsx";
+    const data: Blob = new Blob([buffer], {
+      type: EXCEL_TYPE,
+    });
+    saveAs(
+      data,
+      fileName + "_export_" + new Date().getTime() + EXCEL_EXTENSION
+    );
   }
 }
