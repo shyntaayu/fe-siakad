@@ -3,7 +3,7 @@
     "apiUrlUser": "http://localhost:1000",
     "apiUrlMahasiswa": "http://localhost:1001",
     "apiUrlKrs": "http://localhost:1003",
-    "apiUrlPresensi":"http://localhost:1006",
+    "apiUrlPresensi":"http://localhost:1008",
     "apiUrlKhs":"http://localhost:1007",
     "jenisAplikasi": 3,
     "jenisAplikasiString":"web"

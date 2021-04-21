@@ -1,4 +1,4 @@
-export interface MahasiswaByNimResult {
+export interface DetailMahasiswaResult {
   nim: string;
   no_pendaftaran: string;
   nama: string;
@@ -16,7 +16,6 @@ export interface MahasiswaByNimResult {
   statusmahasiswa: string;
   jenjang: string;
   prodi: string;
-  status_daftar_mahasiswa: string;
   nik: string;
   tempat_lahir: string;
   tgl_lahir: string;
@@ -32,11 +31,26 @@ export interface MahasiswaByNimResult {
   jurusan_asal_sekolah?: any;
   danem?: any;
   status_daftar_mhs_id: number;
+  status_daftar_mahasiswa: string;
   dosenwali: string;
+  id_yudisium?: any;
+  jumlah_sks?: any;
+  ipk?: any;
+  predikat?: any;
+  tglYudisium?: any;
+  tglCetak?: any;
+  noTrans?: any;
+  noIjazah?: any;
+  skLulus?: any;
+  nil?: any;
+  nsi?: any;
+  tahunLulus?: any;
+  IPK: number;
+  semester: number;
 }
 
-export interface MahasiswaByNim {
+export interface DetailMahasiswa {
   status: number;
   msg: string;
-  result: MahasiswaByNimResult[];
+  result: DetailMahasiswaResult[];
 }

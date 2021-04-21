@@ -1,10 +1,10 @@
 <center>
-    <p>
+    <p *ngIf="mahasiswa">
         <font size="3"><span style="font-weight: bold;">YAYASAN PRADNYA PARAMITHA<br>
                 SEKOLAH TINGGI MANAJEMEN INFORMATIKA DAN KOMPUTER<br>
                 PPKIA PRADNYA PARAMITA</span></font><br><br>
         <font size="5"><u>TRANSKRIP AKADEMIK</u></font><br>
-        <font size="2">Lampiran Ijazah Nomor: 572012021000146</font> <br>
+        <font size="2">Lampiran Ijazah Nomor: {{mahasiswa.noTrans}}</font> <br>
         <font size="2">SK Pendirian Sekolah Tinggi nomor: 114/D/0/2000, tanggal 26 Juli 2000</font>
     </p>
 </center>
@@ -44,7 +44,7 @@
                 </td>
                 <td>:</td>
                 <td>
-                    <font size="2">{{setTahunMasuk(nim)}}</font>
+                    <font size="2">{{mahasiswa.tahun_masuk}}</font>
                 </td>
             </tr>
             <tr>
@@ -63,7 +63,7 @@
                 </td>
                 <td>:</td>
                 <td>
-                    <font size="2">PINDAHAN</font>
+                    <font size="2">{{mahasiswa.status_daftar_mahasiswa}}</font>
                 </td>
             </tr>
 
@@ -83,7 +83,7 @@
                 </td>
                 <td>:</td>
                 <td>
-                    <font size="2">24 Februari 2021</font>
+                    <font size="2">{{mahasiswa.tahunLulus}}</font>
                 </td>
             </tr>
             <tr>
@@ -92,12 +92,14 @@
         </tbody>
     </table>
 </center>
-<table border="0" style="BORDER-COLLAPSE:COLLAPSE;" width="700">
+<table border="0" style="BORDER-COLLAPSE:COLLAPSE;" width="100%" *ngIf="mahasiswa">
     <tbody>
         <tr>
             <td>
                 <font size="2">
-                    <font size="2"> Mahasiswa tersebut telah dinyatakan LULUS Strata 1 dengan Skripsi:</font>
+                    <font size="2"> Mahasiswa tersebut telah dinyatakan <span style="text-transform: uppercase;">
+                            {{mahasiswa.statusmahasiswa}}</span> {{setJenjang(mahasiswa.jenjang)}} dengan Skripsi:
+                    </font>
                 </font>
             </td>
         </tr>
@@ -210,7 +212,7 @@
 </table>
 
 
-<table border="0" width="100%" style="BORDER-COLLAPSE:COLLAPSE" *ngIf="footer">
+<table border="0" width="100%" style="BORDER-COLLAPSE:COLLAPSE" *ngIf="mahasiswa">
     <tbody>
         <tr>
             <td></td>
@@ -218,10 +220,10 @@
                 <font size="2">Total sks yang telah ditempuh</font>
             </td>
             <td width="40%">
-                <font size="2">&nbsp;: {{footer.totalTempuhSKS}}</font>
+                <font size="2">&nbsp;: {{mahasiswa.jumlah_sks}}</font>
             </td>
             <td>
-                <font size="2">Indeks Prestasi Kumulatif (IPK) : {{footer.ipk}}</font>
+                <font size="2">Indeks Prestasi Kumulatif (IPK) : {{mahasiswa.ipk}}</font>
             </td>
         </tr>
         <!-- <tr><td width="4%"></td><td width="23%"><font size="2">Total sks yang telah ditempuh</td><td width="37%"><font size="2">&nbsp;: 150<td><font size="2">Indeks Prestasi Kumulatif (IPK) : 2.89</td></tr> -->
@@ -231,7 +233,7 @@
                 <font size="2">Predikat kelulusan</font>
             </td>
             <td>
-                <font size="2">&nbsp;: Memuaskan</font>
+                <font size="2">&nbsp;: {{mahasiswa.predikat}}</font>
             </td>
             <td>&nbsp;</td>
         </tr>
@@ -290,7 +292,7 @@
         <tr>
             <td>&nbsp;</td>
         </tr>
-        <tr *ngIf="mahasiswa">
+        <tr *ngIf="footer">
             <td width="2%"></td>
             <td>
                 <font size="2"><u><span style="font-weight: bold;">Dr. Tubagus Mohammad Akhriza, S.Si., MMSI.</span></u>
@@ -300,7 +302,7 @@
                 <font size="2">&nbsp;</font>
             </td>
             <td>
-                <font size="2"><u><span style="font-weight: bold;">{{mahasiswa.nama_kaprodi}}</span></u></font>
+                <font size="2"><u><span style="font-weight: bold;">{{footer.nama_kaprodi}}</span></u></font>
             </td>
         </tr>
         <tr *ngIf="mahasiswa">
@@ -312,7 +314,7 @@
                 <font size="2">&nbsp;</font>
             </td>
             <td>
-                <font size="2">NIK {{mahasiswa.kaprodi}}</font>
+                <font size="2">NIK {{footer.nip_kaprodi}}</font>
             </td>
         </tr>
 

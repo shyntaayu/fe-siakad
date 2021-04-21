@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { AppConfig } from "app/model/app-config";
+import { DetailMahasiswa } from "app/model/detail-mhs";
 import { MahasiswaByNim } from "app/model/mahasiswa-by-nim";
 import { MahasiswaResponse } from "app/model/mahasiswa-response";
 import { SemesterByNim } from "app/model/semester-by-nim";
@@ -66,6 +67,17 @@ export class MahasiswaService {
     params = params.append("nim", nim);
     return this.http.get<SemesterByNim>(
       `${this.appConfig.apiUrlMahasiswa}/mahasiswa/semester`,
+      { params: params }
+    );
+  }
+
+  // http://localhost:1001/mahasiswa?jenis_aplikasi=web&nim=17.51.0018
+  getDetailMahasiswa(jenis_aplikasi, nim): Observable<DetailMahasiswa> {
+    let params = new HttpParams();
+    params = params.append("jenis_aplikasi", jenis_aplikasi);
+    params = params.append("nim", nim);
+    return this.http.get<DetailMahasiswa>(
+      `${this.appConfig.apiUrlMahasiswa}/mahasiswa`,
       { params: params }
     );
   }

@@ -48,8 +48,12 @@ export class ViewTranskripNilaiComponent
       .pipe(
         finalize(() => {
           //get footer
-          this.khsService
-            .getKhs(this.appConfig.jenisAplikasiString, this.nim, this.semester)
+          this.krsService
+            .getKrs2(
+              this.appConfig.jenisAplikasiString,
+              this.nim,
+              this.semester
+            )
             .pipe(
               finalize(() => {
                 //get transkrip nilai
@@ -59,7 +63,7 @@ export class ViewTranskripNilaiComponent
                     finalize(() => {
                       //get data mahasiswa
                       this.mahasiswaService
-                        .getMahasiswaByNim(
+                        .getDetailMahasiswa(
                           this.appConfig.jenisAplikasiString,
                           this.nim
                         )
@@ -78,10 +82,9 @@ export class ViewTranskripNilaiComponent
                   )
                   .subscribe(
                     (data) => {
-                      let count = data.result.length;
-                      this.half = Math.round(data.result.length / 2);
-
-                      let all = data.result;
+                      let all = data.result.filter((l) => l.nilai != "");
+                      let count = all.length;
+                      this.half = Math.round(count / 2);
                       this.dataLeft = all.slice(0, this.half);
                       this.dataRight = all.slice(this.half + 1, count);
 
@@ -96,8 +99,7 @@ export class ViewTranskripNilaiComponent
             )
             .subscribe(
               (data) => {
-                this.footer = data;
-                console.log(data);
+                this.footer = data.result[0];
               },
               (error) => {
                 console.log(error);

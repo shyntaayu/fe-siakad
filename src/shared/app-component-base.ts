@@ -363,4 +363,33 @@ export abstract class AppComponentBase {
     let angkatan = a.substr(0, 2);
     return "20" + +angkatan + "-" + "20" + (+angkatan + 1);
   }
+
+  setPujian(a) {
+    let result = "";
+    if (a >= 2.76 && a <= 3) {
+      result = "Memuaskan";
+    } else if (a >= 3.01 && a <= 3.5) {
+      result = "Sangat Memuaskan";
+    } else if (a >= 3.51 && a <= 4) {
+      result = "Pujian (cumlaude)";
+    }
+    return result;
+  }
+
+  setIP(a) {
+    let num = a;
+    let with2Decimals = num.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0];
+    return with2Decimals;
+  }
+
+  setJenjang(a) {
+    let result = "";
+    if (a == "S1") {
+      result = "Strata 1";
+    }
+    if (a == "D3") {
+      result = "Diploma 3";
+    }
+    return result;
+  }
 }
