@@ -1,97 +1,93 @@
-<center>
-    <p *ngIf="mahasiswa">
-        <font size="3"><span style="font-weight: bold;">YAYASAN PRADNYA PARAMITHA<br>
-                SEKOLAH TINGGI MANAJEMEN INFORMATIKA DAN KOMPUTER<br>
-                PPKIA PRADNYA PARAMITA</span></font><br><br>
-        <font size="5"><u>TRANSKRIP AKADEMIK</u></font><br>
-        <font size="2">Lampiran Ijazah Nomor: {{mahasiswa.noTrans}}</font> <br>
-        <font size="2">SK Pendirian Sekolah Tinggi nomor: 114/D/0/2000, tanggal 26 Juli 2000</font>
-    </p>
-</center>
-<center>
-    <table border="0" style="BORDER-COLLAPSE:COLLAPSE;" width="100%" *ngIf="mahasiswa">
-        <tbody>
-            <tr>
-                <td></td>
-                <td>
-                    <font size="2">Nama</font>
-                </td>
-                <td>:</td>
-                <td>
-                    <font size="2">{{mahasiswa.nama}}</font>
-                </td>
-                <td> &nbsp; </td>
-                <td>
-                    <font size="2">Jenjang/Program Studi</font>
-                </td>
-                <td>:</td>
-                <td>
-                    <font size="2">{{mahasiswa.jenjang}}/{{mahasiswa.prodi}}</font>
-                </td>
-            </tr>
-            <tr>
-                <td width="10"></td>
-                <td>
-                    <font size="2">NIM</font>
-                </td>
-                <td>:</td>
-                <td>
-                    <font size="2">{{nim}}</font>
-                </td>
-                <td>&nbsp;</td>
-                <td>
-                    <font size="2">Tahun Akademik Masuk</font>
-                </td>
-                <td>:</td>
-                <td>
-                    <font size="2">{{mahasiswa.tahun_masuk}}</font>
-                </td>
-            </tr>
-            <tr>
-                <td width="10"></td>
-                <td>
-                    <font size="2">Tempat, Tgl Lahir</font>
-                </td>
-                <td>:</td>
-                <td>
-                    <font size="2">{{mahasiswa.tempat_lahir}}, {{mahasiswa.tgl_lahir}}</font>
-                </td>
-                <td></td>
+<p *ngIf="mahasiswa" style="text-align: center;">
+    <font size="3"><span style="font-weight: bold;">YAYASAN PRADNYA PARAMITHA<br>
+            SEKOLAH TINGGI MANAJEMEN INFORMATIKA DAN KOMPUTER<br>
+            PPKIA PRADNYA PARAMITA</span></font><br><br>
+    <font size="5"><u>TRANSKRIP AKADEMIK</u></font><br>
+    <font size="2">Lampiran Ijazah Nomor: {{mahasiswa.noTrans}}</font> <br>
+    <font size="2">SK Pendirian Sekolah Tinggi nomor: 114/D/0/2000, tanggal 26 Juli 2000</font>
+</p>
+<table border="0" style="BORDER-COLLAPSE:COLLAPSE;" width="100%" *ngIf="mahasiswa" align="center">
+    <tbody>
+        <tr>
+            <td></td>
+            <td>
+                <font size="2">Nama</font>
+            </td>
+            <td>:</td>
+            <td>
+                <font size="2">{{mahasiswa.nama}}</font>
+            </td>
+            <td> &nbsp; </td>
+            <td>
+                <font size="2">Jenjang/Program Studi</font>
+            </td>
+            <td>:</td>
+            <td>
+                <font size="2">{{mahasiswa.jenjang}}/{{mahasiswa.prodi}}</font>
+            </td>
+        </tr>
+        <tr>
+            <td width="10"></td>
+            <td>
+                <font size="2">NIM</font>
+            </td>
+            <td>:</td>
+            <td>
+                <font size="2">{{nim}}</font>
+            </td>
+            <td>&nbsp;</td>
+            <td>
+                <font size="2">Tahun Akademik Masuk</font>
+            </td>
+            <td>:</td>
+            <td>
+                <font size="2">{{mahasiswa.tahun_masuk}}</font>
+            </td>
+        </tr>
+        <tr>
+            <td width="10"></td>
+            <td>
+                <font size="2">Tempat, Tgl Lahir</font>
+            </td>
+            <td>:</td>
+            <td>
+                <font size="2">{{mahasiswa.tempat_lahir}}, {{mahasiswa.tgl_lahir}}</font>
+            </td>
+            <td></td>
 
-                <td>
-                    <font size="2">Status</font>
-                </td>
-                <td>:</td>
-                <td>
-                    <font size="2">{{mahasiswa.status_daftar_mahasiswa}}</font>
-                </td>
-            </tr>
+            <td>
+                <font size="2">Status</font>
+            </td>
+            <td>:</td>
+            <td>
+                <font size="2">{{mahasiswa.status_daftar_mahasiswa}}</font>
+            </td>
+        </tr>
 
-            <tr>
-                <td width="10"></td>
-                <td>
-                    <font size="2">NIK</font>
-                </td>
-                <td>:</td>
-                <td>
-                    <font size="2">{{mahasiswa.nik}}</font>
-                </td>
-                <td></td>
+        <tr>
+            <td width="10"></td>
+            <td>
+                <font size="2">NIK</font>
+            </td>
+            <td>:</td>
+            <td>
+                <font size="2">{{mahasiswa.nik}}</font>
+            </td>
+            <td></td>
 
-                <td>
-                    <font size="2">Tanggal Lulus</font>
-                </td>
-                <td>:</td>
-                <td>
-                    <font size="2">{{mahasiswa.tahunLulus}}</font>
-                </td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-            </tr>
-        </tbody>
-    </table>
-</center>
+            <td>
+                <font size="2">Tanggal Lulus</font>
+            </td>
+            <td>:</td>
+            <td>
+                <font size="2">{{mahasiswa.tahunLulus}}</font>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+    </tbody>
+</table>
 <table border="0" style="BORDER-COLLAPSE:COLLAPSE;" width="100%" *ngIf="mahasiswa">
     <tbody>
         <tr>
@@ -105,9 +101,7 @@
         </tr>
         <tr>
             <td>
-                <center>
-                    <font size="2"></font>
-                </center>
+                <font size="2"></font>
             </td>
         </tr>
         <tr>
@@ -147,9 +141,9 @@
                             <td>
                                 <font size="1">&nbsp;{{i+1}}&nbsp;</font>
                             </td>
-                            <td>
+                            <td align="center">
                                 <font size="1">
-                                    <center>{{a.kode_matkul}}</center>
+                                    {{a.kode_matkul}}
                                 </font>
                             </td>
                             <td>
@@ -189,9 +183,9 @@
                             <td>
                                 <font size="1">&nbsp;{{i+1+half}}&nbsp;</font>
                             </td>
-                            <td>
+                            <td align="center">
                                 <font size="1">
-                                    <center>{{a.kode_matkul}}</center>
+                                    {{a.kode_matkul}}
                                 </font>
                             </td>
                             <td>
