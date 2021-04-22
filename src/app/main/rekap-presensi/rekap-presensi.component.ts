@@ -139,9 +139,9 @@ export class RekapPresensiComponent extends AppComponentBase implements OnInit {
               return acc;
             }, {});
             let persen =
-              ((m.presensi.data_presensi.Hadir -
+              ((m.presensi.data_presensi.HadirTotal -
                 m.presensi.data_presensi.Alpha) /
-                m.presensi.data_presensi.Hadir) *
+                m.presensi.data_presensi.HadirTotal) *
               100;
             persen = isNaN(persen) ? 0 : persen;
             let cekal = false;
@@ -163,11 +163,11 @@ export class RekapPresensiComponent extends AppComponentBase implements OnInit {
   }
 
   onRowUnselect(event) {
-    this.messageService.add({
-      severity: "info",
-      summary: "Matakuliah Unselected",
-      detail: event.data.nama_matkul,
-    });
+    // this.messageService.add({
+    //   severity: "info",
+    //   summary: "Matakuliah Unselected",
+    //   detail: event.data.nama_matkul,
+    // });
   }
 
   onSubmit() {
@@ -351,7 +351,7 @@ export class RekapPresensiComponent extends AppComponentBase implements OnInit {
       let model = new PresensiCekal();
       model.jenis_aplikasi = this.appConfig.jenisAplikasi;
       model.id_master_waktu_presensi = e;
-      model.master_tipe_presensi_id = 2;
+      model.master_tipe_presensi_id = 5; // 5=telat 2=hadir
       model.nim = row.nim;
       model.krs_id = this.krsid;
       console.log(model);

@@ -50,11 +50,11 @@ export class TranskripNilaiComponent
   }
 
   onRowUnselect(event) {
-    this.messageService.add({
-      severity: "info",
-      summary: "Mahasiswa Unselected",
-      detail: event.data.nama,
-    });
+    // this.messageService.add({
+    //   severity: "info",
+    //   summary: "Mahasiswa Unselected",
+    //   detail: event.data.nama,
+    // });
   }
   applyFilter(a) {
     // TODO: Use EventEmitter with form value

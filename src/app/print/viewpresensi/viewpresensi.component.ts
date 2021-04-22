@@ -124,8 +124,9 @@ export class ViewPresensiKelasComponent
         return acc;
       }, {});
       let persen =
-        ((m.presensi.data_presensi.Hadir - m.presensi.data_presensi.Alpha) /
-          m.presensi.data_presensi.Hadir) *
+        ((m.presensi.data_presensi.HadirTotal -
+          m.presensi.data_presensi.Alpha) /
+          m.presensi.data_presensi.HadirTotal) *
         100;
       persen = isNaN(persen) ? 0 : persen;
       console.log(persen);

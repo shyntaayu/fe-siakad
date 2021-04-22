@@ -1,10 +1,10 @@
 {
     "title":"SIAKAD STIMATA",
-    "apiUrlUser": "http://localhost:1000",
-    "apiUrlMahasiswa": "http://localhost:1001",
-    "apiUrlKrs": "http://localhost:1003",
-    "apiUrlPresensi":"http://localhost:1008",
-    "apiUrlKhs":"http://localhost:1007",
+    "apiUrlUser": "http://api.stimata.ac.id/user/public",
+    "apiUrlMahasiswa": "http://api.stimata.ac.id/mahasiswa/public",
+    "apiUrlKrs": "http://api.stimata.ac.id/krs/public",
+    "apiUrlPresensi":"http://api.stimata.ac.id/presensi/public",
+    "apiUrlKhs":"http://api.stimata.ac.id/khs/public",
     "jenisAplikasi": 3,
     "jenisAplikasiString":"web"
 }

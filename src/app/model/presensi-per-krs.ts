@@ -4,6 +4,7 @@ export interface DataPresensi {
   Sakit: number;
   Izin: number;
   Telat: number;
+  HadirTotal: number;
 }
 
 export interface Presensi {

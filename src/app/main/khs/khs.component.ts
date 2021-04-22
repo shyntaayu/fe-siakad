@@ -105,11 +105,11 @@ export class KhsComponent extends AppComponentBase implements OnInit {
   }
 
   onRowUnselect(event) {
-    this.messageService.add({
-      severity: "info",
-      summary: "Product Unselected",
-      detail: event.data.nama,
-    });
+    // this.messageService.add({
+    //   severity: "info",
+    //   summary: "Product Unselected",
+    //   detail: event.data.nama,
+    // });
   }
 
   onRowEditInit(product: Product) {

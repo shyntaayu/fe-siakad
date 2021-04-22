@@ -73,11 +73,11 @@ export class InputNilaiComponent extends AppComponentBase implements OnInit {
   }
 
   onRowUnselect(event) {
-    this.messageService.add({
-      severity: "info",
-      summary: "Mahasiswa Unselected",
-      detail: event.data.nama,
-    });
+    // this.messageService.add({
+    //   severity: "info",
+    //   summary: "Mahasiswa Unselected",
+    //   detail: event.data.nama,
+    // });
   }
 
   onRowEditInit(product: Product) {

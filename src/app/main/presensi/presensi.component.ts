@@ -137,11 +137,11 @@ export class PresensiComponent extends AppComponentBase implements OnInit {
   }
 
   onRowUnselect(event) {
-    this.messageService.add({
-      severity: "info",
-      summary: "Product Unselected",
-      detail: event.data.nama,
-    });
+    // this.messageService.add({
+    //   severity: "info",
+    //   summary: "Product Unselected",
+    //   detail: event.data.nama,
+    // });
   }
 
   onRowEditInit(product: Product) {
@@ -225,10 +225,15 @@ export class PresensiComponent extends AppComponentBase implements OnInit {
     localStorage.setItem("simahasiswa", JSON.stringify(this.listMahasiswa));
 
     if (type == 1) {
-      let link = "/print/absensi";
-      this.router.navigate([]).then((result) => {
-        window.open(link, "_blank");
-      });
+      console.log(this.sesi);
+      if (this.sesi) {
+        let link = "/print/absensi";
+        this.router.navigate([]).then((result) => {
+          window.open(link, "_blank");
+        });
+      } else {
+        this.showMessage("Info", "Silahkan pilih sesi", "info");
+      }
     }
     if (type == 2) {
       let link = "/print/kehadiran";
