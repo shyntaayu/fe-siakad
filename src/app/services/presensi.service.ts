@@ -13,6 +13,7 @@ import { KrsPrintResponse } from "app/model/krs-print-response";
 import { KrsHeaderResponse } from "app/model/krs-header-response";
 import { PresensiResponse } from "app/model/presensi";
 import { PresensiPerKrs } from "app/model/presensi-per-krs";
+import { PresensiCekal } from "app/model/presensi-cekal";
 @Injectable({
   providedIn: "root",
 })
@@ -55,6 +56,11 @@ export class PresensiService {
         params: params,
       }
     );
+  }
+
+  addPresensi(data: PresensiCekal): Observable<any> {
+    let API_URL = `${this.appConfig.apiUrlPresensi}/presensi/mahasiswa/absen/manual`;
+    return this.http.post(API_URL, data).pipe(catchError(this.errorMgmt));
   }
 
   // Error handling

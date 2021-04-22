@@ -14,6 +14,7 @@ import "jspdf-autotable";
 import { saveAs } from "file-saver";
 import autoTable from "jspdf-autotable";
 import * as xlsx from "xlsx";
+import { PresensiCekal } from "app/model/presensi-cekal";
 
 @Component({
   selector: "app-rekap-presensi",
@@ -28,7 +29,7 @@ export class RekapPresensiComponent extends AppComponentBase implements OnInit {
   selectedProduct2: Product;
   products2: Product[];
   clonedProducts: { [s: string]: Product } = {};
-  statuses: SelectItem[];
+  presies: SelectItem[];
   loading = false;
   tahun;
   semester;
@@ -89,6 +90,11 @@ export class RekapPresensiComponent extends AppComponentBase implements OnInit {
       title: col.header,
       dataKey: col.field,
     }));
+
+    this.presies = [
+      { label: "1", value: 1 },
+      { label: "0", value: 0 },
+    ];
   }
 
   onRowSelect(event) {
@@ -134,7 +140,6 @@ export class RekapPresensiComponent extends AppComponentBase implements OnInit {
                 m.presensi.data_presensi.Hadir) *
               100;
             persen = isNaN(persen) ? 0 : persen;
-            console.log(persen);
             let cekal = false;
             if (persen < 64) {
               cekal = true;
@@ -161,31 +166,6 @@ export class RekapPresensiComponent extends AppComponentBase implements OnInit {
     });
   }
 
-  onRowEditInit(product: Product) {
-    this.clonedProducts[product.id] = { ...product };
-  }
-
-  onRowEditSave(product: Product) {
-    if (product.price > 0) {
-      delete this.clonedProducts[product.id];
-      this.messageService.add({
-        severity: "success",
-        summary: "Success",
-        detail: "Product is updated",
-      });
-    } else {
-      this.messageService.add({
-        severity: "error",
-        summary: "Error",
-        detail: "Invalid Price",
-      });
-    }
-  }
-
-  onRowEditCancel(product: Product, index: number) {
-    this.products2[index] = this.clonedProducts[product.id];
-    delete this.clonedProducts[product.id];
-  }
   onSubmit() {
     console.warn(this.profileForm.value);
     this.model = this.profileForm.value;
@@ -278,5 +258,137 @@ export class RekapPresensiComponent extends AppComponentBase implements OnInit {
       data,
       fileName + "_export_" + new Date().getTime() + EXCEL_EXTENSION
     );
+  }
+
+  onRowEditInit(a) {
+    console.log(a);
+    console.log("dataEdit----", a);
+  }
+
+  onRowEditSave(row) {
+    // if (product.price > 0) {
+    //   delete this.clonedProducts[product.id];
+    //   this.messageService.add({
+    //     severity: "success",
+    //     summary: "Success",
+    //     detail: "Product is updated",
+    //   });
+    // } else {
+    //   this.messageService.add({
+    //     severity: "error",
+    //     summary: "Error",
+    //     detail: "Invalid Price",
+    //   });
+    // }
+    let dataBaru = row;
+    console.log("------dataBaru", dataBaru);
+    let edited = [];
+    let a;
+    if (dataBaru.minggu1 == 1) {
+      a = 1;
+      edited.push(a);
+    }
+    if (dataBaru.minggu2 == 1) {
+      a = 2;
+      edited.push(a);
+    }
+    if (dataBaru.minggu3 == 1) {
+      a = 3;
+      edited.push(a);
+    }
+    if (dataBaru.minggu4 == 1) {
+      a = 4;
+      edited.push(a);
+    }
+    if (dataBaru.minggu5 == 1) {
+      a = 5;
+      edited.push(a);
+    }
+    if (dataBaru.minggu6 == 1) {
+      a = 6;
+      edited.push(a);
+    }
+    if (dataBaru.minggu7 == 1) {
+      a = 7;
+      edited.push(a);
+    }
+    if (dataBaru.minggu8 == 1) {
+      a = 8;
+      edited.push(a);
+    }
+    if (dataBaru.minggu9 == 1) {
+      a = 9;
+      edited.push(a);
+    }
+    if (dataBaru.minggu10 == 1) {
+      a = 10;
+      edited.push(a);
+    }
+    if (dataBaru.minggu11 == 1) {
+      a = 11;
+      edited.push(a);
+    }
+    if (dataBaru.minggu12 == 1) {
+      a = 12;
+      edited.push(a);
+    }
+    if (dataBaru.minggu13 == 1) {
+      a = 13;
+      edited.push(a);
+    }
+    if (dataBaru.minggu14 == 1) {
+      a = 14;
+      edited.push(a);
+    }
+
+    console.log("------edited", edited);
+    edited.map((e) => {
+      this.loading1 = true;
+      let model = new PresensiCekal();
+      model.jenis_aplikasi = this.appConfig.jenisAplikasi;
+      model.id_master_waktu_presensi = e;
+      model.master_tipe_presensi_id = 5;
+      model.nim = row.nim;
+      model.krs_id = this.krsid;
+      console.log(model);
+      this.presensiService
+        .addPresensi(model)
+        .pipe(
+          finalize(() => {
+            this.loading1 = false;
+            this.getMhsByMatkul();
+          })
+        )
+        .subscribe(
+          (res) => {
+            console.log(res);
+            if (res.status == 0) {
+              this.showMessage("Eror!", res.message, "error");
+            } else {
+              // this.showMessage(
+              //   "Sukses!",
+              //   res.msg + " - Berhasil mengganti nilai",
+              //   "success"
+              // );
+              this.showNotification(
+                "top",
+                "right",
+                "Sukses! " +
+                  res.msg +
+                  " - Berhasil mengganti presensi minggu" +
+                  e,
+                "success"
+              );
+            }
+          },
+          (error) => {
+            this.showMessage("Eror!", error, "error");
+          }
+        );
+    });
+  }
+
+  onRowEditCancel() {
+    this.getMhsByMatkul();
   }
 }
