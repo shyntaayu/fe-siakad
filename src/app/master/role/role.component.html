@@ -63,7 +63,8 @@
                 <div class="p-field">
                     <label for="nama">Nama</label>
                     <input type="text" pInputText id="nama" [(ngModel)]="role.nama" required autofocus />
-                    <small class="p-invalid" *ngIf="submitted && !role.nama">Name is required.</small>
+                    <small class="p-invalid" style="color:red;" *ngIf="submitted && !role.nama">Nama is
+                        required.</small>
                 </div>
             </ng-template>
 
