@@ -95,6 +95,7 @@
                             </ng-template>
                         </p-toolbar>
                         <p-table #dt1 [value]="listMahasiswa" [paginator]="true" [rows]="10" editMode="row"
+                            [frozenColumns]="frozenCols" frozenWidth="350px" [scrollable]="true"
                             [showCurrentPageReport]="true" sortMode="multiple" dataKey="nim"
                             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                             [globalFilterFields]="['nama','nim']" [rowsPerPageOptions]="[10,25,50]">
@@ -120,40 +121,30 @@
                                     </span>
                                 </div>
                             </ng-template>
+                            <ng-template pTemplate="colgroup" let-columns>
+                                <colgroup>
+                                    <col style="width:150px">
+                                    <col style="width:200px">
+                                    <col style="width:100px">
+                                    <col style="width:100px">
+                                    <col style="width:100px">
+                                    <col style="width:100px">
+                                    <col style="width:100px">
+                                    <col style="width:100px">
+                                    <col style="width:100px">
+                                    <col style="width:100px">
+                                    <col style="width:100px">
+                                    <col style="width:100px">
+                                    <col style="width:100px">
+                                    <col style="width:100px">
+                                    <col style="width:100px">
+                                    <col style="width:100px">
+                                    <col style="width:100px">
+                                    <col style="width:100px">
+                                </colgroup>
+                            </ng-template>
                             <ng-template pTemplate="header">
                                 <tr>
-                                    <!-- <th pSortableColumn="nim">NIM <p-sortIcon field="nim"></p-sortIcon>
-                                    </th>
-                                    <th pSortableColumn="nama">Nama <p-sortIcon field="nama"></p-sortIcon>
-                                    </th>
-                                    <th pSortableColumn="minggu1">M1<p-sortIcon field="minggu1"></p-sortIcon>
-                                    </th>
-                                    <th pSortableColumn="minggu2">M2<p-sortIcon field="minggu2"></p-sortIcon>
-                                    </th>
-                                    <th pSortableColumn="minggu3">M3<p-sortIcon field="minggu3"></p-sortIcon>
-                                    </th>
-                                    <th pSortableColumn="minggu4">M4<p-sortIcon field="minggu4"></p-sortIcon>
-                                    </th>
-                                    <th pSortableColumn="minggu5">M5<p-sortIcon field="minggu5"></p-sortIcon>
-                                    </th>
-                                    <th pSortableColumn="minggu6">M6<p-sortIcon field="minggu6"></p-sortIcon>
-                                    </th>
-                                    <th pSortableColumn="minggu7">M7<p-sortIcon field="minggu7"></p-sortIcon>
-                                    </th>
-                                    <th pSortableColumn="minggu8">M8<p-sortIcon field="minggu8"></p-sortIcon>
-                                    </th>
-                                    <th pSortableColumn="minggu9">M9<p-sortIcon field="minggu9"></p-sortIcon>
-                                    </th>
-                                    <th pSortableColumn="minggu10">M10<p-sortIcon field="minggu10"></p-sortIcon>
-                                    </th>
-                                    <th pSortableColumn="minggu11">M11<p-sortIcon field="minggu11"></p-sortIcon>
-                                    </th>
-                                    <th pSortableColumn="minggu12">M12<p-sortIcon field="minggu12"></p-sortIcon>
-                                    </th>
-                                    <th pSortableColumn="minggu13">M13<p-sortIcon field="minggu13"></p-sortIcon>
-                                    </th>
-                                    <th pSortableColumn="minggu14">M14<p-sortIcon field="minggu14"></p-sortIcon>
-                                    </th> -->
                                     <th>NIM </th>
                                     <th>Nama</th>
                                     <th>M1</th>
@@ -171,7 +162,6 @@
                                     <th>M13</th>
                                     <th>M14</th>
                                     <th>Hadir</th>
-                                    <th>Telat</th>
                                     <th>Aksi</th>
                                 </tr>
                             </ng-template>
@@ -334,7 +324,6 @@
                                         </p-cellEditor>
                                     </td>
                                     <td>{{mahasiswa.presensi.data_presensi.Hadir}}</td>
-                                    <td>{{mahasiswa.presensi.data_presensi.Telat}}</td>
                                     <td style="text-align:center">
                                         <button *ngIf="!editing&&mahasiswa.cekal" pButton pRipple type="button"
                                             pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(mahasiswa)"

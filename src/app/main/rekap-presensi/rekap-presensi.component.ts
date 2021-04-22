@@ -55,6 +55,10 @@ export class RekapPresensiComponent extends AppComponentBase implements OnInit {
   jmlMahasiswa;
 
   cols: any[];
+  frozenCols = [
+    { field: "nim", header: "NIM" },
+    { field: "nama", header: "Nama" },
+  ];
 
   exportColumns: any[];
 
@@ -347,7 +351,7 @@ export class RekapPresensiComponent extends AppComponentBase implements OnInit {
       let model = new PresensiCekal();
       model.jenis_aplikasi = this.appConfig.jenisAplikasi;
       model.id_master_waktu_presensi = e;
-      model.master_tipe_presensi_id = 5;
+      model.master_tipe_presensi_id = 2;
       model.nim = row.nim;
       model.krs_id = this.krsid;
       console.log(model);
