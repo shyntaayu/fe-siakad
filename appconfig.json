@@ -1,0 +1,10 @@
+{
+    "title":"SIAKAD STIMATA",
+    "apiUrlUser": "http://api.stimata.ac.id/user/public",
+    "apiUrlMahasiswa": "http://api.stimata.ac.id/mahasiswa/public",
+    "apiUrlKrs": "http://api.stimata.ac.id/krs/public",
+    "apiUrlPresensi":"http://api.stimata.ac.id/presensi/public",
+    "apiUrlKhs":"http://api.stimata.ac.id/khs/public",
+    "jenisAplikasi": 3,
+    "jenisAplikasiString":"web"
+}
