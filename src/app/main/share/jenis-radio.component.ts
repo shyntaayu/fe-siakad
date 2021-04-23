@@ -89,13 +89,16 @@ export class JenisRadioComponent
         value: "Kelas",
       },
       {
+        value: "Praktikum",
+      },
+      {
         value: "UTS",
       },
       {
         value: "UAS",
       },
       {
-        value: "Praktikum",
+        value: "Ujian Praktikum",
       },
     ];
     self.isLoading = false;

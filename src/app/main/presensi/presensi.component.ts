@@ -226,13 +226,14 @@ export class PresensiComponent extends AppComponentBase implements OnInit {
 
     if (type == 1) {
       console.log(this.sesi);
-      if (this.sesi) {
-        let link = "/print/absensi";
-        this.router.navigate([]).then((result) => {
-          window.open(link, "_blank");
-        });
+      if (this.model.jenis == "Kelas") {
+        if (this.sesi) {
+          this.goPresensi();
+        } else {
+          this.showMessage("Info", "Silahkan pilih sesi", "info");
+        }
       } else {
-        this.showMessage("Info", "Silahkan pilih sesi", "info");
+        this.goPresensi();
       }
     }
     if (type == 2) {
@@ -248,6 +249,14 @@ export class PresensiComponent extends AppComponentBase implements OnInit {
       });
     }
   }
+
+  goPresensi() {
+    let link = "/print/absensi";
+    this.router.navigate([]).then((result) => {
+      window.open(link, "_blank");
+    });
+  }
+
   getDosen(a) {
     console.log("m111111", a);
     this.krsService

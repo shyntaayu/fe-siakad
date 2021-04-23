@@ -63,7 +63,7 @@ export class ViewPresensiKelasComponent
         this.title = "KELAS";
         this.tipe = 1;
         break;
-      case "Praktikum":
+      case "Ujian Praktikum":
         this.tipe = 2;
         this.title = "UJIAN PRAKTIKUM";
         break;
@@ -74,6 +74,10 @@ export class ViewPresensiKelasComponent
       case "UAS":
         this.title = "UJIAN AKHIR SEMESTER";
         this.tipe = 4;
+        break;
+      case "Praktikum":
+        this.title = "KELAS";
+        this.tipe = 5;
         break;
     }
   }

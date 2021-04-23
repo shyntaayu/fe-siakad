@@ -82,3 +82,8 @@ a[data-toggle="collapse"][aria-expanded="true"] .caret {
 body > [ngb-modal-window]:not([modal-render]) {
   display: none;
 }
+
+.printMe {
+  background-color: white !important;
+  height: 100%;
+}

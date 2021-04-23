@@ -22,6 +22,7 @@ export class ViewKhsComponent extends AppComponentBase implements OnInit {
   footer;
   other;
   beban;
+  dipk;
 
   constructor(
     private printService: PrintService,
@@ -47,7 +48,23 @@ export class ViewKhsComponent extends AppComponentBase implements OnInit {
             .getKrsHeader(this.nim)
             .pipe(
               finalize(() => {
-                // this.printService.onDataReady();
+                this.khsService
+                  .getIPK(this.appConfig.jenisAplikasiString, this.nim)
+                  .pipe(
+                    finalize(() => {
+                      // this.printService.onDataReady();
+                    })
+                  )
+                  .subscribe(
+                    (data) => {
+                      this.dipk = data.result;
+                      console.log(data);
+                    },
+                    (error) => {
+                      console.log(error);
+                      this.showMessage("Eror!", error.message, "error");
+                    }
+                  );
               })
             )
             .subscribe(

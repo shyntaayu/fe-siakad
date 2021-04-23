@@ -25,6 +25,7 @@ export class ViewSalinanNilaiComponent
   totalSks;
   footer;
   half;
+  dipk;
   mahasiswa;
 
   constructor(
@@ -109,6 +110,20 @@ export class ViewSalinanNilaiComponent
       .subscribe(
         (data) => {
           this.semester = data.result;
+          console.log(data);
+        },
+        (error) => {
+          console.log(error);
+          this.showMessage("Eror!", error.message, "error");
+        }
+      );
+
+    this.khsService
+      .getIPK(this.appConfig.jenisAplikasiString, this.nim)
+      .pipe(finalize(() => {}))
+      .subscribe(
+        (data) => {
+          this.dipk = data.result;
           console.log(data);
         },
         (error) => {

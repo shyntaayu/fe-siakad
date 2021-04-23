@@ -127,6 +127,7 @@ export class UserComponent extends AppComponentBase implements OnInit {
         .pipe(
           finalize(() => {
             this.loading = false;
+            this.getUsers();
           })
         )
         .subscribe(
@@ -155,6 +156,7 @@ export class UserComponent extends AppComponentBase implements OnInit {
         .pipe(
           finalize(() => {
             this.loading = false;
+            this.getUsers();
           })
         )
         .subscribe(
@@ -178,7 +180,6 @@ export class UserComponent extends AppComponentBase implements OnInit {
           }
         );
     }
-    this.getUsers();
   }
 
   getRole() {
