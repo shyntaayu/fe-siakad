@@ -59,6 +59,7 @@ export class SalinanNilaiComponent extends AppComponentBase implements OnInit {
     // TODO: Use EventEmitter with form value
     console.log(a);
     this.getMahasiswa();
+    this.listNilai = [];
   }
 
   getMahasiswa() {

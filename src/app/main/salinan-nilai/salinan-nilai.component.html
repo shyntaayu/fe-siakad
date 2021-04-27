@@ -10,7 +10,7 @@
                                     <mat-label>NIM</mat-label>
                                     <input matInput type="text" [(ngModel)]="nim" (keyup)="applyFilter(nim)">
                                     <button mat-button *ngIf="nim" matSuffix mat-icon-button aria-label="Clear"
-                                        (click)="nim=''">
+                                        (click)="nim='';listNilai=[]">
                                         <mat-icon>close</mat-icon>
                                     </button>
                                 </mat-form-field>
