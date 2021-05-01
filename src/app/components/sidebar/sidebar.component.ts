@@ -165,6 +165,22 @@ export const ROUTES: RouteInfo[] = [
     hidden: false,
     parent: "none",
   },
+  {
+    path: "/add-nilai",
+    title: "Input Nilai",
+    icon: "edit_note",
+    class: "",
+    hidden: false,
+    parent: "none",
+  },
+  {
+    path: "/paket-krs",
+    title: "Paket KRS",
+    icon: "post_add",
+    class: "",
+    hidden: false,
+    parent: "none",
+  },
 ];
 
 export const menu: AppMenuItem[] = [
@@ -177,6 +193,8 @@ export const menu: AppMenuItem[] = [
   new AppMenuItem("Revisi Nilai", "1", "create", "/input-nilai"),
   new AppMenuItem("Salinan Nilai", "1", "content_paste", "/salinan-nilai"),
   new AppMenuItem("Transkrip Nilai", "1", "school", "/transkrip-nilai"),
+  new AppMenuItem("Input Nilai", "1", "edit_note", "/add-nilai"),
+  new AppMenuItem("Paket KRS", "1", "post_add", "/paket-krs"),
   new AppMenuItem("Master", "1", "apps", "", [
     new AppMenuItem("User", "1", "badge", "/master/user"),
     new AppMenuItem("Role", "1", "lock", "/master/role"),

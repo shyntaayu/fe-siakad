@@ -22,6 +22,7 @@ import { PesertaByMatkul } from "app/model/pesertabymatkul";
 import { DosenByMatkul } from "app/model/dosen-by-matkul";
 import { Ruangan } from "app/model/ruangan";
 import { Kaprodi } from "app/model/kaprodi";
+import { ModelAddKRS } from "app/model/add-krs";
 @Injectable({
   providedIn: "root",
 })
@@ -227,6 +228,11 @@ export class KrsService {
     return this.http.get<Kaprodi>(
       `${this.appConfig.apiUrlKrs}/dropdown/kaprodi`
     );
+  }
+
+  addKrs(data: ModelAddKRS): Observable<any> {
+    let API_URL = `${this.appConfig.apiUrlKrs}/krs/mahasiswa`;
+    return this.http.post(API_URL, data).pipe(catchError(this.errorMgmt));
   }
 
   // Error handling

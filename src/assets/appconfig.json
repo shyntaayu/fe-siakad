@@ -5,6 +5,7 @@
     "apiUrlKrs": "http://api.stimata.ac.id/krs/public",
     "apiUrlPresensi":"http://api.stimata.ac.id/presensi/public",
     "apiUrlKhs":"http://api.stimata.ac.id/khs/public",
+    "apiUrlKurikulum":"http://api.stimata.ac.id/kurikulum/public",
     "jenisAplikasi": 3,
     "jenisAplikasiString":"web"
 }

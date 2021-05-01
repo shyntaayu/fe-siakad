@@ -43,6 +43,9 @@ import { KhsService } from "app/services/khs.service";
 import { MatIconModule } from "@angular/material/icon";
 import { TranskripNilaiComponent } from "app/main/transkrip-nilai/transkrip-nilai.component";
 import { ToolbarModule } from "primeng/toolbar";
+import { PaketKrsComponent } from "app/main/paket-krs/paket-krs.component";
+import { AddNilaiComponent } from "app/main/add-nilai/add-nilai.component";
+import { KurikulumService } from "app/services/kurikulum.service";
 
 @NgModule({
   imports: [
@@ -86,6 +89,8 @@ import { ToolbarModule } from "primeng/toolbar";
     KrsComponent,
     KartuUjianComponent,
     TranskripNilaiComponent,
+    PaketKrsComponent,
+    AddNilaiComponent,
   ],
   providers: [
     MainService,
@@ -94,6 +99,7 @@ import { ToolbarModule } from "primeng/toolbar";
     MahasiswaService,
     PresensiService,
     KhsService,
+    KurikulumService,
   ],
 })
 export class AdminLayoutModule {}

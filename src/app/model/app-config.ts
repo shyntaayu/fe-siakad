@@ -7,4 +7,5 @@ export abstract class AppConfig {
   jenisAplikasi: number;
   jenisAplikasiString: string;
   apiUrlKhs: string;
+  apiUrlKurikulum: string;
 }

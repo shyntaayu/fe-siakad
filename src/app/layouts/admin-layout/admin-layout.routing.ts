@@ -17,6 +17,8 @@ import { AuthGuard } from "app/helpers/auth.guard";
 import { KrsComponent } from "app/main/krs/krs.component";
 import { KartuUjianComponent } from "app/main/kartu-ujian/kartu-ujian.component";
 import { TranskripNilaiComponent } from "app/main/transkrip-nilai/transkrip-nilai.component";
+import { AddNilaiComponent } from "app/main/add-nilai/add-nilai.component";
+import { PaketKrsComponent } from "app/main/paket-krs/paket-krs.component";
 
 export const AdminLayoutRoutes: Routes = [
   // {
@@ -135,6 +137,18 @@ export const AdminLayoutRoutes: Routes = [
   {
     path: "transkrip-nilai",
     component: TranskripNilaiComponent,
+    canActivate: [AuthGuard],
+    data: { permission: "1" },
+  },
+  {
+    path: "add-nilai",
+    component: AddNilaiComponent,
+    canActivate: [AuthGuard],
+    data: { permission: "1" },
+  },
+  {
+    path: "paket-krs",
+    component: PaketKrsComponent,
     canActivate: [AuthGuard],
     data: { permission: "1" },
   },

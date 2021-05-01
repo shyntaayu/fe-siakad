@@ -1,0 +1,148 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <p-toast></p-toast>
+        <div class="row" style="margin-top: -30px;">
+            <div class="col-md-6">
+                <div class="card" [busyIf]="loading">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>NIM</mat-label>
+                                    <input matInput type="text" [(ngModel)]="nim" (keyup)="applyFilter(nim)">
+                                    <button mat-button *ngIf="nim" matSuffix mat-icon-button aria-label="Clear"
+                                        (click)="nim=''">
+                                        <mat-icon>close</mat-icon>
+                                    </button>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <p-table #dt1 [value]="listMahasiswa" [(selection)]="selectedNim" dataKey="nim"
+                            [paginator]="true" [rows]="10" [showCurrentPageReport]="true" sortMode="multiple"
+                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                            [globalFilterFields]="['nim','nama']" [rowsPerPageOptions]="[10,25,50]">
+                            <ng-template pTemplate="caption">
+                                <div class="table-header">
+                                    List Mahasiswa
+                                    <br><br>
+                                    <span class="p-input-icon-left">
+                                        <i class="pi pi-search"></i>
+                                        <input pInputText type="text"
+                                            (input)="dt1.filterGlobal($event.target.value, 'contains')"
+                                            placeholder="Search..." />
+                                    </span>
+                                </div>
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th style="width: 3rem">
+                                        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                                    </th>
+                                    <th pSortableColumn="nim">NIM <p-sortIcon field="nim"></p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="nama">Nama <p-sortIcon field="nama"></p-sortIcon>
+                                    </th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-mahasiswa>
+                                <tr [pSelectableRow]="mahasiswa">
+                                    <td>
+                                        <p-tableCheckbox [value]="mahasiswa"></p-tableCheckbox>
+                                    </td>
+                                    <td>{{mahasiswa.nim}}</td>
+                                    <td>{{mahasiswa.nama}}</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card" [busyIf]="loading2">
+                    <div class="card-body">
+                        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <tahun-ddl formControlName="tahun">
+                                    </tahun-ddl>
+                                </div>
+                                <div class="col-md-5">
+                                    <semester-ddl formControlName="semester">
+                                    </semester-ddl>
+                                </div>
+                                <div class="col-md-2">
+                                    <button mat-raised-button type="submit" class="btn btn-info"
+                                        [disabled]="!profileForm.valid" [loading]="loading2">Cari</button>
+                                </div>
+                            </div>
+
+                            <div class="clearfix"></div>
+                        </form>
+                        <p-table #dt [value]="listMatkul" dataKey="kode_matkul" [(selection)]="selectedMatkul"
+                            [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                            [globalFilterFields]="['kode_matkul','nama','nilai','status']"
+                            [rowsPerPageOptions]="[10,25,50]">
+                            <ng-template pTemplate="caption">
+                                <div class="table-header">
+                                    List Mata Kuliah
+                                    <br><br>
+                                    <span class="p-input-icon-left">
+                                        <i class="pi pi-search"></i>
+                                        <input pInputText type="text"
+                                            (input)="dt.filterGlobal($event.target.value, 'contains')"
+                                            placeholder="Search..." />
+                                    </span>
+                                </div>
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th style="width: 3rem">
+                                        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                                    </th>
+                                    <th pSortableColumn="kode_matkul">Kode <p-sortIcon field="kode_matkul"></p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="nama">Nama <p-sortIcon field="nama"></p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="nilai">SKS <p-sortIcon field="nilai"></p-sortIcon>
+                                    <th pSortableColumn="status">Status <p-sortIcon field="status"></p-sortIcon>
+                                    </th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-list>
+                                <tr [pSelectableRow]="list">
+                                    <td>
+                                        <p-tableCheckbox [value]="list"></p-tableCheckbox>
+                                    </td>
+                                    <td>{{list.kode_matkul}}</td>
+                                    <td>{{list.nama}}</td>
+                                    <td>{{list.sks}}</td>
+                                    <td>{{list.status}}</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-top: -30px;">
+            <div class="col-md-12">
+                <div class="card" [busyIf]="loading">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6"></div>
+                            <div class="col-md-3">
+                                <smtangka-ddl [(ngModel)]="semesterAngka">
+                                </smtangka-ddl>
+                            </div>
+                            <div class="col-md-3"> <button mat-raised-button type="button"
+                                    class="btn btn-success pull-right"
+                                    [disabled]="this.selectedNim.length==0||this.selectedMatkul.length==0||semesterAngka==undefined"
+                                    (click)="save()">Simpan</button></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
