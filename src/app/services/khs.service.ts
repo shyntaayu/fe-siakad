@@ -12,6 +12,7 @@ import { Khs } from "app/model/khs";
 import { SalinanNilai } from "app/model/salinan-nilai";
 import { NilaiModel } from "app/model/nilai-model";
 import { IPK } from "app/model/ipk";
+import { NilaiList } from "app/model/nilai-list";
 @Injectable({
   providedIn: "root",
 })
@@ -57,6 +58,28 @@ export class KhsService {
     return this.http.get<IPK>(`${this.appConfig.apiUrlKhs}/ipk`, {
       params: params,
     });
+  }
+
+  // http://api.stimata.ac.id/khs/public/khs/nilai?jenis_aplikasi=web&krs_id=237
+  getListNilai(jenis_aplikasi, krs_id): Observable<NilaiList> {
+    let params = new HttpParams();
+    params = params.append("jenis_aplikasi", jenis_aplikasi);
+    params = params.append("krs_id", krs_id);
+    return this.http.get<NilaiList>(`${this.appConfig.apiUrlKhs}/khs/nilai`, {
+      params: params,
+    });
+  }
+
+  // http://api.stimata.ac.id/khs/public/khs/tipenilai?jenis_aplikasi=web
+  getTipeNilai(jenis_aplikasi): Observable<NilaiList> {
+    let params = new HttpParams();
+    params = params.append("jenis_aplikasi", jenis_aplikasi);
+    return this.http.get<NilaiList>(
+      `${this.appConfig.apiUrlKhs}/khs/tipenilai`,
+      {
+        params: params,
+      }
+    );
   }
 
   // Error handling

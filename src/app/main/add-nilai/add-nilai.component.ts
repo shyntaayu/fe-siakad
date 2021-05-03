@@ -1,14 +1,18 @@
 import { Component, Injector, OnInit } from "@angular/core";
-import { FormGroup } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { AppConfig } from "app/model/app-config";
 import { NilaiModel } from "app/model/nilai-model";
+import { PresensiCekal } from "app/model/presensi-cekal";
 import { AuthenticationService } from "app/services/authentication.service";
 import { KhsService } from "app/services/khs.service";
+import { KrsService } from "app/services/krs.service";
 import { MahasiswaService } from "app/services/mahasiswa.service";
+import { PresensiService } from "app/services/presensi.service";
 import { MessageService, SelectItem } from "primeng/api";
 import { finalize } from "rxjs/operators";
 import { AppComponentBase } from "shared/app-component-base";
+import { MainService } from "../main.service";
 import { Product } from "../model/product";
 
 @Component({
@@ -18,70 +22,221 @@ import { Product } from "../model/product";
 })
 export class AddNilaiComponent extends AppComponentBase implements OnInit {
   profileForm: FormGroup;
+  secondForm: FormGroup;
   options: string[] = ["One", "Two", "Three"];
   products: Product[];
   selectedProduct2: Product;
   products2: Product[];
   clonedProducts: { [s: string]: Product } = {};
-  nilaies: SelectItem[];
-
-  nim;
+  presies: SelectItem[];
   loading = false;
+  tahun;
+  semester;
+  prodi;
+  jenjang;
+  loading1 = false;
   loading2 = false;
+  model;
+  nim;
   listMahasiswa = [];
-  listNilai = [];
-  mahasiswa;
-  kaprodi;
+  listMatkul = [];
+  jenis;
+  kelas;
+  krsid;
+  kode_matkul;
+  nip;
+  listDosen = [];
+  dosen;
+  selectedMatkul;
+  selectedDosenNew;
+  matkul;
+  jmlMahasiswa;
+  tipeNilai;
+  isPraktikum = false;
+
+  cols: any[];
+  frozenCols = [
+    { field: "nim", header: "NIM" },
+    { field: "nama", header: "Nama" },
+  ];
+
+  exportColumns: any[];
 
   constructor(
+    private krsService: KrsService,
+    private fb: FormBuilder,
+    private productService: MainService,
     private messageService: MessageService,
-    private mahasiswaService: MahasiswaService,
-    private khsService: KhsService,
     injector: Injector,
     private appConfig: AppConfig,
-    private router: Router,
-    private authenticationService: AuthenticationService
+    private khsService: KhsService,
+    private router: Router
   ) {
     super(injector);
+    this.profileForm = this.fb.group({
+      jenjang: ["", Validators.required],
+      semester: ["", Validators.required],
+      jurusan: ["", Validators.required],
+      tahun: ["", Validators.required],
+      kelas: ["", Validators.required],
+    });
+    this.getTipeNilai();
   }
 
   ngOnInit(): void {
-    this.nilaies = [
-      { label: "A", value: "A" },
-      { label: "A-", value: "A-" },
-      { label: "B+", value: "B+" },
-      { label: "B", value: "B" },
-      { label: "B-", value: "B-" },
-      { label: "C+", value: "C+" },
-      { label: "C", value: "C" },
-      { label: "C-", value: "C-" },
-      { label: "D", value: "D" },
-      { label: "E", value: "E" },
+    this.cols = [
+      { field: "code", header: "Code" },
+      { field: "name", header: "Name" },
+      { field: "category", header: "Category" },
+      { field: "quantity", header: "Quantity" },
+    ];
+
+    this.exportColumns = this.cols.map((col) => ({
+      title: col.header,
+      dataKey: col.field,
+    }));
+
+    this.presies = [
+      { label: "1", value: 1 },
+      { label: "0", value: 0 },
     ];
   }
 
   onRowSelect(event) {
+    console.log(event);
     this.messageService.add({
       severity: "info",
-      summary: "Mahasiswa Selected",
-      detail: event.data.nama,
+      summary: "Mata Kuliah Selected",
+      detail: event.data.nama_matkul,
     });
-    this.mahasiswa = event.data;
-    this.nim = event.data.nim;
-    this.getNilai(this.nim);
+    this.krsid = event.data.krs_id;
+    this.kode_matkul = event.data.kode_matkul;
+    this.matkul = event.data.nama_matkul;
+    if (this.matkul.toLowerCase().includes("praktikum")) {
+      this.isPraktikum = true;
+    } else {
+      this.isPraktikum = false;
+    }
+    this.nip = event.data.nip;
+    this.selectedMatkul = event.data;
+    this.getMhsByMatkul();
+  }
+
+  getMhsByMatkul() {
+    this.loading1 = true;
+    this.khsService
+      .getListNilai(this.appConfig.jenisAplikasiString, this.krsid)
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+          this.loading1 = false;
+        })
+      )
+      .subscribe(
+        (data) => {
+          console.log(this.tipeNilai);
+          let tipe = this.tipeNilai;
+          data.result.map((m) => {
+            // let hadir=m.list_presensi_2.reduce((a, b) => a + b, 0)
+            let obj = m.list_nilai.reduce(function (acc, cur, i) {
+              let index = tipe.find(
+                (_) => _.idmaster_tipe_nilai == cur.idmaster_tipe_nilai
+              ).nama;
+              acc[index] = cur.nilai;
+              return acc;
+            }, {});
+            // m["cekal"] = cekal;
+            Object.assign(m, obj);
+          });
+          this.listMahasiswa = data.result;
+          console.log("mee----", data.result);
+        },
+        (error) => {
+          console.log(error);
+          console.log(error.status);
+          this.showMessage("Eror!", error.message, "error");
+        }
+      );
   }
 
   onRowUnselect(event) {
     // this.messageService.add({
     //   severity: "info",
-    //   summary: "Mahasiswa Unselected",
-    //   detail: event.data.nama,
+    //   summary: "Matakuliah Unselected",
+    //   detail: event.data.nama_matkul,
     // });
   }
 
-  onRowEditInit(product: Product) {
-    console.log(product);
-    // this.clonedProducts[product.id] = { ...product };
+  onSubmit() {
+    console.warn(this.profileForm.value);
+    this.model = this.profileForm.value;
+    this.getMatkul();
+  }
+
+  getMatkul() {
+    this.loading = true;
+    this.loading2 = true;
+    this.listMahasiswa = [];
+    this.krsService
+      .getKrsDetail(
+        this.appConfig.jenisAplikasiString,
+        this.model.tahun,
+        this.model.semester,
+        this.model.jenjang,
+        this.model.jurusan,
+        this.model.kelas
+      )
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+          this.loading2 = false;
+        })
+      )
+      .subscribe(
+        (data) => {
+          this.listMatkul = data.result;
+          console.log(data);
+        },
+        (error) => {
+          console.log(error);
+          console.log(error.status);
+          this.showMessage("Eror!", error.message, "error");
+        }
+      );
+  }
+
+  getNew(param) {
+    console.log(param);
+    if (this.model) this.model.semester = param;
+    if (this.nim) this.getMhsByMatkul();
+  }
+
+  getDosen(a) {
+    console.log("m111111", a);
+    this.krsService
+      .getDosenByMatkul(this.appConfig.jenisAplikasiString, this.kode_matkul)
+      .subscribe(
+        (data) => {
+          this.listDosen = data.result;
+          this.selectedDosenNew = this.listDosen.find((_) => _.nip === a).nama;
+        },
+        (err) => {
+          console.error(err);
+          this.showMessage("Eror!", err.message, "error");
+        }
+      );
+  }
+
+  modelChangeFn(value, field) {
+    // localStorage.setItem("si" + field, value);
+  }
+  getSemester(a) {
+    console.log("------", a);
+  }
+
+  onRowEditInit(a) {
+    console.log(a);
+    console.log("dataEdit----", a);
   }
 
   onRowEditSave(row) {
@@ -99,97 +254,127 @@ export class AddNilaiComponent extends AppComponentBase implements OnInit {
     //     detail: "Invalid Price",
     //   });
     // }
-    console.log(row);
-    this.loading2 = true;
-    let model = new NilaiModel();
-    model.detail_krs_id = row.last_detail_krs_id;
-    model.jenis_aplikasi = this.appConfig.jenisAplikasiString;
-    model.keterangan = "update nilai dari kaprodi";
-    model.nilai = row.nilai;
-    model.nip_kaprodi = this.kaprodi;
-    model.nip_puskordat = this.authenticationService.userValue["username"];
-    console.log(model);
-    this.khsService
-      .addNilaiKaprodi(model)
-      .pipe(
-        finalize(() => {
-          this.loading2 = false;
-          this.getNilai(this.nim);
-        })
-      )
-      .subscribe(
-        (res) => {
-          console.log(res);
-          if (res.status == 0) {
-            this.showMessage("Eror!", res.message, "error");
-          } else {
-            this.showMessage(
-              "Sukses!",
-              res.msg + " - Berhasil mengganti nilai",
-              "success"
-            );
-          }
-        },
-        (error) => {
-          this.showMessage("Eror!", error, "error");
-        }
-      );
+    let dataBaru = row;
+    console.log("------dataBaru", dataBaru);
+    let edited = [];
+    let a;
+    if (dataBaru.minggu1 == 1) {
+      a = 1;
+      edited.push(a);
+    }
+    if (dataBaru.minggu2 == 1) {
+      a = 2;
+      edited.push(a);
+    }
+    if (dataBaru.minggu3 == 1) {
+      a = 3;
+      edited.push(a);
+    }
+    if (dataBaru.minggu4 == 1) {
+      a = 4;
+      edited.push(a);
+    }
+    if (dataBaru.minggu5 == 1) {
+      a = 5;
+      edited.push(a);
+    }
+    if (dataBaru.minggu6 == 1) {
+      a = 6;
+      edited.push(a);
+    }
+    if (dataBaru.minggu7 == 1) {
+      a = 7;
+      edited.push(a);
+    }
+    if (dataBaru.minggu8 == 1) {
+      a = 8;
+      edited.push(a);
+    }
+    if (dataBaru.minggu9 == 1) {
+      a = 9;
+      edited.push(a);
+    }
+    if (dataBaru.minggu10 == 1) {
+      a = 10;
+      edited.push(a);
+    }
+    if (dataBaru.minggu11 == 1) {
+      a = 11;
+      edited.push(a);
+    }
+    if (dataBaru.minggu12 == 1) {
+      a = 12;
+      edited.push(a);
+    }
+    if (dataBaru.minggu13 == 1) {
+      a = 13;
+      edited.push(a);
+    }
+    if (dataBaru.minggu14 == 1) {
+      a = 14;
+      edited.push(a);
+    }
+
+    console.log("------edited", edited);
+    edited.map((e) => {
+      this.loading1 = true;
+      let model = new PresensiCekal();
+      model.jenis_aplikasi = this.appConfig.jenisAplikasi;
+      model.id_master_waktu_presensi = e;
+      model.master_tipe_presensi_id = 2; // 5=telat 2=hadir
+      model.nim = row.nim;
+      model.krs_id = this.krsid;
+      console.log(model);
+      // this.presensiService
+      //   .addPresensi(model)
+      //   .pipe(
+      //     finalize(() => {
+      //       this.loading1 = false;
+      //       this.getMhsByMatkul();
+      //     })
+      //   )
+      //   .subscribe(
+      //     (res) => {
+      //       console.log(res);
+      //       if (res.status == 0) {
+      //         this.showMessage("Eror!", res.message, "error");
+      //       } else {
+      //         // this.showMessage(
+      //         //   "Sukses!",
+      //         //   res.msg + " - Berhasil mengganti nilai",
+      //         //   "success"
+      //         // );
+      //         this.showNotification(
+      //           "top",
+      //           "right",
+      //           "Sukses! " +
+      //             res.msg +
+      //             " - Berhasil mengganti presensi minggu" +
+      //             e,
+      //           "success"
+      //         );
+      //       }
+      //     },
+      //     (error) => {
+      //       this.showMessage("Eror!", error, "error");
+      //     }
+      //   );
+    });
   }
 
   onRowEditCancel() {
-    this.getNilai(this.nim);
-  }
-  onSubmit() {
-    // TODO: Use EventEmitter with form value
-    console.warn(this.profileForm.value);
+    this.getMhsByMatkul();
   }
 
-  applyFilter(a) {
-    // TODO: Use EventEmitter with form value
-    console.log(a);
-    this.getMahasiswa();
-  }
-
-  getMahasiswa() {
-    this.loading = true;
-    this.listMahasiswa = [];
-    this.mahasiswaService
-      .getMahasiswaByNim(this.appConfig.jenisAplikasiString, this.nim)
-      .pipe(
-        finalize(() => {
-          this.loading = false;
-        })
-      )
-      .subscribe(
-        (data) => {
-          this.listMahasiswa = data.result;
-          console.log(data);
-        },
-        (error) => {
-          console.log(error);
-          this.showMessage("Eror!", error.message, "error");
-        }
-      );
-  }
-
-  getNilai(a) {
-    this.loading2 = true;
-    this.khsService
-      .getSalinanNilai(this.appConfig.jenisAplikasiString, a)
-      .pipe(
-        finalize(() => {
-          this.loading2 = false;
-        })
-      )
-      .subscribe(
-        (data) => {
-          this.listNilai = data.result;
-          console.log(data);
-        },
-        (error) => {
-          console.log(error);
-          this.showMessage("Eror!", error.message, "error");
-        }
-      );
+  getTipeNilai() {
+    this.khsService.getTipeNilai(this.appConfig.jenisAplikasiString).subscribe(
+      (data) => {
+        this.tipeNilai = data.result;
+      },
+      (err) => {
+        console.error(err);
+        this.showMessage("Eror!", err.message, "error");
+      }
+    );
   }
 }

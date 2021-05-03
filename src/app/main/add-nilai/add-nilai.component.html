@@ -1,45 +1,107 @@
 <div class="main-content">
     <div class="container-fluid">
         <div class="row" style="margin-top: -30px;">
-            <div class="col-md-12">
-                <div class="card">
+            <div class="col-md-8">
+                <div class="card" [busyIf]="loading">
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <mat-form-field class="example-full-width">
-                                    <mat-label>NIM</mat-label>
-                                    <input matInput type="text" [(ngModel)]="nim" (keyup)="applyFilter(nim)">
-                                    <button mat-button *ngIf="nim" matSuffix mat-icon-button aria-label="Clear"
-                                        (click)="nim=''">
-                                        <mat-icon>close</mat-icon>
-                                    </button>
-                                </mat-form-field>
+                        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <tahun-ddl formControlName="tahun">
+                                    </tahun-ddl>
+                                </div>
+                                <div class="col-md-4">
+                                    <semester-ddl formControlName="semester" (selectedSemester2)="getSemester($event)">
+                                    </semester-ddl>
+                                </div>
                             </div>
-                            <div class="col-md-4">
-                                <kaprodi-ddl [(ngModel)]="kaprodi">
-                                </kaprodi-ddl>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <jenjang-ddl formControlName="jenjang">
+                                    </jenjang-ddl>
+                                </div>
+                                <div class="col-md-4">
+                                    <prodi-ddl formControlName="jurusan">
+                                    </prodi-ddl>
+                                </div>
+                                <div class="col-md-4">
+                                    <kelas-ddl formControlName="kelas" (selectedSmt)="getNew($event)">
+                                    </kelas-ddl>
+                                </div>
                             </div>
-                        </div>
+
+                            <button mat-raised-button type="submit" class="btn btn-info" [disabled]="!profileForm.valid"
+                                [loading]="loading">Cari</button>
+                            <div class="clearfix"></div>
+
+                        </form>
                     </div>
-                    <div class="card-footer">
-                        <div class="stats">
-                            <i class="material-icons text-danger">warning</i>
-                            <p>Pilih Kaprodi supaya tombol edit muncul</p>
-                        </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card" [busyIf]="loading2">
+                    <div class="card-body">
+                        <p-table #dt2 [value]="listMatkul" selectionMode="single" [(selection)]="selectedProduct2"
+                            dataKey="kode_matkul" (onRowSelect)="onRowSelect($event)"
+                            (onRowUnselect)="onRowUnselect($event)" editMode="row" [paginator]="true" [rows]="10"
+                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                            [showCurrentPageReport]="true" [globalFilterFields]="['nama_matkul','kode_matkul']"
+                            [rowsPerPageOptions]="[10,25,50]">
+                            <ng-template pTemplate="caption">
+                                <div class="table-header">
+                                    List Mata Kuliah<br><br>
+                                    <span class="p-input-icon-right p-ml-auto">
+                                        <i class="pi pi-search"></i>
+                                        <input pInputText type="text"
+                                            (input)="dt2.filterGlobal($event.target.value, 'contains')"
+                                            placeholder="Search keyword" />
+                                    </span>
+                                </div>
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th pSortableColumn="kode_matkul">Kode <p-sortIcon field="kode_matkul"></p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="nama_matkul">Nama <p-sortIcon field="nama_matkul">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="sks">SKS <p-sortIcon field="sks">
+                                        </p-sortIcon>
+                                    </th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-matkul>
+                                <tr [pSelectableRow]="matkul">
+                                    <td>{{matkul.kode_matkul}}</td>
+                                    <td>{{matkul.nama_matkul}}</td>
+                                    <td>{{matkul.sks}}</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
                     </div>
                 </div>
             </div>
         </div>
         <p-toast></p-toast>
         <div class="row" style="margin-top: -30px;">
-            <div class="col-md-6">
-                <div class="card" [busyIf]="loading">
+            <div class="col-md-12">
+                <div class="card" [busyIf]="loading1">
                     <div class="card-body">
-                        <p-table #dt1 [value]="listMahasiswa" selectionMode="single" [(selection)]="selectedProduct2"
-                            dataKey="nim" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10"
-                            [showCurrentPageReport]="true" sortMode="multiple"
+                        <p-table #dt1 [value]="listMahasiswa" [paginator]="true" [rows]="10" editMode="row"
+                            [frozenColumns]="frozenCols" frozenWidth="350px" [scrollable]="true"
+                            [showCurrentPageReport]="true" sortMode="multiple" dataKey="nim"
                             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                            [globalFilterFields]="['nim','nama']" [rowsPerPageOptions]="[10,25,50]">
+                            [globalFilterFields]="['nama','nim']" [rowsPerPageOptions]="[10,25,50]">
+                            <!-- <ng-template pTemplate="caption">
+                                <div class="p-d-flex">
+                                    <span class="p-input-icon-right p-ml-auto">
+                                        <i class="pi pi-search"></i>
+                                        <input pInputText type="text"
+                                            (input)="dt1.filterGlobal($event.target.value, 'contains')"
+                                            placeholder="Search keyword" />
+                                    </span>
+                                </div>
+                            </ng-template> -->
                             <ng-template pTemplate="caption">
                                 <div class="table-header">
                                     List Mahasiswa
@@ -52,93 +114,139 @@
                                     </span>
                                 </div>
                             </ng-template>
+                            <ng-template pTemplate="colgroup" let-columns>
+                                <colgroup>
+                                    <col style="width:150px">
+                                    <col style="width:200px">
+                                    <col style="width:100px">
+                                    <col style="width:100px" *ngIf="!isPraktikum">
+                                    <col style="width:100px" *ngIf="!isPraktikum">
+                                    <col style="width:100px" *ngIf="!isPraktikum">
+                                    <col style="width:100px" *ngIf="!isPraktikum">
+                                    <col style="width:100px" *ngIf="isPraktikum">
+                                    <col style="width:100px" *ngIf="isPraktikum">
+                                    <col style="width:100px" *ngIf="isPraktikum">
+                                    <col style="width:100px">
+                                    <col style="width:100px">
+                                </colgroup>
+                            </ng-template>
                             <ng-template pTemplate="header">
                                 <tr>
-                                    <th pSortableColumn="nim">NIM <p-sortIcon field="nim"></p-sortIcon>
-                                    </th>
-                                    <th pSortableColumn="nama">Nama <p-sortIcon field="nama"></p-sortIcon>
-                                    </th>
+                                    <th>NIM </th>
+                                    <th>Nama</th>
+                                    <th>Status</th>
+                                    <th *ngIf="!isPraktikum">Tugas1</th>
+                                    <th *ngIf="!isPraktikum">UTS</th>
+                                    <th *ngIf="!isPraktikum">Tugas2</th>
+                                    <th *ngIf="!isPraktikum">UAS</th>
+                                    <th *ngIf="isPraktikum">Harian</th>
+                                    <th *ngIf="isPraktikum">Laporan</th>
+                                    <th *ngIf="isPraktikum">UAP</th>
+                                    <th>Total</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </ng-template>
-                            <ng-template pTemplate="body" let-mahasiswa>
-                                <tr [pSelectableRow]="mahasiswa">
+                            <ng-template pTemplate="body" let-mahasiswa let-editing="editing" let-ri="rowIndex">
+                                <tr [pEditableRow]="mahasiswa" [ngClass]="{'row-cekal': mahasiswa.cekal == true}">
                                     <td>{{mahasiswa.nim}}</td>
                                     <td>{{mahasiswa.nama}}</td>
-                                </tr>
-                            </ng-template>
-                        </p-table>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="card" [busyIf]="loading2">
-                    <div class="card-body">
-                        <p-table #dt2 [value]="listNilai" dataKey="kode_matkul" editMode="row" [paginator]="true"
-                            [rows]="10" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                            [showCurrentPageReport]="true" [globalFilterFields]="['kode_matkul','nama','nilai']"
-                            [rowsPerPageOptions]="[10,25,50]">
-                            <ng-template pTemplate="caption">
-                                <div class="table-header">
-                                    List Nilai
-                                    <br><br>
-                                    <span class="p-input-icon-left">
-                                        <i class="pi pi-search"></i>
-                                        <input pInputText type="text"
-                                            (input)="dt2.filterGlobal($event.target.value, 'contains')"
-                                            placeholder="Search..." />
-                                    </span>
-                                </div>
-                            </ng-template>
-                            <ng-template pTemplate="header">
-                                <tr>
-                                    <th>Kode</th>
-                                    <th>Nama</th>
-                                    <th>Nilai</th>
-                                    <th style="width:8rem"></th>
-                                </tr>
-                            </ng-template>
-                            <ng-template pTemplate="body" let-nilai let-editing="editing" let-ri="rowIndex">
-                                <tr [pEditableRow]="nilai">
-                                    <td>
+                                    <td>{{mahasiswa.ket_status_matkul}}</td>
+                                    <td *ngIf="!isPraktikum">
                                         <p-cellEditor>
                                             <ng-template pTemplate="input">
-                                                <!-- <input pInputText type="text" [(ngModel)]="nilai.kode_matkul"> -->
-                                                {{nilai.kode_matkul}}
+                                                <input pInputText type="number" [style]="{'width':'100%'}" [min]="0"
+                                                    [max]="100" [(ngModel)]="mahasiswa.tugas1">
                                             </ng-template>
                                             <ng-template pTemplate="output">
-                                                {{nilai.kode_matkul}}
+                                                {{mahasiswa.tugas1}}
+                                            </ng-template>
+                                        </p-cellEditor>
+                                    </td>
+                                    <td *ngIf="!isPraktikum">
+                                        <p-cellEditor>
+                                            <ng-template pTemplate="input">
+                                                <input pInputText type="number" [style]="{'width':'100%'}" [min]="0"
+                                                    [max]="100" [(ngModel)]="mahasiswa.uts">
+                                            </ng-template>
+                                            <ng-template pTemplate="output">
+                                                {{mahasiswa.uts}}
+                                            </ng-template>
+                                        </p-cellEditor>
+                                    </td>
+                                    <td *ngIf="!isPraktikum">
+                                        <p-cellEditor>
+                                            <ng-template pTemplate="input">
+                                                <input pInputText type="number" [style]="{'width':'100%'}" [min]="0"
+                                                    [max]="100" [(ngModel)]="mahasiswa.tugas2">
+                                            </ng-template>
+                                            <ng-template pTemplate="output">
+                                                {{mahasiswa.tugas2}}
+                                            </ng-template>
+                                        </p-cellEditor>
+                                    </td>
+                                    <td *ngIf="!isPraktikum">
+                                        <p-cellEditor>
+                                            <ng-template pTemplate="input">
+                                                <input pInputText type="number" [style]="{'width':'100%'}" [min]="0"
+                                                    [max]="100" [(ngModel)]="mahasiswa.uas">
+                                            </ng-template>
+                                            <ng-template pTemplate="output">
+                                                {{mahasiswa.uas}}
+                                            </ng-template>
+                                        </p-cellEditor>
+                                    </td>
+                                    <td *ngIf="isPraktikum">
+                                        <p-cellEditor>
+                                            <ng-template pTemplate="input">
+                                                <input pInputText type="number" [style]="{'width':'100%'}" [min]="0"
+                                                    [max]="100" [(ngModel)]="mahasiswa.harian">
+                                            </ng-template>
+                                            <ng-template pTemplate="output">
+                                                {{mahasiswa.harian}}
+                                            </ng-template>
+                                        </p-cellEditor>
+                                    </td>
+                                    <td *ngIf="isPraktikum">
+                                        <p-cellEditor>
+                                            <ng-template pTemplate="input">
+                                                <input pInputText type="number" [style]="{'width':'100%'}" [min]="0"
+                                                    [max]="100" [(ngModel)]="mahasiswa.laporan">
+                                            </ng-template>
+                                            <ng-template pTemplate="output">
+                                                {{mahasiswa.laporan}}
+                                            </ng-template>
+                                        </p-cellEditor>
+                                    </td>
+                                    <td *ngIf="isPraktikum">
+                                        <p-cellEditor>
+                                            <ng-template pTemplate="input">
+                                                <input pInputText type="number" [style]="{'width':'100%'}" [min]="0"
+                                                    [max]="100" [(ngModel)]="mahasiswa.uap">
+                                            </ng-template>
+                                            <ng-template pTemplate="output">
+                                                {{mahasiswa.uap}}
                                             </ng-template>
                                         </p-cellEditor>
                                     </td>
                                     <td>
                                         <p-cellEditor>
                                             <ng-template pTemplate="input">
-                                                <!-- <input pInputText type="text" [(ngModel)]="nilai.nama" required> -->
-                                                {{nilai.nama}}
+                                                <!-- <input pInputText type="number" [style]="{'width':'100%'}" [min]="0"
+                                                    [max]="100" [(ngModel)]="mahasiswa.total"> -->
+                                                {{mahasiswa.total}}
                                             </ng-template>
                                             <ng-template pTemplate="output">
-                                                {{nilai.nama}}
+                                                {{mahasiswa.total}}
                                             </ng-template>
                                         </p-cellEditor>
                                     </td>
-                                    <td>
-                                        <p-cellEditor>
-                                            <ng-template pTemplate="input">
-                                                <!-- <input pInputText type="text" [(ngModel)]="nilai.nilai"> -->
-                                                <p-dropdown [options]="nilaies" [(ngModel)]="nilai.nilai"
-                                                    [style]="{'width':'100%'}"></p-dropdown>
-                                            </ng-template>
-                                            <ng-template pTemplate="output">
-                                                {{nilai.nilai}}
-                                            </ng-template>
-                                        </p-cellEditor>
-                                    </td>
+                                    <!-- <td>{{mahasiswa.presensi.data_presensi.Hadir}}</td> -->
                                     <td style="text-align:center">
-                                        <button *ngIf="!editing&&kaprodi" pButton pRipple type="button" pInitEditableRow
-                                            icon="pi pi-pencil" (click)="onRowEditInit(nilai)"
+                                        <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow
+                                            icon="pi pi-pencil" (click)="onRowEditInit(mahasiswa)"
                                             class="p-button-rounded p-button-text"></button>
                                         <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow
-                                            icon="pi pi-check" (click)="onRowEditSave(nilai)"
+                                            icon="pi pi-check" (click)="onRowEditSave(mahasiswa)"
                                             class="p-button-rounded p-button-text p-button-success p-mr-2"></button>
                                         <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow
                                             icon="pi pi-times" (click)="onRowEditCancel()"
