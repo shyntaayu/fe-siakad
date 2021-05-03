@@ -4,7 +4,7 @@
     <br><br>
     <center>
         <h2><u><span style="font-weight: bold;">SALINAN PRESTASI AKADEMIK</span></u></h2>
-        <font size="1">No. Seri: /J.05/STIMATA/SNIL/{{current_date | date:('yyyy')}}</font>
+        <span style="font-size: 10px;">No. Seri: /J.05/STIMATA/SNIL/{{current_date | date:('yyyy')}}</span>
     </center>
 
     <center>
@@ -14,45 +14,45 @@
                 <tr></tr>
                 <tr>
                     <td>
-                        <font size="2">Nama</font>
+                        <span style="font-size: 13px;">Nama</span>
                     </td>
                     <td>:</td>
                     <td>
-                        <font size="2">{{mahasiswa.nama}}</font>
+                        <span style="font-size: 13px;">{{mahasiswa.nama}}</span>
                     </td>
                     <td> &nbsp; </td>
                     <td>
-                        <font size="2">Program Studi</font>
+                        <span style="font-size: 13px;">Program Studi</span>
                     </td>
                     <td>:</td>
                     <td>
-                        <font size="2">{{mahasiswa.jenjang}} {{mahasiswa.prodi}}</font>
+                        <span style="font-size: 13px;">{{mahasiswa.jenjang}} {{mahasiswa.prodi}}</span>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <font size="2">NIM</font>
+                        <span style="font-size: 13px;">NIM</span>
                     </td>
                     <td>:</td>
                     <td>
-                        <font size="2">{{nim}}</font>
+                        <span style="font-size: 13px;">{{nim}}</span>
                     </td>
                     <td>&nbsp;</td>
                     <td width="150">
-                        <font size="2">Thn. Akademik Masuk</font>
+                        <span style="font-size: 13px;">Thn. Akademik Masuk</span>
                     </td>
                     <td>:</td>
                     <td>
-                        <font size="2">{{setTahunMasuk(nim)}}</font>
+                        <span style="font-size: 13px;">{{setTahunMasuk(nim)}}</span>
                     </td>
                 </tr>
                 <tr>
                     <td width="120">
-                        <font size="2">Tempat, Tgl. Lahir</font>
+                        <span style="font-size: 13px;">Tempat, Tgl. Lahir</span>
                     </td>
                     <td>:</td>
                     <td>
-                        <font size="2">{{mahasiswa.tempat_lahir}}, {{mahasiswa.tgl_lahir}}</font>
+                        <span style="font-size: 13px;">{{mahasiswa.tempat_lahir}}, {{mahasiswa.tgl_lahir}}</span>
                     </td>
                     <td></td>
                 </tr>
@@ -72,36 +72,36 @@
                         <tbody>
                             <tr align="center" bgcolor="silver" valign="center">
                                 <td width="20" height="20">
-                                    <font size="1">No.</font>
+                                    <span style="font-size: 10px;">No.</span>
                                 </td>
                                 <td width="64">
-                                    <font size="1">&nbsp;Kode MTK&nbsp;</font>
+                                    <span style="font-size: 10px;">&nbsp;Kode MTK&nbsp;</span>
                                 </td>
                                 <td width="200">
-                                    <font size="1">&nbsp;Nama MTK&nbsp;</font>
+                                    <span style="font-size: 10px;">&nbsp;Nama MTK&nbsp;</span>
                                 </td>
                                 <td width="25">
-                                    <font size="1">&nbsp;SKS&nbsp;</font>
+                                    <span style="font-size: 10px;">&nbsp;SKS&nbsp;</span>
                                 </td>
                                 <td width="25">
-                                    <font size="1">&nbsp;Nilai&nbsp;</font>
+                                    <span style="font-size: 10px;">&nbsp;Nilai&nbsp;</span>
                                 </td>
                             </tr>
                             <tr bgcolor="white" *ngFor="let a of dataLeft; let i = index">
                                 <td>
-                                    <font size="1">&nbsp;{{i+1}}&nbsp;</font>
+                                    <span style="font-size: 10px;">&nbsp;{{i+1}}&nbsp;</span>
                                 </td>
                                 <td>
-                                    <font size="1">&nbsp;{{a.kode_matkul}}&nbsp;</font>
+                                    <span style="font-size: 10px;">&nbsp;{{a.kode_matkul}}&nbsp;</span>
                                 </td>
                                 <td>
-                                    <font size="1">&nbsp;{{a.nama}}&nbsp;</font>
+                                    <span style="font-size: 10px;">&nbsp;{{a.nama}}&nbsp;</span>
                                 </td>
                                 <td align="center">
-                                    <font size="1">&nbsp;{{a.sks}}&nbsp;</font>
+                                    <span style="font-size: 10px;">&nbsp;{{a.sks}}&nbsp;</span>
                                 </td>
                                 <td>
-                                    <font size="1">&nbsp;{{a.nilai}}&nbsp;</font>
+                                    <span style="font-size: 10px;">&nbsp;{{a.nilai}}&nbsp;</span>
                                 </td>
                             </tr>
                         </tbody>
@@ -112,36 +112,36 @@
                         <tbody>
                             <tr align="center" bgcolor="silver" valign="center">
                                 <td width="20" height="20">
-                                    <font size="1">No.</font>
+                                    <span style="font-size: 10px;">No.</span>
                                 </td>
                                 <td width="64">
-                                    <font size="1">&nbsp;Kode MTK&nbsp;</font>
+                                    <span style="font-size: 10px;">&nbsp;Kode MTK&nbsp;</span>
                                 </td>
                                 <td width="200">
-                                    <font size="1">&nbsp;Nama MTK&nbsp;</font>
+                                    <span style="font-size: 10px;">&nbsp;Nama MTK&nbsp;</span>
                                 </td>
                                 <td width="25">
-                                    <font size="1">&nbsp;SKS&nbsp;</font>
+                                    <span style="font-size: 10px;">&nbsp;SKS&nbsp;</span>
                                 </td>
                                 <td width="25">
-                                    <font size="1">&nbsp;Nilai&nbsp;</font>
+                                    <span style="font-size: 10px;">&nbsp;Nilai&nbsp;</span>
                                 </td>
                             </tr>
                             <tr bgcolor="white" *ngFor="let a of dataRight; let i = index">
                                 <td>
-                                    <font size="1">&nbsp;{{i+1+half}}&nbsp;</font>
+                                    <span style="font-size: 10px;">&nbsp;{{i+1+half}}&nbsp;</span>
                                 </td>
                                 <td>
-                                    <font size="1">&nbsp;{{a.kode_matkul}}&nbsp;</font>
+                                    <span style="font-size: 10px;">&nbsp;{{a.kode_matkul}}&nbsp;</span>
                                 </td>
                                 <td>
-                                    <font size="1">&nbsp;{{a.nama}}&nbsp;</font>
+                                    <span style="font-size: 10px;">&nbsp;{{a.nama}}&nbsp;</span>
                                 </td>
                                 <td align="center">
-                                    <font size="1">&nbsp;{{a.sks}}&nbsp;</font>
+                                    <span style="font-size: 10px;">&nbsp;{{a.sks}}&nbsp;</span>
                                 </td>
                                 <td>
-                                    <font size="1">&nbsp;{{a.nilai}}&nbsp;</font>
+                                    <span style="font-size: 10px;">&nbsp;{{a.nilai}}&nbsp;</span>
                                 </td>
                             </tr>
                         </tbody>
@@ -155,16 +155,17 @@
         <tbody>
             <tr>
                 <td width="50%">
-                    <font size="2">&nbsp;Total sks yang telah ditempuh : {{footer.totalTempuhSKS}}</font>
+                    <span style="font-size: 13px;">&nbsp;Total sks yang telah ditempuh :
+                        {{footer.totalTempuhSKS}}</span>
                 </td>
                 <td>
-                    <font size="2">&nbsp;Total sks yang telah lulus : {{footer.totalTempuhSKS}}</font>
+                    <span style="font-size: 13px;">&nbsp;Total sks yang telah lulus : {{footer.totalTempuhSKS}}</span>
                 </td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
                 <td>
-                    <font size="2">&nbsp;Indeks Prestasi Kumulatif (IPK) : {{setIP(dipk.IPK)}}</font>
+                    <span style="font-size: 13px;">&nbsp;Indeks Prestasi Kumulatif (IPK) : {{setIP(dipk.IPK)}}</span>
                 </td>
             </tr>
         </tbody>
@@ -175,12 +176,12 @@
         <tbody>
             <tr>
                 <td>
-                    <font size="2">Malang, {{current_date | date:('dd MMMM yyyy')}}</font>
+                    <span style="font-size: 13px;">Malang, {{current_date | date:('dd MMMM yyyy')}}</span>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <font size="2">Ka. Prodi. {{mahasiswa.jenjang}}-{{mahasiswa.prodi}}</font>
+                    <span style="font-size: 13px;">Ka. Prodi. {{mahasiswa.jenjang}}-{{mahasiswa.prodi}}</span>
                 </td>
             </tr>
 
@@ -192,12 +193,12 @@
             </tr>
             <tr>
                 <td>
-                    <font size="2"><u><b>{{mahasiswa.nama_kaprodi}}</b></u></font>
+                    <span style="font-size: 13px;"><u><b>{{prodi.nama_kaprodi}}</b></u></span>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <font size="2">NIK {{mahasiswa.kaprodi}}</font>
+                    <span style="font-size: 13px;">NIK {{prodi.nik}}</span>
                 </td>
             </tr>
         </tbody>

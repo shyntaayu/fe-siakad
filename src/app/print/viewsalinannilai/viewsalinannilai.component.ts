@@ -27,6 +27,7 @@ export class ViewSalinanNilaiComponent
   half;
   dipk;
   mahasiswa;
+  prodi;
 
   constructor(
     private printService: PrintService,
@@ -98,6 +99,7 @@ export class ViewSalinanNilaiComponent
             .subscribe(
               (data) => {
                 this.footer = data;
+                this.prodi = data.list_khs[0];
                 console.log(data);
               },
               (error) => {
