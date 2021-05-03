@@ -1,86 +1,86 @@
 <p *ngIf="mahasiswa" style="text-align: center;">
-    <font size="3"><span style="font-weight: bold;">YAYASAN PRADNYA PARAMITHA<br>
-            SEKOLAH TINGGI MANAJEMEN INFORMATIKA DAN KOMPUTER<br>
-            PPKIA PRADNYA PARAMITA</span></font><br><br>
-    <font size="5"><u>TRANSKRIP AKADEMIK</u></font><br>
-    <font size="2">Lampiran Ijazah Nomor: {{mahasiswa.noTrans}}</font> <br>
-    <font size="2">SK Pendirian Sekolah Tinggi nomor: 114/D/0/2000, tanggal 26 Juli 2000</font>
+    <span style="font-weight: bold;font-size: 16px;">YAYASAN PRADNYA PARAMITHA<br>
+        SEKOLAH TINGGI MANAJEMEN INFORMATIKA DAN KOMPUTER<br>
+        PPKIA PRADNYA PARAMITA</span><br><br>
+    <span style="font-size: 24px;"><u>TRANSKRIP AKADEMIK</u></span><br>
+    <span style="font-size: 13px;">Lampiran Ijazah Nomor: {{mahasiswa.noTrans}}</span> <br>
+    <span style="font-size: 13px;">SK Pendirian Sekolah Tinggi nomor: 114/D/0/2000, tanggal 26 Juli 2000</span>
 </p>
 <table border="0" style="BORDER-COLLAPSE:COLLAPSE;" width="100%" *ngIf="mahasiswa" align="center">
     <tbody>
         <tr>
             <td></td>
             <td>
-                <font size="2">Nama</font>
+                <span style="font-size: 13px;">Nama</span>
             </td>
             <td>:</td>
             <td>
-                <font size="2">{{mahasiswa.nama}}</font>
+                <span style="font-size: 13px;">{{mahasiswa.nama}}</span>
             </td>
             <td> &nbsp; </td>
             <td>
-                <font size="2">Jenjang/Program Studi</font>
+                <span style="font-size: 13px;">Jenjang/Program Studi</span>
             </td>
             <td>:</td>
             <td>
-                <font size="2">{{mahasiswa.jenjang}}/{{mahasiswa.prodi}}</font>
+                <span style="font-size: 13px;">{{mahasiswa.jenjang}}/{{mahasiswa.prodi}}</span>
             </td>
         </tr>
         <tr>
             <td width="10"></td>
             <td>
-                <font size="2">NIM</font>
+                <span style="font-size: 13px;">NIM</span>
             </td>
             <td>:</td>
             <td>
-                <font size="2">{{nim}}</font>
+                <span style="font-size: 13px;">{{nim}}</span>
             </td>
             <td>&nbsp;</td>
             <td>
-                <font size="2">Tahun Akademik Masuk</font>
+                <span style="font-size: 13px;">Tahun Akademik Masuk</span>
             </td>
             <td>:</td>
             <td>
-                <font size="2">{{mahasiswa.tahun_masuk}}</font>
+                <span style="font-size: 13px;">{{mahasiswa.tahun_masuk}}</span>
             </td>
         </tr>
         <tr>
             <td width="10"></td>
             <td>
-                <font size="2">Tempat, Tgl Lahir</font>
+                <span style="font-size: 13px;">Tempat, Tgl Lahir</span>
             </td>
             <td>:</td>
             <td>
-                <font size="2">{{mahasiswa.tempat_lahir}}, {{mahasiswa.tgl_lahir}}</font>
+                <span style="font-size: 13px;">{{mahasiswa.tempat_lahir}}, {{mahasiswa.tgl_lahir}}</span>
             </td>
             <td></td>
 
             <td>
-                <font size="2">Status</font>
+                <span style="font-size: 13px;">Status</span>
             </td>
             <td>:</td>
             <td>
-                <font size="2">{{mahasiswa.status_daftar_mahasiswa}}</font>
+                <span style="font-size: 13px;">{{mahasiswa.status_daftar_mahasiswa}}</span>
             </td>
         </tr>
 
         <tr>
             <td width="10"></td>
             <td>
-                <font size="2">NIK</font>
+                <span style="font-size: 13px;">NIK</span>
             </td>
             <td>:</td>
             <td>
-                <font size="2">{{mahasiswa.nik}}</font>
+                <span style="font-size: 13px;">{{mahasiswa.nik}}</span>
             </td>
             <td></td>
 
             <td>
-                <font size="2">Tanggal Lulus</font>
+                <span style="font-size: 13px;">Tanggal Lulus</span>
             </td>
             <td>:</td>
             <td>
-                <font size="2">{{mahasiswa.tahunLulus}}</font>
+                <span style="font-size: 13px;">{{mahasiswa.tahunLulus}}</span>
             </td>
         </tr>
         <tr>
@@ -92,21 +92,23 @@
     <tbody>
         <tr>
             <td>
-                <font size="2">
-                    <font size="2"> Mahasiswa tersebut telah dinyatakan <span style="text-transform: uppercase;">
+                <span style="font-size: 13px;">
+                    <span style="font-size: 13px;"> Mahasiswa tersebut telah dinyatakan <span
+                            style="text-transform: uppercase;">
                             {{mahasiswa.statusmahasiswa}}</span> {{setJenjang(mahasiswa.jenjang)}} dengan Skripsi:
-                    </font>
-                </font>
+                    </span>
+                </span>
             </td>
         </tr>
         <tr>
             <td>
-                <font size="2"></font>
+                <span style="font-size: 13px;"></span>
             </td>
         </tr>
         <tr>
             <td>
-                <font size="2">Adapun mata kuliah yang sudah ditempuh beserta nilainya sebagai berikut:</font>
+                <span style="font-size: 13px;">Adapun mata kuliah yang sudah ditempuh beserta nilainya sebagai
+                    berikut:</span>
             </td>
         </tr>
     </tbody>
@@ -122,38 +124,38 @@
                     <tbody>
                         <tr align="center" bgcolor="silver" valign="center">
                             <td width="15" height="20">
-                                <font size="1">No.</font>
+                                <span style="font-size: 10px;">No.</span>
                             </td>
                             <td width="75">
-                                <font size="1">&nbsp;Kode MTK&nbsp;</font>
+                                <span style="font-size: 10px;">&nbsp;Kode MTK&nbsp;</span>
                             </td>
                             <td width="245">
-                                <font size="1" style="Times New Roman">&nbsp;Nama MTK&nbsp;</font>
+                                <span style="font: Times New Roman;font-size: 10px;">&nbsp;Nama MTK&nbsp;</span>
                             </td>
                             <td width="17">
-                                <font size="1">&nbsp;sks&nbsp;</font>
+                                <span style="font-size: 10px;">&nbsp;sks&nbsp;</span>
                             </td>
                             <td width="21">
-                                <font size="1">&nbsp;Nilai&nbsp;</font>
+                                <span style="font-size: 10px;">&nbsp;Nilai&nbsp;</span>
                             </td>
                         </tr>
                         <tr bgcolor="white" *ngFor="let a of dataLeft; let i = index">
                             <td>
-                                <font size="1">&nbsp;{{i+1}}&nbsp;</font>
+                                <span style="font-size: 10px;">&nbsp;{{i+1}}&nbsp;</span>
                             </td>
                             <td align="center">
-                                <font size="1">
+                                <span style="font-size: 10px;">
                                     {{a.kode_matkul}}
-                                </font>
+                                </span>
                             </td>
                             <td>
-                                <font size="1">&nbsp;{{a.nama}}&nbsp;</font>
+                                <span style="font-size: 10px;">&nbsp;{{a.nama}}&nbsp;</span>
                             </td>
                             <td align="center">
-                                <font size="1">&nbsp;{{a.sks}}&nbsp;</font>
+                                <span style="font-size: 10px;">&nbsp;{{a.sks}}&nbsp;</span>
                             </td>
                             <td>
-                                <font size="1">&nbsp;&nbsp;&nbsp;{{a.nilai}}&nbsp;</font>
+                                <span style="font-size: 10px;">&nbsp;&nbsp;&nbsp;{{a.nilai}}&nbsp;</span>
                             </td>
                         </tr>
                     </tbody>
@@ -164,38 +166,38 @@
                     <tbody>
                         <tr align="center" bgcolor="silver" valign="center">
                             <td width="15" height="20">
-                                <font size="1">No.</font>
+                                <span style="font-size: 10px;">No.</span>
                             </td>
                             <td width="75">
-                                <font size="1">&nbsp;Kode MTK&nbsp;</font>
+                                <span style="font-size: 10px;">&nbsp;Kode MTK&nbsp;</span>
                             </td>
                             <td width="245">
-                                <font size="1" style="Times New Roman">&nbsp;Nama MTK&nbsp;</font>
+                                <span style="font:Times New Roman;font-size: 10px;">&nbsp;Nama MTK&nbsp;</span>
                             </td>
                             <td width="17">
-                                <font size="1">&nbsp;sks&nbsp;</font>
+                                <span style="font-size: 10px;">&nbsp;sks&nbsp;</span>
                             </td>
                             <td width="21">
-                                <font size="1">&nbsp;Nilai&nbsp;</font>
+                                <span style="font-size: 10px;">&nbsp;Nilai&nbsp;</span>
                             </td>
                         </tr>
                         <tr bgcolor="white" *ngFor="let a of dataRight; let i = index">
                             <td>
-                                <font size="1">&nbsp;{{i+1+half}}&nbsp;</font>
+                                <span style="font-size: 10px;">&nbsp;{{i+1+half}}&nbsp;</span>
                             </td>
                             <td align="center">
-                                <font size="1">
+                                <span style="font-size: 10px;">
                                     {{a.kode_matkul}}
-                                </font>
+                                </span>
                             </td>
                             <td>
-                                <font size="1">&nbsp;{{a.nama}}&nbsp;</font>
+                                <span style="font-size: 10px;">&nbsp;{{a.nama}}&nbsp;</span>
                             </td>
                             <td align="center">
-                                <font size="1">&nbsp;{{a.sks}}&nbsp;</font>
+                                <span style="font-size: 10px;">&nbsp;{{a.sks}}&nbsp;</span>
                             </td>
                             <td>
-                                <font size="1">&nbsp;&nbsp;&nbsp;{{a.nilai}}&nbsp;</font>
+                                <span style="font-size: 10px;">&nbsp;&nbsp;&nbsp;{{a.nilai}}&nbsp;</span>
                             </td>
                         </tr>
                     </tbody>
@@ -211,23 +213,23 @@
         <tr>
             <td></td>
             <td width="24%">
-                <font size="2">Total sks yang telah ditempuh</font>
+                <span style="font-size: 13px;">Total sks yang telah ditempuh</span>
             </td>
             <td width="40%">
-                <font size="2">&nbsp;: {{mahasiswa.jumlah_sks}}</font>
+                <span style="font-size: 13px;">&nbsp;: {{mahasiswa.jumlah_sks}}</span>
             </td>
             <td>
-                <font size="2">Indeks Prestasi Kumulatif (IPK) : {{setIP(dipk.IPK)}}</font>
+                <span style="font-size: 13px;">Indeks Prestasi Kumulatif (IPK) : {{setIP(dipk.IPK)}}</span>
             </td>
         </tr>
-        <!-- <tr><td width="4%"></td><td width="23%"><font size="2">Total sks yang telah ditempuh</td><td width="37%"><font size="2">&nbsp;: 150<td><font size="2">Indeks Prestasi Kumulatif (IPK) : 2.89</td></tr> -->
+        <!-- <tr><td width="4%"></td><td width="23%"><span style="font-size: 13px;">Total sks yang telah ditempuh</td><td width="37%"><span style="font-size: 13px;">&nbsp;: 150<td><span style="font-size: 13px;">Indeks Prestasi Kumulatif (IPK) : 2.89</td></tr> -->
         <tr>
             <td width="2%"></td>
             <td>
-                <font size="2">Predikat kelulusan</font>
+                <span style="font-size: 13px;">Predikat kelulusan</span>
             </td>
             <td>
-                <font size="2">&nbsp;: {{mahasiswa.predikat}}</font>
+                <span style="font-size: 13px;">&nbsp;: {{mahasiswa.predikat}}</span>
             </td>
             <td>&nbsp;</td>
         </tr>
@@ -243,38 +245,38 @@
         <tr>
             <td></td>
             <td width="40%">
-                <font size="2">&nbsp;</font>
+                <span style="font-size: 13px;">&nbsp;</span>
             </td>
             <td width="24%">
-                <font size="2">&nbsp;</font>
+                <span style="font-size: 13px;">&nbsp;</span>
             </td>
             <td>
-                <font size="2">Malang, {{current_date | date:('dd MMMM yyyy')}}</font>
+                <span style="font-size: 13px;">Malang, {{current_date | date:('dd MMMM yyyy')}}</span>
             </td>
         </tr>
 
         <tr>
             <td width="2%"></td>
             <td>
-                <font size="2">Ketua,</font>
+                <span style="font-size: 13px;">Ketua,</span>
             </td>
             <td>
-                <font size="2">&nbsp;</font>
+                <span style="font-size: 13px;">&nbsp;</span>
             </td>
             <td>
-                <font size="2">Ketua Program Studi,</font>
+                <span style="font-size: 13px;">Ketua Program Studi,</span>
             </td>
         </tr>
         <tr>
             <td width="2%"></td>
             <td>
-                <font size="2"></font>
+                <span style="font-size: 13px;"></span>
             </td>
             <td>
-                <font size="2">&nbsp;</font>
+                <span style="font-size: 13px;">&nbsp;</span>
             </td>
             <td>
-                <font size="2">&nbsp;</font>
+                <span style="font-size: 13px;">&nbsp;</span>
             </td>
         </tr>
         <tr>
@@ -289,26 +291,28 @@
         <tr *ngIf="footer">
             <td width="2%"></td>
             <td>
-                <font size="2"><u><span style="font-weight: bold;">Dr. Tubagus Mohammad Akhriza, S.Si., MMSI.</span></u>
-                </font>
+                <span style="font-size: 13px;"><u><span style="font-weight: bold;">Dr. Tubagus Mohammad Akhriza, S.Si.,
+                            MMSI.</span></u>
+                </span>
             </td>
             <td>
-                <font size="2">&nbsp;</font>
+                <span style="font-size: 13px;">&nbsp;</span>
             </td>
             <td>
-                <font size="2"><u><span style="font-weight: bold;">{{footer.nama_kaprodi}}</span></u></font>
+                <span style="font-size: 13px;"><u><span
+                            style="font-weight: bold;">{{footer.nama_kaprodi}}</span></u></span>
             </td>
         </tr>
         <tr *ngIf="mahasiswa">
             <td width="2%"></td>
             <td>
-                <font size="2">NIK 00.12.01.002</font>
+                <span style="font-size: 13px;">NIK 00.12.01.002</span>
             </td>
             <td>
-                <font size="2">&nbsp;</font>
+                <span style="font-size: 13px;">&nbsp;</span>
             </td>
             <td>
-                <font size="2">NIK {{footer.nip_kaprodi}}</font>
+                <span style="font-size: 13px;">NIK {{footer.nip_kaprodi}}</span>
             </td>
         </tr>
 
