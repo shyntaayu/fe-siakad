@@ -50,8 +50,12 @@ export class ViewSalinanNilaiComponent
       .pipe(
         finalize(() => {
           //get footer
-          this.khsService
-            .getKhs(this.appConfig.jenisAplikasiString, this.nim, this.semester)
+          this.krsService
+            .getKrs2(
+              this.appConfig.jenisAplikasiString,
+              this.nim,
+              this.semester
+            )
             .pipe(
               finalize(() => {
                 //get salinan nilai
@@ -99,7 +103,7 @@ export class ViewSalinanNilaiComponent
             .subscribe(
               (data) => {
                 this.footer = data;
-                this.prodi = data.list_khs[0];
+                this.prodi = data.result[0];
                 console.log(data);
               },
               (error) => {
