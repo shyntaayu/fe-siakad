@@ -53,6 +53,8 @@ export class RekapPresensiComponent extends AppComponentBase implements OnInit {
   jspdf = new jsPDF();
   matkul;
   jmlMahasiswa;
+  listMhsString;
+  index;
 
   cols: any[];
   frozenCols = [
@@ -113,6 +115,7 @@ export class RekapPresensiComponent extends AppComponentBase implements OnInit {
     this.matkul = event.data.nama_matkul;
     this.nip = event.data.nip;
     this.selectedMatkul = event.data;
+    this.index=event.index;
     this.getMhsByMatkul();
   }
 
@@ -132,6 +135,8 @@ export class RekapPresensiComponent extends AppComponentBase implements OnInit {
       )
       .subscribe(
         (data) => {
+          let jmlcekal=0;
+          let length = data.result.length;
           data.result.map((m) => {
             // let hadir=m.list_presensi_2.reduce((a, b) => a + b, 0)
             let obj = m.list_presensi_2.reduce(function (acc, cur, i) {
@@ -147,11 +152,15 @@ export class RekapPresensiComponent extends AppComponentBase implements OnInit {
             let cekal = false;
             if (persen < 64) {
               cekal = true;
+jmlcekal++;
             }
             m["cekal"] = cekal;
             Object.assign(m, obj);
           });
+          let pctcekal = (jmlcekal/length)*100;
+          this.listMatkul[this.index].cekal= pctcekal;
           this.listMahasiswa = data.result;
+          this.listMhsString=JSON.stringify(data.result);
           console.log("mee----", data.result);
         },
         (error) => {
@@ -269,7 +278,7 @@ export class RekapPresensiComponent extends AppComponentBase implements OnInit {
     console.log("dataEdit----", a);
   }
 
-  onRowEditSave(row) {
+  onRowEditSave(row, index) {
     // if (product.price > 0) {
     //   delete this.clonedProducts[product.id];
     //   this.messageService.add({
@@ -288,59 +297,62 @@ export class RekapPresensiComponent extends AppComponentBase implements OnInit {
     console.log("------dataBaru", dataBaru);
     let edited = [];
     let a;
-    if (dataBaru.minggu1 == 1) {
+    let data = JSON.parse(this.listMhsString);
+    let me = data[index];
+console.log("this.oldDiscount2----------------", me);
+    if (me.minggu1 != dataBaru.minggu1 ) {
       a = 1;
       edited.push(a);
     }
-    if (dataBaru.minggu2 == 1) {
+    if (dataBaru.minggu2 != me.minggu2) {
       a = 2;
       edited.push(a);
     }
-    if (dataBaru.minggu3 == 1) {
+    if (dataBaru.minggu3 != me.minggu3) {
       a = 3;
       edited.push(a);
     }
-    if (dataBaru.minggu4 == 1) {
+    if (dataBaru.minggu4 != me.minggu4) {
       a = 4;
       edited.push(a);
     }
-    if (dataBaru.minggu5 == 1) {
+    if (dataBaru.minggu5 != me.minggu5) {
       a = 5;
       edited.push(a);
     }
-    if (dataBaru.minggu6 == 1) {
+    if (dataBaru.minggu6 != me.minggu6) {
       a = 6;
       edited.push(a);
     }
-    if (dataBaru.minggu7 == 1) {
+    if (dataBaru.minggu7 != me.minggu7) {
       a = 7;
       edited.push(a);
     }
-    if (dataBaru.minggu8 == 1) {
+    if (dataBaru.minggu8 != me.minggu8) {
       a = 8;
       edited.push(a);
     }
-    if (dataBaru.minggu9 == 1) {
+    if (dataBaru.minggu9 != me.minggu9) {
       a = 9;
       edited.push(a);
     }
-    if (dataBaru.minggu10 == 1) {
+    if (dataBaru.minggu10 != me.minggu10) {
       a = 10;
       edited.push(a);
     }
-    if (dataBaru.minggu11 == 1) {
+    if (dataBaru.minggu11 != me.minggu11) {
       a = 11;
       edited.push(a);
     }
-    if (dataBaru.minggu12 == 1) {
+    if (dataBaru.minggu12 != me.minggu12) {
       a = 12;
       edited.push(a);
     }
-    if (dataBaru.minggu13 == 1) {
+    if (dataBaru.minggu13 != me.minggu13) {
       a = 13;
       edited.push(a);
     }
-    if (dataBaru.minggu14 == 1) {
+    if (dataBaru.minggu14 != me.minggu14) {
       a = 14;
       edited.push(a);
     }
