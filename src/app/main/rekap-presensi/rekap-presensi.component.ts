@@ -115,7 +115,7 @@ export class RekapPresensiComponent extends AppComponentBase implements OnInit {
     this.matkul = event.data.nama_matkul;
     this.nip = event.data.nip;
     this.selectedMatkul = event.data;
-    this.index=event.index;
+    this.index = event.index;
     this.getMhsByMatkul();
   }
 
@@ -135,7 +135,7 @@ export class RekapPresensiComponent extends AppComponentBase implements OnInit {
       )
       .subscribe(
         (data) => {
-          let jmlcekal=0;
+          let jmlcekal = 0;
           let length = data.result.length;
           data.result.map((m) => {
             // let hadir=m.list_presensi_2.reduce((a, b) => a + b, 0)
@@ -152,15 +152,16 @@ export class RekapPresensiComponent extends AppComponentBase implements OnInit {
             let cekal = false;
             if (persen < 64) {
               cekal = true;
-jmlcekal++;
+              jmlcekal++;
             }
             m["cekal"] = cekal;
             Object.assign(m, obj);
           });
-          let pctcekal = (jmlcekal/length)*100;
-          this.listMatkul[this.index].cekal= pctcekal;
+          let pctcekal = (jmlcekal / length) * 100;
+          console.log(pctcekal);
+          this.listMatkul[this.index].cekal = this.setIP(pctcekal);
           this.listMahasiswa = data.result;
-          this.listMhsString=JSON.stringify(data.result);
+          this.listMhsString = JSON.stringify(data.result);
           console.log("mee----", data.result);
         },
         (error) => {
@@ -299,8 +300,8 @@ jmlcekal++;
     let a;
     let data = JSON.parse(this.listMhsString);
     let me = data[index];
-console.log("this.oldDiscount2----------------", me);
-    if (me.minggu1 != dataBaru.minggu1 ) {
+    console.log("this.oldDiscount2----------------", me);
+    if (me.minggu1 != dataBaru.minggu1) {
       a = 1;
       edited.push(a);
     }
