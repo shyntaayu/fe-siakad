@@ -138,7 +138,6 @@ export class RekapPresensiComponent extends AppComponentBase implements OnInit {
           let jmlcekal = 0;
           let length = data.result.length;
           data.result.map((m) => {
-            // let hadir=m.list_presensi_2.reduce((a, b) => a + b, 0)
             let obj = m.list_presensi_2.reduce(function (acc, cur, i) {
               acc["minggu" + (i + 1)] = cur;
               return acc;
@@ -172,13 +171,7 @@ export class RekapPresensiComponent extends AppComponentBase implements OnInit {
       );
   }
 
-  onRowUnselect(event) {
-    // this.messageService.add({
-    //   severity: "info",
-    //   summary: "Matakuliah Unselected",
-    //   detail: event.data.nama_matkul,
-    // });
-  }
+  onRowUnselect(event) {}
 
   onSubmit() {
     console.warn(this.profileForm.value);
@@ -240,9 +233,7 @@ export class RekapPresensiComponent extends AppComponentBase implements OnInit {
       );
   }
 
-  modelChangeFn(value, field) {
-    // localStorage.setItem("si" + field, value);
-  }
+  modelChangeFn(value, field) {}
   getSemester(a) {
     console.log("------", a);
   }
@@ -280,20 +271,6 @@ export class RekapPresensiComponent extends AppComponentBase implements OnInit {
   }
 
   onRowEditSave(row, index) {
-    // if (product.price > 0) {
-    //   delete this.clonedProducts[product.id];
-    //   this.messageService.add({
-    //     severity: "success",
-    //     summary: "Success",
-    //     detail: "Product is updated",
-    //   });
-    // } else {
-    //   this.messageService.add({
-    //     severity: "error",
-    //     summary: "Error",
-    //     detail: "Invalid Price",
-    //   });
-    // }
     let dataBaru = row;
     console.log("------dataBaru", dataBaru);
     let edited = [];
@@ -382,11 +359,6 @@ export class RekapPresensiComponent extends AppComponentBase implements OnInit {
             if (res.status == 0) {
               this.showMessage("Eror!", res.message, "error");
             } else {
-              // this.showMessage(
-              //   "Sukses!",
-              //   res.msg + " - Berhasil mengganti nilai",
-              //   "success"
-              // );
               this.showNotification(
                 "top",
                 "right",
