@@ -129,9 +129,21 @@ export class PaketKrsComponent extends AppComponentBase implements OnInit {
       );
   }
 
+  isNumber(n) {
+    return Number(n) === n;
+  }
+
   onSubmit() {
     console.warn(this.profileForm.value);
     this.model = this.profileForm.value;
+    let smtAngka = this.semesterBanyak.filter((n) => this.isNumber(n.value));
+    let smtFix = [];
+    if (this.model.semester == 1) {
+      smtFix = smtAngka.filter((n) => +n.value % 2 == 1);
+    } else {
+      smtFix = smtAngka.filter((n) => +n.value % 2 == 0);
+    }
+    this.semesterBanyak = smtFix;
     this.getMatkul();
   }
 
