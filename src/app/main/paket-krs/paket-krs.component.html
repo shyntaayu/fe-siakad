@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <p-toast></p-toast>
         <div class="row" style="margin-top: -30px;">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="card" [busyIf]="loading">
                     <div class="card-body">
                         <div class="row">
@@ -57,7 +57,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <div class="card" [busyIf]="loading2">
                     <div class="card-body">
                         <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
@@ -69,6 +69,12 @@
                                 <div class="col-md-5">
                                     <semester-ddl formControlName="semester">
                                     </semester-ddl>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <prodi-hcode-ddl formControlName="jurusan">
+                                    </prodi-hcode-ddl>
                                 </div>
                                 <div class="col-md-2">
                                     <button mat-raised-button type="submit" class="btn btn-info"
@@ -108,6 +114,8 @@
                                     <th pSortableColumn="status">Status <p-sortIcon field="status"></p-sortIcon>
                                     <th pSortableColumn="semester">Semester <p-sortIcon field="semester"></p-sortIcon>
                                     </th>
+                                    <th pSortableColumn="kode_prodi">Prodi <p-sortIcon field="kode_prodi"></p-sortIcon>
+                                    </th>
                                 </tr>
 
                                 <tr>
@@ -129,7 +137,19 @@
                                             </ng-template>
                                         </p-columnFilter>
                                     </th>
-
+                                    <th>
+                                        <!-- <p-columnFilter field="kode_prodi" matchMode="equals" [showMenu]="false">
+                                            <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                                <p-dropdown [ngModel]="value" [options]="prodiCombo"
+                                                    (onChange)="filter($event.value)" placeholder="Any"
+                                                    [showClear]="true">
+                                                    <ng-template let-option pTemplate="item">
+                                                        <span>{{option.label}}</span>
+                                                    </ng-template>
+                                                </p-dropdown>
+                                            </ng-template>
+                                        </p-columnFilter> -->
+                                    </th>
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" let-list>
@@ -142,6 +162,7 @@
                                     <td>{{list.sks}}</td>
                                     <td>{{list.status}}</td>
                                     <td>{{list.semester}}</td>
+                                    <td>{{getProdi(list.kode_prodi)}}</td>
                                 </tr>
                             </ng-template>
                         </p-table>

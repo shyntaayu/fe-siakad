@@ -75,6 +75,8 @@ export class PaketKrsComponent extends AppComponentBase implements OnInit {
     },
   ];
 
+  prodi;
+
   constructor(
     private messageService: MessageService,
     private mahasiswaService: MahasiswaService,
@@ -89,10 +91,13 @@ export class PaketKrsComponent extends AppComponentBase implements OnInit {
     this.profileForm = this.fb.group({
       semester: ["", Validators.required],
       tahun: ["", Validators.required],
+      jurusan: [""],
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getAllProdi();
+  }
 
   onRowUnselect(event) {
     // this.messageService.add({
@@ -164,8 +169,18 @@ export class PaketKrsComponent extends AppComponentBase implements OnInit {
       )
       .subscribe(
         (data) => {
-          this.listMatkul = data.result;
-          console.log(data);
+          let matkul = data.result;
+          console.log(this.model.jurusan);
+          let kode = this.model.jurusan;
+          let me = matkul.filter((e) => {
+            let kd = e.kode_matkul.substring(5, 7);
+            console.log("kd", kd, typeof kd);
+            console.log("kode", kode, typeof kode);
+            console.log(kd == kode);
+            if (kd == kode) return e;
+          });
+          this.listMatkul = me;
+          console.log(me);
         },
         (error) => {
           console.log(error);
@@ -227,5 +242,24 @@ export class PaketKrsComponent extends AppComponentBase implements OnInit {
           }
         );
     });
+  }
+
+  getAllProdi() {
+    this.krsService.getAllProdi().subscribe(
+      (result) => {
+        this.prodi = result.result;
+      },
+      (err) => {
+        console.error(err);
+        this.showMessage("Eror!", err.message, "error");
+      }
+    );
+  }
+
+  getProdi(a) {
+    let prodi = this.prodi.filter((obj) => {
+      return obj.kode_prodi == a;
+    });
+    return prodi[0].nama;
   }
 }
