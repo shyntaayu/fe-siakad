@@ -13,6 +13,7 @@ import { SalinanNilai } from "app/model/salinan-nilai";
 import { NilaiModel } from "app/model/nilai-model";
 import { IPK } from "app/model/ipk";
 import { NilaiList } from "app/model/nilai-list";
+import { AddNilai } from "app/model/add-nilai";
 @Injectable({
   providedIn: "root",
 })
@@ -80,6 +81,11 @@ export class KhsService {
         params: params,
       }
     );
+  }
+
+  addNilai(data: AddNilai): Observable<any> {
+    let API_URL = `${this.appConfig.apiUrlKhs}/khs/krs`;
+    return this.http.post(API_URL, data).pipe(catchError(this.errorMgmt));
   }
 
   // Error handling

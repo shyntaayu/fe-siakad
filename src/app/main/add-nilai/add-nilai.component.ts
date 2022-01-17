@@ -1,6 +1,7 @@
 import { Component, Injector, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
+import { AddNilai, ListNilai } from "app/model/add-nilai";
 import { AppConfig } from "app/model/app-config";
 import { NilaiModel } from "app/model/nilai-model";
 import { PresensiCekal } from "app/model/presensi-cekal";
@@ -14,6 +15,15 @@ import { finalize } from "rxjs/operators";
 import { AppComponentBase } from "shared/app-component-base";
 import { MainService } from "../main.service";
 import { Product } from "../model/product";
+
+class model {
+  jenjang: string;
+  tipenilai: number;
+  tahun: number;
+  semester: number;
+  jurusan: string;
+  kelas: string;
+}
 
 @Component({
   selector: "app-add-nilai",
@@ -36,7 +46,7 @@ export class AddNilaiComponent extends AppComponentBase implements OnInit {
   jenjang;
   loading1 = false;
   loading2 = false;
-  model;
+  model = new model();
   nim;
   listMahasiswa = [];
   listMatkul = [];
@@ -79,6 +89,7 @@ export class AddNilaiComponent extends AppComponentBase implements OnInit {
       jurusan: ["", Validators.required],
       tahun: ["", Validators.required],
       kelas: ["", Validators.required],
+      // tipenilai: ["", Validators.required],
     });
     this.getTipeNilai();
   }
@@ -138,14 +149,24 @@ export class AddNilaiComponent extends AppComponentBase implements OnInit {
           let tipe = this.tipeNilai;
           data.result.map((m) => {
             // let hadir=m.list_presensi_2.reduce((a, b) => a + b, 0)
+            let total = 0;
             let obj = m.list_nilai.reduce(function (acc, cur, i) {
+              let indTipeNilai = tipe.find(
+                (_) => _.idmaster_tipe_nilai == cur.idmaster_tipe_nilai
+              );
               let index = tipe.find(
                 (_) => _.idmaster_tipe_nilai == cur.idmaster_tipe_nilai
-              ).nama;
-              acc[index] = cur.nilai;
+              ).nama; // get nama tipe nilai= tugas1
+              console.log(index);
+              acc[index] = cur.nilai; // ngisi nama tipe nilai = tugas1:100
+              total += +cur.nilai * (indTipeNilai["bobot"] / 100);
+              console.log(indTipeNilai);
+              acc["total"] = total;
               return acc;
             }, {});
             // m["cekal"] = cekal;
+            //obj = {"tugas1": "0","uts": "0","tugas2": "0","uas": "0"}
+            //m = row asli
             Object.assign(m, obj);
           });
           this.listMahasiswa = data.result;
@@ -235,130 +256,67 @@ export class AddNilaiComponent extends AppComponentBase implements OnInit {
   }
 
   onRowEditInit(a) {
-    console.log(a);
-    console.log("dataEdit----", a);
+    // console.log(a);
+    // console.log("dataEdit----", a);
   }
 
   onRowEditSave(row) {
-    // if (product.price > 0) {
-    //   delete this.clonedProducts[product.id];
-    //   this.messageService.add({
-    //     severity: "success",
-    //     summary: "Success",
-    //     detail: "Product is updated",
-    //   });
-    // } else {
-    //   this.messageService.add({
-    //     severity: "error",
-    //     summary: "Error",
-    //     detail: "Invalid Price",
-    //   });
-    // }
     let dataBaru = row;
-    console.log("------dataBaru", dataBaru);
-    let edited = [];
-    let a;
-    if (dataBaru.minggu1 == 1) {
-      a = 1;
-      edited.push(a);
-    }
-    if (dataBaru.minggu2 == 1) {
-      a = 2;
-      edited.push(a);
-    }
-    if (dataBaru.minggu3 == 1) {
-      a = 3;
-      edited.push(a);
-    }
-    if (dataBaru.minggu4 == 1) {
-      a = 4;
-      edited.push(a);
-    }
-    if (dataBaru.minggu5 == 1) {
-      a = 5;
-      edited.push(a);
-    }
-    if (dataBaru.minggu6 == 1) {
-      a = 6;
-      edited.push(a);
-    }
-    if (dataBaru.minggu7 == 1) {
-      a = 7;
-      edited.push(a);
-    }
-    if (dataBaru.minggu8 == 1) {
-      a = 8;
-      edited.push(a);
-    }
-    if (dataBaru.minggu9 == 1) {
-      a = 9;
-      edited.push(a);
-    }
-    if (dataBaru.minggu10 == 1) {
-      a = 10;
-      edited.push(a);
-    }
-    if (dataBaru.minggu11 == 1) {
-      a = 11;
-      edited.push(a);
-    }
-    if (dataBaru.minggu12 == 1) {
-      a = 12;
-      edited.push(a);
-    }
-    if (dataBaru.minggu13 == 1) {
-      a = 13;
-      edited.push(a);
-    }
-    if (dataBaru.minggu14 == 1) {
-      a = 14;
-      edited.push(a);
-    }
+    console.log("------dataBaru", JSON.stringify(dataBaru));
 
-    console.log("------edited", edited);
-    edited.map((e) => {
-      this.loading1 = true;
-      let model = new PresensiCekal();
-      model.jenis_aplikasi = this.appConfig.jenisAplikasi;
-      model.id_master_waktu_presensi = e;
-      model.master_tipe_presensi_id = 2; // 5=telat 2=hadir
-      model.nim = row.nim;
-      model.krs_id = this.krsid;
-      console.log(model);
-      // this.presensiService
-      //   .addPresensi(model)
-      //   .pipe(
-      //     finalize(() => {
-      //       this.loading1 = false;
-      //       this.getMhsByMatkul();
-      //     })
-      //   )
-      //   .subscribe(
-      //     (res) => {
-      //       console.log(res);
-      //       if (res.status == 0) {
-      //         this.showMessage("Eror!", res.message, "error");
-      //       } else {
-      //         // this.showMessage(
-      //         //   "Sukses!",
-      //         //   res.msg + " - Berhasil mengganti nilai",
-      //         //   "success"
-      //         // );
-      //         this.showNotification(
-      //           "top",
-      //           "right",
-      //           "Sukses! " +
-      //             res.msg +
-      //             " - Berhasil mengganti presensi minggu" +
-      //             e,
-      //           "success"
-      //         );
-      //       }
-      //     },
-      //     (error) => {
-      //       this.showMessage("Eror!", error, "error");
-      //     }
-      //   );
+    this.loading1 = true;
+    let model = new AddNilai();
+    model.jenis_aplikasi = this.appConfig.jenisAplikasi;
+    model.krs_id = dataBaru.krs_id;
+    console.log("keys", this.tipeNilai);
+    //ide = tipenilai dikasih flag, trus dibandingno sing onok fag e
+    dataBaru.list_nilai.map((e) => {
+      let i = this.tipeNilai.find((_) => _.nama == e.nama).nama;
+      console.log("i", i, typeof i);
+      let listNilai = [];
+      if (e.nama === i) {
+        model.tipe_nilai = e.idmaster_tipe_nilai;
+        let list = new ListNilai();
+        list.nilai = dataBaru[e.nama];
+        list.nim = dataBaru.nim;
+        listNilai.push(list);
+        model.list_nilai = listNilai;
+        console.log(model, JSON.stringify(model));
+
+        this.khsService
+          .addNilai(model)
+          .pipe(
+            finalize(() => {
+              this.loading1 = false;
+              this.getMhsByMatkul();
+            })
+          )
+          .subscribe(
+            (res) => {
+              console.log(res);
+              if (res.status == 0) {
+                this.showMessage("Eror!", res.message, "error");
+              } else {
+                this.showNotification(
+                  "top",
+                  "right",
+                  "Sukses! " +
+                    res.msg +
+                    " - Berhasil mengganti nilai " +
+                    e.nama +
+                    " = " +
+                    dataBaru[e.nama] +
+                    ", mahasiswa " +
+                    dataBaru.nama,
+                  "success"
+                );
+              }
+            },
+            (error) => {
+              this.showMessage("Eror!", error, "error");
+            }
+          );
+      }
     });
   }
 
@@ -376,5 +334,10 @@ export class AddNilaiComponent extends AppComponentBase implements OnInit {
         this.showMessage("Eror!", err.message, "error");
       }
     );
+  }
+
+  getTipeNilaiDDL(param) {
+    console.log("nilai", param);
+    this.model.tipenilai = param;
   }
 }
