@@ -92,6 +92,7 @@ export class AddNilaiComponent extends AppComponentBase implements OnInit {
       // tipenilai: ["", Validators.required],
     });
     this.getTipeNilai();
+    this.getMhsByMatkul();
   }
 
   ngOnInit(): void {
@@ -135,6 +136,7 @@ export class AddNilaiComponent extends AppComponentBase implements OnInit {
 
   getMhsByMatkul() {
     this.loading1 = true;
+    this.krsid = 1328;
     this.khsService
       .getListNilai(this.appConfig.jenisAplikasiString, this.krsid)
       .pipe(

@@ -150,6 +150,14 @@ export const ROUTES: RouteInfo[] = [
     parent: "master",
   },
   {
+    path: "/master/mahasiswa",
+    title: "Mahasiswa",
+    icon: "lock",
+    class: "",
+    hidden: false,
+    parent: "master",
+  },
+  {
     path: "/master/dosen",
     title: "Dosen",
     icon: "group",
@@ -198,6 +206,7 @@ export const menu: AppMenuItem[] = [
   new AppMenuItem("Master", "1", "apps", "", [
     new AppMenuItem("User", "1", "badge", "/master/user"),
     new AppMenuItem("Role", "1", "lock", "/master/role"),
+    new AppMenuItem("Mahasiswa", "1", "lock", "/master/mahasiswa"),
   ]),
 ];
 

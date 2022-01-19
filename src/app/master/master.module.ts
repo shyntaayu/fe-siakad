@@ -32,6 +32,10 @@ import { MessageService } from "primeng/api";
 import { InputTextareaModule } from "primeng/inputtextarea";
 import { RoleComponent } from "./role/role.component";
 import { RoleService } from "app/services/role.service";
+import { MahasiswaComponent } from "./mahasiswa/mahasiswa.component";
+import { ListMahasiswaService } from "app/services/listmahasiswa.service";
+import { MatButtonModule } from "@angular/material/button";
+import { ShareModule } from "app/main/share/share.module";
 
 @NgModule({
   declarations: [
@@ -39,6 +43,7 @@ import { RoleService } from "app/services/role.service";
     DynamicFormQuestionComponent,
     DynamicFormComponent,
     RoleComponent,
+    MahasiswaComponent,
   ],
   imports: [
     CommonModule,
@@ -65,7 +70,15 @@ import { RoleService } from "app/services/role.service";
     InputNumberModule,
     ConfirmDialogModule,
     InputTextareaModule,
+    MatButtonModule,
+    ShareModule,
   ],
-  providers: [UserService, ConfirmationService, MessageService, RoleService],
+  providers: [
+    UserService,
+    ConfirmationService,
+    MessageService,
+    RoleService,
+    ListMahasiswaService,
+  ],
 })
 export class MasterModule {}

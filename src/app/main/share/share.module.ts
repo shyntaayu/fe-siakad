@@ -21,6 +21,7 @@ import { SesiDdlComponent } from "./sesi-ddl.component";
 import { RuanganDdlComponent } from "./ruangan-ddl.component";
 import { KaprodiDdlComponent } from "./kaprodi-ddl.component";
 import { ProdiHcodeDdlComponent } from "./prodi-hcode-ddl.component";
+import { TipeNilaiDdlComponent } from "./tipe-nilai-ddl.component";
 
 @NgModule({
   imports: [
@@ -49,6 +50,7 @@ import { ProdiHcodeDdlComponent } from "./prodi-hcode-ddl.component";
     RuanganDdlComponent,
     KaprodiDdlComponent,
     ProdiHcodeDdlComponent,
+    TipeNilaiDdlComponent,
   ],
   exports: [
     DosenByMatkulDdlComponent,
@@ -66,6 +68,7 @@ import { ProdiHcodeDdlComponent } from "./prodi-hcode-ddl.component";
     RuanganDdlComponent,
     KaprodiDdlComponent,
     ProdiHcodeDdlComponent,
+    TipeNilaiDdlComponent,
   ],
 })
 export class ShareModule {}
