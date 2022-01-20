@@ -271,11 +271,17 @@ export class AddNilaiComponent extends AppComponentBase implements OnInit {
     console.log("keys", this.tipeNilai);
     //ide = tipenilai dikasih flag, trus dibandingno sing onok fag e
     console.log("dataku", dataBaru.list_nilai);
+    let teori = [1, 2, 3, 4];
+    let praktek = [5, 6, 7];
+    let listtipe = [];
+    listtipe = this.isPraktikum ? praktek : teori;
     dataBaru.list_nilai.map((e) => {
       let i = this.tipeNilai.find((_) => _.nama == e.nama).nama;
       console.log("i", i, typeof i);
       let listNilai = [];
-      if (e.nama === i) {
+      let nilaitermasuk = listtipe.includes(e.idmaster_tipe_nilai);
+      console.log("nilaitermasuk", nilaitermasuk);
+      if (e.nama === i && nilaitermasuk) {
         model.tipe_nilai = e.idmaster_tipe_nilai;
         let list = new ListNilai();
         list.nilai = dataBaru[e.nama];
