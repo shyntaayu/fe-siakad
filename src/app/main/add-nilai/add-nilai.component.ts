@@ -92,7 +92,6 @@ export class AddNilaiComponent extends AppComponentBase implements OnInit {
       // tipenilai: ["", Validators.required],
     });
     this.getTipeNilai();
-    this.getMhsByMatkul();
   }
 
   ngOnInit(): void {
@@ -136,7 +135,6 @@ export class AddNilaiComponent extends AppComponentBase implements OnInit {
 
   getMhsByMatkul() {
     this.loading1 = true;
-    this.krsid = 1328;
     this.khsService
       .getListNilai(this.appConfig.jenisAplikasiString, this.krsid)
       .pipe(
@@ -272,6 +270,7 @@ export class AddNilaiComponent extends AppComponentBase implements OnInit {
     model.krs_id = dataBaru.krs_id;
     console.log("keys", this.tipeNilai);
     //ide = tipenilai dikasih flag, trus dibandingno sing onok fag e
+    console.log("dataku", dataBaru.list_nilai);
     dataBaru.list_nilai.map((e) => {
       let i = this.tipeNilai.find((_) => _.nama == e.nama).nama;
       console.log("i", i, typeof i);
