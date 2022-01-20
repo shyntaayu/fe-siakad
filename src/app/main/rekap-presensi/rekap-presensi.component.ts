@@ -158,7 +158,7 @@ export class RekapPresensiComponent extends AppComponentBase implements OnInit {
           });
           let pctcekal = (jmlcekal / length) * 100;
           console.log(pctcekal);
-          this.listMatkul[this.index].cekal = this.setIP(pctcekal);
+          this.listMatkul[this.index].cekal = this.setPercent(pctcekal);
           this.listMahasiswa = data.result;
           this.listMhsString = JSON.stringify(data.result);
           console.log("mee----", data.result);

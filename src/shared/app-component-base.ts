@@ -378,6 +378,12 @@ export abstract class AppComponentBase {
 
   setIP(a) {
     let num = a;
+    let with2Decimals = num.toString().match(/^-?\d+(?:\.\d{0,4})?/)[0];
+    return Math.round(with2Decimals * 100) / 100;
+  }
+
+  setPercent(a) {
+    let num = a;
     let with2Decimals = num.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0];
     return with2Decimals;
   }

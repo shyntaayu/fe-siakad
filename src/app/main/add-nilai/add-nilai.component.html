@@ -246,10 +246,10 @@
                                                 <ng-template pTemplate="input">
                                                     <!-- <input pInputText type="number" [style]="{'width':'100%'}" [min]="0"
                                                     [max]="100" [(ngModel)]="mahasiswa.total"> -->
-                                                    {{mahasiswa.total}}
+                                                    {{setPercent(mahasiswa.total)}}
                                                 </ng-template>
                                                 <ng-template pTemplate="output">
-                                                    {{mahasiswa.total}}
+                                                    {{setPercent(mahasiswa.total)}}
                                                 </ng-template>
                                             </p-cellEditor>
                                         </td>

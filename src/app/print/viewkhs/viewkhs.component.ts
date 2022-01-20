@@ -80,7 +80,9 @@ export class ViewKhsComponent extends AppComponentBase implements OnInit {
         })
       )
       .subscribe(
-        (data) => {
+        (e) => {
+          console.log("data", e);
+          let data = e["result"];
           this.footer = data.list_khs[0];
           this.totalSks = data.total_sks;
           this.data = data.list_khs;
