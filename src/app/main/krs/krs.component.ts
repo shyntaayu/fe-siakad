@@ -152,12 +152,12 @@ export class KrsComponent extends AppComponentBase implements OnInit {
     this.loading1 = true;
     this.listMatkul = [];
     this.mahasiswaService
-      .getMahasiswas2(
+      .getMahasiswas(
         this.appConfig.jenisAplikasiString,
         this.model.jenjang,
-        this.model.jurusan,
-        this.model.semester - 1,
-        this.model.kelas
+        this.model.jurusan
+        // this.model.semester - 1,
+        // this.model.kelas
       )
       .pipe(
         finalize(() => {

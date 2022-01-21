@@ -114,12 +114,12 @@ export class KartuUjianComponent extends AppComponentBase implements OnInit {
     this.loading1 = true;
     this.listPresensi = [];
     this.mahasiswaService
-      .getMahasiswas2(
+      .getMahasiswas(
         this.appConfig.jenisAplikasiString,
         this.model.jenjang,
-        this.model.jurusan,
-        this.model.semester,
-        this.model.kelas
+        this.model.jurusan
+        // this.model.semester,
+        // this.model.kelas
       )
       .pipe(
         finalize(() => {
