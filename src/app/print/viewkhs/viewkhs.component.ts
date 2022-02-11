@@ -23,6 +23,7 @@ export class ViewKhsComponent extends AppComponentBase implements OnInit {
   other;
   beban;
   dipk;
+  ttd;
 
   constructor(
     private printService: PrintService,
@@ -71,6 +72,25 @@ export class ViewKhsComponent extends AppComponentBase implements OnInit {
               (data) => {
                 this.header = data.result[0];
                 console.log(data);
+                let prodi = this.header.prodi.toString().toLowerCase();
+                if (
+                  this.header.jenjang == "S1" &&
+                  prodi == "teknologi informasi"
+                ) {
+                  this.ttd = "/assets/img/ttd-pak-samsul-2.png";
+                }
+                if (
+                  this.header.jenjang == "S1" &&
+                  prodi == "sistem informasi"
+                ) {
+                  this.ttd = "/assets/img/ttd-bu-dwi.gif";
+                }
+                if (
+                  this.header.jenjang == "D3" &&
+                  prodi == "sistem informasi"
+                ) {
+                  this.ttd = "/assets/img/ttd-bu-linda.png";
+                }
               },
               (error) => {
                 console.log(error);
