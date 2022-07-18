@@ -1,0 +1,863 @@
+<div class="invoice" *ngIf="data">
+    <!-- <h1>Invoice Num. {{ invoice }}</h1>
+    Amount: {{ (invoiceDetails[i] | async)?.amount }} -->
+    <br>
+    <center>
+        <table border="1" style="BORDER-COLLAPSE:COLLAPSE;" width="100%" *ngIf="tipe==5">
+            <tbody>
+                <tr>
+                    <td rowspan="2" align="center">
+                        <img src="/assets/img/stimata.jpeg" width="100">
+                    </td>
+                    <td colspan="2" align="center">
+                        <span style="font-weight: bold;font-size: 18px;">STMIK PPKIA PRADNYA PARAMITA MALANG</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center"><span style="font-weight: bold;">FORMULIR NILAI HARIAN PRAKTIKUM</span>
+                    </td>
+                    <td>
+                        <table border="0" style="BORDER-COLLAPSE:COLLAPSE;" width="100%">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <span style="font-size: 13px;">Kode Form</span>
+                                    </td>
+                                    <td>
+                                        <span style="font-size: 13px;"> :</span>
+                                    </td>
+                                    <td>
+                                        <span style="font-size: 13px;">FM-LAB.003.01</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span style="font-size: 13px;">REVISI</span>
+                                    </td>
+                                    <td>
+                                        <span style="font-size: 13px;"> :</span>
+                                    </td>
+                                    <td>
+                                        <span style="font-size: 13px;">01</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span style="font-size: 13px;">TANGGAL</span>
+                                    </td>
+                                    <td>
+                                        <span style="font-size: 13px;"> :</span>
+                                    </td>
+                                    <td>
+                                        <span style="font-size: 13px;">24 September 2012</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <table border="0" width="100%" *ngIf="tipe!=5">
+            <tbody>
+                <tr>
+                    <td rowspan="3">
+                        <center><img src="/assets/img/stimata.jpeg" height="80"></center>
+                    </td>
+                    <td width="50">&nbsp;</td>
+                    <td>
+                        <center><span style="font-weight: bold;font-size: 18px;">STMIK PPKIA PRADNYA PARAMITA
+                                MALANG</span></center>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="50">&nbsp;</td>
+                    <td>
+                        <span style="font-size: 13px;">
+                            <center>JL. LAKSDA ADI SUCIPTO 249 A MALANG, TELP (0341) 412699</center>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="50">&nbsp;</td>
+                    <td>
+                        <center><span style="font-weight: bold;font-size: 18px;">PRESENSI {{title}}</span></center>
+                    </td>
+                </tr>
+            </tbody>
+        </table><br>
+        <table border="0" width="100%">
+            <tbody>
+                <tr>
+                    <td>
+                        <span style="font-size: 13px;">MATA KULIAH</span>
+                    </td>
+                    <td>:</td>
+                    <td>
+                        <span style="font-size: 13px;">{{nama_matkul}}</span>
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>
+                        <span style="font-size: 13px;">SEMESTER</span>
+                    </td>
+                    <td>:</td>
+                    <td>
+                        <span style="font-size: 13px;">{{semester}}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span style="font-size: 13px;">KODE MTK/sks</span>
+                    </td>
+                    <td>:</td>
+                    <td>
+                        <span style="font-size: 13px;">{{kode_matkul}} / {{sks}} sks</span>
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>
+                        <span style="font-size: 13px;">TAHUN</span>
+                    </td>
+                    <td>:</td>
+                    <td>
+                        <span style="font-size: 13px;">{{tahun_akademik}}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span style="font-size: 13px;">PROG. STUDI</span>
+                    </td>
+                    <td>:</td>
+                    <td>
+                        <span style="font-size: 13px;">{{jenjang}} {{jurusan}} {{kelas}}</span>
+                    </td>
+                    <td>&nbsp;</td>
+                    <td *ngIf="tipe==1||tipe==5">
+                        <span style="font-size: 13px;">TGL. CETAK</span>
+                    </td>
+                    <td *ngIf="tipe==1||tipe==5">:</td>
+                    <td *ngIf="tipe==1||tipe==5">
+                        <span style="font-size: 13px;">{{current_date | date:('dd MMMM yyyy')}}</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- presensi praktikum -->
+        <table style="BORDER-COLLAPSE:COLLAPSE; BORDER-COLOR:BLACK;" width="100%" border="1" cellpadding="0"
+            *ngIf="tipe==5" cellspacing="0">
+            <tbody>
+                <tr height="25">
+                    <td rowspan="3" width="30">
+                        <center><b>
+                                <span style="font-weight: bold;font-size: 13px;">NO</span>
+                            </b></center>
+                    </td>
+                    <td rowspan="3" width="80">
+                        <center><b>
+                                <span style="font-weight: bold;font-size: 13px;">NIM</span>
+                            </b></center>
+                    </td>
+                    <td rowspan="3" width="250">
+                        <center><b>
+                                <span style="font-weight: bold;font-size: 13px;">NAMA MAHASISWA</span>
+                            </b></center>
+                    </td>
+                    <td colspan="9">
+                        <center><b>
+                                <span style="font-weight: bold;font-size: 13px;">NILAI HARIAN PRAKTIKUM</span>
+                            </b></center>
+                    </td>
+                </tr>
+                <tr height="25">
+                    <td width="40">
+                        <span style="font-size: 13px;">
+                            <center>MG-1</center>
+                        </span>
+                    </td>
+                    <td width="40">
+                        <span style="font-size: 13px;">
+                            <center>MG-2</center>
+                        </span>
+                    </td>
+                    <td width="40">
+                        <span style="font-size: 13px;">
+                            <center>MG-3</center>
+                        </span>
+                    </td>
+                    <td width="40">
+                        <span style="font-size: 13px;">
+                            <center>MG-4</center>
+                        </span>
+                    </td>
+                    <td width="40">
+                        <span style="font-size: 13px;">
+                            <center>MG-5</center>
+                        </span>
+                    </td>
+                    <td width="40">
+                        <span style="font-size: 13px;">
+                            <center>MG-6</center>
+                        </span>
+                    </td>
+                    <td width="40">
+                        <span style="font-size: 13px;">
+                            <center>MG-7</center>
+                        </span>
+                    </td>
+                    <td width="40">
+                        <span style="font-size: 13px;">
+                            <center>MG-8</center>
+                        </span>
+                    </td>
+                    <td width="40">
+                        <span style="font-size: 13px;">
+                            <center>MG-9</center>
+                        </span>
+                    </td>
+                </tr>
+                <tr height="25">
+                    <td width="40">&nbsp;</td>
+                    <td width="40">&nbsp;</td>
+                    <td width="40">&nbsp;</td>
+                    <td width="40">&nbsp;</td>
+                    <td width="40">&nbsp;</td>
+                    <td width="40">&nbsp;</td>
+                    <td width="40">&nbsp;</td>
+                    <td width="40">&nbsp;</td>
+                    <td width="40">&nbsp;</td>
+                </tr>
+                <tr height="30" *ngFor="let a of listFixMahasiswa; let i = index">
+                    <td>
+                        <center>
+                            <span style="font-size: 13px;">{{i+1}}</span>
+                        </center>
+                    </td>
+                    <td>
+                        <center>
+                            <span style="font-size: 13px;">{{a.nim}}</span>
+                        </center>
+                    </td>
+                    <td>
+                        <span style="font-size: 13px;">&nbsp;{{a.nama}}</span>
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- presensi kelas sebelum uas -->
+        <table style="BORDER-COLLAPSE:COLLAPSE; BORDER-COLOR:BLACK;" width="100%" border="1" cellpadding="0"
+            *ngIf="tipe==1&&sesi==2" cellspacing="0">
+            <tbody>
+                <tr height="25">
+                    <td rowspan="3" width="30">
+                        <center><b>
+                                <span style="font-weight: bold;font-size: 13px;">NO</span>
+                            </b></center>
+                    </td>
+                    <td rowspan="3" width="80">
+                        <center><b>
+                                <span style="font-weight: bold;font-size: 13px;">NIM</span>
+                            </b></center>
+                    </td>
+                    <td rowspan="3" width="250">
+                        <center><b>
+                                <span style="font-weight: bold;font-size: 13px;">NAMA MAHASISWA</span>
+                            </b></center>
+                    </td>
+                    <td colspan="8">
+                        <center><b>
+                                <span style="font-weight: bold;font-size: 13px;">TANDA TANGAN</span>
+                            </b></center>
+                    </td>
+                </tr>
+                <tr height="25">
+                    <td width="40">
+                        <span style="font-size: 13px;">
+                            <center>MG-8</center>
+                        </span>
+                    </td>
+                    <td width="40">
+                        <span style="font-size: 13px;">
+                            <center>MG-9</center>
+                        </span>
+                    </td>
+                    <td width="40">
+                        <span style="font-size: 13px;">
+                            <center>MG-10</center>
+                        </span>
+                    </td>
+                    <td width="40">
+                        <span style="font-size: 13px;">
+                            <center>MG-11</center>
+                        </span>
+                    </td>
+                    <td width="40">
+                        <span style="font-size: 13px;">
+                            <center>MG-12</center>
+                        </span>
+                    </td>
+                    <td width="40">
+                        <span style="font-size: 13px;">
+                            <center>MG-13</center>
+                        </span>
+                    </td>
+                    <td width="40">
+                        <span style="font-size: 13px;">
+                            <center>MG-14</center>
+                        </span>
+                    </td>
+                    <td width="40">
+                        <span style="font-size: 13px;">
+                            <center>UAS</center>
+                        </span>
+                    </td>
+                </tr>
+                <tr height="25">
+                    <td width="40">&nbsp;</td>
+                    <td width="40">&nbsp;</td>
+                    <td width="40">&nbsp;</td>
+                    <td width="40">&nbsp;</td>
+                    <td width="40">&nbsp;</td>
+                    <td width="40">&nbsp;</td>
+                    <td width="40">&nbsp;</td>
+                    <td width="40">&nbsp;</td>
+                </tr>
+                <tr height="30" *ngFor="let a of listFixMahasiswa; let i = index">
+                    <td>
+                        <center>
+                            <span style="font-size: 13px;">{{i+1}}</span>
+                        </center>
+                    </td>
+                    <td>
+                        <center>
+                            <span style="font-size: 13px;">{{a.nim}}</span>
+                        </center>
+                    </td>
+                    <td>
+                        <span style="font-size: 13px;">&nbsp;{{a.nama}}</span>
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr height="30">
+                    <td colspan="3">
+                        <center>
+                            <span style="font-size: 13px;">TANDA TANGAN DOSEN</span>
+                        </center>
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr height="30">
+                    <td colspan="3">
+                        <center>
+                            <span style="font-size: 13px;">JUMLAH HADIR</span>
+                        </center>
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <br>
+        <!-- presensi sebelum uts -->
+        <table style="BORDER-COLLAPSE:COLLAPSE; BORDER-COLOR:BLACK;" width="100%" border="1" cellpadding="0"
+            cellspacing="0" *ngIf="tipe==1&&sesi==1">
+            <tbody>
+                <tr height="25">
+                    <td rowspan="3" width="30">
+                        <center><b>
+                                <span style="font-weight: bold;font-size: 13px;">NO</span>
+                            </b></center>
+                    </td>
+                    <td rowspan="3" width="80">
+                        <center><b>
+                                <span style="font-weight: bold;font-size: 13px;">NIM</span>
+                            </b></center>
+                    </td>
+                    <td rowspan="3" width="250">
+                        <center><b>
+                                <span style="font-weight: bold;font-size: 13px;">NAMA MAHASISWA</span>
+                            </b></center>
+                    </td>
+                    <td colspan="8">
+                        <center><b>
+                                <span style="font-weight: bold;font-size: 13px;">TANDA TANGAN</span>
+                            </b></center>
+                    </td>
+                </tr>
+                <tr height="25">
+                    <td width="40">
+                        <span style="font-size: 13px;">
+                            <center>MG-1</center>
+                        </span>
+                    </td>
+                    <td width="40">
+                        <span style="font-size: 13px;">
+                            <center>MG-2</center>
+                        </span>
+                    </td>
+                    <td width="40">
+                        <span style="font-size: 13px;">
+                            <center>MG-3</center>
+                        </span>
+                    </td>
+                    <td width="40">
+                        <span style="font-size: 13px;">
+                            <center>MG-4</center>
+                        </span>
+                    </td>
+                    <td width="40">
+                        <span style="font-size: 13px;">
+                            <center>MG-5</center>
+                        </span>
+                    </td>
+                    <td width="40">
+                        <span style="font-size: 13px;">
+                            <center>MG-6</center>
+                        </span>
+                    </td>
+                    <td width="40">
+                        <span style="font-size: 13px;">
+                            <center>MG-7</center>
+                        </span>
+                    </td>
+                    <td width="40">
+                        <span style="font-size: 13px;">
+                            <center>UTS</center>
+                        </span>
+                    </td>
+                </tr>
+                <tr height="25">
+                    <td width="40">&nbsp;</td>
+                    <td width="40">&nbsp;</td>
+                    <td width="40">&nbsp;</td>
+                    <td width="40">&nbsp;</td>
+                    <td width="40">&nbsp;</td>
+                    <td width="40">&nbsp;</td>
+                    <td width="40">&nbsp;</td>
+                    <td width="40">&nbsp;</td>
+                </tr>
+                <tr height="30" *ngFor="let a of listFixMahasiswa; let i = index">
+                    <td>
+                        <center>
+                            <span style="font-size: 13px;">{{i+1}}</span>
+                        </center>
+                    </td>
+                    <td>
+                        <center>
+                            <span style="font-size: 13px;">{{a.nim}}</span>
+                        </center>
+                    </td>
+                    <td>
+                        <span style="font-size: 13px;">&nbsp;{{a.nama}}</span>
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr height="30">
+                    <td colspan="3">
+                        <center>
+                            <span style="font-size: 13px;">TANDA TANGAN DOSEN</span>
+                        </center>
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr height="30">
+                    <td colspan="3">
+                        <center>
+                            <span style="font-size: 13px;">JUMLAH HADIR</span>
+                        </center>
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <br>
+        <!-- presensi uts -->
+        <table style="BORDER-COLLAPSE:COLLAPSE; BORDER-COLOR:BLACK;" width="100%" border="1" cellpadding="0"
+            *ngIf="tipe==3" cellspacing="0">
+            <tbody>
+                <tr height="25">
+                    <td rowspan="2" width="30">
+                        <center><b>
+                                <span style="font-weight: bold;font-size: 13px;">NO</span>
+                            </b></center>
+                    </td>
+                    <td rowspan="2" width="80">
+                        <center><b>
+                                <span style="font-weight: bold;font-size: 13px;">NIM</span>
+                            </b></center>
+                    </td>
+                    <td rowspan="2" width="250">
+                        <center><b>
+                                <span style="font-weight: bold;font-size: 13px;">NAMA MAHASISWA</span>
+                            </b></center>
+                    </td>
+                    <td rowspan="2" width="100">
+                        <center><b>
+                                <span style="font-weight: bold;font-size: 13px;">TANDA TANGAN</span>
+                            </b></center>
+                    </td>
+                    <td colspan="3">
+                        <center><b>
+                                <span style="font-weight: bold;font-size: 13px;">NILAI</span>
+                            </b></center>
+                    </td>
+                </tr>
+                <tr height="25">
+                    <td width="40">
+                        <span style="font-size: 13px;">
+                            <center>TUGAS*</center>
+                        </span>
+                    </td>
+                    <td width="40">
+                        <span style="font-size: 13px;">
+                            <center>UTS*</center>
+                        </span>
+                    </td>
+                    <td width="40">
+                        <span style="font-size: 13px;">
+                            <center>AKHIR*</center>
+                        </span>
+                    </td>
+                </tr>
+                <tr height="30" *ngFor="let a of listFixMahasiswa; let i = index">
+                    <td>
+                        <center>
+                            <span style="font-size: 13px;">{{i+1}}</span>
+                        </center>
+                    </td>
+                    <td>
+                        <center>
+                            <span style="font-size: 13px;">{{a.nim}}</span>
+                        </center>
+                    </td>
+                    <td>
+                        <span style="font-size: 13px;">&nbsp;{{a.nama}}</span>
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <!-- presensi uas -->
+        <table style="BORDER-COLLAPSE:COLLAPSE; BORDER-COLOR:BLACK;" width="100%" border="1" cellpadding="0"
+            *ngIf="tipe==4" cellspacing="0">
+            <tbody>
+                <tr height="25">
+                    <td rowspan="2" width="30">
+                        <center><b>
+                                <span style="font-weight: bold;font-size: 13px;">NO</span>
+                            </b></center>
+                    </td>
+                    <td rowspan="2" width="80">
+                        <center><b>
+                                <span style="font-weight: bold;font-size: 13px;">NIM</span>
+                            </b></center>
+                    </td>
+                    <td rowspan="2" width="250">
+                        <center><b>
+                                <span style="font-weight: bold;font-size: 13px;">NAMA MAHASISWA</span>
+                            </b></center>
+                    </td>
+                    <td rowspan="2" width="100">
+                        <center><b>
+                                <span style="font-weight: bold;font-size: 13px;">TANDA TANGAN</span>
+                            </b></center>
+                    </td>
+                    <td colspan="3">
+                        <center><b>
+                                <span style="font-weight: bold;font-size: 13px;">NILAI</span>
+                            </b></center>
+                    </td>
+                </tr>
+                <tr height="25">
+                    <td width="40">
+                        <span style="font-size: 13px;">
+                            <center>TUGAS*</center>
+                        </span>
+                    </td>
+                    <td width="40">
+                        <span style="font-size: 13px;">
+                            <center>UAS*</center>
+                        </span>
+                    </td>
+                    <td width="40">
+                        <span style="font-size: 13px;">
+                            <center>AKHIR*</center>
+                        </span>
+                    </td>
+                </tr>
+                <tr height="30" *ngFor="let a of listFixMahasiswa; let i = index"
+                    [ngClass]="{'row-cekal': a.cekal == true}">
+                    <td>
+                        <center>
+                            <span style="font-size: 13px;">{{i+1}}</span>
+                        </center>
+                    </td>
+                    <td>
+                        <center>
+                            <span style="font-size: 13px;">{{a.nim}}</span>
+                        </center>
+                    </td>
+                    <td>
+                        <span style="font-size: 13px;">&nbsp;{{a.nama}}</span>
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <!-- presensi praktikum -->
+        <table style="BORDER-COLLAPSE:COLLAPSE; BORDER-COLOR:BLACK;" width="100%" border="1" cellpadding="0"
+            *ngIf="tipe==2" cellspacing="0">
+            <tbody>
+                <tr height="25">
+                    <td rowspan="2" width="30">
+                        <center><b>
+                                <span style="font-weight: bold;font-size: 13px;">NO</span>
+                            </b></center>
+                    </td>
+                    <td rowspan="2" width="80">
+                        <center><b>
+                                <span style="font-weight: bold;font-size: 13px;">NIM</span>
+                            </b></center>
+                    </td>
+                    <td rowspan="2" width="250">
+                        <center><b>
+                                <span style="font-weight: bold;font-size: 13px;">NAMA MAHASISWA</span>
+                            </b></center>
+                    </td>
+                    <td rowspan="2" width="100">
+                        <center><b>
+                                <span style="font-weight: bold;font-size: 13px;">TANDA TANGAN</span>
+                            </b></center>
+                    </td>
+                    <td colspan="3">
+                        <center><b>
+                                <span style="font-weight: bold;font-size: 13px;">NILAI</span>
+                            </b></center>
+                    </td>
+                </tr>
+                <tr height="25">
+                    <td width="40">
+                        <span style="font-size: 13px;">
+                            <center>HARIAN<br>20%</center>
+                        </span>
+                    </td>
+                    <td width="40">
+                        <span style="font-size: 13px;">
+                            <center>LAPORAN<br>20%</center>
+                        </span>
+                    </td>
+                    <td width="40">
+                        <span style="font-size: 13px;">
+                            <center>UJIAN<br>60%</center>
+                        </span>
+                    </td>
+                </tr>
+                <tr height="30" *ngFor="let a of listFixMahasiswa; let i = index"
+                    [ngClass]="{'row-cekal': a.cekal == true}">
+                    <td>
+                        <center>
+                            <span style="font-size: 13px;">{{i+1}}</span>
+                        </center>
+                    </td>
+                    <td>
+                        <center>
+                            <span style="font-size: 13px;">{{a.nim}}</span>
+                        </center>
+                    </td>
+                    <td>
+                        <span style="font-size: 13px;">&nbsp;{{a.nama}}</span>
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+            </tbody>
+        </table>
+    </center>
+    <span style="font-size: 13px;" *ngIf="tipe==1"><br>BILA NAMA ANDA BELUM TERCANTUM DI LEMBAR PRESENSI, JANGAN MENULIS
+        NAMA ANDA DI
+        LEMBAR INI,
+        SILAHKAN LAPOR LANGSUNG KE LOKET BAAK</span><br>
+    <span style="font-size: 13px;" *ngIf="tipe!=1">*) Nama mahasiswa dengan blok warna abu-abu terkena cekal
+        ujian</span><br>
+    <span style="font-size: 13px;" *ngIf="tipe!=1">**) Kolom nilai harap diisi dengan angka</span>
+    <table border='0' cellpadding='0' cellspacing='0' *ngIf="tipe!=1" width="100%">
+        <tr>
+            <td>
+                <span style="font-size: 10px;">TABEL NILAI :</span>
+            </td>
+            <td>
+                <span style="font-size: 10px;">A</span>
+            </td>
+            <td>
+                <span style="font-size: 10px;">=</span>
+            </td>
+            <td>
+                <span style="font-size: 10px;">85 - 100</span>
+            </td>
+            <td>&nbsp;</td>
+            <td>
+                <span style="font-size: 10px;">C+</span>
+            </td>
+            <td>
+                <span style="font-size: 10px;">=</span>
+            </td>
+            <td>
+                <span style="font-size: 10px;">60 - 64</span>
+            </td>
+            <td width='180'> &nbsp; </td>
+            <td>
+                <span style="font-size: 13px;">MALANG, ...... /...... /............</span>
+            </td>
+        </tr>
+        <tr>
+            <td rowspan='4'>&nbsp;</td>
+            <td>
+                <span style="font-size: 10px;">A-</span>
+            </td>
+            <td>
+                <span style="font-size: 10px;">=</span>
+            </td>
+            <td>
+                <span style="font-size: 10px;">80 - 84</span>
+            </td>
+            <td>&nbsp;</td>
+            <td>
+                <span style="font-size: 10px;">C</span>
+            </td>
+            <td>
+                <span style="font-size: 10px;">=</span>
+            </td>
+            <td>
+                <span style="font-size: 10px;">55 - 59</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span style="font-size: 10px;">B+</span>
+            </td>
+            <td>
+                <span style="font-size: 10px;">=</span>
+            </td>
+            <td>
+                <span style="font-size: 10px;">75 - 79</span>
+            </td>
+            <td>&nbsp;</td>
+            <td>
+                <span style="font-size: 10px;">C-</span>
+            </td>
+            <td>
+                <span style="font-size: 10px;">=</span>
+            </td>
+            <td>
+                <span style="font-size: 10px;">50 - 54</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span style="font-size: 10px;">B</span>
+            </td>
+            <td>
+                <span style="font-size: 10px;">=</span>
+            </td>
+            <td>
+                <span style="font-size: 10px;">70 - 74</span>
+            </td>
+            <td>&nbsp;</td>
+            <td>
+                <span style="font-size: 10px;">D</span>
+            </td>
+            <td>
+                <span style="font-size: 10px;">=</span>
+            </td>
+            <td>
+                <span style="font-size: 10px;">45 - 49</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span style="font-size: 10px;">B-</span>
+            </td>
+            <td>
+                <span style="font-size: 10px;">=</span>
+            </td>
+            <td>
+                <span style="font-size: 10px;">65 - 69</span>
+            </td>
+            <td>&nbsp;</td>
+            <td>
+                <span style="font-size: 10px;">E</span>
+            </td>
+            <td>
+                <span style="font-size: 10px;">=</span>
+            </td>
+            <td>
+                <span style="font-size: 10px;">0 - 44</span>
+            </td>
+            <td width='280'> &nbsp; </td>
+            <td>
+                <span style="font-size: 13px;">{{dosen}}</span>
+            </td>
+        </tr>
+    </table>
+</div>

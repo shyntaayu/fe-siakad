@@ -1,0 +1,159 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row" style="margin-top: -30px;">
+            <div class="col-md-12">
+                <div class="card" [busyIf]="loading">
+                    <div class="card-body">
+                        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <jenjang-ddl formControlName="jenjang" [(ngModel)]="jenjang">
+                                    </jenjang-ddl>
+                                </div>
+                                <div class="col-md-4">
+                                    <prodi-ddl formControlName="jurusan" [(ngModel)]="prodi" #hasMessage>
+                                    </prodi-ddl>
+                                </div>
+                                <div class="col-md-4">
+                                    <kelas-ddl formControlName="kelas" [(ngModel)]="kelas">
+                                    </kelas-ddl>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <smtangka-ddl formControlName="semester" [(ngModel)]="semester"
+                                        (selectedSmt)="getNew($event)">
+                                    </smtangka-ddl>
+                                </div>
+                            </div>
+                            <button mat-raised-button type="submit" class="btn btn-info" [disabled]="!profileForm.valid"
+                                [loading]="loading">Cari</button>
+                            <div class="clearfix"></div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p-toast></p-toast>
+        <div class="row" style="margin-top: -30px;">
+            <div class="col-md-6">
+                <div class="card" [busyIf]="loading1">
+                    <div class="card-body">
+                        <p-table #dt1 [value]="listMahasiswa" selectionMode="single" [(selection)]="selectedProduct2"
+                            dataKey="nim" (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)"
+                            [paginator]="true" [rows]="10" [showCurrentPageReport]="true" sortMode="multiple"
+                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                            [globalFilterFields]="['nama','nim']" [rowsPerPageOptions]="[10,25,50]">
+                            <!-- <ng-template pTemplate="caption">
+                                <div class="p-d-flex">
+                                    <span class="p-input-icon-right p-ml-auto">
+                                        <i class="pi pi-search"></i>
+                                        <input pInputText type="text"
+                                            (input)="dt1.filterGlobal($event.target.value, 'contains')"
+                                            placeholder="Search keyword" />
+                                    </span>
+                                </div>
+                            </ng-template> -->
+                            <ng-template pTemplate="caption">
+                                <div class="table-header">
+                                    List Mahasiswa
+                                    <br><br>
+                                    <span class="p-input-icon-left">
+                                        <i class="pi pi-search"></i>
+                                        <input pInputText type="text"
+                                            (input)="dt1.filterGlobal($event.target.value, 'contains')"
+                                            placeholder="Search..." />
+                                    </span>
+                                </div>
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th pSortableColumn="nim">NIM <p-sortIcon field="nim"></p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="nama">Nama <p-sortIcon field="nama"></p-sortIcon>
+                                    </th>
+                                    <!-- <th pSortableColumn="category">Category <p-sortIcon field="category"></p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="quantity">Quantity <p-sortIcon field="quantity"></p-sortIcon>
+                                    </th> -->
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-mahasiswa>
+                                <tr [pSelectableRow]="mahasiswa">
+                                    <td>{{mahasiswa.nim}}</td>
+                                    <td>{{mahasiswa.nama}}</td>
+                                    <!-- <td>{{mahasiswa.category}}</td>
+                                    <td>{{mahasiswa.quantity}}</td> -->
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card" [busyIf]="loading2">
+                    <div class="card-body">
+                        <p-table #dt2 [value]="listPresensi" dataKey="id" editMode="row" [paginator]="true" [rows]="10"
+                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                            [showCurrentPageReport]="true" [globalFilterFields]="['matakuliah']"
+                            [rowsPerPageOptions]="[10,25,50]">
+                            <ng-template pTemplate="caption">
+                                <div class="table-header">
+                                    List Mata Kuliah<br><br>
+                                    <span class="p-input-icon-right p-ml-auto">
+                                        <i class="pi pi-search"></i>
+                                        <input pInputText type="text"
+                                            (input)="dt2.filterGlobal($event.target.value, 'contains')"
+                                            placeholder="Search keyword" />
+                                    </span>
+                                </div>
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th pSortableColumn="matakuliah">Nama Matakuliah <p-sortIcon field="matakuliah">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="data_presensi.Alpha">Alpa <p-sortIcon
+                                            field="data_presensi.Alpha"></p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="data_presensi.Izin">Ijin <p-sortIcon
+                                            field="data_presensi.Izin">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="data_presensi.Sakit">Sakit <p-sortIcon
+                                            field="data_presensi.Sakit">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="data_presensi.Hadir">Hadir <p-sortIcon
+                                            field="data_presensi.Hadir">
+                                        </p-sortIcon>
+                                    </th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-presensi>
+                                <tr [pSelectableRow]="presensi">
+                                    <td>{{presensi.matakuliah}}</td>
+                                    <td>{{presensi.data_presensi.Alpha}}</td>
+                                    <td>{{presensi.data_presensi.Izin}}</td>
+                                    <td>{{presensi.data_presensi.Sakit}}</td>
+                                    <td>{{presensi.data_presensi.Hadir}}</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12"> <button mat-raised-button type="button" class="btn btn-success pull-right"
+                            [disabled]="this.listPresensi.length==0" (click)="print(2)">Print Kartu UAS</button>
+                        <button mat-raised-button type="button" class="btn btn-warning pull-right"
+                            [disabled]="this.listPresensi.length==0" (click)="print(1)"
+                            style="margin-right: 1rem;">Print Kartu UTS</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,245 @@
+<div class="invoice" [busyIf]="loading">
+    <!-- <h1>Invoice Num. {{ invoice }}</h1>
+    Amount: {{ (invoiceDetails[i] | async)?.amount }} -->
+    <br>
+    <table border="1" style="BORDER-COLLAPSE:COLLAPSE;" width="100%" *ngIf="data">
+        <tbody>
+            <tr>
+                <td rowspan="2" align="center">
+                    <img src="/assets/img/stimata.jpeg" width="80">
+                </td>
+                <td colspan="2" align="center">
+
+                    <span style="font-weight: bold;font-size: 18px;">STMIK PPKIA PRADNYA PARAMITA</span> <br>
+                    <span style="font-size: 16px;">Kampus : Jl. Laksda Adi Sucipto 249 A Malang <br>
+                        <span style="font-size: 13px;">Telp. (0341) 412699, Fax. (0341) 412782</span>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td align="center">
+                    <span style="font-weight: bold;font-size: 16px;">FORMULIR<br>KARTU UJIAN AKHIR<br>SEMESTER
+                        {{semester}}
+                        <br> TAHUN AJARAN
+                        {{tahun_akademik}}</span>
+
+                </td>
+                <td>
+                    <table border="0" style="BORDER-COLLAPSE:COLLAPSE;" width="100%">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <span style="font-size: 13px;">No. Dokumen</span>
+                                </td>
+                                <td>
+                                    <span style="font-size: 13px;"> :</span>
+                                </td>
+                                <td>
+                                    <span style="font-size: 13px;">FORM/BAAK/006/02</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span style="font-size: 13px;">No. Revisi</span>
+                                </td>
+                                <td>
+                                    <span style="font-size: 13px;"> :</span>
+                                </td>
+                                <td>
+                                    <span style="font-size: 13px;">03</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span style="font-size: 13px;">Tgl. Dibuat</span>
+                                </td>
+                                <td>
+                                    <span style="font-size: 13px;"> :</span>
+                                </td>
+                                <td>
+                                    <span style="font-size: 13px;">20 Januari 2011</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span style="font-size: 13px;">Tgl. Berlaku</span>
+                                </td>
+                                <td>
+                                    <span style="font-size: 13px;"> :</span>
+                                </td>
+                                <td>
+                                    <span style="font-size: 13px;">15 Mei 2013</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span style="font-size: 13px;">Penanggung Jawab</span>
+                                </td>
+                                <td>
+                                    <span style="font-size: 13px;"> :</span>
+                                </td>
+                                <td>
+                                    <span style="font-size: 13px;">Ka. BAAK</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <table border="0" width="100%" *ngIf="header">
+        <tbody>
+            <tr>
+                <td>
+                    <span style="font-size: 16px;">Nama</span>
+                </td>
+                <td>:</td>
+                <td>
+                    <span style="font-size: 16px;">{{header.nama}}</span>
+                </td>
+                <td>
+                    <span style="font-size: 16px;">Jenjang</span>
+                </td>
+                <td>:</td>
+                <td>
+                    <span style="font-size: 16px;">{{header.jenjang}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="font-size: 16px;">NIM</span>
+                </td>
+                <td>:</td>
+                <td>
+                    <span style="font-size: 16px;">{{header.nim}}</span>
+                </td>
+                <td>
+                    <span style="font-size: 16px;">Program Studi</span>
+                </td>
+                <td>:</td>
+                <td>
+                    <span style="font-size: 16px;">{{header.prodi}} </span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="font-size: 16px;">Dosen Wali</span>
+                </td>
+                <td>:</td>
+                <td>
+                    <span style="font-size: 16px;">{{header.dosen}}</span>
+                </td>
+                <td>
+                    <span style="font-size: 16px;">Semester</span>
+                </td>
+                <td>:</td>
+                <td>
+                    <span style="font-size: 16px;">{{semester}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="font-size: 16px;">&nbsp;</span>
+                </td>
+                <td></td>
+                <td>
+                    <span style="font-size: 16px;">&nbsp;</span>
+                </td>
+                <td>
+                    <span style="font-size: 16px;">Th. Akademik</span>
+                </td>
+                <td>:</td>
+                <td>
+                    <span style="font-size: 16px;">{{tahun_akademik}}</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <table style="BORDER-COLLAPSE:COLLAPSE;" frame="below" border="1" width="100%">
+        <tbody>
+            <tr>
+                <td width="680"></td>
+            </tr>
+        </tbody>
+    </table>
+    <table border="1" style="BORDER-COLLAPSE:COLLAPSE;" frame="vsides" rules="cols" cellpadding="5" width="100%"
+        cellspacing="0" height="25">
+        <tbody>
+            <tr class="gray" height="35">
+                <td width="30" align="center">
+                    <span style="font-size: 13px;">No</span>
+                </td>
+                <td width="90" align="center">
+                    <span style="font-size: 13px;">KODE MTK</span>
+                </td>
+                <td width="295" align="center">
+                    <span style="font-size: 13px;">NAMA MATA KULIAH</span>
+                </td>
+                <td width="50" align="center">
+                    <span style="font-size: 13px;">SKS</span>
+                </td>
+                <td width="40" align="center">
+                    <span style="font-size: 10px;">PROSEN-<br>TASE</span>
+                </td>
+                <td width="90" align="center">
+                    <span style="font-size: 10px;">TTD PENGAWAS</span>
+                </td>
+            </tr>
+            <tr class="white" height="30" align="center" *ngFor="let a of data; let i = index"
+                [ngClass]="{'row-cekal': a.cekal == true}">
+                <td align="center">
+                    <span class="white" style="font-size: 16px;">{{i+1}}</span>
+                </td>
+                <td align="center">
+                    <span class="white" style="font-size: 16px;">{{a.kodematkul}}</span>
+                </td>
+                <td>
+                    <span class="white" style="font-size: 16px;">{{a.matakuliah}}</span>
+                </td>
+                <td align="center">
+                    <span class="white" style="font-size: 16px;">{{a.sks}}</span>
+                </td>
+                <td align="center">
+                    <span style="font-size: 16px;">{{a.persen}} %</span>
+                </td>
+                <td>&nbsp;</td>
+            </tr>
+        </tbody>
+    </table>
+    <table style="BORDER-COLLAPSE:COLLAPSE;" frame="above" border="1" width="100%">
+        <tbody>
+            <tr>
+                <td width=""></td>
+            </tr>
+        </tbody>
+    </table>
+    <div style="text-align: center;">
+        <span style="font-size: 16px;">Total SKS: {{totalSks}} sks<p align="right">
+        </span>
+    </div>
+    <table border="0" width="100%" style="margin-left: 70%;">
+        <tbody>
+            <tr>
+                <td>
+                    <span style="font-size: 13px;">Koord. BAAK</span>
+                </td>
+            </tr>
+            <tr>
+            </tr>
+            <tr>
+                <td><br><br><br>
+                    <!-- <img src="eka y.png" height="80"> -->
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="font-size: 13px;">Eka Yuniar, S.Kom., MMSI</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

@@ -1,0 +1,144 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row" style="margin-top: -30px;">
+            <div class="col-md-12">
+                <div class="card" [busyIf]="loading">
+                    <div class="card-body">
+                        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <jenjang-ddl formControlName="jenjang" [(ngModel)]="jenjang">
+                                    </jenjang-ddl>
+                                </div>
+                                <div class="col-md-4">
+                                    <prodi-ddl formControlName="jurusan" [(ngModel)]="prodi" #hasMessage>
+                                    </prodi-ddl>
+                                </div>
+                                <div class="col-md-4">
+                                    <kelas-ddl formControlName="kelas" [(ngModel)]="kelas">
+                                    </kelas-ddl>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <smtangka-ddl formControlName="semester" [(ngModel)]="semester"
+                                        (selectedSmt)="getNew($event)">
+                                    </smtangka-ddl>
+                                </div>
+                            </div>
+                            <button mat-raised-button type="submit" class="btn btn-info" [disabled]="!profileForm.valid"
+                                [loading]="loading">Cari</button>
+                            <div class="clearfix"></div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p-toast></p-toast>
+        <div class="row" style="margin-top: -30px;">
+            <div class="col-md-6">
+                <div class="card" [busyIf]="loading1">
+                    <div class="card-body">
+                        <p-table #dt1 [value]="listMahasiswa" selectionMode="single" [(selection)]="selectedProduct2"
+                            dataKey="nim" (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)"
+                            [paginator]="true" [rows]="10" [showCurrentPageReport]="true" sortMode="multiple"
+                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                            [globalFilterFields]="['nama','nim']" [rowsPerPageOptions]="[10,25,50]">
+                            <!-- <ng-template pTemplate="caption">
+                                <div class="p-d-flex">
+                                    <span class="p-input-icon-right p-ml-auto">
+                                        <i class="pi pi-search"></i>
+                                        <input pInputText type="text"
+                                            (input)="dt1.filterGlobal($event.target.value, 'contains')"
+                                            placeholder="Search keyword" />
+                                    </span>
+                                </div>
+                            </ng-template> -->
+                            <ng-template pTemplate="caption">
+                                <div class="table-header">
+                                    List Mahasiswa
+                                    <br><br>
+                                    <span class="p-input-icon-left">
+                                        <i class="pi pi-search"></i>
+                                        <input pInputText type="text"
+                                            (input)="dt1.filterGlobal($event.target.value, 'contains')"
+                                            placeholder="Search..." />
+                                    </span>
+                                </div>
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th pSortableColumn="nim">NIM <p-sortIcon field="nim"></p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="nama">Nama <p-sortIcon field="nama"></p-sortIcon>
+                                    </th>
+                                    <!-- <th pSortableColumn="uts">UTS <p-sortIcon field="uts"></p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="uas">UAS <p-sortIcon field="uas"></p-sortIcon>
+                                    </th> -->
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-mahasiswa>
+                                <tr [pSelectableRow]="mahasiswa">
+                                    <td>{{mahasiswa.nim}}</td>
+                                    <td>{{mahasiswa.nama}}</td>
+                                    <!-- <td>{{mahasiswa.uts}}</td>
+                                    <td>{{mahasiswa.uas}}</td> -->
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card" [busyIf]="loading2">
+                    <div class="card-body">
+                        <p-table #dt2 [value]="listMatkul" dataKey="id" editMode="row" [paginator]="true" [rows]="10"
+                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                            [showCurrentPageReport]="true" [globalFilterFields]="['nama','kode_matkul']"
+                            [rowsPerPageOptions]="[10,25,50]">
+                            <ng-template pTemplate="caption">
+                                <div class="table-header">
+                                    List Mata Kuliah<br><br>
+                                    <span class="p-input-icon-right p-ml-auto">
+                                        <i class="pi pi-search"></i>
+                                        <input pInputText type="text"
+                                            (input)="dt2.filterGlobal($event.target.value, 'contains')"
+                                            placeholder="Search keyword" />
+                                    </span>
+                                </div>
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th pSortableColumn="kode_matkul">Kode <p-sortIcon field="kode_matkul"></p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="nama">Nama Matakuliah <p-sortIcon field="nama"></p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="status_matkul">Status <p-sortIcon field="status_matkul">
+                                        </p-sortIcon>
+                                    </th>
+                                    <!-- <th>Quantity</th> -->
+                                    <!-- <th style="width:8rem"></th> -->
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-matkul>
+                                <tr [pSelectableRow]="matkul">
+                                    <td>{{matkul.kode_matkul}}</td>
+                                    <td>{{matkul.nama}}</td>
+                                    <td>{{setStatusMatkul(matkul.status_matkul)}}</td>
+                                    <!-- <td>{{matkul.quantity}}</td> -->
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12"> <button mat-raised-button type="button" class="btn btn-success pull-right"
+                            [disabled]="this.listMatkul.length==0" (click)="print(1)">Print</button></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

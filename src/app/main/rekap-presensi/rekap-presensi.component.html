@@ -1,1 +1,350 @@
-<p>rekap-presensi works!</p>
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row" style="margin-top: -30px;">
+            <div class="col-md-6">
+                <div class="card" [busyIf]="loading">
+                    <div class="card-body">
+                        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <tahun-ddl formControlName="tahun">
+                                    </tahun-ddl>
+                                </div>
+                                <div class="col-md-4">
+                                    <semester-ddl formControlName="semester" (selectedSemester2)="getSemester($event)">
+                                    </semester-ddl>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <jenjang-ddl formControlName="jenjang">
+                                    </jenjang-ddl>
+                                </div>
+                                <div class="col-md-4">
+                                    <prodi-ddl formControlName="jurusan">
+                                    </prodi-ddl>
+                                </div>
+                                <div class="col-md-4">
+                                    <kelas-ddl formControlName="kelas" (selectedSmt)="getNew($event)">
+                                    </kelas-ddl>
+                                </div>
+                            </div>
+
+                            <button mat-raised-button type="submit" class="btn btn-info" [disabled]="!profileForm.valid"
+                                [loading]="loading">Cari</button>
+                            <div class="clearfix"></div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card" [busyIf]="loading2">
+                    <div class="card-body">
+                        <p-table #dt2 [value]="listMatkul" selectionMode="single" [(selection)]="selectedProduct2"
+                            dataKey="kode_matkul" (onRowSelect)="onRowSelect($event)"
+                            (onRowUnselect)="onRowUnselect($event)" editMode="row" [paginator]="true" [rows]="10"
+                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                            [showCurrentPageReport]="true" [globalFilterFields]="['nama_matkul','kode_matkul']"
+                            [rowsPerPageOptions]="[10,25,50]">
+                            <ng-template pTemplate="caption">
+                                <div class="table-header">
+                                    List Mata Kuliah<br><br>
+                                    <span class="p-input-icon-right p-ml-auto">
+                                        <i class="pi pi-search"></i>
+                                        <input pInputText type="text"
+                                            (input)="dt2.filterGlobal($event.target.value, 'contains')"
+                                            placeholder="Search keyword" />
+                                    </span>
+                                </div>
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th pSortableColumn="kode_matkul">Kode <p-sortIcon field="kode_matkul"></p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="nama_matkul">Nama <p-sortIcon field="nama_matkul">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="sks">SKS <p-sortIcon field="sks">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="sks">Cekal <p-sortIcon field="sks">
+                                        </p-sortIcon>
+                                    </th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-matkul let-rowIndex="rowIndex">
+                                <tr [pSelectableRow]="matkul" [pSelectableRowIndex]="rowIndex">
+                                    <td>{{matkul.kode_matkul}}</td>
+                                    <td>{{matkul.nama_matkul}}</td>
+                                    <td>{{matkul.sks}}</td>
+                                    <td>{{matkul.cekal}} %</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p-toast></p-toast>
+        <div class="row" style="margin-top: -30px;">
+            <div class="col-md-12">
+                <div class="card" [busyIf]="loading1">
+                    <div class="card-body">
+                        <p-toolbar styleClass="p-mb-4">
+                            <ng-template pTemplate="left">
+                                <button type="button" pButton pRipple icon="pi pi-file-excel" label="Excel"
+                                    [disabled]="listMahasiswa.length==0" (click)="exportExcel()"
+                                    class="p-button-success p-mr-2" pTooltip="XLS" tooltipPosition="bottom"></button>
+                            </ng-template>
+                        </p-toolbar>
+                        <p-table #dt1 [value]="listMahasiswa" [paginator]="true" [rows]="10" editMode="row"
+                            [frozenColumns]="frozenCols" frozenWidth="350px" [scrollable]="true"
+                            [showCurrentPageReport]="true" sortMode="multiple" dataKey="nim"
+                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                            [globalFilterFields]="['nama','nim']" [rowsPerPageOptions]="[10,25,50]">
+                            <!-- <ng-template pTemplate="caption">
+                                <div class="p-d-flex">
+                                    <span class="p-input-icon-right p-ml-auto">
+                                        <i class="pi pi-search"></i>
+                                        <input pInputText type="text"
+                                            (input)="dt1.filterGlobal($event.target.value, 'contains')"
+                                            placeholder="Search keyword" />
+                                    </span>
+                                </div>
+                            </ng-template> -->
+                            <ng-template pTemplate="caption">
+                                <div class="table-header">
+                                    List Mahasiswa
+                                    <br><br>
+                                    <span class="p-input-icon-left">
+                                        <i class="pi pi-search"></i>
+                                        <input pInputText type="text"
+                                            (input)="dt1.filterGlobal($event.target.value, 'contains')"
+                                            placeholder="Search..." />
+                                    </span>
+                                </div>
+                            </ng-template>
+                            <ng-template pTemplate="colgroup" let-columns>
+                                <colgroup>
+                                    <col style="width:150px">
+                                    <col style="width:200px">
+                                    <col style="width:100px">
+                                    <col style="width:100px">
+                                    <col style="width:100px">
+                                    <col style="width:100px">
+                                    <col style="width:100px">
+                                    <col style="width:100px">
+                                    <col style="width:100px">
+                                    <col style="width:100px">
+                                    <col style="width:100px">
+                                    <col style="width:100px">
+                                    <col style="width:100px">
+                                    <col style="width:100px">
+                                    <col style="width:100px">
+                                    <col style="width:100px">
+                                    <col style="width:100px">
+                                    <col style="width:100px">
+                                </colgroup>
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>NIM </th>
+                                    <th>Nama</th>
+                                    <th>M1</th>
+                                    <th>M2</th>
+                                    <th>M3</th>
+                                    <th>M4</th>
+                                    <th>M5</th>
+                                    <th>M6</th>
+                                    <th>M7</th>
+                                    <th>M8</th>
+                                    <th>M9</th>
+                                    <th>M10</th>
+                                    <th>M11</th>
+                                    <th>M12</th>
+                                    <th>M13</th>
+                                    <th>M14</th>
+                                    <th>Hadir</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-mahasiswa let-editing="editing" let-ri="rowIndex">
+                                <tr [pEditableRow]="mahasiswa" [ngClass]="{'row-cekal': mahasiswa.cekal == true}">
+                                    <td>{{mahasiswa.nim}}</td>
+                                    <td>{{mahasiswa.nama}}</td>
+                                    <td>
+                                        <p-cellEditor>
+                                            <ng-template pTemplate="input">
+                                                <p-dropdown [options]="presies" [(ngModel)]="mahasiswa.minggu1"
+                                                    [style]="{'width':'100%'}"></p-dropdown>
+                                            </ng-template>
+                                            <ng-template pTemplate="output">
+                                                {{mahasiswa.minggu1}}
+                                            </ng-template>
+                                        </p-cellEditor>
+                                    </td>
+                                    <td>
+                                        <p-cellEditor>
+                                            <ng-template pTemplate="input">
+                                                <p-dropdown [options]="presies" [(ngModel)]="mahasiswa.minggu2"
+                                                    [style]="{'width':'100%'}"></p-dropdown>
+                                            </ng-template>
+                                            <ng-template pTemplate="output">
+                                                {{mahasiswa.minggu2}}
+                                            </ng-template>
+                                        </p-cellEditor>
+                                    </td>
+                                    <td>
+                                        <p-cellEditor>
+                                            <ng-template pTemplate="input">
+                                                <p-dropdown [options]="presies" [(ngModel)]="mahasiswa.minggu3"
+                                                    [style]="{'width':'100%'}"></p-dropdown>
+                                            </ng-template>
+                                            <ng-template pTemplate="output">
+                                                {{mahasiswa.minggu3}}
+                                            </ng-template>
+                                        </p-cellEditor>
+                                    </td>
+                                    <td>
+                                        <p-cellEditor>
+                                            <ng-template pTemplate="input">
+                                                <p-dropdown [options]="presies" [(ngModel)]="mahasiswa.minggu4"
+                                                    [style]="{'width':'100%'}"></p-dropdown>
+                                            </ng-template>
+                                            <ng-template pTemplate="output">
+                                                {{mahasiswa.minggu4}}
+                                            </ng-template>
+                                        </p-cellEditor>
+                                    </td>
+                                    <td>
+                                        <p-cellEditor>
+                                            <ng-template pTemplate="input">
+                                                <p-dropdown [options]="presies" [(ngModel)]="mahasiswa.minggu5"
+                                                    [style]="{'width':'100%'}"></p-dropdown>
+                                            </ng-template>
+                                            <ng-template pTemplate="output">
+                                                {{mahasiswa.minggu5}}
+                                            </ng-template>
+                                        </p-cellEditor>
+                                    </td>
+                                    <td>
+                                        <p-cellEditor>
+                                            <ng-template pTemplate="input">
+                                                <p-dropdown [options]="presies" [(ngModel)]="mahasiswa.minggu6"
+                                                    [style]="{'width':'100%'}"></p-dropdown>
+                                            </ng-template>
+                                            <ng-template pTemplate="output">
+                                                {{mahasiswa.minggu6}}
+                                            </ng-template>
+                                        </p-cellEditor>
+                                    </td>
+                                    <td>
+                                        <p-cellEditor>
+                                            <ng-template pTemplate="input">
+                                                <p-dropdown [options]="presies" [(ngModel)]="mahasiswa.minggu7"
+                                                    [style]="{'width':'100%'}"></p-dropdown>
+                                            </ng-template>
+                                            <ng-template pTemplate="output">
+                                                {{mahasiswa.minggu7}}
+                                            </ng-template>
+                                        </p-cellEditor>
+                                    </td>
+                                    <td>
+                                        <p-cellEditor>
+                                            <ng-template pTemplate="input">
+                                                <p-dropdown [options]="presies" [(ngModel)]="mahasiswa.minggu8"
+                                                    [style]="{'width':'100%'}"></p-dropdown>
+                                            </ng-template>
+                                            <ng-template pTemplate="output">
+                                                {{mahasiswa.minggu8}}
+                                            </ng-template>
+                                        </p-cellEditor>
+                                    </td>
+                                    <td>
+                                        <p-cellEditor>
+                                            <ng-template pTemplate="input">
+                                                <p-dropdown [options]="presies" [(ngModel)]="mahasiswa.minggu9"
+                                                    [style]="{'width':'100%'}"></p-dropdown>
+                                            </ng-template>
+                                            <ng-template pTemplate="output">
+                                                {{mahasiswa.minggu9}}
+                                            </ng-template>
+                                        </p-cellEditor>
+                                    </td>
+                                    <td>
+                                        <p-cellEditor>
+                                            <ng-template pTemplate="input">
+                                                <p-dropdown [options]="presies" [(ngModel)]="mahasiswa.minggu10"
+                                                    [style]="{'width':'100%'}"></p-dropdown>
+                                            </ng-template>
+                                            <ng-template pTemplate="output">
+                                                {{mahasiswa.minggu10}}
+                                            </ng-template>
+                                        </p-cellEditor>
+                                    </td>
+                                    <td>
+                                        <p-cellEditor>
+                                            <ng-template pTemplate="input">
+                                                <p-dropdown [options]="presies" [(ngModel)]="mahasiswa.minggu11"
+                                                    [style]="{'width':'100%'}"></p-dropdown>
+                                            </ng-template>
+                                            <ng-template pTemplate="output">
+                                                {{mahasiswa.minggu11}}
+                                            </ng-template>
+                                        </p-cellEditor>
+                                    </td>
+                                    <td>
+                                        <p-cellEditor>
+                                            <ng-template pTemplate="input">
+                                                <p-dropdown [options]="presies" [(ngModel)]="mahasiswa.minggu12"
+                                                    [style]="{'width':'100%'}"></p-dropdown>
+                                            </ng-template>
+                                            <ng-template pTemplate="output">
+                                                {{mahasiswa.minggu12}}
+                                            </ng-template>
+                                        </p-cellEditor>
+                                    </td>
+                                    <td>
+                                        <p-cellEditor>
+                                            <ng-template pTemplate="input">
+                                                <p-dropdown [options]="presies" [(ngModel)]="mahasiswa.minggu13"
+                                                    [style]="{'width':'100%'}"></p-dropdown>
+                                            </ng-template>
+                                            <ng-template pTemplate="output">
+                                                {{mahasiswa.minggu13}}
+                                            </ng-template>
+                                        </p-cellEditor>
+                                    </td>
+                                    <td>
+                                        <p-cellEditor>
+                                            <ng-template pTemplate="input">
+                                                <p-dropdown [options]="presies" [(ngModel)]="mahasiswa.minggu14"
+                                                    [style]="{'width':'100%'}"></p-dropdown>
+                                            </ng-template>
+                                            <ng-template pTemplate="output">
+                                                {{mahasiswa.minggu14}}
+                                            </ng-template>
+                                        </p-cellEditor>
+                                    </td>
+                                    <td>{{mahasiswa.presensi.data_presensi.Hadir}}</td>
+                                    <td style="text-align:center">
+                                        <button *ngIf="!editing&&mahasiswa.cekal" pButton pRipple type="button"
+                                            pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(mahasiswa)"
+                                            class="p-button-rounded p-button-text"></button>
+                                        <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow
+                                            icon="pi pi-check" (click)="onRowEditSave(mahasiswa, ri)"
+                                            class="p-button-rounded p-button-text p-button-success p-mr-2"></button>
+                                        <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow
+                                            icon="pi pi-times" (click)="onRowEditCancel()"
+                                            class="p-button-rounded p-button-text p-button-danger"></button>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

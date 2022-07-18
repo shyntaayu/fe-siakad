@@ -1,0 +1,322 @@
+<p *ngIf="mahasiswa" style="text-align: center;">
+    <span style="font-weight: bold;font-size: 16px;">YAYASAN PRADNYA PARAMITHA<br>
+        SEKOLAH TINGGI MANAJEMEN INFORMATIKA DAN KOMPUTER<br>
+        PPKIA PRADNYA PARAMITA</span><br><br>
+    <span style="font-size: 24px;"><u>TRANSKRIP AKADEMIK</u></span><br>
+    <span style="font-size: 13px;">Lampiran Ijazah Nomor: {{mahasiswa.noTrans}}</span> <br>
+    <span style="font-size: 13px;">SK Pendirian Sekolah Tinggi nomor: 114/D/0/2000, tanggal 26 Juli 2000</span>
+</p>
+<table border="0" style="BORDER-COLLAPSE:COLLAPSE;" width="100%" *ngIf="mahasiswa" align="center">
+    <tbody>
+        <tr>
+            <td></td>
+            <td>
+                <span style="font-size: 13px;">Nama</span>
+            </td>
+            <td>:</td>
+            <td>
+                <span style="font-size: 13px;">{{mahasiswa.nama}}</span>
+            </td>
+            <td> &nbsp; </td>
+            <td>
+                <span style="font-size: 13px;">Jenjang/Program Studi</span>
+            </td>
+            <td>:</td>
+            <td>
+                <span style="font-size: 13px;">{{mahasiswa.jenjang}}/{{mahasiswa.prodi}}</span>
+            </td>
+        </tr>
+        <tr>
+            <td width="10"></td>
+            <td>
+                <span style="font-size: 13px;">NIM</span>
+            </td>
+            <td>:</td>
+            <td>
+                <span style="font-size: 13px;">{{nim}}</span>
+            </td>
+            <td>&nbsp;</td>
+            <td>
+                <span style="font-size: 13px;">Tahun Akademik Masuk</span>
+            </td>
+            <td>:</td>
+            <td>
+                <span style="font-size: 13px;">{{mahasiswa.tahun_masuk}}</span>
+            </td>
+        </tr>
+        <tr>
+            <td width="10"></td>
+            <td>
+                <span style="font-size: 13px;">Tempat, Tgl Lahir</span>
+            </td>
+            <td>:</td>
+            <td>
+                <span style="font-size: 13px;">{{mahasiswa.tempat_lahir}}, {{mahasiswa.tgl_lahir}}</span>
+            </td>
+            <td></td>
+
+            <td>
+                <span style="font-size: 13px;">Status</span>
+            </td>
+            <td>:</td>
+            <td>
+                <span style="font-size: 13px;">{{mahasiswa.status_daftar_mahasiswa}}</span>
+            </td>
+        </tr>
+
+        <tr>
+            <td width="10"></td>
+            <td>
+                <span style="font-size: 13px;">NIK</span>
+            </td>
+            <td>:</td>
+            <td>
+                <span style="font-size: 13px;">{{mahasiswa.nik}}</span>
+            </td>
+            <td></td>
+
+            <td>
+                <span style="font-size: 13px;">Tanggal Lulus</span>
+            </td>
+            <td>:</td>
+            <td>
+                <span style="font-size: 13px;">{{mahasiswa.tahunLulus}}</span>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+    </tbody>
+</table>
+<table border="0" style="BORDER-COLLAPSE:COLLAPSE;" width="100%" *ngIf="mahasiswa">
+    <tbody>
+        <tr>
+            <td>
+                <span style="font-size: 13px;">
+                    <span style="font-size: 13px;"> Mahasiswa tersebut telah dinyatakan <span
+                            style="text-transform: uppercase;">
+                            {{mahasiswa.statusmahasiswa}}</span> {{setJenjang(mahasiswa.jenjang)}} dengan Skripsi:
+                    </span>
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span style="font-size: 13px;"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span style="font-size: 13px;">Adapun mata kuliah yang sudah ditempuh beserta nilainya sebagai
+                    berikut:</span>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+<table border="1" style="BORDER-COLLAPSE:COLLAPSE;" width="100%" align="center" frame="hsides" rules="rows">
+    <tbody>
+        <tr>
+            <td valign="top">
+                <table border="1" style="BORDER-COLLAPSE:COLLAPSE;" width="100%" align="center" frame="vsides"
+                    rules="cols">
+                    <tbody>
+                        <tr align="center" bgcolor="silver" valign="center">
+                            <td width="15" height="20">
+                                <span style="font-size: 10px;">No.</span>
+                            </td>
+                            <td width="75">
+                                <span style="font-size: 10px;">&nbsp;Kode MTK&nbsp;</span>
+                            </td>
+                            <td width="245">
+                                <span style="font: Times New Roman;font-size: 10px;">&nbsp;Nama MTK&nbsp;</span>
+                            </td>
+                            <td width="17">
+                                <span style="font-size: 10px;">&nbsp;sks&nbsp;</span>
+                            </td>
+                            <td width="21">
+                                <span style="font-size: 10px;">&nbsp;Nilai&nbsp;</span>
+                            </td>
+                        </tr>
+                        <tr bgcolor="white" *ngFor="let a of dataLeft; let i = index">
+                            <td>
+                                <span style="font-size: 10px;">&nbsp;{{i+1}}&nbsp;</span>
+                            </td>
+                            <td align="center">
+                                <span style="font-size: 10px;">
+                                    {{a.kode_matkul}}
+                                </span>
+                            </td>
+                            <td>
+                                <span style="font-size: 10px;">&nbsp;{{a.nama}}&nbsp;</span>
+                            </td>
+                            <td align="center">
+                                <span style="font-size: 10px;">&nbsp;{{a.sks}}&nbsp;</span>
+                            </td>
+                            <td>
+                                <span style="font-size: 10px;">&nbsp;&nbsp;&nbsp;{{a.nilai}}&nbsp;</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+            <td valign="top">
+                <table border="1" style="BORDER-COLLAPSE:COLLAPSE;" width="100%" frame="vsides" rules="cols">
+                    <tbody>
+                        <tr align="center" bgcolor="silver" valign="center">
+                            <td width="15" height="20">
+                                <span style="font-size: 10px;">No.</span>
+                            </td>
+                            <td width="75">
+                                <span style="font-size: 10px;">&nbsp;Kode MTK&nbsp;</span>
+                            </td>
+                            <td width="245">
+                                <span style="font:Times New Roman;font-size: 10px;">&nbsp;Nama MTK&nbsp;</span>
+                            </td>
+                            <td width="17">
+                                <span style="font-size: 10px;">&nbsp;sks&nbsp;</span>
+                            </td>
+                            <td width="21">
+                                <span style="font-size: 10px;">&nbsp;Nilai&nbsp;</span>
+                            </td>
+                        </tr>
+                        <tr bgcolor="white" *ngFor="let a of dataRight; let i = index">
+                            <td>
+                                <span style="font-size: 10px;">&nbsp;{{i+1+half}}&nbsp;</span>
+                            </td>
+                            <td align="center">
+                                <span style="font-size: 10px;">
+                                    {{a.kode_matkul}}
+                                </span>
+                            </td>
+                            <td>
+                                <span style="font-size: 10px;">&nbsp;{{a.nama}}&nbsp;</span>
+                            </td>
+                            <td align="center">
+                                <span style="font-size: 10px;">&nbsp;{{a.sks}}&nbsp;</span>
+                            </td>
+                            <td>
+                                <span style="font-size: 10px;">&nbsp;&nbsp;&nbsp;{{a.nilai}}&nbsp;</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+<table border="0" width="100%" style="BORDER-COLLAPSE:COLLAPSE" *ngIf="mahasiswa">
+    <tbody>
+        <tr>
+            <td></td>
+            <td width="24%">
+                <span style="font-size: 13px;">Total sks yang telah ditempuh</span>
+            </td>
+            <td width="40%">
+                <span style="font-size: 13px;">&nbsp;: {{mahasiswa.jumlah_sks}}</span>
+            </td>
+            <td>
+                <span style="font-size: 13px;">Indeks Prestasi Kumulatif (IPK) : {{setIP(dipk.IPK)}}</span>
+            </td>
+        </tr>
+        <!-- <tr><td width="4%"></td><td width="23%"><span style="font-size: 13px;">Total sks yang telah ditempuh</td><td width="37%"><span style="font-size: 13px;">&nbsp;: 150<td><span style="font-size: 13px;">Indeks Prestasi Kumulatif (IPK) : 2.89</td></tr> -->
+        <tr>
+            <td width="2%"></td>
+            <td>
+                <span style="font-size: 13px;">Predikat kelulusan</span>
+            </td>
+            <td>
+                <span style="font-size: 13px;">&nbsp;: {{mahasiswa.predikat}}</span>
+            </td>
+            <td>&nbsp;</td>
+        </tr>
+    </tbody>
+</table>
+
+
+<table border="0" width="100%" style="BORDER-COLLAPSE:COLLAPSE;">
+    <tbody>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td width="40%">
+                <span style="font-size: 13px;">&nbsp;</span>
+            </td>
+            <td width="24%">
+                <span style="font-size: 13px;">&nbsp;</span>
+            </td>
+            <td>
+                <span style="font-size: 13px;">Malang, {{current_date | date:('dd MMMM yyyy')}}</span>
+            </td>
+        </tr>
+
+        <tr>
+            <td width="2%"></td>
+            <td>
+                <span style="font-size: 13px;">Ketua,</span>
+            </td>
+            <td>
+                <span style="font-size: 13px;">&nbsp;</span>
+            </td>
+            <td>
+                <span style="font-size: 13px;">Ketua Program Studi,</span>
+            </td>
+        </tr>
+        <tr>
+            <td width="2%"></td>
+            <td>
+                <span style="font-size: 13px;"></span>
+            </td>
+            <td>
+                <span style="font-size: 13px;">&nbsp;</span>
+            </td>
+            <td>
+                <span style="font-size: 13px;">&nbsp;</span>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr *ngIf="footer">
+            <td width="2%"></td>
+            <td>
+                <span style="font-size: 13px;"><u><span style="font-weight: bold;">Dr. Tubagus Mohammad Akhriza, S.Si.,
+                            MMSI.</span></u>
+                </span>
+            </td>
+            <td>
+                <span style="font-size: 13px;">&nbsp;</span>
+            </td>
+            <td>
+                <span style="font-size: 13px;"><u><span
+                            style="font-weight: bold;">{{footer.nama_kaprodi}}</span></u></span>
+            </td>
+        </tr>
+        <tr *ngIf="mahasiswa">
+            <td width="2%"></td>
+            <td>
+                <span style="font-size: 13px;">NIK 00.12.01.002</span>
+            </td>
+            <td>
+                <span style="font-size: 13px;">&nbsp;</span>
+            </td>
+            <td>
+                <span style="font-size: 13px;">NIK {{footer.nip_kaprodi}}</span>
+            </td>
+        </tr>
+
+
+
+    </tbody>
+</table>

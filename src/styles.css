@@ -3,3 +3,87 @@ body {
   /* font-family: "Poppins", sans-serif !important; */
   font-family: "Verdana" !important;
 }
+.btn-group.bootstrap-select.open .caret,
+.dropdown.open .caret,
+.dropup.open .caret,
+a[data-toggle="collapse"][aria-expanded="true"] .caret {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 8px solid #fff;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #fff transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@media print {
+  .isPrinting > * {
+    display: none;
+  }
+  .isPrinting app-print-layout {
+    display: block;
+  }
+  button {
+    display: none !important;
+  }
+
+  body {
+    -webkit-print-color-adjust: exact !important;
+  }
+
+  * {
+    font-family: "Times New Roman", Times, serif;
+    color: #000;
+  }
+}
+
+.pull-right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cdk-global-overlay-wrapper,
+.cdk-overlay-container {
+  z-index: 1300 !important;
+}
+
+body > [ngb-modal-window]:not([modal-render]) {
+  display: none;
+}
+
+.printMe {
+  background-color: white !important;
+  height: 100%;
+}

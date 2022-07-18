@@ -1,0 +1,9 @@
+<div [class.isPrinting]="printService.isPrinting" class="printMe">
+
+    <div style="text-align:center">
+        <button class="btn btn-info pull-right" style="z-index: 1;" (click)="onPrintInvoice()">Print {{title}}</button>
+    </div>
+
+    <router-outlet></router-outlet>
+    <router-outlet name="print"></router-outlet>
+</div>

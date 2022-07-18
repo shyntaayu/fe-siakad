@@ -28,6 +28,24 @@ import { TableModule } from "primeng/table";
 import { ToastModule } from "primeng/toast";
 import { HttpClientModule } from "@angular/common/http";
 import { MainService } from "app/main/main.service";
+import { MatAutocompleteModule } from "@angular/material/autocomplete";
+import { MessageService } from "primeng/api";
+import { DropdownModule } from "primeng/dropdown";
+import { InputTextModule } from "primeng/inputtext";
+import { UtilsModule } from "shared/utils/utils.module";
+import { KrsComponent } from "app/main/krs/krs.component";
+import { KrsService } from "app/services/krs.service";
+import { SweetAlert2Module } from "@sweetalert2/ngx-sweetalert2";
+import { MahasiswaService } from "app/services/mahasiswa.service";
+import { PresensiService } from "app/services/presensi.service";
+import { KartuUjianComponent } from "app/main/kartu-ujian/kartu-ujian.component";
+import { KhsService } from "app/services/khs.service";
+import { MatIconModule } from "@angular/material/icon";
+import { TranskripNilaiComponent } from "app/main/transkrip-nilai/transkrip-nilai.component";
+import { ToolbarModule } from "primeng/toolbar";
+import { PaketKrsComponent } from "app/main/paket-krs/paket-krs.component";
+import { AddNilaiComponent } from "app/main/add-nilai/add-nilai.component";
+import { KurikulumService } from "app/services/kurikulum.service";
 
 @NgModule({
   imports: [
@@ -46,6 +64,13 @@ import { MainService } from "app/main/main.service";
     ButtonModule,
     ToastModule,
     HttpClientModule,
+    MatAutocompleteModule,
+    DropdownModule,
+    InputTextModule,
+    UtilsModule,
+    SweetAlert2Module,
+    MatIconModule,
+    ToolbarModule,
   ],
   declarations: [
     DashboardComponent,
@@ -61,7 +86,20 @@ import { MainService } from "app/main/main.service";
     InputNilaiComponent,
     SalinanNilaiComponent,
     KhsComponent,
+    KrsComponent,
+    KartuUjianComponent,
+    TranskripNilaiComponent,
+    PaketKrsComponent,
+    AddNilaiComponent,
   ],
-  providers: [MainService],
+  providers: [
+    MainService,
+    MessageService,
+    KrsService,
+    MahasiswaService,
+    PresensiService,
+    KhsService,
+    KurikulumService,
+  ],
 })
 export class AdminLayoutModule {}

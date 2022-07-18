@@ -1,0 +1,297 @@
+<div class="invoice" *ngIf="data">
+    <!-- <h1>Invoice Num. {{ invoice }}</h1>
+    Amount: {{ (invoiceDetails[i] | async)?.amount }} -->
+    <table align="center" border="0" width="900" style="BORDER-COLLAPSE:COLLAPSE; margin-top: 30px;">
+        <tbody>
+            <tr align="center">
+                <td rowspan="3" align="right"><img src="/assets/img/stimata.jpeg" height="120" width="90" alt="logo">
+                </td>
+                <td>
+                    <span style="font-weight: bold;font-size: 18px;"> SEKOLAH TINGGI MANAJEMEN INFORMATIKA DAN KOMPUTER
+                    </span>
+                </td>
+            </tr>
+            <tr align="center">
+                <td>
+                    <span style="font-weight: bold;font-size: 32px;"> STMIK PPKIA PRADNYA PARAMITA</span>
+                </td>
+            </tr>
+            <tr align="center">
+                <td>
+                    <span style="font-size: 16px;">JL. LAKSDA ADI SUCIPTO 249 A MALANG, TELP (0341) 412699, FAX (0341)
+                        412782<br>
+                    </span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <div style="text-align:center;">
+        <span style="font-weight: bold;font-size: 32px;">KARTU HASIL STUDI</span>
+    </div>
+    <table border="0" align="center" *ngIf="header" style="width: 100%;">
+        <tbody>
+            <tr>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="font-size: 16px;">Nama</span>
+                </td>
+                <td>:</td>
+                <td>
+                    <span style="font-size: 16px;">{{header.nama}}</span>
+                </td>
+                <td width="70"> &nbsp; </td>
+                <td>
+                    <span style="font-size: 16px;">Jenjang</span>
+                </td>
+                <td>:</td>
+                <td>
+                    <span style="font-size: 16px;">{{header.jenjang}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="font-size: 16px;">NIM</span>
+                </td>
+                <td>:</td>
+                <td>
+                    <span style="font-size: 16px;">{{header.nim}}</span>
+                </td>
+                <td> &nbsp; </td>
+                <td>
+                    <span style="font-size: 16px;">Program Studi</span>
+                </td>
+                <td>:</td>
+                <td>
+                    <span style="font-size: 16px;">{{header.prodi}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="font-size: 16px;">Dosen Wali</span>
+                </td>
+                <td>:</td>
+                <td>
+                    <span style="font-size: 16px;">{{header.dosen}}</span>
+                </td>
+                <td> &nbsp; </td>
+                <td>
+                    <span style="font-size: 16px;">Semester</span>
+                </td>
+                <td>:</td>
+                <td>
+                    <span style="font-size: 16px;">{{semester}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+            </tr>
+        </tbody>
+    </table>
+    <table style="BORDER-COLLAPSE:COLLAPSE;" width="100%" frame="below" border="1">
+        <tbody>
+            <tr>
+                <td width="*"></td>
+            </tr>
+        </tbody>
+    </table>
+    <table style="BORDER-COLLAPSE:COLLAPSE;" frame="vsides" rules="cols" cellpadding="0" cellspacing="5" height="30"
+        width="100%" border="1">
+        <tbody>
+            <tr class="silver" height="30">
+                <td>
+                    <center>
+                        <span style="font-size: 13px;">&nbsp;No&nbsp;</span>
+                    </center>
+                </td>
+                <td width="100">
+                    <center>
+                        <span style="font-size: 13px;">Kode MTK</span>
+                    </center>
+                </td>
+                <td width="360">
+                    <center>
+                        <span style="font-size: 13px;">Mata Kuliah</span>
+                    </center>
+                </td>
+                <td>
+                    <center>
+                        <span style="font-size: 13px;">&nbsp;sks&nbsp;</span>
+                    </center>
+                </td>
+                <td>
+                    <center>
+                        <span style="font-size: 13px;">&nbsp;Nilai&nbsp;</span>
+                    </center>
+                </td>
+                <td>
+                    <center>
+                        <span style="font-size: 13px;">&nbsp;Indeks&nbsp;</span>
+                    </center>
+                </td>
+                <td>
+                    <center>
+                        <span style="font-size: 13px;">&nbsp;Bobot&nbsp;</span>
+                    </center>
+                </td>
+                <td width="50">
+                    <center>
+                        <span style="font-size: 13px;">&nbsp;Predikat&nbsp;</span>
+                    </center>
+                </td>
+                <td>
+                    <center>
+                        <span style="font-size: 13px;">&nbsp;Ket.&nbsp;</span>
+                    </center>
+                </td>
+            </tr>
+            <tr height="30" *ngFor="let a of data; let i = index">
+                <td>
+                    <center>
+                        <span style="font-size: 13px;">{{i+1}}</span>
+                    </center>
+                </td>
+                <td>
+                    <center>
+                        <span style="font-size: 13px;">{{a.kode_matkul}}</span>
+                    </center>
+                </td>
+                <td>
+                    <span style="font-size: 13px;">&nbsp;&nbsp;{{a.nama_matkul}}</span>
+                </td>
+                <td>
+                    <center>
+                        <span style="font-size: 13px;">{{a.sks}}</span>
+                    </center>
+                </td>
+                <td>
+                    <center>
+                        <span style="font-size: 13px;">{{a.nilai}}</span>
+                    </center>
+                </td>
+                <td>
+                    <center>
+                        <span style="font-size: 13px;">{{a.indeks}}</span>
+                    </center>
+                </td>
+                <td>
+                    <center>
+                        <span style="font-size: 13px;">{{a.bobot}}</span>
+                    </center>
+                </td>
+                <td>
+                    <center>
+                        <span style="font-size: 10px;">{{a.predikat}}</span>
+                    </center>
+                </td>
+                <td>
+                    <center>
+                        <span style="font-size: 10px;">&nbsp;{{setStatusMatkul(a.status_matkul)}}&nbsp;</span>
+                    </center>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table style="BORDER-COLLAPSE:COLLAPSE;" width="100%" frame="above" border="1">
+        <tbody>
+            <tr>
+                <td width="*"></td>
+            </tr>
+        </tbody>
+    </table>
+    <table border="0" align="center" *ngIf="other" style="width: 100%;">
+        <tbody>
+            <tr>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="font-size: 16px;">Total Bobot</span>
+                </td>
+                <td>:</td>
+                <td>
+                    <span style="font-size: 16px;">{{other.total_bobot}}</span>
+                </td>
+                <td width="70"> &nbsp; </td>
+                <td>
+                    <span style="font-size: 16px;">Indeks Prestasi (IP)</span>
+                </td>
+                <td>:</td>
+                <td>
+                    <span style="font-size: 16px;">{{setIP(other.ip)}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="font-size: 16px;">Total SKS</span>
+                </td>
+                <td>:</td>
+                <td>
+                    <span style="font-size: 16px;">{{other.total_sks}} sks</span>
+                </td>
+                <td> &nbsp; </td>
+                <td>
+                    <span style="font-size: 16px;">Indeks Prestasi Kumulatif (IPK)</span>
+                </td>
+                <td>:</td>
+                <td>
+                    <span style="font-size: 16px;" *ngIf="dipk">{{setIP(dipk.IPK)}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="font-size: 16px;">Total SKS Lulus</span>
+                </td>
+                <td>:</td>
+                <td>
+                    <span style="font-size: 16px;">{{other.totalTempuhSKS}} sks</span>
+                </td>
+                <td> &nbsp; </td>
+                <td>
+                    <span style="font-size: 16px;">Beban Studi Maksimum y.a.d</span>
+                </td>
+                <td>:</td>
+                <td>
+                    <span style="font-size: 16px;">{{beban}} sks</span>
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <table border="0" width="700" style="BORDER-COLLAPSE:COLLAPSE;width: 100%;" align="center" *ngIf="header">
+        <tbody>
+            <tr align="left">
+                <td width="70%">&nbsp;</td>
+                <td witdh="*">
+                    <span style="font-size: 16px;">Malang, {{current_date | date:('dd MMMM yyyy')}} </span>
+                </td>
+            </tr>
+            <tr>
+                <td width="50%">&nbsp;</td>
+                <td witdh="*">
+                    <span style="font-size: 16px;">
+                        <div style="text-align:left;">Ka. Prodi. {{header.jenjang}}-{{header.prodi}}</div>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td width="50%">&nbsp;</td>
+                <td witdh="*"><br><img width="300px" src="{{ttd}}" alt="ttd-prodi"><br></td>
+            </tr>
+            <tr>
+                <td width="70%">&nbsp;</td>
+                <td witdh="*">
+                    <span style="font-size: 16px;">
+                        <div style="text-align:left;">{{footer.nama_kaprodi}}
+                        </div>
+                    </span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

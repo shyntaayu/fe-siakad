@@ -1,5 +1,5 @@
 <div class="logo">
-    <a href="https://www.creative-tim.com" class="simple-text">
+    <a href="/" class="simple-text">
         <div class="logo-img">
             <img src="/assets/img/lion-pentagon.png" />
         </div>
@@ -20,47 +20,93 @@
             </span>
         </form>
         <ul class="nav navbar-nav nav-mobile-menu">
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link" href="javascript:void(0)">
                     <i class="material-icons">dashboard</i>
                     <p>
                         <span class="d-lg-none d-md-block">Stats</span>
                     </p>
                 </a>
-            </li>
+            </li> -->
             <li class="nav-item dropdown">
                 <a class="nav-link" href="javascript:void(0)" id="navbarDropdownMenuLink" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
-                    <i class="material-icons">notifications</i>
-                    <span class="notification">5</span>
-                    <p>
-                        <span class="d-lg-none d-md-block">Some Actions</span>
-                    </p>
+                    {{userFromApi}}
+                    <i class="material-icons">person</i>
+                    <!-- <span class="notification">5</span> -->
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Mike John responded to your email</a>
-                    <a class="dropdown-item" href="#">You have 5 new tasks</a>
+                    <a class="dropdown-item" (click)="logout()">Logout</a>
+                    <!-- <a class="dropdown-item" href="#">You have 5 new tasks</a>
                     <a class="dropdown-item" href="#">You're now friend with Andrew</a>
                     <a class="dropdown-item" href="#">Another Notification</a>
-                    <a class="dropdown-item" href="#">Another One</a>
+                    <a class="dropdown-item" href="#">Another One</a> -->
                 </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0)">
-                    <i class="material-icons">person</i>
-                    <p>
-                        <span class="d-lg-none d-md-block">Account</span>
-                    </p>
-                </a>
             </li>
         </ul>
     </div>
     <ul class="nav">
-        <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
+        <!-- <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
             <a class="nav-link" [routerLink]="[menuItem.path]">
                 <i class="material-icons">{{menuItem.icon}}</i>
                 <p>{{menuItem.title}}</p>
             </a>
+        </li> -->
+
+        <!-- benar1 -->
+        <!-- <li routerLinkActive="active" *ngFor="let menuItem of menuDashboard" class="{{menuItem.class}} nav-item">
+            <a class="nav-link" [routerLink]="[menuItem.path]" *ngIf="!menuItem.hidden">
+                <i class="material-icons">{{menuItem.icon}}</i>
+                <p>{{menuItem.title}}</p>
+            </a>
         </li>
+        <li routerlinkactive="active" class="nav-item" >
+            <a data-toggle="collapse" class="nav-link" href="#components" aria-expanded="false"><i
+                    class="material-icons">apps</i>
+                <p>Master<b class="caret"></b></p>
+            </a>
+            <div class="collapse" id="components" style="">
+                <ul class="nav">
+                    <li routerLinkActive="active" *ngFor="let menuItem of menuItems"
+                        class="{{menuItem.class}} nav-item">
+                        <a class="nav-link" [routerLink]="[menuItem.path]" *ngIf="!menuItem.hidden">
+                            <i class="material-icons">{{menuItem.icon}}</i>
+                            <p>{{menuItem.title}}</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li routerLinkActive="active" *ngFor="let menuItem of menuNone" class="{{menuItem.class}} nav-item">
+            <a class="nav-link" [routerLink]="[menuItem.path]" *ngIf="!menuItem.hidden">
+                <i class="material-icons">{{menuItem.icon}}</i>
+                <p>{{menuItem.title}}</p>
+            </a>
+        </li> -->
+        <ng-template ngFor let-menuItem [ngForOf]="menuNew" let-mainMenuItemIndex="index">
+            <li routerlinkactive="active" class="nav-item" *ngIf="menuItem.items.length>0">
+                <a data-toggle="collapse" class="nav-link" href="#components{{mainMenuItemIndex}}" aria-expanded="false"
+                    *ngIf="showMenuItem(menuItem)"><i class="material-icons">{{menuItem.icon}}</i>
+                    <p>{{menuItem.name}}<b class="caret"></b></p>
+                </a>
+                <div class="collapse" id="components{{mainMenuItemIndex}}" style="">
+                    <ul class="nav">
+                        <li routerLinkActive="active" *ngFor="let child of menuItem.items"
+                            class="{{child.class}} nav-item">
+                            <a class="nav-link" [routerLink]="[child.route]">
+                                <i class="material-icons">{{child.icon}}</i>
+                                <p>{{child.name}}</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li routerLinkActive="active" class="{{menuItem.class}} nav-item" *ngIf="menuItem.items.length==0">
+                <a class="nav-link" [routerLink]="[menuItem.route]" *ngIf="showMenuItem(menuItem)">
+                    <i class="material-icons">{{menuItem.icon}}</i>
+                    <p>{{menuItem.name}}</p>
+                </a>
+            </li>
+        </ng-template>
     </ul>
 </div>

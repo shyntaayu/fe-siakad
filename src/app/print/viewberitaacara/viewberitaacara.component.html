@@ -1,0 +1,296 @@
+<div class="invoice" *ngIf="nama_matkul">
+    <!-- <h1>Invoice Num. {{ invoice }}</h1>
+    Amount: {{ (invoiceDetails[i] | async)?.amount }} -->
+    <br>
+    <center>
+        <table border="1" style="BORDER-COLLAPSE:COLLAPSE;border-color:#000000;">
+            <tbody>
+                <tr>
+                    <td rowspan="2" width="90">
+                        <center> <img src="/assets/img/stimata.jpeg" height="90"> </center>
+                    </td>
+                    <td colspan="2">
+                        <center><span style="font-weight: bold;font-size: 18px;"> STMIK PPKIA PRADNYA PARAMITA MALANG
+                            </span></center>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table border="0">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <span style="font-size: 13px;">KODE Form</span>
+                                    </td>
+                                    <td> :</td>
+                                    <td>
+                                        <span style="font-size: 13px;"> FM-BAAK-023</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span style="font-size: 13px;">REVISI</span>
+                                    </td>
+                                    <td>:</td>
+                                    <td>
+                                        <span style="font-size: 13px;">00</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span style="font-size: 13px;">TANGGAL</span>
+                                    </td>
+                                    <td>:</td>
+                                    <td>
+                                        <span style="font-size: 13px;"> 20 Juli 2010</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </center>
+    <center><br><span style="font-weight: bold;">BERITA ACARA</span><br>
+    </center>
+    <center>
+        <table border="0">
+            <tbody>
+                <tr>
+                    <td width="110">
+                        <span style="font-size: 13px;">Program Studi</span>
+                    </td>
+                    <td>
+                        <span style="font-size: 13px;">:</span>
+                    </td>
+                    <td width="300">
+                        <span style="font-size: 13px;">{{jenjang}} {{jurusan}} {{kelas}}</span>
+                    </td>
+                    <td width="20">&nbsp;</td>
+                    <td width="190">
+                        <span style="font-size: 13px;">Jumlah Peserta Terdaftar</span>
+                    </td>
+                    <td>
+                        <span style="font-size: 13px;">:</span>
+                    </td>
+                    <td>
+                        <span style="font-size: 13px;">{{jmlMahasiswa}} </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span style="font-size: 13px;">Kode MTK / sks</span>
+                    </td>
+                    <td>
+                        <span style="font-size: 13px;">:</span>
+                    </td>
+                    <td>
+                        <span style="font-size: 13px;">{{kode_matkul}} / {{sks}}</span>
+                    </td>
+                    <td width="20">&nbsp;</td>
+                    <td>
+                        <span style="font-size: 13px;">Jumlah Peserta Hadir</span>
+                    </td>
+                    <td>
+                        <span style="font-size: 13px;">: </span>
+                    </td>
+                    <td>_____</td>
+                </tr>
+                <tr>
+                    <td>
+                        <span style="font-size: 13px;">Matakuliah</span>
+                    </td>
+                    <td>
+                        <span style="font-size: 13px;">:</span>
+                    </td>
+                    <td>
+                        <span style="font-size: 13px;">{{nama_matkul}} </span>
+                    </td>
+                    <td width="20">&nbsp;</td>
+                    <td>
+                        <span style="font-size: 13px;">Jumlah Peserta Tidak Hadir</span>
+                    </td>
+                    <td>
+                        <span style="font-size: 13px;">: </span>
+                    </td>
+                    <td>_____</td>
+                </tr>
+            </tbody>
+        </table>
+    </center>
+    <center>
+        _________________________________________________________________________________________________________<br><br>
+        <center>
+            _________________________________________________________________________________________________________<br><br>
+            <center>
+                _________________________________________________________________________________________________________<br><br>
+                <center>
+                    <table border="1" style="BORDER-COLLAPSE:COLLAPSE;border-color:#000000;">
+                        <tbody>
+                            <tr>
+                                <td colspan="5">
+                                    <span style="font-size: 13px;">
+                                        <center>DATA PELANGGARAN / KECURANGAN <br> PELAKSANAAN UJIAN </center>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="30" height="30">
+                                    <span style="font-size: 13px;">
+                                        <center>NO</center>
+                                    </span>
+                                </td>
+                                <td width="100">
+                                    <span style="font-size: 13px;">
+                                        <center>NIM</center>
+                                    </span>
+                                </td>
+                                <td width="200">
+                                    <span style="font-size: 13px;">
+                                        <center>NAMA</center>
+                                    </span>
+                                </td>
+                                <td width="250">
+                                    <span style="font-size: 13px;">
+                                        <center>BENTUK PELANGGARAN</center>
+                                    </span>
+                                </td>
+                                <td width="100">
+                                    <span style="font-size: 13px;">
+                                        <center>KETERANGAN</center>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="30">
+                                    <span style="font-size: 13px;">
+                                        <center>1.</center>
+                                    </span>
+                                </td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td height="30">
+                                    <span style="font-size: 13px;">
+                                        <center>2.</center>
+                                    </span>
+                                </td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td height="30">
+                                    <span style="font-size: 13px;">
+                                        <center>3.</center>
+                                    </span>
+                                </td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td height="30">
+                                    <span style="font-size: 13px;">
+                                        <center>4.</center>
+                                    </span>
+                                </td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td height="30">
+                                    <span style="font-size: 13px;">
+                                        <center>5.</center>
+                                    </span>
+                                </td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </center>
+                <center>
+                    <table border="0">
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <span style="font-size: 13px;">
+                                        <center>Malang, ____________________</center>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <center>(.................................)</center>
+                                </td>
+                                <td></td>
+                                <td>
+                                    <center>(.................................)</center>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <span style="font-size: 13px;">
+                                        <center>Mengetahui</center>
+                                    </span>
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span style="font-size: 13px;">
+                                        <center>Andri Prasetyo, S.E.,MMSI</center>
+                                    </span>
+                                </td>
+                                <td></td>
+                                <td>
+                                    <span style="font-size: 13px;">
+                                        <center>Evy Sophia, S.Pd.,MMSI</center>
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </center>
+                <p align="left">Pengawas ujian diwajibkan mengisi berita acara ini, apapun kejadian dalam pelaksanaan
+                    ujian tersebut.
+
+                </p>
+            </center>
+        </center>
+    </center>
+</div>

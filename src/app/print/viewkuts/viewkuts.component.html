@@ -1,0 +1,215 @@
+<div class="invoice" *ngIf="data">
+    <!-- <h1>Invoice Num. {{ invoice }}</h1>
+    Amount: {{ (invoiceDetails[i] | async)?.amount }} -->
+    <br>
+    <table border="0" width="100%">
+        <tbody>
+            <tr>
+                <td rowspan="3" width="100"><img src="/assets/img/stimata.jpeg" width="80"></td>
+                <td>
+                    <center><span style="font-weight: bold;font-size: 16px;">SEKOLAH TINGGI MANAJEMEN INFORMATIKA &amp;
+                            KOMPUTER</span></center>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <center><span style="font-weight: bold;font-size: 24px;">STMIK PPKIA PRADNYA PARAMITA</span>
+                    </center>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="font-size: 13px;">
+                        <center>JL. LAKSDA ADI SUCIPTO 249 A MALANG, TELP (0341) 412699, FAX (0341) 412782<br>&nbsp;
+                        </center>
+                    </span>
+                </td>
+            </tr>
+        </tbody>
+    </table><br>
+    <br>
+    <div style="text-align:center;">
+        <span style="font-weight: bold;font-size: 24px;">KARTU UJIAN TENGAH SEMESTER <br><br></span>
+    </div>
+    <center>
+        <table border="0" width="100%" *ngIf="header">
+            <tbody>
+                <tr>
+                    <td>
+                        <span style="font-size: 13px;">Nama</span>
+                    </td>
+                    <td>:</td>
+                    <td>
+                        <span style="font-size: 13px;">{{header.nama}}</span>
+                    </td>
+                    <td>
+                        <span style="font-size: 13px;">Jenjang</span>
+                    </td>
+                    <td>:</td>
+                    <td>
+                        <span style="font-size: 13px;">{{header.jenjang}}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span style="font-size: 13px;">NIM</span>
+                    </td>
+                    <td>:</td>
+                    <td>
+                        <span style="font-size: 13px;">{{header.nim}}</span>
+                    </td>
+                    <td>
+                        <span style="font-size: 13px;">Program Studi</span>
+                    </td>
+                    <td>:</td>
+                    <td>
+                        <span style="font-size: 13px;">{{header.prodi}} </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span style="font-size: 13px;">Dosen Wali</span>
+                    </td>
+                    <td>:</td>
+                    <td>
+                        <span style="font-size: 13px;">{{header.dosen}}</span>
+                    </td>
+                    <td>
+                        <span style="font-size: 13px;">Semester/TA</span>
+                    </td>
+                    <td>:</td>
+                    <td>
+                        <span style="font-size: 13px;">{{semester}} / {{tahun_akademik}}</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <center>
+            <table style="BORDER-COLLAPSE:COLLAPSE;" frame="below" border="1" width="100%">
+                <tbody>
+                    <tr>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table style="BORDER-COLLAPSE:COLLAPSE;" frame="vsides" rules="cols" cellpadding="5" cellspacing="0"
+                width="100%" height="25">
+                <tbody>
+                    <tr class="silver" height="30">
+                        <td>
+                            <center>
+                                <span style="font-size: 13px;">&nbsp;No&nbsp;</span>
+                            </center>
+                        </td>
+                        <td width="100">
+                            <center>
+                                <span style="font-size: 13px;">Kode MTK</span>
+                            </center>
+                        </td>
+                        <td width="360">
+                            <center>
+                                <span style="font-size: 13px;">Mata Kuliah</span>
+                            </center>
+                        </td>
+                        <td>
+                            <center>
+                                <span style="font-size: 13px;">&nbsp;sks&nbsp;</span>
+                            </center>
+                        </td>
+                        <td>
+                            <center>
+                                <span style="font-size: 13px;">&nbsp;Ket.&nbsp;</span>
+                            </center>
+                        </td>
+                        <td>
+                            <center>
+                                <span style="font-size: 13px;"> TTD Pengawas </span>
+                            </center>
+                        </td>
+                    </tr>
+                    <tr height="30" *ngFor="let a of data; let i = index">
+                        <td>
+                            <center>
+                                <span style="font-size: 13px;">{{i+1}}</span>
+                            </center>
+                        </td>
+                        <td>
+                            <center>
+                                <span style="font-size: 13px;">{{a.kode_matkul}}</span>
+                            </center>
+                        </td>
+                        <td>
+                            <span style="font-size: 13px;">{{a.nama}}</span>
+                        </td>
+                        <td>
+                            <center>
+                                <span style="font-size: 13px;">{{a.sks}}</span>
+                            </center>
+                        </td>
+                        <td>
+                            <center>
+                                <span style="font-size: 13px;">{{setStatusMatkul(a.status_matkul)}}</span>
+                            </center>
+                        </td>
+                        <td>
+                            <center>
+                                <span style="font-size: 13px;">&nbsp;</span>
+                            </center>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table style="BORDER-COLLAPSE:COLLAPSE;" frame="above" border="1" width="100%">
+                <tbody>
+                    <tr>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </center>
+        <center>
+            <table border="0" width="100%">
+                <tbody>
+                    <tr>
+                        <td align="center" valign="top">
+                            <span style="font-size: 13px;"><span style="font-weight: bold;">Total SKS:
+                                    {{totalSks}}</span></span>
+                        </td>
+                    </tr>
+                    <tr></tr>
+                </tbody>
+            </table>
+            <br>
+            <table border="0" width="100%">
+                <tbody>
+                    <tr>
+                        <td width="60%">&nbsp;</td>
+                        <td>
+                            <span style="font-size: 13px;">Malang, {{current_date | date:('dd MMMM yyyy')}}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>
+                            <span style="font-size: 13px;">Koord. BAAK</span>
+                        </td>
+                    </tr>
+                    <tr>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td><img src="eka y.png" height="80"></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>
+                            <span style="font-size: 13px;">Eka Yuniar, S.Kom., MMSI</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </center>
+    </center>
+</div>

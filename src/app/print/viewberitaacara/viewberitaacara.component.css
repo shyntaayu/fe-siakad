@@ -1,0 +1,8 @@
+.invoice {
+  page-break-after: always;
+  margin: 0px 113px;
+}
+
+.invoice:last-child {
+  page-break-after: avoid;
+}

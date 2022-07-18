@@ -13,6 +13,12 @@ import { SalinanNilaiComponent } from "app/main/salinan-nilai/salinan-nilai.comp
 import { InputNilaiComponent } from "app/main/input-nilai/input-nilai.component";
 import { RekapPresensiComponent } from "app/main/rekap-presensi/rekap-presensi.component";
 import { PresensiComponent } from "app/main/presensi/presensi.component";
+import { AuthGuard } from "app/helpers/auth.guard";
+import { KrsComponent } from "app/main/krs/krs.component";
+import { KartuUjianComponent } from "app/main/kartu-ujian/kartu-ujian.component";
+import { TranskripNilaiComponent } from "app/main/transkrip-nilai/transkrip-nilai.component";
+import { AddNilaiComponent } from "app/main/add-nilai/add-nilai.component";
+import { PaketKrsComponent } from "app/main/paket-krs/paket-krs.component";
 
 export const AdminLayoutRoutes: Routes = [
   // {
@@ -57,17 +63,93 @@ export const AdminLayoutRoutes: Routes = [
   //         component: UpgradeComponent
   //     }]
   // }
-  { path: "dashboard", component: DashboardComponent },
-  { path: "user-profile", component: UserProfileComponent },
-  { path: "table-list", component: TableListComponent },
-  { path: "typography", component: TypographyComponent },
-  { path: "icons", component: IconsComponent },
-  { path: "maps", component: MapsComponent },
-  { path: "notifications", component: NotificationsComponent },
-  { path: "upgrade", component: UpgradeComponent },
-  { path: "presensi", component: PresensiComponent },
-  { path: "rekap-presensi", component: RekapPresensiComponent },
-  { path: "input-nilai", component: InputNilaiComponent },
-  { path: "salinan-nilai", component: SalinanNilaiComponent },
-  { path: "khs", component: KhsComponent },
+  {
+    path: "dashboard",
+    component: DashboardComponent,
+    canActivate: [AuthGuard],
+    data: { permission: "1" },
+  },
+  {
+    path: "user-profile",
+    component: UserProfileComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "table-list",
+    component: TableListComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "typography",
+    component: TypographyComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: "icons", component: IconsComponent, canActivate: [AuthGuard] },
+  { path: "maps", component: MapsComponent, canActivate: [AuthGuard] },
+  {
+    path: "notifications",
+    component: NotificationsComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: "upgrade", component: UpgradeComponent, canActivate: [AuthGuard] },
+  {
+    path: "kartu-ujian",
+    component: KartuUjianComponent,
+    canActivate: [AuthGuard],
+    data: { permission: "1" },
+  },
+  {
+    path: "rekap-presensi",
+    component: RekapPresensiComponent,
+    canActivate: [AuthGuard],
+    data: { permission: "1" },
+  },
+  {
+    path: "input-nilai",
+    component: InputNilaiComponent,
+    canActivate: [AuthGuard],
+    data: { permission: "1" },
+  },
+  {
+    path: "salinan-nilai",
+    component: SalinanNilaiComponent,
+    canActivate: [AuthGuard],
+    data: { permission: "1" },
+  },
+  {
+    path: "khs",
+    component: KhsComponent,
+    canActivate: [AuthGuard],
+    data: { permission: "1" },
+  },
+  {
+    path: "krs",
+    component: KrsComponent,
+    canActivate: [AuthGuard],
+    data: { permission: "1" },
+  },
+  {
+    path: "presensi",
+    component: PresensiComponent,
+    canActivate: [AuthGuard],
+    data: { permission: "1" },
+  },
+  {
+    path: "transkrip-nilai",
+    component: TranskripNilaiComponent,
+    canActivate: [AuthGuard],
+    data: { permission: "1" },
+  },
+  {
+    path: "add-nilai",
+    component: AddNilaiComponent,
+    canActivate: [AuthGuard],
+    data: { permission: "1" },
+  },
+  {
+    path: "paket-krs",
+    component: PaketKrsComponent,
+    canActivate: [AuthGuard],
+    data: { permission: "1" },
+  },
 ];

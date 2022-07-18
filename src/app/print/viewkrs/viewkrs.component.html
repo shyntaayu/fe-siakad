@@ -1,0 +1,188 @@
+<div class="invoice" *ngIf="data">
+    <!-- <h1>Invoice Num. {{ invoice }}</h1>
+    Amount: {{ (invoiceDetails[i] | async)?.amount }} -->
+    <table align="center" border="0" width="900" style="BORDER-COLLAPSE:COLLAPSE; margin-top: 30px;">
+        <tbody>
+            <tr align="center">
+                <td rowspan="3" align="right"><img src="/assets/img/stimata.jpeg" height="120" width="90" alt="logo">
+                </td>
+                <td>
+                    <span style="font-weight: bold;font-size: 18px;"> SEKOLAH TINGGI MANAJEMEN INFORMATIKA DAN
+                        KOMPUTER
+                    </span>
+                </td>
+            </tr>
+            <tr align="center">
+                <td>
+                    <span style="font-weight: bold;font-size: 32px;"> STMIK PPKIA PRADNYA PARAMITA</span>
+                </td>
+            </tr>
+            <tr align="center">
+                <td>
+                    <span style="font-size: 16px;">Jl. Laksda Adi Sucipto 249 A Malang 65141, Telp (0341) 412699, Fax
+                        (0341)
+                        412782<br>Official Website: www.stimata.ac.id</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <div style="text-align:center;">
+        <span style="font-weight: bold;font-size: 32px;">KARTU RENCANA STUDI</span>
+    </div>
+    <table border="0" align="center" *ngIf="header">
+        <tbody>
+            <tr>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="font-size: 16px;">Nama</span>
+                </td>
+                <td>:</td>
+                <td>
+                    <span style="font-size: 16px;">{{header.nama}}</span>
+                </td>
+                <td width="70"> &nbsp; </td>
+                <td>
+                    <span style="font-size: 16px;">Jenjang</span>
+                </td>
+                <td>:</td>
+                <td>
+                    <span style="font-size: 16px;">{{header.jenjang}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="font-size: 16px;">NIM</span>
+                </td>
+                <td>:</td>
+                <td>
+                    <span style="font-size: 16px;">{{header.nim}}</span>
+                </td>
+                <td> &nbsp; </td>
+                <td>
+                    <span style="font-size: 16px;">Program Studi</span>
+                </td>
+                <td>:</td>
+                <td>
+                    <span style="font-size: 16px;">{{header.prodi}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="font-size: 16px;">Semester</span>
+                </td>
+                <td>:</td>
+                <td>
+                    <span style="font-size: 16px;">{{semester}}</span>
+                </td>
+                <td> &nbsp; </td>
+                <td>
+                    <span style="font-size: 16px;">Dosen Wali</span>
+                </td>
+                <td>:</td>
+                <td>
+                    <span style="font-size: 16px;">{{header.dosen}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+            </tr>
+        </tbody>
+    </table>
+    <table border="1" style="BORDER-COLLAPSE:COLLAPSE;" align="center" cellpadding="3">
+        <tbody>
+            <tr align="center">
+                <td>
+                    <span style="font-weight: bold;font-size: 16px;">No.</span>
+                </td>
+                <td>
+                    <span style="font-weight: bold;font-size: 16px;">Kode MTK</span>
+                </td>
+                <td>
+                    <span style="font-weight: bold;font-size: 16px;">Mata Kuliah</span>
+                </td>
+                <td>
+                    <span style="font-weight: bold;font-size: 16px;">sks</span>
+                </td>
+                <td>
+                    <span style="font-weight: bold;font-size: 16px;">Status</span>
+                </td>
+                <td>
+                    <span style="font-weight: bold;font-size: 16px;">Wajib/Pilihan</span>
+                </td>
+            </tr>
+            <tr class="white" *ngFor="let a of data; let i = index">
+                <td align="center">
+                    <span style="font-size: 13px;">{{i+1}}.</span>
+                </td>
+                <td>
+                    <span style="font-size: 16px;">{{a.kode_matkul}}</span>
+                </td>
+                <td>
+                    <span style="font-size: 16px;">{{a.nama}}</span>
+                </td>
+                <td align="center">
+                    <span style="font-size: 13px;">{{a.sks}}</span>
+                </td>
+                <td align="center">
+                    <span style="font-size: 13px;">{{setStatusMatkul(a.status_matkul)}}</span>
+                </td>
+                <td>
+                    <span style="font-size: 16px;">{{a.status}}</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table border="0" style="BORDER-COLLAPSE:COLLAPSE;" align="center">
+        <tbody>
+            <tr>
+                <td>
+                    <span style="font-size: 16px;">Total sks</span>
+                </td>
+                <td>:</td>
+                <td>
+                    <span style="font-weight: bold;font-size: 16px;">{{totalSks}}</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <table border="0" width="700" style="BORDER-COLLAPSE:COLLAPSE;" align="center" *ngIf="header">
+        <tbody>
+            <tr align="center">
+                <td width="400">&nbsp;</td>
+                <td witdh="200">&nbsp;</td>
+                <td witdh="100">
+                    <span style="font-size: 16px;">Malang, {{current_date | date:('dd MMMM yyyy')}} </span>
+                </td>
+            </tr>
+            <tr>
+                <td width="300">
+                    <div style="text-align:center;font-size: 16px;">Dosen Penasehat Akademik</div>
+                </td>
+                <td witdh="200">&nbsp;</td>
+                <td witdh="100">
+                    <div style="text-align:center;font-size: 16px;">Mahasiswa,</div>
+                </td>
+            </tr>
+            <tr>
+                <td><br><br><br><br></td>
+            </tr>
+            <tr>
+                <td width="300">
+                    <div style="text-align:center;font-size: 16px;"><span
+                            style="font-weight: bold;">{{header.dosen}}</span>
+                    </div>
+                </td>
+                <td witdh="200">&nbsp;</td>
+                <td witdh="100">
+                    <div style="text-align:center;font-size: 16px;"><span
+                            style="font-weight: bold;">{{header.nama}}</span>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
