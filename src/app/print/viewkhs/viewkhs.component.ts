@@ -59,10 +59,8 @@ export class ViewKhsComponent extends AppComponentBase implements OnInit {
                   .subscribe(
                     (data) => {
                       this.dipk = data.result;
-                      console.log(data);
                     },
                     (error) => {
-                      console.log(error);
                       this.showMessage("Eror!", error.message, "error");
                     }
                   );
@@ -71,7 +69,6 @@ export class ViewKhsComponent extends AppComponentBase implements OnInit {
             .subscribe(
               (data) => {
                 this.header = data.result[0];
-                console.log(data);
                 let prodi = this.header.prodi.toString().toLowerCase();
                 if (
                   this.header.jenjang == "S1" &&
@@ -93,7 +90,6 @@ export class ViewKhsComponent extends AppComponentBase implements OnInit {
                 }
               },
               (error) => {
-                console.log(error);
                 this.showMessage("Eror!", error.message, "error");
               }
             );
@@ -101,7 +97,6 @@ export class ViewKhsComponent extends AppComponentBase implements OnInit {
       )
       .subscribe(
         (e) => {
-          console.log("data", e);
           let data = e["result"];
           this.footer = data.list_khs[0];
           this.totalSks = data.total_sks;
@@ -110,11 +105,8 @@ export class ViewKhsComponent extends AppComponentBase implements OnInit {
 
           if (data.ip <= 2) this.beban = 20;
           else this.beban = 24;
-
-          console.log(data);
         },
         (error) => {
-          console.log(error);
           this.showMessage("Eror!", error.message, "error");
         }
       );

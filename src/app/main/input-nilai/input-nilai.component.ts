@@ -81,7 +81,6 @@ export class InputNilaiComponent extends AppComponentBase implements OnInit {
   }
 
   onRowEditInit(product: Product) {
-    console.log(product);
     // this.clonedProducts[product.id] = { ...product };
   }
 
@@ -100,7 +99,6 @@ export class InputNilaiComponent extends AppComponentBase implements OnInit {
     //     detail: "Invalid Price",
     //   });
     // }
-    console.log(row);
     this.loading2 = true;
     let model = new NilaiModel();
     model.detail_krs_id = row.last_detail_krs_id;
@@ -109,7 +107,6 @@ export class InputNilaiComponent extends AppComponentBase implements OnInit {
     model.nilai = row.nilai;
     model.nip_kaprodi = this.kaprodi;
     model.nip_puskordat = this.authenticationService.userValue["username"];
-    console.log(model);
     this.khsService
       .addNilaiKaprodi(model)
       .pipe(
@@ -120,7 +117,6 @@ export class InputNilaiComponent extends AppComponentBase implements OnInit {
       )
       .subscribe(
         (res) => {
-          console.log(res);
           if (res.status == 0) {
             this.showMessage("Eror!", res.message, "error");
           } else {
@@ -147,7 +143,6 @@ export class InputNilaiComponent extends AppComponentBase implements OnInit {
 
   applyFilter(a) {
     // TODO: Use EventEmitter with form value
-    console.log(a);
     this.getMahasiswa();
   }
 
@@ -164,10 +159,8 @@ export class InputNilaiComponent extends AppComponentBase implements OnInit {
       .subscribe(
         (data) => {
           this.listMahasiswa = data.result;
-          console.log(data);
         },
         (error) => {
-          console.log(error);
           this.showMessage("Eror!", error.message, "error");
         }
       );
@@ -185,10 +178,8 @@ export class InputNilaiComponent extends AppComponentBase implements OnInit {
       .subscribe(
         (data) => {
           this.listNilai = data.result;
-          console.log(data);
         },
         (error) => {
-          console.log(error);
           this.showMessage("Eror!", error.message, "error");
         }
       );

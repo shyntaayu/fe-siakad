@@ -35,7 +35,6 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     let a = JSON.parse(this.cookieService.get("userMe"));
-    console.log(a);
     this.userFromApi = a ? a.username : null;
     this.listTitles = ROUTES.filter((listTitle) => listTitle);
     const navbar: HTMLElement = this.element.nativeElement;

@@ -59,9 +59,9 @@ export class ViewKehadiranComponent extends AppComponentBase implements OnInit {
 
   ngOnInit() {
     if (this.sesi == 1) {
-      this.listTime = ["I", "II", "III", "IV", "V", "VI", "VII"];
+      this.listTime = ["I", "II", "III", "IV", "V", "VI", "VII", "UTS"];
     } else {
-      this.listTime = ["VIII", "IX", "X", "XI", "XII", "XIII", "XIV"];
+      this.listTime = ["VIII", "IX", "X", "XI", "XII", "XIII", "XIV", "UAS"];
     }
   }
 

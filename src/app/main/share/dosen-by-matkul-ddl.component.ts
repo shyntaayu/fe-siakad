@@ -53,7 +53,8 @@ const noop = () => {};
 })
 export class DosenByMatkulDdlComponent
   extends AppComponentBase
-  implements OnInit, ControlValueAccessor, OnChanges {
+  implements OnInit, ControlValueAccessor, OnChanges
+{
   private innerValue: any = "";
   dosen;
   stateCtrl: FormControl;
@@ -85,7 +86,6 @@ export class DosenByMatkulDdlComponent
   // }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(changes);
     if (changes.kodeMatkul) {
       this.loadData(changes.kodeMatkul.currentValue);
     } else {
@@ -93,7 +93,6 @@ export class DosenByMatkulDdlComponent
   }
 
   loadData(a) {
-    console.log(this.kodeMatkul);
     if (this.kodeMatkul) {
       let self = this;
       self.isLoading = true;
@@ -102,7 +101,6 @@ export class DosenByMatkulDdlComponent
         .subscribe(
           (data) => {
             this.dosen = data.result;
-            console.log(this.dosen);
             let sel = this.dosen.find((_) => _.nip === this.nip).nip;
             this.inputValue = sel;
             self.isLoading = false;

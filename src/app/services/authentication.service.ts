@@ -26,7 +26,6 @@ export class AuthenticationService extends AppComponentBase {
   ) {
     super(injector);
     // this.userSubject = new BehaviorSubject<LoginResponse>(JSON.parse(localStorage.getItem('userMe')));
-    console.log(this.cookieService.check("userMe"));
     if (this.cookieService.check("userMe")) {
       this.cookieService.get("userMe");
       this.userSubject = new BehaviorSubject<LoginResponse>(

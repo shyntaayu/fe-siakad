@@ -16,7 +16,8 @@ import { Product } from "../model/product";
 })
 export class TranskripNilaiComponent
   extends AppComponentBase
-  implements OnInit {
+  implements OnInit
+{
   selectedProduct2;
   nim;
   loading = false;
@@ -58,7 +59,6 @@ export class TranskripNilaiComponent
   }
   applyFilter(a) {
     // TODO: Use EventEmitter with form value
-    console.log(a);
     this.getMahasiswa();
   }
 
@@ -75,10 +75,8 @@ export class TranskripNilaiComponent
       .subscribe(
         (data) => {
           this.listMahasiswa = data.result;
-          console.log(data);
         },
         (error) => {
-          console.log(error);
           this.showMessage("Eror!", error.message, "error");
         }
       );
@@ -96,10 +94,8 @@ export class TranskripNilaiComponent
       .subscribe(
         (data) => {
           this.listNilai = data.result;
-          console.log(data);
         },
         (error) => {
-          console.log(error);
           this.showMessage("Eror!", error.message, "error");
         }
       );

@@ -104,7 +104,6 @@ export class RekapPresensiComponent extends AppComponentBase implements OnInit {
   }
 
   onRowSelect(event) {
-    console.log(event);
     this.messageService.add({
       severity: "info",
       summary: "Mata Kuliah Selected",
@@ -157,15 +156,11 @@ export class RekapPresensiComponent extends AppComponentBase implements OnInit {
             Object.assign(m, obj);
           });
           let pctcekal = (jmlcekal / length) * 100;
-          console.log(pctcekal);
           this.listMatkul[this.index].cekal = this.setPercent(pctcekal);
           this.listMahasiswa = data.result;
           this.listMhsString = JSON.stringify(data.result);
-          console.log("mee----", data.result);
         },
         (error) => {
-          console.log(error);
-          console.log(error.status);
           this.showMessage("Eror!", error.message, "error");
         }
       );
@@ -201,24 +196,19 @@ export class RekapPresensiComponent extends AppComponentBase implements OnInit {
       .subscribe(
         (data) => {
           this.listMatkul = data.result;
-          console.log(data);
         },
         (error) => {
-          console.log(error);
-          console.log(error.status);
           this.showMessage("Eror!", error.message, "error");
         }
       );
   }
 
   getNew(param) {
-    console.log(param);
     if (this.model) this.model.semester = param;
     if (this.nim) this.getMhsByMatkul();
   }
 
   getDosen(a) {
-    console.log("m111111", a);
     this.krsService
       .getDosenByMatkul(this.appConfig.jenisAplikasiString, this.kode_matkul)
       .subscribe(
@@ -234,9 +224,7 @@ export class RekapPresensiComponent extends AppComponentBase implements OnInit {
   }
 
   modelChangeFn(value, field) {}
-  getSemester(a) {
-    console.log("------", a);
-  }
+  getSemester(a) {}
 
   exportExcel() {
     let cekalaja = this.listMahasiswa.filter((a) => a.cekal == true);
@@ -265,19 +253,14 @@ export class RekapPresensiComponent extends AppComponentBase implements OnInit {
     );
   }
 
-  onRowEditInit(a) {
-    console.log(a);
-    console.log("dataEdit----", a);
-  }
+  onRowEditInit(a) {}
 
   onRowEditSave(row, index) {
     let dataBaru = row;
-    console.log("------dataBaru", dataBaru);
     let edited = [];
     let a;
     let data = JSON.parse(this.listMhsString);
     let me = data[index];
-    console.log("this.oldDiscount2----------------", me);
     if (me.minggu1 != dataBaru.minggu1) {
       a = 1;
       edited.push(a);
@@ -335,7 +318,6 @@ export class RekapPresensiComponent extends AppComponentBase implements OnInit {
       edited.push(a);
     }
 
-    console.log("------edited", edited);
     edited.map((e) => {
       this.loading1 = true;
       let model = new PresensiCekal();
@@ -344,7 +326,6 @@ export class RekapPresensiComponent extends AppComponentBase implements OnInit {
       model.master_tipe_presensi_id = 2; // 5=telat 2=hadir
       model.nim = row.nim;
       model.krs_id = this.krsid;
-      console.log(model);
       this.presensiService
         .addPresensi(model)
         .pipe(
@@ -355,7 +336,6 @@ export class RekapPresensiComponent extends AppComponentBase implements OnInit {
         )
         .subscribe(
           (res) => {
-            console.log(res);
             if (res.status == 0) {
               this.showMessage("Eror!", res.message, "error");
             } else {

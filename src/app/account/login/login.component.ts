@@ -55,8 +55,6 @@ export class LoginComponent extends AppComponentBase implements OnInit {
           this.router.navigate([this.returnUrl]);
         },
         (error) => {
-          console.log(error);
-          console.log(error.status);
           this.error = error;
           this.showMessage("Eror!", error.message, "error");
         }

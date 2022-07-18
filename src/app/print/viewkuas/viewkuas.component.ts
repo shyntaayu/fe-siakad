@@ -65,11 +65,8 @@ export class ViewKuasComponent extends AppComponentBase implements OnInit {
                       data.result.map((list) => {
                         let hadir = list.data_presensi.Hadir;
                         let alpha = list.data_presensi.Alpha;
-                        console.log(alpha, hadir);
                         let persen = ((hadir - alpha) / hadir) * 100;
-                        console.log(persen, typeof persen);
                         persen = isNaN(persen) ? 0 : persen;
-                        // console.log(persen);
                         let cekal = false;
                         if (persen < 64) {
                           cekal = true;
@@ -79,10 +76,8 @@ export class ViewKuasComponent extends AppComponentBase implements OnInit {
                         list["persen"] = resultpersen;
                       });
                       this.data = data.result;
-                      console.log(data.result);
                     },
                     (error) => {
-                      console.log(error);
                       this.showMessage("Eror!", error.message, "error");
                     }
                   );
@@ -91,10 +86,8 @@ export class ViewKuasComponent extends AppComponentBase implements OnInit {
             .subscribe(
               (data) => {
                 this.header = data.result[0];
-                console.log(data);
               },
               (error) => {
-                console.log(error);
                 this.showMessage("Eror!", error.message, "error");
               }
             );
@@ -108,10 +101,8 @@ export class ViewKuasComponent extends AppComponentBase implements OnInit {
           this.totalSks = this.dataKrs.reduce((total, num) => {
             return total + num.sks;
           }, 0);
-          console.log(data);
         },
         (error) => {
-          console.log(error);
           this.showMessage("Eror!", error.message, "error");
         }
       );

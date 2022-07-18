@@ -48,10 +48,8 @@ export class ViewKrsComponent extends AppComponentBase implements OnInit {
             .subscribe(
               (data) => {
                 this.header = data.result[0];
-                console.log(data);
               },
               (error) => {
-                console.log(error);
                 this.showMessage("Eror!", error.message, "error");
               }
             );
@@ -63,10 +61,8 @@ export class ViewKrsComponent extends AppComponentBase implements OnInit {
           this.totalSks = this.data.reduce((total, num) => {
             return total + num.sks;
           }, 0);
-          console.log(data);
         },
         (error) => {
-          console.log(error);
           this.showMessage("Eror!", error.message, "error");
         }
       );

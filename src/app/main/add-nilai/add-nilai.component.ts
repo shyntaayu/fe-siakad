@@ -114,7 +114,6 @@ export class AddNilaiComponent extends AppComponentBase implements OnInit {
   }
 
   onRowSelect(event) {
-    console.log(event);
     this.messageService.add({
       severity: "info",
       summary: "Mata Kuliah Selected",
@@ -145,7 +144,6 @@ export class AddNilaiComponent extends AppComponentBase implements OnInit {
       )
       .subscribe(
         (data) => {
-          console.log(this.tipeNilai);
           let tipe = this.tipeNilai;
           data.result.map((m) => {
             // let hadir=m.list_presensi_2.reduce((a, b) => a + b, 0)
@@ -157,10 +155,8 @@ export class AddNilaiComponent extends AppComponentBase implements OnInit {
               let index = tipe.find(
                 (_) => _.idmaster_tipe_nilai == cur.idmaster_tipe_nilai
               ).nama; // get nama tipe nilai= tugas1
-              console.log(index);
               acc[index] = cur.nilai; // ngisi nama tipe nilai = tugas1:100
               total += +cur.nilai * (indTipeNilai["bobot"] / 100);
-              console.log(indTipeNilai);
               acc["total"] = total;
               return acc;
             }, {});
@@ -170,11 +166,8 @@ export class AddNilaiComponent extends AppComponentBase implements OnInit {
             Object.assign(m, obj);
           });
           this.listMahasiswa = data.result;
-          console.log("mee----", data.result);
         },
         (error) => {
-          console.log(error);
-          console.log(error.status);
           this.showMessage("Eror!", error.message, "error");
         }
       );
@@ -216,24 +209,19 @@ export class AddNilaiComponent extends AppComponentBase implements OnInit {
       .subscribe(
         (data) => {
           this.listMatkul = data.result;
-          console.log(data);
         },
         (error) => {
-          console.log(error);
-          console.log(error.status);
           this.showMessage("Eror!", error.message, "error");
         }
       );
   }
 
   getNew(param) {
-    console.log(param);
     if (this.model) this.model.semester = param;
     if (this.nim) this.getMhsByMatkul();
   }
 
   getDosen(a) {
-    console.log("m111111", a);
     this.krsService
       .getDosenByMatkul(this.appConfig.jenisAplikasiString, this.kode_matkul)
       .subscribe(
@@ -251,36 +239,26 @@ export class AddNilaiComponent extends AppComponentBase implements OnInit {
   modelChangeFn(value, field) {
     // localStorage.setItem("si" + field, value);
   }
-  getSemester(a) {
-    console.log("------", a);
-  }
+  getSemester(a) {}
 
-  onRowEditInit(a) {
-    // console.log(a);
-    // console.log("dataEdit----", a);
-  }
+  onRowEditInit(a) {}
 
   onRowEditSave(row) {
     let dataBaru = row;
-    console.log("------dataBaru", JSON.stringify(dataBaru));
 
     this.loading1 = true;
     let model = new AddNilai();
     model.jenis_aplikasi = this.appConfig.jenisAplikasi;
     model.krs_id = dataBaru.krs_id;
-    console.log("keys", this.tipeNilai);
     //ide = tipenilai dikasih flag, trus dibandingno sing onok fag e
-    console.log("dataku", dataBaru.list_nilai);
     let teori = [1, 2, 3, 4];
     let praktek = [5, 6, 7];
     let listtipe = [];
     listtipe = this.isPraktikum ? praktek : teori;
     dataBaru.list_nilai.map((e) => {
       let i = this.tipeNilai.find((_) => _.nama == e.nama).nama;
-      console.log("i", i, typeof i);
       let listNilai = [];
       let nilaitermasuk = listtipe.includes(e.idmaster_tipe_nilai);
-      console.log("nilaitermasuk", nilaitermasuk);
       if (e.nama === i && nilaitermasuk) {
         model.tipe_nilai = e.idmaster_tipe_nilai;
         let list = new ListNilai();
@@ -288,7 +266,6 @@ export class AddNilaiComponent extends AppComponentBase implements OnInit {
         list.nim = dataBaru.nim;
         listNilai.push(list);
         model.list_nilai = listNilai;
-        console.log(model, JSON.stringify(model));
 
         this.khsService
           .addNilai(model)
@@ -300,7 +277,6 @@ export class AddNilaiComponent extends AppComponentBase implements OnInit {
           )
           .subscribe(
             (res) => {
-              console.log(res);
               if (res.status == 0) {
                 this.showMessage("Eror!", res.message, "error");
               } else {
@@ -344,7 +320,6 @@ export class AddNilaiComponent extends AppComponentBase implements OnInit {
   }
 
   getTipeNilaiDDL(param) {
-    console.log("nilai", param);
     this.model.tipenilai = param;
   }
 }

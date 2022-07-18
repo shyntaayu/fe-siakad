@@ -62,7 +62,6 @@ export class KrsComponent extends AppComponentBase implements OnInit {
   ngOnInit(): void {
     this.productService.getProductsSmall().then((data) => {
       this.products = data;
-      console.log(data);
     });
     this.productService
       .getProductsSmall()
@@ -75,7 +74,6 @@ export class KrsComponent extends AppComponentBase implements OnInit {
   }
 
   onRowSelect(event) {
-    console.log(event);
     this.messageService.add({
       severity: "info",
       summary: "Mahasiswa Selected",
@@ -98,11 +96,8 @@ export class KrsComponent extends AppComponentBase implements OnInit {
       .subscribe(
         (data) => {
           this.listMatkul = data.result;
-          console.log(data);
         },
         (error) => {
-          console.log(error);
-          console.log(error.status);
           this.showMessage("Eror!", error.message, "error");
         }
       );
@@ -168,24 +163,19 @@ export class KrsComponent extends AppComponentBase implements OnInit {
       .subscribe(
         (data) => {
           this.listMahasiswa = data.result;
-          console.log(data);
         },
         (error) => {
-          console.log(error);
-          console.log(error.status);
           this.showMessage("Eror!", error.message, "error");
         }
       );
   }
 
   getNew(param) {
-    console.log(param);
     if (this.model) this.model.semester = param;
     if (this.nim) this.getMatkulByMhs(this.nim);
   }
 
   print(type) {
-    console.log("type----", type);
     // localStorage.setItem("sinim", this.nim);
     // localStorage.setItem("sismt", this.model.semester);
     if (type == 1) {

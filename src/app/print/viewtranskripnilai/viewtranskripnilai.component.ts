@@ -15,7 +15,8 @@ import { PrintService } from "../print.service";
 })
 export class ViewTranskripNilaiComponent
   extends AppComponentBase
-  implements OnInit {
+  implements OnInit
+{
   dataRight;
   dataLeft;
   nim;
@@ -72,10 +73,8 @@ export class ViewTranskripNilaiComponent
                         .subscribe(
                           (data) => {
                             this.mahasiswa = data.result[0];
-                            console.log(data);
                           },
                           (error) => {
-                            console.log(error);
                             this.showMessage("Eror!", error.message, "error");
                           }
                         );
@@ -88,11 +87,8 @@ export class ViewTranskripNilaiComponent
                       this.half = Math.round(count / 2);
                       this.dataLeft = all.slice(0, this.half);
                       this.dataRight = all.slice(this.half + 1, count);
-
-                      console.log(data.result.length);
                     },
                     (error) => {
-                      console.log(error);
                       this.showMessage("Eror!", error.message, "error");
                     }
                   );
@@ -103,7 +99,6 @@ export class ViewTranskripNilaiComponent
                 this.footer = data.result[0];
               },
               (error) => {
-                console.log(error);
                 this.showMessage("Eror!", error.message, "error");
               }
             );
@@ -112,10 +107,8 @@ export class ViewTranskripNilaiComponent
       .subscribe(
         (data) => {
           this.semester = data.result;
-          console.log(data);
         },
         (error) => {
-          console.log(error);
           this.showMessage("Eror!", error.message, "error");
         }
       );
@@ -126,10 +119,8 @@ export class ViewTranskripNilaiComponent
       .subscribe(
         (data) => {
           this.dipk = data.result;
-          console.log(data);
         },
         (error) => {
-          console.log(error);
           this.showMessage("Eror!", error.message, "error");
         }
       );

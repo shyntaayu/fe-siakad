@@ -96,7 +96,6 @@ export class PresensiComponent extends AppComponentBase implements OnInit {
   ngOnInit(): void {}
 
   onRowSelect(event) {
-    console.log(event);
     this.messageService.add({
       severity: "info",
       summary: "Mata Kuliah Selected",
@@ -126,11 +125,8 @@ export class PresensiComponent extends AppComponentBase implements OnInit {
       .subscribe(
         (data) => {
           this.listMahasiswa = data.result;
-          console.log(data);
         },
         (error) => {
-          console.log(error);
-          console.log(error.status);
           this.showMessage("Eror!", error.message, "error");
         }
       );
@@ -197,24 +193,19 @@ export class PresensiComponent extends AppComponentBase implements OnInit {
       .subscribe(
         (data) => {
           this.listMatkul = data.result;
-          console.log(data);
         },
         (error) => {
-          console.log(error);
-          console.log(error.status);
           this.showMessage("Eror!", error.message, "error");
         }
       );
   }
 
   getNew(param) {
-    console.log(param);
     if (this.model) this.model.semester = param;
     if (this.nim) this.getMhsByMatkul();
   }
 
   print(type) {
-    console.log("type----", type);
     localStorage.setItem("simatkul", JSON.stringify(this.selectedMatkul));
     localStorage.setItem("sikey", JSON.stringify(this.model));
     localStorage.setItem("sidosennew", this.selectedDosenNew);
@@ -225,7 +216,6 @@ export class PresensiComponent extends AppComponentBase implements OnInit {
     localStorage.setItem("simahasiswa", JSON.stringify(this.listMahasiswa));
 
     if (type == 1) {
-      console.log(this.sesi);
       if (this.model.jenis == "Kelas") {
         if (this.sesi) {
           this.goPresensi();
@@ -258,7 +248,6 @@ export class PresensiComponent extends AppComponentBase implements OnInit {
   }
 
   getDosen(a) {
-    console.log("m111111", a);
     this.krsService
       .getDosenByMatkul(this.appConfig.jenisAplikasiString, this.kode_matkul)
       .subscribe(
@@ -276,7 +265,5 @@ export class PresensiComponent extends AppComponentBase implements OnInit {
   modelChangeFn(value, field) {
     // localStorage.setItem("si" + field, value);
   }
-  getSemester(a) {
-    console.log("------", a);
-  }
+  getSemester(a) {}
 }

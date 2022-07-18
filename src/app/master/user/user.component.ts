@@ -87,7 +87,6 @@ export class UserComponent extends AppComponentBase implements OnInit {
       fields: new FormControl(JSON.stringify(this.fields)),
     });
     this.unsubcribe = this.form.valueChanges.subscribe((update) => {
-      console.log(update);
       this.fields = JSON.parse(update.fields);
     });
 
@@ -99,9 +98,7 @@ export class UserComponent extends AppComponentBase implements OnInit {
     this.getUsers();
   }
 
-  onUpload(e) {
-    console.log(e);
-  }
+  onUpload(e) {}
 
   getFields() {
     return this.fields;
@@ -132,7 +129,6 @@ export class UserComponent extends AppComponentBase implements OnInit {
         )
         .subscribe(
           (res) => {
-            console.log(res);
             if (res.status == 0) {
               this.showMessage("Eror!", res.msg, "error");
             } else {
@@ -161,7 +157,6 @@ export class UserComponent extends AppComponentBase implements OnInit {
         )
         .subscribe(
           (res) => {
-            console.log(res);
             if (res.status == 0) {
               this.showMessage("Eror!", res.msg, "error");
             } else {
@@ -211,7 +206,6 @@ export class UserComponent extends AppComponentBase implements OnInit {
       .subscribe(
         (data) => {
           this.users = data.result;
-          console.log(data);
         },
         (error) => {
           this.showMessage("Eror!", error.message, "error");
@@ -220,7 +214,6 @@ export class UserComponent extends AppComponentBase implements OnInit {
   }
 
   open(content, type?, user?) {
-    console.log(type, user);
     this.setFieldsEdit(user);
     this.type = type;
     this.modalReference = this.modalService.open(content, { size: "lg" });
@@ -248,7 +241,6 @@ export class UserComponent extends AppComponentBase implements OnInit {
       accept: () => {
         this.userService.deleteUser(user.login_id).subscribe(
           (res) => {
-            console.log(res);
             if (res.status == 0) {
               this.showMessage("Eror!", res.msg, "error");
             } else {

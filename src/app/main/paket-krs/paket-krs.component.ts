@@ -108,7 +108,6 @@ export class PaketKrsComponent extends AppComponentBase implements OnInit {
   }
   applyFilter(a) {
     // TODO: Use EventEmitter with form value
-    console.log(a);
     this.getMahasiswa();
   }
 
@@ -125,10 +124,8 @@ export class PaketKrsComponent extends AppComponentBase implements OnInit {
       .subscribe(
         (data) => {
           this.listMahasiswa = data.result;
-          console.log(data);
         },
         (error) => {
-          console.log(error);
           this.showMessage("Eror!", error.message, "error");
         }
       );
@@ -170,30 +167,20 @@ export class PaketKrsComponent extends AppComponentBase implements OnInit {
       .subscribe(
         (data) => {
           let matkul = data.result;
-          console.log(this.model.jurusan);
           let kode = this.model.jurusan;
           let me = matkul.filter((e) => {
             let kd = e.kode_matkul.substring(5, 7);
-            console.log("kd", kd, typeof kd);
-            console.log("kode", kode, typeof kode);
-            console.log(kd == kode);
             if (kd == kode) return e;
           });
           this.listMatkul = me;
-          console.log(me);
         },
         (error) => {
-          console.log(error);
-          console.log(error.status);
           this.showMessage("Eror!", error.message, "error");
         }
       );
   }
 
   save() {
-    console.log("this.selectedNim", this.selectedNim);
-    console.log("this.selectedMatkul", this.selectedMatkul);
-
     this.loading = true;
     this.loading2 = true;
     let temp: ListKrs[] = [];
@@ -209,7 +196,6 @@ export class PaketKrsComponent extends AppComponentBase implements OnInit {
       model.nim = e.nim;
       model.semester = this.semesterAngka;
       model.list_krs = temp;
-      console.log(model);
       this.krsService
         .addKrs(model)
         .pipe(
@@ -233,11 +219,8 @@ export class PaketKrsComponent extends AppComponentBase implements OnInit {
                 "success"
               );
             }
-            console.log(res);
           },
           (error) => {
-            console.log(error);
-            console.log(error.status);
             this.showMessage("Eror!", error.message, "error");
           }
         );

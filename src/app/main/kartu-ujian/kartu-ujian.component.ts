@@ -58,7 +58,6 @@ export class KartuUjianComponent extends AppComponentBase implements OnInit {
   ngOnInit(): void {}
 
   onRowSelect(event) {
-    console.log(event);
     this.messageService.add({
       severity: "info",
       summary: "Mahasiswa Selected",
@@ -85,11 +84,8 @@ export class KartuUjianComponent extends AppComponentBase implements OnInit {
       .subscribe(
         (data) => {
           this.listPresensi = data.result;
-          console.log(data);
         },
         (error) => {
-          console.log(error);
-          console.log(error.status);
           this.showMessage("Eror!", error.message, "error");
         }
       );
@@ -130,24 +126,19 @@ export class KartuUjianComponent extends AppComponentBase implements OnInit {
       .subscribe(
         (data) => {
           this.listMahasiswa = data.result;
-          console.log(data);
         },
         (error) => {
-          console.log(error);
-          console.log(error.status);
           this.showMessage("Eror!", error.message, "error");
         }
       );
   }
 
   getNew(param) {
-    console.log(param);
     if (this.model) this.model.semester = param;
     if (this.nim) this.getMatkulByMhs(this.nim);
   }
 
   print(type) {
-    console.log("type----", type);
     // localStorage.setItem("sinim", this.nim);
     // localStorage.setItem("sismt", this.model.semester);
     if (type == 1) {

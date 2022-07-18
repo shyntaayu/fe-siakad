@@ -57,7 +57,6 @@ export class SalinanNilaiComponent extends AppComponentBase implements OnInit {
   }
   applyFilter(a) {
     // TODO: Use EventEmitter with form value
-    console.log(a);
     this.getMahasiswa();
     this.listNilai = [];
   }
@@ -75,10 +74,8 @@ export class SalinanNilaiComponent extends AppComponentBase implements OnInit {
       .subscribe(
         (data) => {
           this.listMahasiswa = data.result;
-          console.log(data);
         },
         (error) => {
-          console.log(error);
           this.showMessage("Eror!", error.message, "error");
         }
       );
@@ -96,10 +93,8 @@ export class SalinanNilaiComponent extends AppComponentBase implements OnInit {
       .subscribe(
         (data) => {
           this.listNilai = data.result;
-          console.log(data);
         },
         (error) => {
-          console.log(error);
           this.showMessage("Eror!", error.message, "error");
         }
       );

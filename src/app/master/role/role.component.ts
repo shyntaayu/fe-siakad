@@ -53,7 +53,6 @@ export class RoleComponent extends AppComponentBase implements OnInit {
   }
 
   deleteSelectedRoles() {
-    console.log(this.selectedRoles);
     this.confirmationService.confirm({
       message: "Are you sure you want to delete the selected roles?",
       header: "Confirm",
@@ -66,7 +65,6 @@ export class RoleComponent extends AppComponentBase implements OnInit {
           )
           .subscribe(
             (res) => {
-              console.log(res);
               if (res.status == 0) {
                 this.showMessage("Eror!", res.msg, "error");
               } else {
@@ -101,7 +99,6 @@ export class RoleComponent extends AppComponentBase implements OnInit {
         this.role = {};
         this.roleService.deleteRole(role.master_hak_akses_id).subscribe(
           (res) => {
-            console.log(res);
             if (res.status == 0) {
               this.showMessage("Eror!", res.msg, "error");
             } else {
@@ -128,7 +125,6 @@ export class RoleComponent extends AppComponentBase implements OnInit {
 
   saveRole() {
     this.submitted = true;
-    console.log(this.role);
     if (this.role.nama.trim()) {
       if (this.role.master_hak_akses_id) {
         const model = new RoleModel();
@@ -137,7 +133,6 @@ export class RoleComponent extends AppComponentBase implements OnInit {
         model.master_hak_akses_id = this.role.master_hak_akses_id;
         this.roleService.updateRole(model).subscribe(
           (res) => {
-            console.log(res);
             if (res.status == 0) {
               this.showMessage("Eror!", res.msg, "error");
             } else {
@@ -158,7 +153,6 @@ export class RoleComponent extends AppComponentBase implements OnInit {
         model.jenis_aplikasi = this.appConfig.jenisAplikasi;
         this.roleService.addRole(model).subscribe(
           (res) => {
-            console.log(res);
             if (res.status == 0) {
               this.showMessage("Eror!", res.msg, "error");
             } else {
@@ -214,11 +208,8 @@ export class RoleComponent extends AppComponentBase implements OnInit {
       .subscribe(
         (data) => {
           this.roles = data.result;
-          console.log(data);
         },
         (error) => {
-          console.log(error);
-          console.log(error.status);
           this.showMessage("Eror!", error.message, "error");
         }
       );

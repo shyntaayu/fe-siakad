@@ -13,7 +13,8 @@ import { PrintService } from "../print.service";
 })
 export class ViewPresensiKelasComponent
   extends AppComponentBase
-  implements OnInit {
+  implements OnInit
+{
   data;
   nim;
   semester;
@@ -98,10 +99,8 @@ export class ViewPresensiKelasComponent
             .subscribe(
               (data) => {
                 this.header = data.result[0];
-                console.log(data);
               },
               (error) => {
-                console.log(error);
                 this.showMessage("Eror!", error.message, "error");
               }
             );
@@ -113,10 +112,8 @@ export class ViewPresensiKelasComponent
           this.totalSks = this.data.reduce((total, num) => {
             return total + num.sks;
           }, 0);
-          console.log(data);
         },
         (error) => {
-          console.log(error);
           this.showMessage("Eror!", error.message, "error");
         }
       );
@@ -132,7 +129,6 @@ export class ViewPresensiKelasComponent
           m.presensi.data_presensi.Hadir) *
         100;
       persen = isNaN(persen) ? 0 : persen;
-      console.log(persen);
       let cekal = false;
       if (persen < 64) {
         cekal = true;
@@ -141,7 +137,6 @@ export class ViewPresensiKelasComponent
       Object.assign(m, obj);
     });
     this.listFixMahasiswa = this.listMahasiswa;
-    console.log("mee----", this.listMahasiswa);
   }
 
   getJenjang() {

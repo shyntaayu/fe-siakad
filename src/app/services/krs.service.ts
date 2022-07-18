@@ -71,7 +71,6 @@ export class KrsService {
   }
 
   getAllTahun(): Observable<TahunAkademik> {
-    console.log(this.appConfig.apiUrlKrs);
     return this.http.get<TahunAkademik>(
       `${this.appConfig.apiUrlKrs}/dropdown/tahun`
     );
@@ -245,7 +244,6 @@ export class KrsService {
       // Get server-side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
-    console.log(errorMessage);
     return throwError(errorMessage);
   }
 }

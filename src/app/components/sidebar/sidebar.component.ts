@@ -233,10 +233,8 @@ export class SidebarComponent implements OnInit {
     // );
     // this.menuItems = ROUTES.filter((menuItem) => menuItem.parent == "master");
     // this.menuNone = ROUTES.filter((menuItem) => menuItem.parent == "none");
-    console.log(menu);
     this.menuNew = menu;
     let a = JSON.parse(this.cookieService.get("userMe"));
-    console.log(a);
     this.userFromApi = a ? a.username : null;
   }
   isMobileMenu() {
