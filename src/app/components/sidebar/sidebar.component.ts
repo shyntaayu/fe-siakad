@@ -192,16 +192,16 @@ export const ROUTES: RouteInfo[] = [
 ];
 
 export const menu: AppMenuItem[] = [
-  new AppMenuItem("Dashboard", "1", "dashboard", "/dashboard"),
+  new AppMenuItem("Dashboard", "1,8", "dashboard", "/dashboard"),
   new AppMenuItem("KRS", "1", "task_alt", "/krs"),
   new AppMenuItem("Kartu Ujian", "1", "list_alt", "/kartu-ujian"),
   new AppMenuItem("KHS", "1", "file_copy", "/khs"),
   new AppMenuItem("Presensi", "1", "fact_check", "/presensi"),
   new AppMenuItem("Rekap Presensi", "1", "folder_open", "/rekap-presensi"),
-  new AppMenuItem("Revisi Nilai", "1", "create", "/input-nilai"),
+  new AppMenuItem("Revisi Nilai", "1,2,3", "create", "/input-nilai"),
   new AppMenuItem("Salinan Nilai", "1", "content_paste", "/salinan-nilai"),
   new AppMenuItem("Transkrip Nilai", "1", "school", "/transkrip-nilai"),
-  new AppMenuItem("Input Nilai", "1", "edit_note", "/add-nilai"),
+  new AppMenuItem("Input Nilai", "1,8", "edit_note", "/add-nilai"),
   new AppMenuItem("Paket KRS", "1", "post_add", "/paket-krs"),
   new AppMenuItem("Master", "1", "apps", "", [
     new AppMenuItem("User", "1", "badge", "/master/user"),
@@ -246,10 +246,11 @@ export class SidebarComponent implements OnInit {
 
   showMenuItem(menuItem): boolean {
     if (menuItem.permissionName) {
-      return (
-        this.authenticationService.userValue["master_hak_akses_id"] ==
-        menuItem.permissionName
-      );
+      let permission = menuItem.permissionName.split(",");
+      let f = permission.find((x) => {
+        return x == this.authenticationService.userValue["master_hak_akses_id"];
+      });
+      return f;
     }
     return true;
   }

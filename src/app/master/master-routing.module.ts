@@ -10,19 +10,19 @@ const routes: Routes = [
     path: "user",
     component: UserComponent,
     canActivate: [AuthGuard],
-    data: { permission: "1" },
+    data: { permission: [1] },
   },
   {
     path: "role",
     component: RoleComponent,
     canActivate: [AuthGuard],
-    data: { permission: "1" },
+    data: { permission: [1] },
   },
   {
     path: "mahasiswa",
     component: MahasiswaComponent,
     canActivate: [AuthGuard],
-    data: { permission: "1" },
+    data: { permission: [1] },
   },
 ];
 

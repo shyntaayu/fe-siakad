@@ -109,71 +109,82 @@ export class UserComponent extends AppComponentBase implements OnInit {
   }
 
   getValueForm(q) {
-    this.loading = true;
-    let model = new RegisterModel();
-    model.jenis_aplikasi = this.appConfig.jenisAplikasi;
-    model.password = q.password;
-    model.penginput = this.authenticationService.userValue["username"];
-    model.role = q.role;
-    model.statusLogin = q.status;
-    model.username = q.username;
-    model.login_id = this.user.login_id;
-    if (this.type == 1) {
-      this.userService
-        .register(model)
-        .pipe(
-          finalize(() => {
-            this.loading = false;
-            this.getUsers();
-          })
-        )
-        .subscribe(
-          (res) => {
-            if (res.status == 0) {
-              this.showMessage("Eror!", res.msg, "error");
-            } else {
-              Swal.fire({
-                title: "Sukses!",
-                text: res.msg + " - Berhasil menambahkan",
-                icon: "success",
-                allowOutsideClick: false,
-              }).then(() => {
-                this.modalReference.close();
-              });
-            }
-          },
-          (error) => {
-            this.showMessage("Eror!", error.message, "error");
-          }
-        );
+    let decimal =
+      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
+    if (!q.password.match(decimal)) {
+      this.showMessage(
+        "Warning",
+        "8 to 15 characters which contain at least one lowercase letter, one uppercase letter, one numeric digit, and one special character",
+        "warning"
+      );
+      return false;
     } else {
-      this.userService
-        .updateUser(model)
-        .pipe(
-          finalize(() => {
-            this.loading = false;
-            this.getUsers();
-          })
-        )
-        .subscribe(
-          (res) => {
-            if (res.status == 0) {
-              this.showMessage("Eror!", res.msg, "error");
-            } else {
-              Swal.fire({
-                title: "Sukses!",
-                text: res.msg + " - Berhasil mengedit",
-                icon: "success",
-                allowOutsideClick: false,
-              }).then(() => {
-                this.modalReference.close();
-              });
+      this.loading = true;
+      let model = new RegisterModel();
+      model.jenis_aplikasi = this.appConfig.jenisAplikasi;
+      model.password = q.password;
+      model.penginput = this.authenticationService.userValue["username"];
+      model.role = q.role;
+      model.statusLogin = q.status;
+      model.username = q.username;
+      model.login_id = this.user.login_id;
+      if (this.type == 1) {
+        this.userService
+          .register(model)
+          .pipe(
+            finalize(() => {
+              this.loading = false;
+              this.getUsers();
+            })
+          )
+          .subscribe(
+            (res) => {
+              if (res.status == 0) {
+                this.showMessage("Eror!", res.msg, "error");
+              } else {
+                Swal.fire({
+                  title: "Sukses!",
+                  text: res.msg + " - Berhasil menambahkan",
+                  icon: "success",
+                  allowOutsideClick: false,
+                }).then(() => {
+                  this.modalReference.close();
+                });
+              }
+            },
+            (error) => {
+              this.showMessage("Eror!", error.message, "error");
             }
-          },
-          (error) => {
-            this.showMessage("Eror!", error.message, "error");
-          }
-        );
+          );
+      } else {
+        this.userService
+          .updateUser(model)
+          .pipe(
+            finalize(() => {
+              this.loading = false;
+              this.getUsers();
+            })
+          )
+          .subscribe(
+            (res) => {
+              if (res.status == 0) {
+                this.showMessage("Eror!", res.msg, "error");
+              } else {
+                Swal.fire({
+                  title: "Sukses!",
+                  text: res.msg + " - Berhasil mengedit",
+                  icon: "success",
+                  allowOutsideClick: false,
+                }).then(() => {
+                  this.modalReference.close();
+                });
+              }
+            },
+            (error) => {
+              this.showMessage("Eror!", error.message, "error");
+            }
+          );
+      }
     }
   }
 
